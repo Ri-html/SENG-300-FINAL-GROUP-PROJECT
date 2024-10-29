@@ -10,7 +10,7 @@
 30219429 | Aaron Sheikh  
 00334798 | Sean Skelton  
 30113727 | Sowmithra Suresh Kumar  
-30213935 | Xiaofan Gu
-30221727 | Harry He
-30139136 | Jok Kuon
-30071699 | Connor Gavlin
+30213935 | Xiaofan Gu   
+30221727 | Harry He 
+30139136 | Jok Kuon 
+30071699 | Connor Gavlin    
