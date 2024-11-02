@@ -1,6 +1,5 @@
 package gameLogic.player;
 
-public enum side {
-    WHITE,
+public enum TicTacToeSide {
     BLACK
 }
