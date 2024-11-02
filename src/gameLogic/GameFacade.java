@@ -1,3 +1,5 @@
+package gameLogic;
+
 public class GameFacade {
     public Game game;
     public Game[] ongoingGames;
