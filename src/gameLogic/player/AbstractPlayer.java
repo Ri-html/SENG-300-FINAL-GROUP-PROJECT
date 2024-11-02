@@ -1,5 +1,6 @@
 package gameLogic.player;
 
+import gameLogic.boardGames.BoardGame;
 import gameLogic.piece.Piece;
 
 public abstract class AbstractPlayer {
