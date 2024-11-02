@@ -16,7 +16,7 @@ public abstract class AbstractPiece implements Piece {
 
     public void setType(){
     }
-    public Type getType(){}
+    public PieceType getType(){}
 
 
 }
