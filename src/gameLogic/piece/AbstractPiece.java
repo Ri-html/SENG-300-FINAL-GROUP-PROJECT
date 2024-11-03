@@ -1,5 +1,7 @@
 package gameLogic.piece;
 
+import gameLogic.player.AbstractPlayer;
+
 public abstract class AbstractPiece implements Piece {
     private int[] location; //should this be an x, y?
 
@@ -16,7 +18,18 @@ public abstract class AbstractPiece implements Piece {
 
     public void setType(){
     }
-    public PieceType getType(){}
 
+    public PieceType getType(){
+        return null;
+    }
 
+    public void getValidMoves(){ //why is this void in class diagram?
+                                // maybe return array of tuples with all possible moves x,y
+    }
+
+    public void updateValidMoves(){
+    }
+
+    public void setPlayer(AbstractPlayer player){
+    }
 }
