@@ -23,7 +23,7 @@ public class AbstractBoardGame implements BoardGame {
     //cannot add a notify() method, Object's notify() is final.
 
     public Piece getPiece(){
-
+        return null;
     }
 
     public void switchCurrentPlayer(){
