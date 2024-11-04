@@ -1,0 +1,120 @@
+# Other's Profile
+
+## Use case: View User Profile Photo
+
+**Primary actor:** User
+
+**Goal in context:** To allow the user to view an enlarged version of their own or another user's profile photo.
+
+**Preconditions:** The user's profile or another user's profile is displayed.
+
+**Trigger:** The user clicks on a profile photo.
+
+**Scenario:**
+1. User clicks on the Profile Photo on the left or right panel.
+2. The system displays an enlarged version of the clicked photo in a popup or new screen.
+3. The user can view the photo and close the enlarged view when finished.
+
+**Postcondition:** The user views the enlarged profile photo and can return to the main profile screen.
+
+**Exceptions:**
+
+The photo fails to load due to a network or system error. An error message is displayed to the user.
+
+**Priority:** Medium. Enhances the user experience but is not essential for basic functionality.
+
+**When available:** Second iteration.
+
+**Frequency of use:** A few times per day.
+
+**Channel to actor:** Physical interaction through touch or mouse click.
+
+**Secondary actors:** None.
+
+**Channels to secondary actors:** N/A.
+
+**Open issues:**
+Decide whether users can download or share the photo.
+
+## **Use case:** View and Start a Game
+
+**Primary actor:** User
+
+**Goal in context:** To allow the user to view game details and either start a solo game for points or challenge another user to a multiplayer game.
+
+**Preconditions:** The user's profile and the other user's profile are loaded and displayed.
+
+**Trigger:** The user decides to start or challenge a game.
+
+**Scenario:**
+1. User navigates to the "Other's Profile" screen.
+2. User clicks the Challenge button next to a specific game (e.g., Chess, Connect 4, Tic Tac Toe).
+
+	- If the game is solo (e.g., for points competition), the user can start playing immediately.
+	- If the game requires another user (multiplayer), the system verifies if the user is eligible to challenge for the selected game.
+
+3. For solo games, the game starts, and the user begins playing.
+4. For multiplayer games, the system sends a challenge request to the other user.
+5. A confirmation message is displayed to the user indicating the challenge has been sent, and the challenged user receives a notification.
+
+**Postcondition:**
+
+- For solo games, the game starts, and the user begins competing for points.
+- For multiplayer games, the challenge is successfully sent, and the user is notified.
+
+**Exceptions**:
+
+1. The user is not eligible to start or challenge for the game (e.g., insufficient ranking or system error). An error message is displayed.
+2. The system fails to send the challenge due to a network or server issue. The system notifies the user of the failure and prompts them to try again later.
+
+**Priority:** High. Essential for enabling interactions and gameplay for users.
+
+**When available:** First iteration.
+
+**Frequency of use:** Multiple times per day.
+
+**Channel to actor:** Physical interaction through clicking on the screen or a mouse click.
+
+**Secondary actors:** The challenged user (recipient for multiplayer).
+
+**Channels to secondary actors:** Notification system for the recipient.
+
+**Open issues:**
+- Clarify if a solo game has a time limit or can be paused.
+
+## Use case: Navigate Back to Previous Page
+
+**Primary actor:** User
+
+**Goal in context:** To allow the user to return to the previous screen or main menu.
+
+**Preconditions:** The user is currently viewing a detailed profile screen (e.g., "Other's Profile").
+
+**Trigger:** The user decides to go back to the previous screen.
+**Scenario:**
+
+1. User clicks the Back button located at the top left corner of the screen.
+2. The system navigates the user to the previous screen (e.g., main menu or previous list).
+3. The content of the previous screen is loaded and displayed to the user.
+
+**Postcondition:** The user is taken to the previous screen without any loss of data or context.
+
+**Exceptions:**
+
+1. The navigation fails due to a system or network error. An error message is displayed, and the user remains on the current screen.
+2. The previous screen is not accessible (e.g., due to session timeout). The user is directed to the main menu instead.
+
+**Priority:** High. Important for user navigation and overall experience.
+
+**When available:** First iteration.
+
+**Frequency of use:** Many times per session.
+
+**Channel to actor:** Physical interaction through touch or mouse click.
+
+**Secondary actors:** None.
+
+**Channels to secondary actors:** N/A.
+
+**Open issues:**
+Determine if additional confirmation should be added for unsaved changes before navigating back.
