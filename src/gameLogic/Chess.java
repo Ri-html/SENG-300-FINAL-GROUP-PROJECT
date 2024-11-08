@@ -4,6 +4,13 @@ import gameLogic.player.AbstractPlayer;
 
 public class Chess implements Game{
 
+    public Chess() {
+    }
+
+    public void newGame(){ //is this void?
+
+    }
+
     @Override
     public boolean validateVictory() {
         return false;
