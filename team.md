@@ -1,5 +1,0 @@
-30207209 | Aleksandr Aghajanov  
-00334798 | Sean Skelton 
-30113727 | Sowmithra Suresh Kumar
-30208825 | Lei Fang
-30217431 | Nathaniel Appiah
