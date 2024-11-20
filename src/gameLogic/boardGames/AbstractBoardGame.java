@@ -4,8 +4,10 @@ import gameLogic.piece.AbstractPiece;
 import gameLogic.piece.Piece;
 import gameLogic.player.AbstractPlayer;
 
+import java.util.ArrayList;
+
 public class AbstractBoardGame implements BoardGame {
-    public BoardGameObserver[] observers;
+    public ArrayList<BoardGameObserver> observers;
     private String winner;
     private String gameID;
     private AbstractPlayer currentPlayer;
@@ -13,15 +15,14 @@ public class AbstractBoardGame implements BoardGame {
     protected Piece[][] gameBoard;
 
     public void attach(BoardGameObserver observer){
-
+        observers.add(observer);
     }
 
     public void detach(BoardGameObserver observer){
-
+        observers.remove(observer);
     }
-
+    public void notifyObservers(Piece piece){};
     //cannot add a notify() method, Object's notify() is final.
-
     public Piece getPiece(){
         return null;
     }
