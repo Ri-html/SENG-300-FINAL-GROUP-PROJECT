@@ -1,8 +1,10 @@
 package gameLogic;
 
+import gameLogic.boardGames.AbstractBoardGame;
+import gameLogic.boardGames.Game;
 import gameLogic.player.AbstractPlayer;
 
-public class Chess implements Game{
+public class Chess extends AbstractBoardGame {
 
     public Chess() {
     }

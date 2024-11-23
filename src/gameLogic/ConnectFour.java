@@ -1,8 +1,10 @@
 package gameLogic;
 
+import gameLogic.boardGames.AbstractBoardGame;
+import gameLogic.boardGames.Game;
 import gameLogic.player.AbstractPlayer;
 
-public class ConnectFour implements Game{
+public class ConnectFour extends AbstractBoardGame {
     private char[][] board;
     private int player1;
     private int player2;
