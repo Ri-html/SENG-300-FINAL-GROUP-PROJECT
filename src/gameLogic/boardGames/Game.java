@@ -1,4 +1,4 @@
-package gameLogic;
+package gameLogic.boardGames;
 
 import gameLogic.player.AbstractPlayer;
 
