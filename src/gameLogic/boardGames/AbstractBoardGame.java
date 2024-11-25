@@ -36,9 +36,14 @@ public abstract class AbstractBoardGame implements BoardGame {
     }
 
     //methods that should be implemented in the subclass
+
+        //sets up the Board for the specific board game
     abstract protected void setUpBoard(Piece[][] board);
+        //validates if an ending condition is met
     abstract public boolean validateVictory();
+        //validates if the move is legal
     abstract public boolean validateMove(int[] moves);
+        //changes the board according to how pieces move in the game and the moves received by the networking team
     abstract public void makeMove(int[] moves);
 
     public void addPlayer(String player) {
