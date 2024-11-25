@@ -54,9 +54,9 @@
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
-            <Text style="-fx-fill: white; -fx-font-size: 14;" text="1st player and stats" textAlignment="CENTER" wrappingWidth="162.068359375" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-            <Text style="-fx-fill: white; -fx-font-size: 14;" text="3rd player and stats" textAlignment="CENTER" wrappingWidth="143.4794921875" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-            <Text style="-fx-fill: white; -fx-font-size: 14;" text="2nd player and stats" textAlignment="CENTER" wrappingWidth="161.1796875" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+            <Text style="-fx-fill: white; -fx-font-size: 14;" text="1st player and stats" textAlignment="CENTER" wrappingWidth="161.66015625" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Text style="-fx-fill: white; -fx-font-size: 14;" text="3rd player and stats" textAlignment="CENTER" wrappingWidth="161.66015625" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+            <Text style="-fx-fill: white; -fx-font-size: 14;" text="2nd player and stats" textAlignment="CENTER" wrappingWidth="161.66015625" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
       
           <!-- Leaderboard Title -->
           <Text style="-fx-fill: white; -fx-font-size: 24;" text="Leaderboard" textAlignment="CENTER" wrappingWidth="161.66015625" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="2" />
