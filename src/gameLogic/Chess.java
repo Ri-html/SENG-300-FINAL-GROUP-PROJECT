@@ -18,13 +18,4 @@ public class Chess extends AbstractBoardGame {
         return false;
     }
 
-    @Override
-    public void setCurrentPlayer() {
-
-    }
-
-    @Override
-    public void addPlayer(AbstractPlayer player) {
-
-    }
 }

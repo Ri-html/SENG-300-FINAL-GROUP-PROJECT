@@ -1,5 +1,7 @@
 package gameLogic;
 
+import gameLogic.boardGames.Game;
+
 public class GameFacade {
     public Game game;
     public Game[] ongoingGames;

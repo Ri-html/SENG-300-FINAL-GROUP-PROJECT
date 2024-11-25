@@ -5,18 +5,10 @@ import gameLogic.boardGames.Game;
 import gameLogic.player.AbstractPlayer;
 
 public class ConnectFour extends AbstractBoardGame {
-    private char[][] board;
-    private int player1;
-    private int player2;
-    private int currentPlayer;
-    private gameState gameState;
 
     public ConnectFour(int player1, int player2) {
-       board = new int[6][7];
-       player1 = player1;
-       player2 = player2;
-       currentPlayer = player1;
-       gameState = gameState.START;
+        super();
+        board = new int[6][7];
     }
 
     public void start() {
@@ -62,19 +54,4 @@ public class ConnectFour extends AbstractBoardGame {
         return false;
     }
 
-    @Override
-    public void setCurrentPlayer() {
-
-    }
-
-    @Override
-    public void addPlayer(AbstractPlayer player) {
-
-    }
-}
-
-enum gameState {
-    START,
-    INPROGRESS,
-    OVER
 }
