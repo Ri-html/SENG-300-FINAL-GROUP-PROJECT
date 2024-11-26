@@ -1,9 +1,9 @@
 package gameLogic.piece;
 
-import gameLogic.player.AbstractPlayer;
-
 public abstract class AbstractPiece implements Piece {
     private int[] location; //should this be an x, y?
+    private ;
+
 
     public int[] getLocation() {
         return location;
@@ -30,6 +30,6 @@ public abstract class AbstractPiece implements Piece {
     public void updateValidMoves(){
     }
 
-    public void setPlayer(AbstractPlayer player){
+    public void setPlayer(String player){
     }
 }

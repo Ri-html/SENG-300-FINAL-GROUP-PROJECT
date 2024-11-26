@@ -2,7 +2,6 @@ package gameLogic.boardGames;
 
 import gameLogic.piece.AbstractPiece;
 import gameLogic.piece.Piece;
-import gameLogic.player.AbstractPlayer;
 
 import java.util.ArrayList;
 
@@ -21,7 +20,7 @@ public abstract class AbstractBoardGame implements BoardGame {
     public ArrayList<BoardGameObserver> gameEndObservers;
     private String winner = null;
     private String gameID;
-    private String currentPlayer;
+    private int currentPlayer;
     private String[] players;
     protected Piece[][] gameBoard;
     int addedPlayers=0;
@@ -61,7 +60,9 @@ public abstract class AbstractBoardGame implements BoardGame {
         }
     }
     private void startGame(){
+        currentPlayer=0;
         setUpBoard(gameBoard);
+
     }
     private void gameTurn(int[] moves){
         if (validateMove(moves)){
@@ -76,6 +77,8 @@ public abstract class AbstractBoardGame implements BoardGame {
             notify();
         }
     }
+
+
     public void switchCurrentPlayer(){
 
     }
