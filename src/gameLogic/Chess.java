@@ -21,17 +21,18 @@ public class Chess extends AbstractBoardGame {
     int addedPlayers=0;
     int playerNumber;
     int[]moves;
-    private GameState gameState;
+    private GameState gameState = GameState.WAITING;
 
     public Chess(ChessPlayer player1, ChessPlayer player2) {
         this.GameState = GameState.INPROGRESS;
-        setUpBoard();
+        setUpBoard(this.gameBoard);
+
     }
     
 
     @Override
     protected void setUpBoard(Piece[][] board) {
-
+        board[0][0] = new Rook rook;
     }
 
     @Override
