@@ -53,16 +53,31 @@ public abstract class AbstractBoardGame implements BoardGame {
         checkStartCondition();
     }
 
+    /**
+     * Checks the starting condition and start the game if true
+     */
     protected void checkStartCondition(){
         if (addedPlayers>=playerNumber && gameState==GameState.WAITING) {
             gameState = GameState.INPROGRESS;
             startGame();
         }
     }
+
+    /**
+     * sets up the board and notify both frontend of the board state
+     * Also notify player one to make their move
+     */
     private void startGame(){
         currentPlayer=0;
         setUpBoard(gameBoard);
     }
+
+    /** receives the move
+     * validate whether move is correct
+     * make the move
+     * then check for end game condition
+     * @param moves an array containing 2,4 integers representing [x,y] or [startingX,startingY,EndingX,EndingY]
+     */
     private void gameTurn(int[] moves){
         if (validateMove(moves)){
             makeMove(moves);
@@ -93,7 +108,20 @@ public abstract class AbstractBoardGame implements BoardGame {
     public void placeBoardPiece(AbstractPiece piece, int x, int y) {
     }
 
-    public Piece getPiece(int x, int y){};
+    /**
+     * set the piece if
+     * @param piece the piece to place
+     * @param x row number
+     * @param y the column number
+     */
+    protected void setPiece(Piece piece, int x, int y) {
+        if(gameBoard[x][y]==null){
+            gameBoard[x][y] = piece;
+        }else{
+            throw new IllegalArgumentException("Piece already occupied");
+        }
+    }
+
     public void setCurrentPlayer(String aCurrentPlayer){
         currentPlayer=aCurrentPlayer;
     }
