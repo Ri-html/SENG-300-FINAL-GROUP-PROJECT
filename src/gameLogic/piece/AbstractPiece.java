@@ -14,4 +14,12 @@ public abstract class AbstractPiece implements Piece {
         return side;
     }
 
+    /**
+     * print out string representation of the class
+     * @return side+" "+display in string format
+     */
+    @Override
+    public String toString() {
+        return side.toString()+" "+display;
+    }
 }
