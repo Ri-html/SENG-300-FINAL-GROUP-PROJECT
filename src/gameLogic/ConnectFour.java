@@ -46,8 +46,8 @@ public class ConnectFour extends AbstractBoardGame {
     }
 
     @Override
-    protected void setUpBoard(Piece[][] board) {
-
+    protected Piece[][] setUpBoard() {
+        return new Piece[3][3];
     }
 
     @Override

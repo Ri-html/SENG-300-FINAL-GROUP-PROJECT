@@ -16,11 +16,11 @@ public abstract class AbstractBoardGame implements BoardGame {
     public ArrayList<BoardGameObserver> boardSetupObservers;
     public ArrayList<BoardGameObserver> turnEndObservers;
     public ArrayList<BoardGameObserver> gameEndObservers;
-    private String winner = null;
-    private String gameID;
-    private int currentPlayer;
-    private final String[] players;
-    protected Piece[][] gameBoard;
+    protected String winner = null;
+    protected String gameID;
+    protected int currentPlayer;
+    protected final String[] players;
+    public Piece[][] gameBoard;
     int addedPlayers=0;
     int playerNumber;
     int[]moves;
@@ -34,7 +34,7 @@ public abstract class AbstractBoardGame implements BoardGame {
 
     //methods that should be implemented in the subclass
         //sets up the Board for the specific board game
-    abstract protected void setUpBoard(Piece[][] board);
+    abstract protected Piece[][] setUpBoard();
         //validates if an ending condition is met
     abstract public GameEndState validateGameEnds();
         //validates if the move is legal
@@ -72,7 +72,7 @@ public abstract class AbstractBoardGame implements BoardGame {
      */
     private void startGame(){
         currentPlayer=0;
-        setUpBoard(gameBoard);
+        gameBoard=setUpBoard();
     }
 
     /** receives the move
@@ -111,7 +111,7 @@ public abstract class AbstractBoardGame implements BoardGame {
 
     /**
      * receives the move and calls the gameTurn method
-     * @param moves the an array containing 2,4 integers representing [x,y] or [startingX,startingY,EndingX,EndingY]
+     * @param moves an array containing 2,4 integers representing [x,y] or [startingX,startingY,EndingX,EndingY]
      */
     public void update(int[] moves){
         gameTurn(moves);
@@ -190,6 +190,25 @@ public abstract class AbstractBoardGame implements BoardGame {
         }
     }
 
+    @Override
+    public String toString(){
+        if(gameBoard==null) {
+            return "null";
+        } else{
+            StringBuilder str = new StringBuilder();
+            for (int i = 0; i<gameBoard.length; i++){
+                for (int j=0; j<gameBoard.length;j++){
+                    if (gameBoard[i][j]==null){
+                        str.append(" ,");
+                    }else {
+                        str.append(gameBoard[i][j].toString());
+                    }
+                }
+                str.append("\n");
+            }
+            return str.toString();
+        }
+    }
     public enum GameEndState{
         Victory, Draw, Ongoing
     }

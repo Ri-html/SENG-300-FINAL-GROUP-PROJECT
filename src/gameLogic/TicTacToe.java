@@ -9,8 +9,8 @@ public class TicTacToe extends AbstractBoardGame {
     }
 
     @Override
-    protected void setUpBoard(Piece[][] board) {
-
+    protected Piece[][] setUpBoard() {
+        return new Piece[0][0];
     }
 
     @Override
