@@ -36,8 +36,22 @@ public class AbstractBoardGameTest {
     }
 
     @Test
-    public void gameTurnTest(){
+    public void switchPlayerTest(){
+        String player1="rrr";
+        String player2="rr";
+        boardGame.addPlayer(player1);
+        boardGame.addPlayer(player2);
+        assertEquals(boardGame.getCurrentPlayer(),player1);
+        boardGame.switchCurrentPlayer();
+        assertEquals(boardGame.getCurrentPlayer(),player2);
+        boardGame.switchCurrentPlayer();
+        assertEquals(boardGame.getCurrentPlayer(),player1);
+    }
 
+    @Test
+    public void gameTurnTest(){
+        boardGame.addPlayer("rrr");
+        boardGame.addPlayer("rrr");
     }
 
     @Test
