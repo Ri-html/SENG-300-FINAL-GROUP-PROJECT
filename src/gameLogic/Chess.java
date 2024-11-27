@@ -30,13 +30,14 @@ public class Chess extends AbstractBoardGame {
         super(2);
         GameState gameState = GameState.WAITING;
         //generate gameid to be this game object's hashcode
-        gameID = hashCode()
+        gameID = hashCode();
     }
     
 
     @Override
     protected Piece[][] setUpBoard() {
         Piece[][] board = this.gameBoard;
+        //need to assign pieces to a player
         //add white pieces to board
         board[0][0] = new Rook(ChessSide.WHITE);
         board[0][1] = new Knight(ChessSide.WHITE);
@@ -62,7 +63,6 @@ public class Chess extends AbstractBoardGame {
         //add black pawns
         for (int i = 0; i < 8; i++) {
             board[6][i] = new Pawn(ChessSide.BLACK);
-
         }
         return board;
     }
