@@ -20,7 +20,7 @@ public abstract class AbstractBoardGame implements BoardGame {
     protected String gameID;
     protected int currentPlayer;
     protected final String[] players;
-    public Piece[][] gameBoard;
+    private Piece[][] gameBoard;
     int addedPlayers=0;
     int playerNumber;
     int[]moves;
