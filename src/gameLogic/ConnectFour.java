@@ -48,7 +48,7 @@ public class ConnectFour extends AbstractBoardGame {
     }
 
     @Override
-    public boolean validateVictory() {
+    public boolean validateGameEnds() {
         return false;
     }
 

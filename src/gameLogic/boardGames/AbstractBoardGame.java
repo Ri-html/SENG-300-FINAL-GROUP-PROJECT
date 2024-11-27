@@ -39,7 +39,7 @@ public abstract class AbstractBoardGame implements BoardGame {
         //sets up the Board for the specific board game
     abstract protected void setUpBoard(Piece[][] board);
         //validates if an ending condition is met
-    abstract public boolean validateVictory();
+    abstract public boolean validateGameEnds();
         //validates if the move is legal
     abstract public boolean validateMove(int[] moves);
         //changes the board according to how pieces move in the game and the moves received by the networking team
@@ -73,7 +73,7 @@ public abstract class AbstractBoardGame implements BoardGame {
 
     }
     private void endGame(){
-        if(validateVictory()){
+        if(validateGameEnds()){
             notify();
         }
     }
