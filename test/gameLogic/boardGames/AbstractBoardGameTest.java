@@ -1,5 +1,8 @@
 package gameLogic.boardGames;
 import gameLogic.piece.Piece;
+import gameLogic.piece.chessPiece.Pawn;
+import gameLogic.side.ChessSide;
+import gameLogic.side.Side;
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
@@ -9,8 +12,9 @@ public class AbstractBoardGameTest {
     SomeBoardGame boardGame;
     @Before
     public void resetBoardGame(){
-        boardGame=new SomeBoardGame(2);
+        boardGame= new SomeBoardGame(2);
     }
+
     @Test
     public void addPlayerTest(){
         //the game should not be running with only one player
@@ -52,6 +56,8 @@ public class AbstractBoardGameTest {
     public void gameTurnTest(){
         boardGame.addPlayer("rrr");
         boardGame.addPlayer("rrr");
+        boardGame.setIsMoveCorrect(false);
+        boardGame.update(new int[]{1 , 2});
     }
 
     @Test
@@ -59,31 +65,44 @@ public class AbstractBoardGameTest {
         String string= "null";
         assertEquals(boardGame.toString(), string);
     }
+
+    private static class SomeBoardGame extends AbstractBoardGame {
+
+        GameEndState state;
+        Boolean isMoveCorrect;
+        public SomeBoardGame(int playerNum) {
+            super(playerNum);
+        }
+
+        @Override
+        protected Piece[][] setUpBoard() {
+            return new Piece[3][3];
+        }
+
+        @Override
+        public GameEndState validateGameEnds() {
+            return state;
+        }
+
+        @Override
+        public boolean validateMove(int[] moves) {
+            return isMoveCorrect;
+        }
+
+        @Override
+        public void makeMove(int[] moves) {
+            ChessSide side= ChessSide.WHITE;
+            Piece one= new Pawn(side);
+            this.setPiece(one, moves[0], moves[1]);
+        }
+
+        public void setState(GameEndState state) {
+            this.state = state;
+        }
+
+        public void setIsMoveCorrect(Boolean isMoveCorrect) {
+            this.isMoveCorrect = isMoveCorrect;
+        }
+    }
 }
 
-class SomeBoardGame extends AbstractBoardGame {
-
-    public SomeBoardGame(int playerNum) {
-        super(playerNum);
-    }
-
-    @Override
-    protected Piece[][] setUpBoard() {
-        return new Piece[3][3];
-    }
-
-    @Override
-    public GameEndState validateGameEnds() {
-        return null;
-    }
-
-    @Override
-    public boolean validateMove(int[] moves) {
-        return false;
-    }
-
-    @Override
-    public void makeMove(int[] moves) {
-
-    }
-}
