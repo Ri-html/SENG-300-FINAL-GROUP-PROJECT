@@ -12,8 +12,8 @@ public class Chess extends AbstractBoardGame {
     }
 
     @Override
-    public boolean validateGameEnds() {
-        return false;
+    public GameEndState validateGameEnds() {
+        return GameEndState.Ongoing;
     }
 
 }
