@@ -29,7 +29,7 @@ public class Chess extends AbstractBoardGame {
         super(2);
         this.gameState = GameState.INPROGRESS;
         setUpBoard(this.gameBoard);
-
+        //generate gameid to be this object's hexcode
     }
     
 
