@@ -4,6 +4,6 @@ import gameLogic.side.ChessSide;
 public class Queen extends AbstractChessPiece {
     private ChessSide side;
     public Queen(ChessSide side) {
-        this.side = side;
+        super(side);
     }
 }

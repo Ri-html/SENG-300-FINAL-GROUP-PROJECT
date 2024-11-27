@@ -137,11 +137,11 @@ public abstract class AbstractBoardGame implements BoardGame {
         }
     }
 
-    public void setCurrentPlayer(String aCurrentPlayer){
+    public void setCurrentPlayer(int aCurrentPlayer){
         currentPlayer=aCurrentPlayer;
     }
 
-    public String getCurrentPlayer() {
+    public int getCurrentPlayer() {
         return currentPlayer;
     }
 

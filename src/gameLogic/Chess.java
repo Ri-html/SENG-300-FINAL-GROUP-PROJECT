@@ -3,7 +3,6 @@ package gameLogic;
 import gameLogic.boardGames.AbstractBoardGame;
 import gameLogic.boardGames.BoardGameObserver;
 import gameLogic.piece.Piece;
-import gameLogic.player.ChessPlayer;
 import gameLogic.piece.chessPiece.*;
 import gameLogic.side.ChessSide;
 

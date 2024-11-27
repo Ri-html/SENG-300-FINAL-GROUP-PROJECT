@@ -5,6 +5,6 @@ import gameLogic.side.ChessSide;
 public class Bishop extends AbstractChessPiece{
     private ChessSide side;
     public Bishop(ChessSide side) {
-        this.side = side;
+        super(side);
     }
 }

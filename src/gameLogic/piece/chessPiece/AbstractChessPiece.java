@@ -5,12 +5,12 @@ import gameLogic.piece.PieceType;
 import gameLogic.side.Side;
 
 public abstract class AbstractChessPiece extends AbstractPiece {
-    abstract int[][] validMoves;
+    int[][] validMoves;
     private int[] location; //in [x, y]
     protected PieceType type = PieceType.ChessPieceType;
 
-    public AbstractChessPiece(Side side, String display) {
-        super(side, display);
+    public AbstractChessPiece(Side side) {
+        super(side);
     }
 
     public void checkChessMove(){ //cannot have an abstract method in a non-abstract class
@@ -25,6 +25,7 @@ public abstract class AbstractChessPiece extends AbstractPiece {
 
     public int[][] getValidMoves(){ //why is this void in class diagram?
         // maybe return array of tuples with all possible moves x,y
+        return validMoves;
     }
 
     public void updateValidMoves(){

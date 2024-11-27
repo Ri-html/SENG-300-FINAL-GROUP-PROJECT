@@ -1,27 +1,25 @@
 package gameLogic;
 
 import gameLogic.boardGames.AbstractBoardGame;
+import gameLogic.boardGames.BoardGame;
+import gameLogic.piece.Piece;
 
 public class ConnectFour extends AbstractBoardGame {
-
-    public ConnectFour(int player1, int player2) {
-        super();
-        board = new int[6][7];
+    boolean isValid;
+    String board[][]=new String[6][7];
+    public ConnectFour(int player1, int player2,int playerNum) {
+        super(playerNum);
     }
 
-    public void start() {
-        gameState = gameLogic.gameState.INPROGRESS;
-        alertPlayer(currentPlayer);
-    }
-
+/*
     public void placePiece(int player, int x) {
         isValid = isValidMove(x);
         for (int i = 6; i >= 0; i--) {
             if (board[i][x] == 'X') {
                 if (player1 == player) {
-                    board[i][x] = 'R'
+                    board[i][x] = 'R';
                 } else {
-                    board[i][x] = 'Y'
+                    board[i][x] = 'Y';
                 }
                 return;
             }
@@ -29,7 +27,7 @@ public class ConnectFour extends AbstractBoardGame {
         checkWin();
     }
 
-    public checkWin() {
+    public void checkWin() {
         checkHorizontalWin();
         checkVerticalWin();
         checkDiagonalWin();
@@ -42,14 +40,29 @@ public class ConnectFour extends AbstractBoardGame {
     private boolean isValidMove(int x) {
         return board[0][x] == 'X';
     }
+*/
+    public void checkMoves(int x, int y) {
 
-    public checkMoves(int x, int y) {
+    }
+
+    @Override
+    protected void setUpBoard(Piece[][] board) {
 
     }
 
     @Override
     public GameEndState validateGameEnds() {
         return GameEndState.Ongoing;
+    }
+
+    @Override
+    public boolean validateMove(int[] moves) {
+        return false;
+    }
+
+    @Override
+    public void makeMove(int[] moves) {
+
     }
 
 }

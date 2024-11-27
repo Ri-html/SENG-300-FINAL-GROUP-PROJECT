@@ -4,7 +4,7 @@ import gameLogic.side.ChessSide;
 public class Rook extends AbstractChessPiece {
     private ChessSide side;
     public Rook(ChessSide side){
-        this.side = side;
+        super(side);
     }
 
 }
