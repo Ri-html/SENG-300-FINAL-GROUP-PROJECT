@@ -62,7 +62,7 @@ public abstract class AbstractBoardGame implements BoardGame {
         if (addedPlayers>=playerNumber && gameState==GameState.WAITING) {
             gameState = GameState.INPROGRESS;
             startGame();
-            System.out.println("Player "+playerNumber+" has started");
+            System.out.println("Game has started");
         }
     }
 
@@ -117,8 +117,15 @@ public abstract class AbstractBoardGame implements BoardGame {
         gameTurn(moves);
     };
 
-    public void switchCurrentPlayer(){
-
+    /**
+     * switch the player's turn
+     */
+    public void switchCurrentPlayer() {
+        if (currentPlayer<playerNumber-1){
+            currentPlayer++;
+        }else{
+            currentPlayer=0;
+        }
     }
 
     public void setWinner(){
