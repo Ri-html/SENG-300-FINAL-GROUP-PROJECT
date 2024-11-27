@@ -8,8 +8,8 @@ public class TicTacToe extends AbstractBoardGame {
     }
 
     @Override
-    public boolean validateVictory() {
-        return false;
+    public GameEndState validateGameEnds() {
+        return GameEndState.Ongoing;
     }
 
 }

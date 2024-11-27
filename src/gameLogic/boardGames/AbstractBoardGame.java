@@ -10,18 +10,13 @@ import java.util.ArrayList;
  * board games and sets up a framework of adding player, starting game, switching turns, notifying changes, and ending game
  */
 public abstract class AbstractBoardGame implements BoardGame {
-    public enum GameState {
-        WAITING,
-        INPROGRESS,
-        OVER
-    }
     public ArrayList<BoardGameObserver> boardSetupObservers;
     public ArrayList<BoardGameObserver> turnEndObservers;
     public ArrayList<BoardGameObserver> gameEndObservers;
     private String winner = null;
     private String gameID;
     private int currentPlayer;
-    private String[] players;
+    private final String[] players;
     protected Piece[][] gameBoard;
     int addedPlayers=0;
     int playerNumber;
@@ -39,12 +34,16 @@ public abstract class AbstractBoardGame implements BoardGame {
         //sets up the Board for the specific board game
     abstract protected void setUpBoard(Piece[][] board);
         //validates if an ending condition is met
-    abstract public boolean validateVictory();
+    abstract public GameEndState validateGameEnds();
         //validates if the move is legal
     abstract public boolean validateMove(int[] moves);
         //changes the board according to how pieces move in the game and the moves received by the networking team
     abstract public void makeMove(int[] moves);
 
+    /**
+     * Adds the player to the game and check if the game started
+     * @param player
+     */
     public void addPlayer(String player) {
         if (addedPlayers>=playerNumber){
             System.err.println("Player is at full capacity");
@@ -53,17 +52,32 @@ public abstract class AbstractBoardGame implements BoardGame {
         }
         checkStartCondition();
     }
+
+    /**
+     * Checks the starting condition and start the game if true
+     */
     protected void checkStartCondition(){
         if (addedPlayers>=playerNumber && gameState==GameState.WAITING) {
             gameState = GameState.INPROGRESS;
             startGame();
         }
     }
+
+    /**
+     * sets up the board and notify both frontend of the board state
+     * Also notify player one to make their move
+     */
     private void startGame(){
         currentPlayer=0;
         setUpBoard(gameBoard);
-
     }
+
+    /** receives the move
+     * validate whether move is correct
+     * make the move
+     * then check for end game condition
+     * @param moves an array containing 2,4 integers representing [x,y] or [startingX,startingY,EndingX,EndingY]
+     */
     private void gameTurn(int[] moves){
         if (validateMove(moves)){
             makeMove(moves);
@@ -73,7 +87,10 @@ public abstract class AbstractBoardGame implements BoardGame {
 
     }
     private void endGame(){
-        if(validateVictory()){
+        if(validateGameEnds()==GameEndState.Draw){
+            notify();
+        } else if (validateGameEnds()==GameEndState.Victory) {
+            winner = players[currentPlayer];
             notify();
         }
     }
@@ -91,7 +108,20 @@ public abstract class AbstractBoardGame implements BoardGame {
     public void placeBoardPiece(AbstractPiece piece, int x, int y) {
     }
 
-    public Piece getPiece(int x, int y){};
+    /**
+     * set the piece if
+     * @param piece the piece to place
+     * @param x row number
+     * @param y the column number
+     */
+    protected void setPiece(Piece piece, int x, int y) {
+        if(gameBoard[x][y]==null){
+            gameBoard[x][y] = piece;
+        }else{
+            throw new IllegalArgumentException("Piece already occupied");
+        }
+    }
+
     public void setCurrentPlayer(String aCurrentPlayer){
         currentPlayer=aCurrentPlayer;
     }
@@ -137,5 +167,12 @@ public abstract class AbstractBoardGame implements BoardGame {
         for(BoardGameObserver observer : gameEndObservers){
             observer.update(winner);
         }
+    }
+
+    public enum GameEndState{
+        Victory, Draw, Ongoing
+    }
+    public enum GameState {
+        WAITING, INPROGRESS, OVER
     }
 }
