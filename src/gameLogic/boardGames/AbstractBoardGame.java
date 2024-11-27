@@ -73,6 +73,7 @@ public abstract class AbstractBoardGame implements BoardGame {
     private void startGame(){
         currentPlayer=0;
         gameBoard=setUpBoard();
+        notifyBoardSetup();
     }
 
     /** receives the move
@@ -84,8 +85,11 @@ public abstract class AbstractBoardGame implements BoardGame {
     private void gameTurn(int[] moves){
         if (validateMove(moves)){
             makeMove(moves);
+            checkForEndGame();
+        }else{
+            gameState=GameState.OVER;
+            notifyGameEnd();
         }
-        checkForEndGame();
     }
 
     /**
@@ -94,6 +98,9 @@ public abstract class AbstractBoardGame implements BoardGame {
     protected void checkForEndGame(){
         if(validateGameEnds()!=null && validateGameEnds()!=GameEndState.Ongoing){
             endGame();
+        }else{
+            switchCurrentPlayer();
+            notifyTurnEnd();
         }
     }
 
@@ -102,10 +109,12 @@ public abstract class AbstractBoardGame implements BoardGame {
      */
     private void endGame(){
         if(validateGameEnds()==GameEndState.Draw){
-            notify();
+            gameState=GameState.OVER;
+            notifyGameEnd();
         } else if (validateGameEnds()==GameEndState.Victory) {
+            gameState=GameState.OVER;
             winner = players[currentPlayer];
-            notify();
+            notifyGameEnd();
         }
     }
 
@@ -128,17 +137,14 @@ public abstract class AbstractBoardGame implements BoardGame {
         }
     }
 
-    @Override
-    public void placeBoardPiece(AbstractPiece piece, int x, int y) {
-    }
-
     /**
      * set the piece if
      * @param piece the piece to place
      * @param x row number
      * @param y the column number
      */
-    protected void setPiece(Piece piece, int x, int y) {
+    @Override
+    public void placeBoardPiece(AbstractPiece piece, int x, int y) {
         if(gameBoard[x][y]==null){
             gameBoard[x][y] = piece;
         }else{
