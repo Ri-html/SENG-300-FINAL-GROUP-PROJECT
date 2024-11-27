@@ -16,24 +16,27 @@ public class Chess extends AbstractBoardGame {
     private String winner = null;
     private String gameID;
     private int currentPlayer;
-    private String[] players;
+    private String[] players = new String[2];
     //define size of board
+    /*Board assumes that square [0][0-7] is white's side (1A-H).
+    It will look upside down if you print it for testing. Sorry.*/
     protected Piece[][] gameBoard = new Piece[8][8];
     int addedPlayers=0;
-    int playerNumber;
+    //Chess is a 2-player game
+    int playerNumber = 2;
     int[]moves;
-    private GameState gameState = GameState.WAITING;
 
     public Chess() {
         super(2);
-        this.gameState = GameState.INPROGRESS;
-        //generate gameid to be this object's hexcode
+        GameState gameState = GameState.WAITING;
+        //generate gameid to be this game object's hashcode
+        gameID = hashCode()
     }
     
 
     @Override
     protected Piece[][] setUpBoard() {
-        Piece[][] board= new Piece[8][8];
+        Piece[][] board = this.gameBoard;
         //add white pieces to board
         board[0][0] = new Rook(ChessSide.WHITE);
         board[0][1] = new Knight(ChessSide.WHITE);
@@ -57,8 +60,8 @@ public class Chess extends AbstractBoardGame {
         board[7][6] = new Knight(ChessSide.BLACK);
         board[7][7] = new Rook(ChessSide.BLACK);
         //add black pawns
-        for (int i = 0; i < 7; i++) {
-            board[7][i] = new Pawn(ChessSide.BLACK);
+        for (int i = 0; i < 8; i++) {
+            board[6][i] = new Pawn(ChessSide.BLACK);
 
         }
         return board;
