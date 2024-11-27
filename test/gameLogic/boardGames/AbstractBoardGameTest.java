@@ -13,11 +13,37 @@ public class AbstractBoardGameTest {
     }
     @Test
     public void addPlayerTest(){
+        //the game should not be running with only one player
         boardGame.addPlayer("rerere");
         assertEquals(boardGame.getGameState(), AbstractBoardGame.GameState.WAITING);
+        //the game should be running with two players
         boardGame.addPlayer("rerere");
         assertEquals(boardGame.getGameState(), AbstractBoardGame.GameState.INPROGRESS);
+        //check to see if error message is send when we add too much players
         boardGame.addPlayer("rerere");
+    }
+
+    @Test
+    public void startGameTest(){
+        String now= """
+                 , , ,
+                 , , ,
+                 , , ,
+                """;
+        boardGame.addPlayer("rrr");
+        boardGame.addPlayer("rrr");
+        assertEquals(now,boardGame.toString());
+    }
+
+    @Test
+    public void gameTurnTest(){
+
+    }
+
+    @Test
+    public void toStringTest(){
+        String string= "null";
+        assertEquals(boardGame.toString(), string);
     }
 }
 
@@ -28,7 +54,8 @@ class SomeBoardGame extends AbstractBoardGame {
     }
 
     @Override
-    protected void setUpBoard(Piece[][] board) {
+    protected Piece[][] setUpBoard() {
+        return new Piece[3][3];
     }
 
     @Override
