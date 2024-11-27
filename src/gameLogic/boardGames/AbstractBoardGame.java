@@ -8,6 +8,9 @@ import java.util.ArrayList;
 /**
  * AbstractBoardGame handles the common functionality between the
  * board games and sets up a framework of adding player, starting game, switching turns, notifying changes, and ending game
+ * This class would encapsulate the entire process of running the game
+ * The game instance would start as soon as the players are full which would notify the frontend
+ * The class would send null or player as a string value when game instance ends
  */
 public abstract class AbstractBoardGame implements BoardGame {
     public ArrayList<BoardGameObserver> boardSetupObservers;
@@ -30,7 +33,6 @@ public abstract class AbstractBoardGame implements BoardGame {
     }
 
     //methods that should be implemented in the subclass
-
         //sets up the Board for the specific board game
     abstract protected void setUpBoard(Piece[][] board);
         //validates if an ending condition is met
@@ -42,7 +44,7 @@ public abstract class AbstractBoardGame implements BoardGame {
 
     /**
      * Adds the player to the game and check if the game started
-     * @param player
+     * @param player A string id representing the user
      */
     public void addPlayer(String player) {
         if (addedPlayers>=playerNumber){
@@ -64,7 +66,7 @@ public abstract class AbstractBoardGame implements BoardGame {
     }
 
     /**
-     * sets up the board and notify both frontend of the board state
+     * sets up the board and notify both frontends of the board state
      * Also notify player one to make their move
      */
     private void startGame(){
@@ -74,7 +76,7 @@ public abstract class AbstractBoardGame implements BoardGame {
 
     /** receives the move
      * validate whether move is correct
-     * make the move
+     * make the move in the game instance
      * then check for end game condition
      * @param moves an array containing 2,4 integers representing [x,y] or [startingX,startingY,EndingX,EndingY]
      */
@@ -84,8 +86,21 @@ public abstract class AbstractBoardGame implements BoardGame {
         }else{
             gameState = GameState.OVER;
         }
-
+        checkForEndGame();
     }
+
+    /**
+     * checks whether the game end condition is met
+     */
+    protected void checkForEndGame(){
+        if(validateGameEnds()!=null && validateGameEnds()!=GameEndState.Ongoing){
+            endGame();
+        }
+    }
+
+    /**
+     * notify the winner to the leaderboard and both frontends
+     */
     private void endGame(){
         if(validateGameEnds()==GameEndState.Draw){
             notify();
