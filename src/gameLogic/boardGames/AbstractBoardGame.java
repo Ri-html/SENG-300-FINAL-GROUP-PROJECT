@@ -20,7 +20,7 @@ public abstract class AbstractBoardGame implements BoardGame {
     protected String gameID;
     protected int currentPlayer;
     protected final String[] players;
-    private Piece[][] gameBoard;
+    protected Piece[][] gameBoard;
     int addedPlayers=0;
     int playerNumber;
     int[]moves;
@@ -128,10 +128,6 @@ public abstract class AbstractBoardGame implements BoardGame {
         }
     }
 
-    public void setWinner(){
-
-    }
-
     @Override
     public void placeBoardPiece(AbstractPiece piece, int x, int y) {
     }
@@ -162,13 +158,6 @@ public abstract class AbstractBoardGame implements BoardGame {
         return gameState;
     }
 
-    public String getWinner() {
-        return winner;
-    }
-
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
 
     //methods related to observers
     public void attachBoardSetupObserver(BoardGameObserver observer){
