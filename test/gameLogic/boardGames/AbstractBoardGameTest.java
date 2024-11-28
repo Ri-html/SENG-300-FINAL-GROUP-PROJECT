@@ -93,7 +93,7 @@ public class AbstractBoardGameTest {
         public void makeMove(int[] moves) {
             ChessSide side= ChessSide.WHITE;
             Piece one= new Pawn(side);
-            this.setPiece(one, moves[0], moves[1]);
+            this.placeBoardPiece(one, moves[0], moves[1]);
         }
 
         public void setState(GameEndState state) {
