@@ -29,11 +29,7 @@ public class AbstractBoardGameTest {
 
     @Test
     public void startGameTest(){
-        String now= """
-                 , , ,
-                 , , ,
-                 , , ,
-                """;
+        String now= " , , \n , , \n , , \n";
         boardGame.addPlayer("rrr");
         boardGame.addPlayer("rrr");
         assertEquals(now,boardGame.toString());
@@ -58,6 +54,18 @@ public class AbstractBoardGameTest {
         boardGame.addPlayer("rrr");
         boardGame.setIsMoveCorrect(false);
         boardGame.update(new int[]{1 , 2});
+        assertEquals(boardGame.getGameState(), AbstractBoardGame.GameState.OVER);
+    }
+
+    @Test
+    public void gameTurnTest2(){
+        boardGame.addPlayer("rrr");
+        boardGame.addPlayer("rrr");
+        String one= boardGame.toString();
+        boardGame.setIsMoveCorrect(true);
+        boardGame.update(new int[]{1 , 2});
+        String two= boardGame.toString();
+        assertNotEquals(one,two);
     }
 
     @Test
