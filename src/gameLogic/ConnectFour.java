@@ -6,15 +6,14 @@ import gameLogic.piece.Piece;
 
 public class ConnectFour extends AbstractBoardGame {
     boolean isValid;
-    String board[][]=new String[6][7];
+    String board[][]= new String[6][7];
     public ConnectFour(int player1, int player2,int playerNum) {
         super(playerNum);
     }
 
-/*
-    public void placePiece(int player, int x) {
+    private boolean placePiece(int player, int x) {
         isValid = isValidMove(x);
-        for (int i = 6; i >= 0; i--) {
+        for (int i = board[0].length-1; i >= 0; i--) {
             if (board[i][x] == 'X') {
                 if (player1 == player) {
                     board[i][x] = 'R';
@@ -24,13 +23,29 @@ public class ConnectFour extends AbstractBoardGame {
                 return;
             }
         }
-        checkWin();
     }
 
-    public void checkWin() {
-        checkHorizontalWin();
-        checkVerticalWin();
-        checkDiagonalWin();
+    public boolean checkWin() {
+        if (checkHorizontalWin() || checkVerticalWin() || checkDiagonalWin()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkHorizontalWin() {
+        //!TODO
+    }
+
+    private boolean checkVerticalWin() {
+        //!TODO
+    }
+
+    private boolean checkDiagonalWin() {
+        //!TODO
+    }
+
+    private boolean isFull() {
+        //!TODO
     }
 
     public char[][] getBoard() {
@@ -42,7 +57,7 @@ public class ConnectFour extends AbstractBoardGame {
     }
 */
     public void checkMoves(int x, int y) {
-
+        return isValidMove(x);
     }
 
     @Override
@@ -52,17 +67,24 @@ public class ConnectFour extends AbstractBoardGame {
 
     @Override
     public GameEndState validateGameEnds() {
-        return GameEndState.Ongoing;
+        if (checkWin()) {
+            return GameEndState.Victory;
+        } else if (isFull()){
+            return GameEndState.DRAW;
+        } else {
+            return GameEndState.Ongoing;
+        }
     }
 
     @Override
     public boolean validateMove(int[] moves) {
-        return false;
+        isValidMove(moves[0]);
     }
 
     @Override
-    public void makeMove(int[] moves) {
-
+    public void makeMove(int player1, int[] moves) {
+        validateMove(int[] moves);
+        placePiece(player1, moves[0]);
     }
 
 }
