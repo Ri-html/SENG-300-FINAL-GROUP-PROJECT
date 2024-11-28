@@ -10,6 +10,7 @@ public class TicTacToe extends AbstractBoardGame {
 
     @Override
     protected Piece[][] setUpBoard() {
+
         return new Piece[0][0];
     }
 
