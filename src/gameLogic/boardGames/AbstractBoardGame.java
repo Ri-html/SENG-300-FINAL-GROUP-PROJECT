@@ -14,9 +14,9 @@ import java.util.UUID;
  * The class would send null or player as a string value when game instance ends
  */
 public abstract class AbstractBoardGame implements BoardGame {
-    public ArrayList<BoardGameObserver> boardSetupObservers;
-    public ArrayList<BoardGameObserver> turnEndObservers;
-    public ArrayList<BoardGameObserver> gameEndObservers;
+    public ArrayList<BoardGameObserver> boardSetupObservers=new ArrayList<>();
+    public ArrayList<BoardGameObserver> turnEndObservers=new ArrayList<>();
+    public ArrayList<BoardGameObserver> gameEndObservers=new ArrayList<>();
     protected String winner = null;
     protected String gameID;
     protected int currentPlayer;
@@ -181,33 +181,57 @@ public abstract class AbstractBoardGame implements BoardGame {
     public void detachGameEndObserver(BoardGameObserver observer){gameEndObservers.remove(observer);}
     public void notifyBoardSetup(){
             for(BoardGameObserver observer : boardSetupObservers){
-                observer.update(gameBoard);
+                StringBuilder stringToSend=new StringBuilder();
+                stringToSend.append("Setup"+"\n");
+                stringToSend.append(gameID+"\n");
+                stringToSend.append(this.toString());
+                observer.update(stringToSend.toString());
             }
     }
     public void notifyTurnEnd(){
         for(BoardGameObserver observer : turnEndObservers){
-            observer.update(moves);
+            StringBuilder stringToSend=new StringBuilder();
+            stringToSend.append("TurnEnd"+"\n");
+            stringToSend.append(gameID).append("\n");
+            observer.update(stringToSend.toString());
         }
     }
     public void notifyGameEnd(){
         for(BoardGameObserver observer : gameEndObservers){
-            observer.update(winner);
+            StringBuilder stringToSend=new StringBuilder();
+            stringToSend.append("GameEnd"+"\n");
+            stringToSend.append(gameID).append("\n");
+            if(winner!=null){
+                stringToSend.append("winner,").append(winner).append(",loser,").append("\n");
+            }else{
+                stringToSend.append("winner:null - loser: null");
+            }
+            observer.update(stringToSend.toString());
         }
     }
 
+    /**
+     * print the string representation of the game board
+     * @return string representation of the game board
+     */
     @Override
     public String toString(){
         if(gameBoard==null) {
             return "null";
         } else{
             StringBuilder str = new StringBuilder();
-            for (int i = 0; i<gameBoard.length; i++){
-                for (int j=0; j<gameBoard.length;j++){
-                    if (gameBoard[i][j]==null){
-                        str.append(" ,");
-                    }else {
-                        str.append(gameBoard[i][j].toString());
+            for (Piece[] pieces : gameBoard) {
+                for (int j = 0; j < gameBoard.length - 1; j++) {
+                    if (pieces[j] == null) {
+                        str.append(" " + ",");
+                    } else {
+                        str.append(pieces[j].toString()).append(",");
                     }
+                }
+                if (pieces[gameBoard.length-1] == null) {
+                    str.append(" ");
+                } else {
+                    str.append(pieces[gameBoard.length-1].toString());
                 }
                 str.append("\n");
             }

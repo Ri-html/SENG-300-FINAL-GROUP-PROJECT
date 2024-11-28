@@ -1,5 +1,5 @@
 package gameLogic.boardGames;
 
-public interface BoardGameObserver<T> {
-    void update(T element);
+public interface BoardGameObserver {
+    void update(String element);
 }
