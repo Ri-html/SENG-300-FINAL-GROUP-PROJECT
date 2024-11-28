@@ -45,7 +45,13 @@ public class ConnectFour extends AbstractBoardGame {
     }
 
     private boolean isFull() {
-        //!TODO
+        boolean full = true;
+        for ( i=0; i < board[0].length; i++) {
+            if (board[board.length - 1][i] == 'X') {
+                full = false;
+            }
+        }
+        return full;
     }
 
     public char[][] getBoard() {
