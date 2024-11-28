@@ -144,7 +144,7 @@ public abstract class AbstractBoardGame implements BoardGame {
      * @param y the column number
      */
     @Override
-    public void placeBoardPiece(AbstractPiece piece, int x, int y) {
+    public void placeBoardPiece(Piece piece, int x, int y) {
         if(gameBoard[x][y]==null){
             gameBoard[x][y] = piece;
         }else{

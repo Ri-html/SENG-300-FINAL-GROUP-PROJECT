@@ -1,7 +1,7 @@
 package gameLogic.boardGames;
 
-import gameLogic.piece.AbstractPiece;
+import gameLogic.piece.Piece;
 
 public interface BoardGame extends Game{
-    void placeBoardPiece(AbstractPiece piece, int x, int y);
+    void placeBoardPiece(Piece piece, int x, int y);
 }
