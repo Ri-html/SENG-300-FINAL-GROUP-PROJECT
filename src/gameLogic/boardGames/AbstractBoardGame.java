@@ -4,6 +4,7 @@ import gameLogic.piece.AbstractPiece;
 import gameLogic.piece.Piece;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * AbstractBoardGame handles the common functionality between the
@@ -30,6 +31,8 @@ public abstract class AbstractBoardGame implements BoardGame {
         gameState = GameState.WAITING;
         playerNumber = playerNum;
         players = new String[playerNum];
+        //get a unique game id
+        gameID= UUID.randomUUID().toString();
     }
 
     //methods that should be implemented in the subclass
