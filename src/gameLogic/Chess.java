@@ -28,9 +28,6 @@ public class Chess extends AbstractBoardGame {
 
     public Chess() {
         super(2);
-        GameState gameState = GameState.WAITING;
-        //generate gameid to be this game object's hashcode
-        gameID = hashCode();
     }
     
 
