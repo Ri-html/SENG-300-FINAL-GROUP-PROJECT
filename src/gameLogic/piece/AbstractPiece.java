@@ -4,7 +4,7 @@ import gameLogic.side.Side;
 
 public abstract class AbstractPiece implements Piece {
     private final Side side;
-    private char display;
+    protected char display;
     public AbstractPiece(Side side) {
         this.side = side;
     }

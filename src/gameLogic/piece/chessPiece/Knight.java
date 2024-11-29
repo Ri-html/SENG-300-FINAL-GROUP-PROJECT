@@ -5,6 +5,7 @@ public class Knight extends AbstractChessPiece{
     private ChessSide side;
     public Knight(ChessSide side) {
         super(side);
+        display=ChessPieceDisplay.knight.getSymbol();
     }
 
 }

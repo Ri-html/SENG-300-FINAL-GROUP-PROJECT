@@ -6,5 +6,6 @@ public class King extends AbstractChessPiece{
     private ChessSide side;
     public King(ChessSide side) {
         super(side);
+        display=ChessPieceDisplay.king.getSymbol();
     }
 }
