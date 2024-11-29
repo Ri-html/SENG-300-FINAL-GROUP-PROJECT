@@ -1,0 +1,9 @@
+Class Diagram Feedback(backend, networking):
+
+Great use of the observer design pattern for sending game data.
+
+Some minor syntax error in the UML are marked red
+
+Recommend implementing a facade class to simplify the complicated structure
+
+Overall, it is a well designed diagram
