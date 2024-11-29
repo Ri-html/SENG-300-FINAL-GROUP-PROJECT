@@ -62,5 +62,4 @@ public class TicTacToe extends AbstractBoardGame {
             placeBoardPiece(new TicTacToePiece(TicTacToeSide.O), moves[0], moves[1]);
         }
     }
-
 }
