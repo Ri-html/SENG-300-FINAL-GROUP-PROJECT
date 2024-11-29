@@ -25,10 +25,10 @@ public class TicTacToe extends AbstractBoardGame {
         // check for win
         for (int i = 0; i < WIDTH; i++) {
             // check columns
-            if (gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][0] == gameBoard[i][2])
+            if (gameBoard[i][0] != null && gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][0] == gameBoard[i][2])
                 return GameEndState.Victory;
             // check rows
-            if (gameBoard[0][i] == gameBoard[1][i] && gameBoard[0][i] == gameBoard[2][i])
+            if (gameBoard[0][i] != null && gameBoard[0][i] == gameBoard[1][i] && gameBoard[0][i] == gameBoard[2][i])
                 return GameEndState.Victory;
         }
         // check diagonals
