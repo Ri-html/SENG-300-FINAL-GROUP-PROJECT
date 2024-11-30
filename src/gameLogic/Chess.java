@@ -12,6 +12,8 @@ public class Chess extends AbstractBoardGame {
 
     public static ArrayList<Piece> capturedPieces;
 
+    //somehow set game board to be [8][8]?
+
     //constructor
     //chess can only take 2 players
     public Chess() {
