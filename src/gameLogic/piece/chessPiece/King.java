@@ -8,4 +8,9 @@ public class King extends AbstractChessPiece{
         super(side);
         display=ChessPieceDisplay.king.getSymbol();
     }
+
+    @Override
+    public int[][] getValidMoves() {
+        return new int[0][];
+    }
 }
