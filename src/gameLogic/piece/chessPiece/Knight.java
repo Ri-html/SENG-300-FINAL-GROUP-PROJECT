@@ -8,4 +8,9 @@ public class Knight extends AbstractChessPiece{
         display=ChessPieceDisplay.knight.getSymbol();
     }
 
+    @Override
+    public int[][] getValidMoves() {
+        return new int[0][];
+    }
+
 }

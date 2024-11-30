@@ -10,7 +10,7 @@ public class Bishop extends AbstractChessPiece{
     }
 
     @Override
-    int[][] getValidMoves() {
+    public int[][] getValidMoves() {
         while(//in bounds of board and no piece in way){
 
         }
