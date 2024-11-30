@@ -8,4 +8,5 @@ public class Bishop extends AbstractChessPiece{
         super(side);
         display=ChessPieceDisplay.bishop.getSymbol();
     }
+
 }
