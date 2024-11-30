@@ -1,4 +1,4 @@
-package UserAndProfile;
+package authProfile;
 
 public class TicTacToeProfile extends AbstractGameProfile {
 

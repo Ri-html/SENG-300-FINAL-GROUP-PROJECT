@@ -1,4 +1,4 @@
-package UserAndProfile;
+package authProfile;
 
 
 public class ChessProfile extends AbstractGameProfile {

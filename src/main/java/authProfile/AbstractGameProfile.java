@@ -1,4 +1,4 @@
-package UserAndProfile;
+package authProfile;
 import java.util.Date;
 
 public abstract class AbstractGameProfile {

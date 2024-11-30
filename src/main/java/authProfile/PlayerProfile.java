@@ -1,4 +1,4 @@
-package UserAndProfile;
+package authProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
