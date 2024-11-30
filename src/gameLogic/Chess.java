@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class Chess extends AbstractBoardGame {
 
+    public static ArrayList<Piece> capturedPieces;
+
     //constructor
     //chess can only take 2 players
     public Chess() {

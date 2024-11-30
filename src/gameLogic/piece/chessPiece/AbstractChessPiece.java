@@ -1,5 +1,6 @@
 package gameLogic.piece.chessPiece;
 
+import gameLogic.Chess;
 import gameLogic.piece.AbstractPiece;
 import gameLogic.piece.PieceType;
 import gameLogic.side.ChessSide;
@@ -35,6 +36,8 @@ public abstract class AbstractChessPiece extends AbstractPiece {
      * @param captured the piece that is captured and removed from the board
      */
     public void capture(AbstractChessPiece takes, AbstractChessPiece captured){
-
+        //remove piece from board
+        //store piece somewhere in 'captured' collection to be displayed
+        Chess.capturedPieces.add(captured);
     }
 }
