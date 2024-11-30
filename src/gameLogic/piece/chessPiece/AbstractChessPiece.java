@@ -28,4 +28,13 @@ public abstract class AbstractChessPiece extends AbstractPiece {
 
     public void updateValidMoves(){
     }
+
+    /**
+     * Handles removing a piece from the board on capture
+     * @param takes the piece that takes another piece
+     * @param captured the piece that is captured and removed from the board
+     */
+    public void capture(AbstractChessPiece takes, AbstractChessPiece captured){
+
+    }
 }
