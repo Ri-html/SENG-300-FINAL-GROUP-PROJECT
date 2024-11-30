@@ -10,7 +10,8 @@ import gameLogic.side.ChessSide;
     Author: Noah Pinel
  */
 
-public class Rook extends AbstractChessPiece {
+public class Rook extends AbstractChessPiece
+{
     private ChessSide side;
     public Rook(ChessSide side){
         super(side);
