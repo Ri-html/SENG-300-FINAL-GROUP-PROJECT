@@ -9,21 +9,21 @@ public class ProfileSearch {
         this.userDatabase = userDatabase;
     }
 
-    // Search by username or email
+    // Search by either username or email
     public PlayerProfile searchProfile(String searchTerm) {
-        // First, try searching by username
+        User user = searchUser(searchTerm);
+        return user != null ? user.getPlayerProfile() : null;
+    }
+
+    // Helper method for searching by username or email
+    private User searchUser(String searchTerm) {
+        // Check if the search term matches a username
         User user = userDatabase.searchByUsername(searchTerm);
         if (user != null) {
-            return user.getPlayerProfile();
+            return user;
         }
 
-        // If not found by username, try searching by email
-        user = userDatabase.searchByEmail(searchTerm);
-        if (user != null) {
-            return user.getPlayerProfile();
-        }
-
-        // If not found by either, return null or throw exception
-        return null;
+        // If not found by username, check by email
+        return userDatabase.searchByEmail(searchTerm);
     }
 }
