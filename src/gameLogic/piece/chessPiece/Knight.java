@@ -14,12 +14,12 @@ public class Knight extends AbstractChessPiece{
     @Override
     public int[][] getValidMoves(Piece[][] board) {
 
+        List<int[]> validMoves = new ArrayList<>();
+
         final int[][] KNIGHT_MOVES = {
                 {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
                 {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
         };
-
-        List<int[]> validMoves = new ArrayList<>();
 
         int x = this.getLocation()[0];
         int y = this.getLocation()[1];
