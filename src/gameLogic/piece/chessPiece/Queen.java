@@ -17,12 +17,12 @@ public class Queen extends AbstractChessPiece {
 
         List<int[]> validMoves = new ArrayList<>();
 
-        final int[][] DIRECTIONS = {
-                {-1,  0}, { 1,  0}, { 0, -1}, { 0,  1},                 // rook directions
-                {-1, -1}, {-1,  1}, { 1, -1}, { 1,  1}                  // bishop directions
+        final int[][] QUEEN_MOVES = {
+                {-1,  0}, { 1,  0}, { 0, -1}, { 0,  1},                 // rook moves
+                {-1, -1}, {-1,  1}, { 1, -1}, { 1,  1}                  // bishop moves
         };
 
-        for (int[] direction : DIRECTIONS) {
+        for (int[] direction : QUEEN_MOVES) {
             int dx = direction[0];
             int dy = direction[1];
             int newX = this.getLocation()[0] + dx;
@@ -35,9 +35,10 @@ public class Queen extends AbstractChessPiece {
                     // stop if the square contains an opponent's piece
                     if (board[newX][newY] != null) break;
                 } else {
-                    break;  // path is blocked by our piece
+                    break;  // not valid square, i.e. path is blocked by our piece
                 }
 
+                // increment to check next square
                 newX += dx;
                 newY += dy;
             }
