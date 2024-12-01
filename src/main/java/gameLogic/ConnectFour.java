@@ -1,4 +1,4 @@
-package gameLogic;
+/*package gameLogic;
 
 import gameLogic.boardGames.AbstractBoardGame;
 import gameLogic.boardGames.BoardGame;
@@ -14,13 +14,13 @@ public class ConnectFour extends AbstractBoardGame {
     private boolean placePiece(int player, int x) {
         isValid = isValidMove(x);
         for (int i = board[0].length-1; i >= 0; i--) {
-            if (board[i][x] == 'X') {
+            if (board[i][x].equals('X')) {
                 if (player1 == player) {
                     board[i][x] = 'R';
                 } else {
                     board[i][x] = 'Y';
                 }
-                return;
+                return false;
             }
         }
     }
@@ -34,20 +34,23 @@ public class ConnectFour extends AbstractBoardGame {
 
     private boolean checkHorizontalWin() {
         //!TODO
+        return false;
     }
 
     private boolean checkVerticalWin() {
         //!TODO
+        return false;
     }
 
     private boolean checkDiagonalWin() {
         //!TODO
+        return false;
     }
 
     private boolean isFull() {
         boolean full = true;
-        for ( i=0; i < board[0].length; i++) {
-            if (board[board.length - 1][i] == 'X') {
+        for ( int i=0; i < board[0].length; i++) {
+            if (board[board.length - 1][i].equals('X')) {
                 full = false;
             }
         }
@@ -61,7 +64,7 @@ public class ConnectFour extends AbstractBoardGame {
     private boolean isValidMove(int x) {
         return board[0][x] == 'X';
     }
-*/
+
     public void checkMoves(int x, int y) {
         return isValidMove(x);
     }
@@ -93,4 +96,4 @@ public class ConnectFour extends AbstractBoardGame {
         placePiece(player1, moves[0]);
     }
 
-}
+}*/
