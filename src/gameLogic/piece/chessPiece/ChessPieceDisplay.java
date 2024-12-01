@@ -1,12 +1,12 @@
 package gameLogic.piece.chessPiece;
 
 public enum ChessPieceDisplay {
-    bishop('b'),
-    king('e'),
-    knight('k'),
-    pawn('p'),
-    queen('q'),
-    rook('r');
+    bishop('B'),
+    king('K'),
+    knight('N'),
+    pawn('P'),
+    queen('Q'),
+    rook('R');
 
     public final char symbol;
     ChessPieceDisplay(char ch) {
