@@ -20,7 +20,6 @@
       <TextField layoutX="54.0" layoutY="163.0" />
       <TextField layoutX="54.0" layoutY="220.0" />
       <TextField layoutX="299.0" layoutY="163.0" />
-      <Button layoutX="299.0" layoutY="220.0" mnemonicParsing="false" text="Reset Password" />
       <Text layoutX="245.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game History">
          <font>
             <Font size="18.0" />
