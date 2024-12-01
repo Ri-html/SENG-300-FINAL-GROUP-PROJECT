@@ -24,6 +24,41 @@ public class Rook extends AbstractChessPiece
     @Override
     public int[][] getValidMoves(Piece[][] board)
     {
+
+        List<int[]> validMoves = new ArrayList<>();
+
+        final int[][] ROOK_MOVES = {
+                {-1,  0},
+                { 1,  0},
+                { 0, -1},
+                { 0,  1}
+        };
+
+        for (int[] direction : ROOK_MOVES) {
+            int dx = direction[0];
+            int dy = direction[1];
+            int newX = this.getLocation()[0] + dx;
+            int newY = this.getLocation()[1] + dy;
+
+            // keep checking in current direction until blocked or out of bounds
+            while (isInBounds(newX, newY)) {
+                if (isValidSquare(board, newX, newY)) {
+                    validMoves.add(new int[] {newX, newY});
+                    // stop if the square contains an opponent's piece
+                    if (board[newX][newY] != null) break;
+                } else {
+                    break;  // not valid square, i.e. path is blocked by our piece
+                }
+
+                // increment to check next square
+                newX += dx;
+                newY += dy;
+            }
+        }
+
+        return validMoves.toArray(new int[validMoves.size()][2]);
+
+        /*
         // Pull the current location of the rook
         // I think getLocation works like this
         int x = getLocation()[0];
@@ -47,6 +82,8 @@ public class Rook extends AbstractChessPiece
 
         iii) If it's our own piece, break.
         */
+
+        /*
 
         // Check moves for  (HORI. L)
         for (int i = y - 1; i >= 0; i--)
@@ -146,5 +183,7 @@ public class Rook extends AbstractChessPiece
         }
 
         return validMovesArray;
+
+        */
     }
 }
