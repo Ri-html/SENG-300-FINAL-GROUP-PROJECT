@@ -1,5 +1,8 @@
 package gameLogic.piece.chessPiece;
+import gameLogic.piece.*;
 import gameLogic.side.ChessSide;
+
+import java.util.*;
 
 /*
     This class handles the logic for ROOK movements. It takes the initial
@@ -19,7 +22,7 @@ public class Rook extends AbstractChessPiece
     }
 
     @Override
-    public int[][] getValidMoves()
+    public int[][] getValidMoves(Piece[][] board)
     {
         // Pull the current location of the rook
         // I think getLocation works like this

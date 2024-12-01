@@ -1,5 +1,6 @@
 package gameLogic.piece.chessPiece;
 
+import gameLogic.piece.*;
 import gameLogic.side.ChessSide;
 
 public class Bishop extends AbstractChessPiece{
@@ -10,7 +11,7 @@ public class Bishop extends AbstractChessPiece{
     }
 
     @Override
-    public int[][] getValidMoves() {
+    public int[][] getValidMoves(Piece[][] board) {
         while(//in bounds of board and no piece in way){
 
         }

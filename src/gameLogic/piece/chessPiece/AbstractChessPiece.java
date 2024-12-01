@@ -2,6 +2,7 @@ package gameLogic.piece.chessPiece;
 
 import gameLogic.Chess;
 import gameLogic.piece.AbstractPiece;
+import gameLogic.piece.Piece;
 import gameLogic.piece.PieceType;
 import gameLogic.side.ChessSide;
 import gameLogic.side.Side;
@@ -25,7 +26,7 @@ public abstract class AbstractChessPiece extends AbstractPiece {
         this.location = location;
     }
 
-    abstract int[][] getValidMoves();
+    abstract int[][] getValidMoves(Piece[][] board);
 
     public void updateValidMoves(){
     }
@@ -39,5 +40,15 @@ public abstract class AbstractChessPiece extends AbstractPiece {
         //remove piece from board
         //store piece somewhere in 'captured' collection to be displayed
         Chess.capturedPieces.add(captured);
+    }
+
+    private boolean isInBounds(int x, int y) {
+
+        return true;
+    }
+
+    private boolean isValidSquare(int x, int y) {
+
+        return true;
     }
 }

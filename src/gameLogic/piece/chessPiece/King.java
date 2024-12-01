@@ -1,5 +1,6 @@
 package gameLogic.piece.chessPiece;
 
+import gameLogic.piece.Piece;
 import gameLogic.side.ChessSide;
 
 import java.sql.Array;
@@ -13,7 +14,7 @@ public class King extends AbstractChessPiece{
     }
 
     @Override
-    public int[][] getValidMoves() {
+    public int[][] getValidMoves(Piece[][] board) {
         ArrayList<int[]> validMoves = new ArrayList<>();
         int y = this.getLocation()[0];
         int x = this.getLocation()[1];

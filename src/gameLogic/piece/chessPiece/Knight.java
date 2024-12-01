@@ -1,4 +1,5 @@
 package gameLogic.piece.chessPiece;
+import gameLogic.piece.*;
 import gameLogic.side.ChessSide;
 
 import java.util.*;
@@ -11,7 +12,7 @@ public class Knight extends AbstractChessPiece{
     }
 
     @Override
-    public int[][] getValidMoves() {
+    public int[][] getValidMoves(Piece[][] board) {
 
         final int[][] KNIGHT_MOVES = {
                 {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
