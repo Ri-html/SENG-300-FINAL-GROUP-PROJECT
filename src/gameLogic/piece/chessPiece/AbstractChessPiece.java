@@ -42,13 +42,11 @@ public abstract class AbstractChessPiece extends AbstractPiece {
         Chess.capturedPieces.add(captured);
     }
 
-    private boolean isInBounds(int x, int y) {
-
-        return true;
+    protected boolean isInBounds(int x, int y) {
+        return x >= 0 && x <= 7 && y >= 0 && y <= 7;
     }
 
-    private boolean isValidSquare(int x, int y) {
-
-        return true;
+    protected boolean isValidSquare(Piece[][] board, int x, int y) {
+        return board[x][y] == null || board[x][y].getSide() != this.getSide();
     }
 }
