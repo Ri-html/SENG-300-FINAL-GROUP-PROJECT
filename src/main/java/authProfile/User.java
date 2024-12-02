@@ -67,6 +67,7 @@ public class User {
 
     // Method to log the user in
     public void loginUser() {
+        //in practice we would send password textbox contents to the database, ideally hashed so a hacker cannot listen in on the network activity and get a password in plaintext (known as sniffing)
         isLoggedIn = true;
         System.out.println("User logged in successfully.");
     }
