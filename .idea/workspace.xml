@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1f8e027f-ed18-41be-bf82-b4f92ff299a3" name="Changes" comment="UCID: 30113727. Added code to tic tac toe main menu controller." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2ojJ2u5dAFt6GSuq7fFSad0d0MN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication (1).executor": "Coverage",
+    "Application.HelloApplication.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "guiTeam",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/cpsc331/ProjectGUIV1",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "vcs.Perforce"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\cpsc331\ProjectGUIV1\src\main\java" />
+      <recent name="C:\cpsc331\ProjectGUIV1\GUI\Use Case Descriptions" />
+      <recent name="C:\cpsc331\ProjectGUIV1\GUI" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.HelloApplication">
+    <configuration name="HelloApplication (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ca.ucalgary.cpsc.projectguiv1.HelloApplication" />
+      <module name="seng300-f24-project-GUI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.ucalgary.cpsc.projectguiv1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ca.ucalgary.cpsc.projectguiv1.HelloApplication" />
+      <module name="Project-GUI-V1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.ucalgary.cpsc.projectguiv1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.HelloApplication (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+        <option value="jdk-22-openjdk-22-3183f394aec4-bad0321e" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f8e027f-ed18-41be-bf82-b4f92ff299a3" name="Changes" comment="" />
+      <created>1731376849507</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731376849507</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1731459090095</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731459090095</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Deleted my fxml files, added in planning documents from gui-team branch">
+      <option name="closed" value="true" />
+      <created>1731481736438</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731481736438</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added read me and team.md file to local project">
+      <option name="closed" value="true" />
+      <created>1731535411053</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731535411053</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added correct team.md file from main">
+      <option name="closed" value="true" />
+      <created>1731535741228</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731535741228</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added 'Manage profile' and 'View Other Users Profile' fxml pages.">
+      <option name="closed" value="true" />
+      <created>1732498470175</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732498470175</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added reset password fxml page.">
+      <option name="closed" value="true" />
+      <created>1732583968893</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732583968893</updated>
+    </task>
+    <task id="LOCAL-00007" summary="UCID: 30113727. Login and Signup links now take you to the correct screen.">
+      <option name="closed" value="true" />
+      <created>1733094667950</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733094667950</updated>
+    </task>
+    <task id="LOCAL-00008" summary="UCID: 30113727. Home Page buttons now go to main menu for the games.">
+      <option name="closed" value="true" />
+      <created>1733096840687</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733096840687</updated>
+    </task>
+    <task id="LOCAL-00009" summary="UCID: 30113727. Changed Leaderboard fxml file. Started coding main menu controller for tic tac toe board.">
+      <option name="closed" value="true" />
+      <created>1733100191341</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733100191341</updated>
+    </task>
+    <task id="LOCAL-00010" summary="UCID: 30113727. Added code to tic tac toe main menu controller.">
+      <option name="closed" value="true" />
+      <created>1733101638949</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733101638949</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Deleted my fxml files, added in planning documents from gui-team branch" />
+    <MESSAGE value="Added read me and team.md file to local project" />
+    <MESSAGE value="Added team.md file from main" />
+    <MESSAGE value="Added correct team.md file from main" />
+    <MESSAGE value="Added 'Manage profile' and 'View Other Users Profile' fxml pages." />
+    <MESSAGE value="Added reset password fxml page." />
+    <MESSAGE value="UCID: 30113727. Login and Signup links now take you to the correct screen." />
+    <MESSAGE value="UCID: 30113727. Home Page buttons now go to main menu for the games." />
+    <MESSAGE value="UCID: 30113727. Changed Leaderboard fxml file. Started coding main menu controller for tic tac toe board." />
+    <MESSAGE value="UCID: 30113727. Added code to tic tac toe main menu controller." />
+    <option name="LAST_COMMIT_MESSAGE" value="UCID: 30113727. Added code to tic tac toe main menu controller." />
+  </component>
+</project>
