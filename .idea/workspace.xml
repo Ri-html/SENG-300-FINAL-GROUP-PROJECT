@@ -4,38 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e027f-ed18-41be-bf82-b4f92ff299a3" name="Changes" comment="UCID: 30113727. Added code to tic tac toe main menu controller." />
+    <list default="true" id="b969fb9c-69f2-44b8-99b5-6577fbef5cb0" name="Changes" comment="30204218: hopefully done tictactoe grid gui">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/cpsc/projectguiv1/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/cpsc/projectguiv1/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/cpsc/projectguiv1/TicTacToeGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/cpsc/projectguiv1/TicTacToeGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ca/ucalgary/cpsc/projectguiv1/TicTacToe_Game_Screen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ca/ucalgary/cpsc/projectguiv1/TicTacToe_Game_Screen.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
-      </MavenGeneralSettings>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;nathaniel.appiah&quot;,
+      &quot;fullname&quot;: &quot;Nathaniel Appiah&quot;
+    }
+  }
 }</component>
-  <component name="ProjectId" id="2ojJ2u5dAFt6GSuq7fFSad0d0MN" />
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://csgit.ucalgary.ca/alex.aghajanov/seng300-f24-project.git&quot;,
+    &quot;second&quot;: &quot;b9580393-f9c1-4cf4-bf43-66477d07b651&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2pdyYcNglq4COPKfLC80NzM9SnM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -43,36 +50,25 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.HelloApplication (1).executor": "Coverage",
     "Application.HelloApplication.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "guiTeam",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/cpsc331/ProjectGUIV1",
-    "project.structure.last.edited": "Problems",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "vcs.Perforce"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.15722656",
+    "project.structure.side.proportion": "0.19721578"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\cpsc331\ProjectGUIV1\src\main\java" />
-      <recent name="C:\cpsc331\ProjectGUIV1\GUI\Use Case Descriptions" />
-      <recent name="C:\cpsc331\ProjectGUIV1\GUI" />
-    </key>
-  </component>
   <component name="RunManager" selected="Application.HelloApplication">
-    <configuration name="HelloApplication (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ca.ucalgary.cpsc.projectguiv1.HelloApplication" />
-      <module name="seng300-f24-project-GUI" />
+      <module name="seng300-f24-project" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ca.ucalgary.cpsc.projectguiv1.*" />
@@ -83,15 +79,65 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ca.ucalgary.cpsc.projectguiv1.HelloApplication" />
+    <configuration name="AbstractBoardGameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project-GUI-V1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ca.ucalgary.cpsc.projectguiv1.*" />
+          <option name="PATTERN" value="gameLogic.boardGames.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="gameLogic.boardGames" />
+      <option name="MAIN_CLASS_NAME" value="gameLogic.boardGames.AbstractBoardGameTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AbstractBoardGameTest.addPlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project-GUI-V1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gameLogic.boardGames.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="gameLogic.boardGames" />
+      <option name="MAIN_CLASS_NAME" value="gameLogic.boardGames.AbstractBoardGameTest" />
+      <option name="METHOD_NAME" value="addPlayerTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AbstractBoardGameTest.gameTurnTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project-GUI-V1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gameLogic.boardGames.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="gameLogic.boardGames" />
+      <option name="MAIN_CLASS_NAME" value="gameLogic.boardGames.AbstractBoardGameTest" />
+      <option name="METHOD_NAME" value="gameTurnTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AbstractBoardGameTest.startGameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project-GUI-V1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gameLogic.boardGames.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="gameLogic.boardGames" />
+      <option name="MAIN_CLASS_NAME" value="gameLogic.boardGames.AbstractBoardGameTest" />
+      <option name="METHOD_NAME" value="startGameTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,122 +145,53 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.HelloApplication" />
-        <item itemvalue="Application.HelloApplication (1)" />
+        <item itemvalue="JUnit.AbstractBoardGameTest" />
+        <item itemvalue="JUnit.AbstractBoardGameTest.addPlayerTest" />
+        <item itemvalue="JUnit.AbstractBoardGameTest.gameTurnTest" />
+        <item itemvalue="JUnit.AbstractBoardGameTest.startGameTest" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
-        <option value="jdk-22-openjdk-22-3183f394aec4-bad0321e" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1f8e027f-ed18-41be-bf82-b4f92ff299a3" name="Changes" comment="" />
-      <created>1731376849507</created>
+      <changelist id="b969fb9c-69f2-44b8-99b5-6577fbef5cb0" name="Changes" comment="" />
+      <created>1733110296014</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1731376849507</updated>
+      <updated>1733110296014</updated>
     </task>
-    <task id="LOCAL-00001" summary="Initial commit">
+    <task id="LOCAL-00001" summary="Committing Unversioned Files">
       <option name="closed" value="true" />
-      <created>1731459090095</created>
+      <created>1733110314817</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1731459090095</updated>
+      <updated>1733110314817</updated>
     </task>
-    <task id="LOCAL-00002" summary="Deleted my fxml files, added in planning documents from gui-team branch">
+    <task id="LOCAL-00002" summary="Committing Unversioned Files">
       <option name="closed" value="true" />
-      <created>1731481736438</created>
+      <created>1733110630605</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1731481736438</updated>
+      <updated>1733110630605</updated>
     </task>
-    <task id="LOCAL-00003" summary="Added read me and team.md file to local project">
+    <task id="LOCAL-00003" summary="Adding JUnit 4.13.1 as Source Root">
       <option name="closed" value="true" />
-      <created>1731535411053</created>
+      <created>1733110740677</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1731535411053</updated>
+      <updated>1733110740677</updated>
     </task>
-    <task id="LOCAL-00004" summary="Added correct team.md file from main">
-      <option name="closed" value="true" />
-      <created>1731535741228</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1731535741228</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Added 'Manage profile' and 'View Other Users Profile' fxml pages.">
-      <option name="closed" value="true" />
-      <created>1732498470175</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1732498470175</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Added reset password fxml page.">
-      <option name="closed" value="true" />
-      <created>1732583968893</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1732583968893</updated>
-    </task>
-    <task id="LOCAL-00007" summary="UCID: 30113727. Login and Signup links now take you to the correct screen.">
-      <option name="closed" value="true" />
-      <created>1733094667950</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1733094667950</updated>
-    </task>
-    <task id="LOCAL-00008" summary="UCID: 30113727. Home Page buttons now go to main menu for the games.">
-      <option name="closed" value="true" />
-      <created>1733096840687</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1733096840687</updated>
-    </task>
-    <task id="LOCAL-00009" summary="UCID: 30113727. Changed Leaderboard fxml file. Started coding main menu controller for tic tac toe board.">
-      <option name="closed" value="true" />
-      <created>1733100191341</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1733100191341</updated>
-    </task>
-    <task id="LOCAL-00010" summary="UCID: 30113727. Added code to tic tac toe main menu controller.">
-      <option name="closed" value="true" />
-      <created>1733101638949</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1733101638949</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial commit" />
-    <MESSAGE value="Deleted my fxml files, added in planning documents from gui-team branch" />
-    <MESSAGE value="Added read me and team.md file to local project" />
-    <MESSAGE value="Added team.md file from main" />
-    <MESSAGE value="Added correct team.md file from main" />
-    <MESSAGE value="Added 'Manage profile' and 'View Other Users Profile' fxml pages." />
-    <MESSAGE value="Added reset password fxml page." />
-    <MESSAGE value="UCID: 30113727. Login and Signup links now take you to the correct screen." />
-    <MESSAGE value="UCID: 30113727. Home Page buttons now go to main menu for the games." />
-    <MESSAGE value="UCID: 30113727. Changed Leaderboard fxml file. Started coding main menu controller for tic tac toe board." />
-    <MESSAGE value="UCID: 30113727. Added code to tic tac toe main menu controller." />
-    <option name="LAST_COMMIT_MESSAGE" value="UCID: 30113727. Added code to tic tac toe main menu controller." />
+    <MESSAGE value="Committing Unversioned Files" />
+    <MESSAGE value="Adding JUnit 4.13.1 as Source Root" />
+    <MESSAGE value="30204218: hopefully done tictactoe grid gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="30204218: hopefully done tictactoe grid gui" />
   </component>
 </project>
