@@ -5,6 +5,7 @@ import gameLogic.piece.ConnectFourPiece;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// TESTS FOR CONNECT FOUR IMPLEMENTATION OF BOARD GAME
 public class ConnectFourTest {
 
     /*
