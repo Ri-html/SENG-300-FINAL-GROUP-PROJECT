@@ -9,6 +9,7 @@ import java.util.List;
 
 public class King extends AbstractChessPiece{
     private ChessSide side;
+    private boolean hasMoved = false;
     public King(ChessSide side) {
         super(side);
         display=ChessPieceDisplay.king.getSymbol();
@@ -36,5 +37,23 @@ public class King extends AbstractChessPiece{
         }
 
         return validMoves.toArray(new int[validMoves.size()][2]);
+    }
+
+    // Logic needed to facilitate castling
+    public boolean hasMoved() {
+        return hasMoved;
+    }
+    public void setMoved() {
+        this.hasMoved = true;
+    }
+
+    private boolean canCastleKingSide(Piecec[][] board, int kingX, int kingY)
+    {
+        return false;
+    }
+
+    private boolean canCastleQueenSide(Piecec[][] board, int kingX, int kingY)
+    {
+        return false;
     }
 }
