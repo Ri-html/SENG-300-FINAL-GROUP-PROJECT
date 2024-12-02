@@ -61,10 +61,16 @@ public class TicTacToeGameController {
     @FXML
     GridPane gamePane;
 
+    @FXML
+    Label infoLabel;
+
+    @FXML
+    ScrollPane chatScrlPane;
+
     @Deprecated
     public TicTacToeGameController() {
         this.usrOne = new User("1", "firsstUsr", "email@google.com");
-        this.usrTwo = new User("2", "scndUsr", "email@google.com");
+        this.usrTwo = new User("2", "scndUsr", "otheremail@google.com");
 
         this.gameTicTacToe = new TicTacToe(2);
         this.gameTicTacToe.addPlayer(this.usrOne.getUsername());
@@ -105,7 +111,17 @@ public class TicTacToeGameController {
             }
             Random randInt = new Random();
             this.gameTicTacToe.setCurrentPlayer(randInt.nextInt(2));
-
+            if(this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())){
+                this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
+            }else{
+                this.infoLabel.setText(this.usrTwo.getUsername() + "'s move!");
+            }
+            this.player1Name.setText("Win: " + this.usrOne.getUsername());
+            this.player2Name.setText("Win: " + this.usrTwo.getUsername());
+            this.winLabelP1.setText("Win: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+            this.winLabelP2.setText("Win: " + this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+            this.rankLabelP1.setText("Rank: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+            this.rankLabelP2.setText("Rank: " + this.usrTwo.getPlayerProfile().getTicTacToeProfile().getScoreRank());
             this.setup = true;
         }
 
@@ -117,16 +133,18 @@ public class TicTacToeGameController {
             this.gameTicTacToe.switchCurrentPlayer();
 
             if(this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())){
-                currPane.getChildren().add(new Label("              X")); // Later add an image
+                currPane.getChildren().add(new Label("              O")); // Later add an image or something
+                this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
+
             }else{
-                currPane.getChildren().add(new Label("              O"));
+                currPane.getChildren().add(new Label("              X")); // Later add an image or something
+                this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
             }
-            System.out.println(this.gameTicTacToe.validateGameEnds());
             if(this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Victory)){
                 exitBtnFunc();
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
-                alert.setHeaderText("You Won");
+                alert.setHeaderText("You Won!");
                 alert.show();
 
             } else if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Draw)) {
@@ -142,8 +160,19 @@ public class TicTacToeGameController {
             alert.setHeaderText("Tile Already Occupied");
             alert.show();
         }
+    }
 
-        System.out.println(this.gameTicTacToe.toString());
+    public void sendBtnFunc(){
+        String chatTxt = "";
+        if(this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())){
+            chatTxt += this.usrOne.getUsername() + ": ";
+        }else{
+            chatTxt += this.usrTwo.getUsername() + ": ";
+        }
+
+        chatTxt += this.chatTxtFld.getText();
+        this.chatBox.getChildren().add(new Label(chatTxt));
+        this.chatScrlPane.setContent(this.chatBox);
     }
 
 
