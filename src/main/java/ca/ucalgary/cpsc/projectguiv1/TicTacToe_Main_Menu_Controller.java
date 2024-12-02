@@ -44,5 +44,17 @@ public class TicTacToe_Main_Menu_Controller {
     // game history --> loads game history for this game (past 5 games?)
     // exit --> goes back to the homepage
 
+    // Leaderboard code:
+    public void getLeaderboard(){
+
+
+    }
+
+    // Game History:
+    public void getGameHistory(){
+
+
+    }
+
 
 }
