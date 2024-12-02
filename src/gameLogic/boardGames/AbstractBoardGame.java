@@ -1,6 +1,5 @@
 package gameLogic.boardGames;
 
-import gameLogic.piece.AbstractPiece;
 import gameLogic.piece.Piece;
 
 import java.util.ArrayList;
@@ -85,10 +84,18 @@ public abstract class AbstractBoardGame implements BoardGame {
      * then check for end game condition
      * @param moves an array containing 2,4 integers representing [x,y] or [startingX,startingY,EndingX,EndingY]
      */
-    private void gameTurn(int[] moves){
+    private void gameTurn(String move){
+        //parsing the move from string to integer
+        String[] aMove = move.split(",");
+        int[] moves=new int[aMove.length];
+        for (int i=0;i<aMove.length;i++){
+            moves[i]=Integer.parseInt(aMove[i]);
+        }
+
+        //uses the integer moves
         if (validateMove(moves)){
             makeMove(moves);
-            checkForEndGame();
+            checkForEndGame(move);
         }else{
             gameState=GameState.OVER;
             notifyGameEnd();
@@ -98,12 +105,12 @@ public abstract class AbstractBoardGame implements BoardGame {
     /**
      * checks whether the game end condition is met
      */
-    protected void checkForEndGame(){
+    protected void checkForEndGame(String moves){
         if(validateGameEnds()!=null && validateGameEnds()!=GameEndState.Ongoing){
             endGame();
         }else{
             switchCurrentPlayer();
-            notifyTurnEnd();
+            notifyTurnEnd(moves);
         }
     }
 
@@ -125,7 +132,7 @@ public abstract class AbstractBoardGame implements BoardGame {
      * receives the move and calls the gameTurn method
      * @param moves an array containing 2,4 integers representing [x,y] or [startingX,startingY,EndingX,EndingY]
      */
-    public void update(int[] moves){
+    public void updateMove(String moves){
         gameTurn(moves);
     };
 
@@ -184,15 +191,16 @@ public abstract class AbstractBoardGame implements BoardGame {
                 StringBuilder stringToSend=new StringBuilder();
                 stringToSend.append("Setup"+"\n");
                 stringToSend.append(gameID+"\n");
-                stringToSend.append(this.toString());
+                stringToSend.append(this.toString()+"\n");
                 observer.update(stringToSend.toString());
             }
     }
-    public void notifyTurnEnd(){
+    public void notifyTurnEnd(String moves){
         for(BoardGameObserver observer : turnEndObservers){
             StringBuilder stringToSend=new StringBuilder();
             stringToSend.append("TurnEnd"+"\n");
             stringToSend.append(gameID).append("\n");
+            stringToSend.append(moves).append("\n");
             observer.update(stringToSend.toString());
         }
     }
@@ -202,10 +210,16 @@ public abstract class AbstractBoardGame implements BoardGame {
             stringToSend.append("GameEnd"+"\n");
             stringToSend.append(gameID).append("\n");
             if(winner!=null){
-                stringToSend.append("winner,").append(winner).append(",loser,").append("\n");
+                stringToSend.append("winner,").append(winner).append(",loser");
+                for (String player: players) {
+                    if (!player.equals(winner)) {
+                        stringToSend.append(",").append(player);
+                    }
+                }
             }else{
-                stringToSend.append("winner:null - loser: null");
+                stringToSend.append("winner:none - loser: none");
             }
+            stringToSend.append("\n");
             observer.update(stringToSend.toString());
         }
     }
