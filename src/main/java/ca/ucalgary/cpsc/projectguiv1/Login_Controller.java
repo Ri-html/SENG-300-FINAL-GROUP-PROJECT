@@ -34,7 +34,7 @@ public class Login_Controller {
     }
     public void signupLinkFxn() throws IOException { // Switch to sign up page
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Signup.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         Stage newStg = new Stage();
         newStg.sizeToScene();
         newStg.setTitle("Sign Up");
