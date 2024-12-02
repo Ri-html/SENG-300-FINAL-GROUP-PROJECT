@@ -6,28 +6,26 @@ import gameLogic.side.ConnectFourSide;
 import gameLogic.piece.Piece;
 
 public class ConnectFour extends AbstractBoardGame {
-    boolean isValid;
     private static final int WINLENGTH = 4;
-    ConnectFourPiece[][] board = new ConnectFourPiece[6][7];
     public ConnectFour(int playerNum) {
         super(playerNum);
+        this.gameBoard = new ConnectFourPiece[6][7];
     }
 
     /**
      * Takes a player id and column and places a piece in that column
      *
-     * @param player int player id
      * @param x      int for column to place in
      */
-    private void placePiece(int player, int x) {
-        isValid = isValidMove(x);
+    private void placePiece(int x) {
+        boolean isValid = isValidMove(x);
         if (isValid) {
-            for (int i = board[0].length - 1; i >= 0; i--) {
-                if (board[i][x] == null) {
+            for (int i = gameBoard.length - 1; i >= 0; i--) {
+                if (gameBoard[i][x] == null) {
                     if (currentPlayer == 0) {
-                        board[i][x] = new ConnectFourPiece(ConnectFourSide.RED);
+                        gameBoard[i][x] = new ConnectFourPiece(ConnectFourSide.RED);
                     } else {
-                        board[i][x] = new ConnectFourPiece(ConnectFourSide.YELLOW);
+                        gameBoard[i][x] = new ConnectFourPiece(ConnectFourSide.YELLOW);
                     }
                     return;
                 }
@@ -40,9 +38,9 @@ public class ConnectFour extends AbstractBoardGame {
      * @return bool true on win or false on no win
      */
     public boolean checkWin() {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                switch (board[i][j].getSide()) {
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[0].length; j++) {
+                switch (gameBoard[i][j].getSide()) {
                     case ConnectFourSide.RED:
                         if (horizontalWinHelper(ConnectFourSide.RED, i, j)) {
                             return true;
@@ -84,7 +82,7 @@ public class ConnectFour extends AbstractBoardGame {
                 break;
             }
             // if piece to left is wrong colour stop checking for win
-            if (board[i][y].getSide() != side) {
+            if (gameBoard[i][y].getSide() != side) {
                 break;
             }
             // piece to left is right colour, keep looking
@@ -100,11 +98,11 @@ public class ConnectFour extends AbstractBoardGame {
         while (length < WINLENGTH) {
             i++;
             // overflow guard
-            if (i >= board[0].length - 1) {
+            if (i >= gameBoard[0].length - 1) {
                 break;
             }
             // if piece to right is wrong colour stop checking for win
-            if (board[i][y].getSide() != side) {
+            if (gameBoard[i][y].getSide() != side) {
                 break;
             }
             // piece to right is correct colour, keep looking
@@ -128,7 +126,7 @@ public class ConnectFour extends AbstractBoardGame {
                 break;
             }
             // if piece up is wrong colour stop checking for win
-            if (board[x][j].getSide() != side) {
+            if (gameBoard[x][j].getSide() != side) {
                 break;
             }
             // piece up is right colour, keep looking
@@ -144,11 +142,11 @@ public class ConnectFour extends AbstractBoardGame {
         while (length < WINLENGTH) {
             j++;
             // overflow guard
-            if (j >= board[0].length - 1) {
+            if (j >= gameBoard[0].length - 1) {
                 break;
             }
             // if piece down is wrong colour stop checking for win
-            if (board[x][j].getSide() != side) {
+            if (gameBoard[x][j].getSide() != side) {
                 break;
             }
             // piece down is correct colour, keep looking
@@ -180,7 +178,7 @@ public class ConnectFour extends AbstractBoardGame {
                 break;
             }
             // if piece to left is wrong colour stop checking for win
-            if (board[i][j].getSide() != side) {
+            if (gameBoard[i][j].getSide() != side) {
                 break;
             }
             // piece to down left is right colour, keep looking
@@ -198,11 +196,11 @@ public class ConnectFour extends AbstractBoardGame {
             // overflow guard
             i++;
             j--;
-            if (i >= board[0].length || j <= 0) {
+            if (i >= gameBoard[0].length || j <= 0) {
                 break;
             }
             // if piece to left is wrong colour stop checking for win
-            if (board[i][j].getSide() != side) {
+            if (gameBoard[i][j].getSide() != side) {
                 break;
             }
             // piece to down left is right colour, keep looking
@@ -220,11 +218,11 @@ public class ConnectFour extends AbstractBoardGame {
             // overflow guard
             j++;
             i--;
-            if (i <= 0 || j >= board.length - 1) {
+            if (i <= 0 || j >= gameBoard.length - 1) {
                 break;
             }
             // if piece to right is wrong colour stop checking for win
-            if (board[x][y].getSide() != side) {
+            if (gameBoard[x][y].getSide() != side) {
                 break;
             }
             // piece to right is correct colour, keep looking
@@ -242,11 +240,11 @@ public class ConnectFour extends AbstractBoardGame {
             // overflow guard
             j++;
             i++;
-            if (i <= board[0].length || j >= board.length - 1) {
+            if (i <= gameBoard[0].length || j >= gameBoard.length - 1) {
                 break;
             }
             // if piece to right is wrong colour stop checking for win
-            if (board[x][y].getSide() != side) {
+            if (gameBoard[x][y].getSide() != side) {
                 break;
             }
             // piece to right is correct colour, keep looking
@@ -260,13 +258,13 @@ public class ConnectFour extends AbstractBoardGame {
     }
 
     /**
-     * Checks if board is full (no possible moves left)
-     * @return true if board is full
+     * Checks if gameBoard is full (no possible moves left)
+     * @return true if gameBoard is full
      */
     private boolean isFull() {
         boolean full = true;
-        for ( int i = 0; i < board[0].length; i++) {
-            if (board[board.length - 1][i] == null) {
+        for ( int i = 0; i < gameBoard[0].length; i++) {
+            if (gameBoard[gameBoard.length - 1][i] == null) {
                 full = false;
                 break;
             }
@@ -275,10 +273,10 @@ public class ConnectFour extends AbstractBoardGame {
     }
 
     /**
-     * Returns board state
+     * Returns gameBoard state
      */
-    public ConnectFourPiece[][] getBoard() {
-        return board;
+    public Piece[][] getBoard() {
+        return gameBoard;
     }
 
     /**
@@ -286,7 +284,7 @@ public class ConnectFour extends AbstractBoardGame {
      * @param x int of column to place
      */
     private boolean isValidMove(int x) {
-        return board[0][x] == null;
+        return gameBoard[0][x] == null;
     }
 
     /**
@@ -300,12 +298,12 @@ public class ConnectFour extends AbstractBoardGame {
     }
 
     /**
-     * Creates a new board for game
-     * @return 2d array of ConnectFourPieces of the current board state
+     * Creates a new gameBoard for game
+     * @return 2d array of ConnectFourPieces of the current gameBoard state
      */
     @Override
     protected Piece[][] setUpBoard() {
-        this.board = new ConnectFourPiece[6][7];
+        this.gameBoard = new ConnectFourPiece[6][7];
         return getBoard();
     }
 
@@ -341,18 +339,18 @@ public class ConnectFour extends AbstractBoardGame {
     @Override
     public void makeMove(int[] moves) {
         if (validateMove(moves)){
-            placePiece(currentPlayer, moves[0]);
+            placePiece(moves[0]);
         }
     }
 
     /**
-     * Returns the current board state as a string
-     * @return String of current board state
+     * Returns the current gameBoard state as a string
+     * @return String of current gameBoard state
      */
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (ConnectFourPiece[] connectFourPieces : board) {
-            for (int j = 0; j < board[0].length; j++) {
+        for (Piece[] connectFourPieces : gameBoard) {
+            for (int j = 0; j < gameBoard[0].length; j++) {
                 if (connectFourPieces[j] == null) {
                     stringBuilder.append(" ");
                 } else if (connectFourPieces[j].getSide() == ConnectFourSide.RED) {
@@ -371,14 +369,14 @@ public class ConnectFour extends AbstractBoardGame {
     }
 
     /**
-     * returns the current board state as a character array
-     * @return char[][] of board state
+     * returns the current gameBoard state as a character array
+     * @return char[][] of gameBoard state
      */
     public char[][] toCharArray() {
-        char[][] charArray = new char[board.length][board[0].length];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                switch (board[i][j].getSide()) {
+        char[][] charArray = new char[gameBoard.length][gameBoard[0].length];
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[0].length; j++) {
+                switch (gameBoard[i][j].getSide()) {
                     case ConnectFourSide.RED:
                         charArray[i][j] = 'R';
                         break;
