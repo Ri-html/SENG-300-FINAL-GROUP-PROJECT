@@ -47,12 +47,12 @@ public class King extends AbstractChessPiece{
         this.hasMoved = true;
     }
 
-    private boolean canCastleKingSide(Piecec[][] board, int kingX, int kingY)
+    private boolean canCastleKingSide(Piece[][] board, int kingX, int kingY)
     {
         return false;
     }
 
-    private boolean canCastleQueenSide(Piecec[][] board, int kingX, int kingY)
+    private boolean canCastleQueenSide(Piece[][] board, int kingX, int kingY)
     {
         return false;
     }
