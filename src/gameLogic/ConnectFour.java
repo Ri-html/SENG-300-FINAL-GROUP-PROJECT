@@ -1,37 +1,37 @@
 package gameLogic;
 
 import gameLogic.boardGames.AbstractBoardGame;
-import gameLogic.boardGames.BoardGame;
+import gameLogic.piece.ConnectFourPiece;
+import gameLogic.side.ConnectFourSide;
 import gameLogic.piece.Piece;
 
 public class ConnectFour extends AbstractBoardGame {
     boolean isValid;
-    String board[][]= new ConnectFourPiece[6][7];
-    public ConnectFour(int player1, int player2,int playerNum) {
+    private static final int WINLENGTH = 4;
+    ConnectFourPiece[][] board = new ConnectFourPiece[6][7];
+    public ConnectFour(int playerNum) {
         super(playerNum);
     }
 
     /**
      * Takes a player id and column and places a piece in that column
-     * @param int player id
-     * @param int x for column to place in
-     * @return bool success
+     *
+     * @param player int player id
+     * @param x      int for column to place in
      */
-    private boolean placePiece(int player, int x) {
+    private void placePiece(int player, int x) {
         isValid = isValidMove(x);
         if (isValid) {
             for (int i = board[0].length - 1; i >= 0; i--) {
                 if (board[i][x] == null) {
-                    if (player1 == player) {
+                    if (currentPlayer == 0) {
                         board[i][x] = new ConnectFourPiece(ConnectFourSide.RED);
                     } else {
                         board[i][x] = new ConnectFourPiece(ConnectFourSide.YELLOW);
                     }
-                    return true;
+                    return;
                 }
             }
-        } else {
-            return false;
         }
     }
 
@@ -40,10 +40,7 @@ public class ConnectFour extends AbstractBoardGame {
      * @return bool true on win or false on no win
      */
     public boolean checkWin() {
-        if (checkHorizontalWin() || checkVerticalWin() || checkDiagonalWin()) {
-            return true;
-        }
-        return false;
+        return checkHorizontalWin() || checkVerticalWin() || checkDiagonalWin();
     }
 
     /**
@@ -51,7 +48,67 @@ public class ConnectFour extends AbstractBoardGame {
      * @return true on win horizontal or false on no win
      */
     private boolean checkHorizontalWin() {
-        //!TODO
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                switch (board[i][j].getSide()) {
+                    case ConnectFourSide.RED:
+                        if (horizontalWinHelper(ConnectFourSide.RED, i, j)) {
+                            return true;
+                        }
+                        break;
+                    case ConnectFourSide.YELLOW:
+                        if (horizontalWinHelper(ConnectFourSide.YELLOW, i, j)) {
+                            return true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean horizontalWinHelper(ConnectFourSide side, int x, int y) {
+        // check left
+        int length = 1;
+        while (length < WINLENGTH) {
+            // overflow guard
+            if (x == 0) {
+                break;
+            }
+            x--;
+            // if piece to left is wrong colour stop checking for win
+            if (board[x][y].getSide() != side) {
+                break;
+            }
+            // piece to left is right colour, keep looking
+            length++;
+        }
+        // if length of sequence is long enough return that a win was found.
+        if (length >= WINLENGTH) {
+            return true;
+        }
+        length = 1;
+        // check right
+        while (length < WINLENGTH) {
+            // overflow guard
+            if (x == board[0].length - 1) {
+                break;
+            }
+            x++;
+            // if piece to right is wrong colour stop checking for win
+            if (board[x][y].getSide() != side) {
+                break;
+            }
+            // piece to right is correct colour, keep looking
+            length++;
+        }
+        // if length of sequence was long enough return that a win was found.
+        if (length >= WINLENGTH) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -76,9 +133,10 @@ public class ConnectFour extends AbstractBoardGame {
      */
     private boolean isFull() {
         boolean full = true;
-        for ( i=0; i < board[0].length; i++) {
+        for ( int i = 0; i < board[0].length; i++) {
             if (board[board.length - 1][i] == null) {
                 full = false;
+                break;
             }
         }
         return full;
@@ -103,8 +161,9 @@ public class ConnectFour extends AbstractBoardGame {
      * checks valid move
      * @param x checks column to place in
      * @param y ignored, artifact of abstract
+     * @return true if valid move
      */
-    public void checkMoves(int x, int y) {
+    public boolean checkMoves(int x, int y) {
         return isValidMove(x);
     }
 
@@ -125,11 +184,11 @@ public class ConnectFour extends AbstractBoardGame {
     @Override
     public GameEndState validateGameEnds() {
         if (checkWin()) {
-            return GameEndState.VICTORY;
+            return GameEndState.Victory;
         } else if (isFull()){
-            return GameEndState.DRAW;
+            return GameEndState.Draw;
         } else {
-            return GameEndState.ONGOING;
+            return GameEndState.Ongoing;
         }
     }
 
@@ -140,19 +199,67 @@ public class ConnectFour extends AbstractBoardGame {
      */
     @Override
     public boolean validateMove(int[] moves) {
-        isValidMove(moves[0]);
+        return isValidMove(moves[0]);
     }
 
     /**
      * Place move requested (does nothing if invalid move)
-     * @param player1 id of player making move
      * @param moves coords of move
      */
     @Override
-    public void makeMove(int player1, int[] moves) {
-        if (validateMove(int[] moves)){
-            placePiece(player1, moves[0]);
+    public void makeMove(int[] moves) {
+        if (validateMove(moves)){
+            placePiece(currentPlayer, moves[0]);
         }
     }
 
+    /**
+     * Returns the current board state as a string
+     * @return String of current board state
+     */
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (ConnectFourPiece[] connectFourPieces : board) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (connectFourPieces[j] == null) {
+                    stringBuilder.append(" ");
+                } else if (connectFourPieces[j].getSide() == ConnectFourSide.RED) {
+                    stringBuilder.append('R');
+                } else if (connectFourPieces[j].getSide() == ConnectFourSide.YELLOW) {
+                    stringBuilder.append('Y');
+                } else {
+                    stringBuilder.append("E");
+                }
+                stringBuilder.append(", ");
+            }
+            stringBuilder.delete(stringBuilder.length()-2, stringBuilder.length()-1);
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * returns the current board state as a character array
+     * @return char[][] of board state
+     */
+    public char[][] toCharArray() {
+        char[][] charArray = new char[board.length][board[0].length];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                switch (board[i][j].getSide()) {
+                    case ConnectFourSide.RED:
+                        charArray[i][j] = 'R';
+                        break;
+                    case ConnectFourSide.YELLOW:
+                        charArray[i][j] = 'Y';
+                        break;
+                    case null:
+                        charArray[i][j] = ' ';
+                    default:
+                        charArray[i][j] = 'E';
+                }
+            }
+        }
+        return charArray;
+    }
 }
