@@ -1,0 +1,51 @@
+Overall, the designs are well done and the exceptions are well thought out. Just a few minor points of improvement to better understand the use case process. An usecase of placing pieces on the tictactoe and a return option in tic tac toe home menu would be a nice addition. Tic Tac Toe leaderboard use case is especially well done in outlining its functionality.
+
+
+	Tic Tac Toe Home Menu description
+
+well done in separating function by components
+
+gives a good outline of the options (leader board, view queue)
+
+cons
+missing a way for player to return back to choose game menu if a player decides to not want to play
+
+
+	Tic Tac Toe game queue
+
+a well formatted description of the process of queueing of the game and waiting for an opponent
+
+cons
+recommend first searching the queue for valid opponent before adding the player into the queue
+
+could do better with a bit more emphasis on what the waiting process for the queue would be like would it move the player to the game page with a loading icon like in chess.com, or just a prompt saying waiting for player like in MLBB
+
+
+	Tic Tac Toe game Instance
+
+good description of the process where players are paired, notified, and the game starts; and the general process of the game where player takes turns making moves to end, system records outcome, and results are displayed, to where players make a decision to return back to homepage.
+
+cons/suggestions
+recommends making a separate use case of making the moves or a sequence diagram to get a better understanding of the process of the game as it is pretty complicated
+
+
+No Match Found
+
+nice outline of the process where game failed to find opponent, displays a pop-up and user is given choices of what to do afterward.
+
+cons/suggestions
+could be combined with other No Match Found use case since it does the same thing just with different games
+
+
+Tic Tac Toe Leaderboard
+
+Clearly outlined the information and statistic shown on the leader board, their function, and option to return back to home page
+
+
+Checkers Home Menu
+clearly defined the process of going into the menu and the two functions inside the menu
+
+cons/recommendations
+Suggestion to add a way to return to choose game menu among the options as in tictactoe home menu
+
+Adding that the player has logged into their account is a bit redundant. Could be abstracted to just mention the pages directly before and after the use case

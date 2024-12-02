@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<GridPane fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Home_Page_Controller">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -53,23 +53,23 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="122.0" text="Home" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.columnSpan="3" GridPane.rowIndex="1">
+      <Label fx:id="mainTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="122.0" text="Home" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.columnSpan="3" GridPane.rowIndex="1">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label prefHeight="17.0" prefWidth="141.0" text="Search for players" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="4">
+      <Label alignment="CENTER" prefHeight="26.0" prefWidth="154.0" text="Search for players" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="4">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </Label>
-      <TextField GridPane.columnIndex="7" GridPane.columnSpan="7" GridPane.rowIndex="4" />
+      <TextField fx:id="searchBar" GridPane.columnIndex="7" GridPane.columnSpan="7" GridPane.rowIndex="4" />
       <Circle fill="WHITE" radius="31.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="3" />
-      <Button mnemonicParsing="false" prefHeight="143.0" prefWidth="228.0" text="Button" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="4" />
-      <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="192.0" text="Button" GridPane.columnIndex="7" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="4" />
-      <Button mnemonicParsing="false" prefHeight="176.0" prefWidth="192.0" text="Button" GridPane.columnIndex="13" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="4" />
-      <Label prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="13" />
-      <Label prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="13" />
-      <Label prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="13" GridPane.columnSpan="3" GridPane.rowIndex="13" />
+      <Button fx:id="chessSelection" mnemonicParsing="false" onMouseClicked="#chessSelectionFxn" prefHeight="143.0" prefWidth="228.0" text="Chess" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="4" />
+      <Button fx:id="tictactoeSelection" mnemonicParsing="false" onMouseClicked="#ticTacToeSelectionFxn" prefHeight="176.0" prefWidth="192.0" text="Tic-Tac-Toe" GridPane.columnIndex="7" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="4" />
+      <Button fx:id="connect4Selection" mnemonicParsing="false" onMouseClicked="#connect4SelectionFxn" prefHeight="176.0" prefWidth="192.0" text="Connect-4" GridPane.columnIndex="13" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="4" />
+      <Label fx:id="rankingChessLbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="13" />
+      <Label fx:id="rankingTicTacToeLbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="13" />
+      <Label fx:id="rankingConnect4Lbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="13" GridPane.columnSpan="3" GridPane.rowIndex="13" />
    </children>
 </GridPane>

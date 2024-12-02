@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Sign_Up_Controller">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -37,34 +37,34 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TextField text="Email..." GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="9" />
-      <TextField text="Username..." GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
-      <TextField text="Full Name..." GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Sign Up" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+      <TextField fx:id="emailTxtField" text="Email..." GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+      <TextField fx:id="usernameTxtField" text="Username..." GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+      <TextField fx:id="nameTxtField" text="Full Name..." GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+      <Button fx:id="signupButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Sign Up" GridPane.columnIndex="3" GridPane.rowIndex="12" />
       <Label GridPane.columnIndex="2" GridPane.rowIndex="6" />
       <Label GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <Label text="Email*" GridPane.columnIndex="2" GridPane.rowIndex="8">
+      <Label fx:id="emailLbl" text="Email*" GridPane.columnIndex="2" GridPane.rowIndex="8">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label text="Username*" GridPane.columnIndex="2" GridPane.rowIndex="6">
+      <Label fx:id="usernameLbl" text="Username*" GridPane.columnIndex="2" GridPane.rowIndex="6">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label text="Full Name*" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <Label fx:id="nameLbl" text="Full Name*" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" prefHeight="17.0" prefWidth="117.0" text="Sign Up" GridPane.columnIndex="3" GridPane.rowIndex="2">
+      <Label fx:id="mainTitle" alignment="CENTER" prefHeight="17.0" prefWidth="117.0" text="Sign Up" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
       <Label GridPane.columnIndex="2" GridPane.rowIndex="11" />
       <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="186.0" text="Already have an account?" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="11" />
-      <Hyperlink text="Log in" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+      <Hyperlink fx:id="loginLink" onMouseClicked="#loginLinkFxn" text="Log in" GridPane.columnIndex="4" GridPane.rowIndex="11" />
    </children>
 </GridPane>
