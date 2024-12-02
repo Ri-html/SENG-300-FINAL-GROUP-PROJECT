@@ -40,14 +40,6 @@ public class ConnectFour extends AbstractBoardGame {
      * @return bool true on win or false on no win
      */
     public boolean checkWin() {
-        return checkHorizontalWin() || checkVerticalWin() || checkDiagonalWin();
-    }
-
-    /**
-     * Checks board for win horizontally
-     * @return true on win horizontal or false on no win
-     */
-    private boolean checkHorizontalWin() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 switch (board[i][j].getSide()) {
@@ -55,9 +47,21 @@ public class ConnectFour extends AbstractBoardGame {
                         if (horizontalWinHelper(ConnectFourSide.RED, i, j)) {
                             return true;
                         }
+                        if (verticalWinHelper(ConnectFourSide.RED, i, j)) {
+                            return true;
+                        }
+                        if (diagonalWinHelper(ConnectFourSide.RED, i, j)) {
+                            return true;
+                        }
                         break;
                     case ConnectFourSide.YELLOW:
                         if (horizontalWinHelper(ConnectFourSide.YELLOW, i, j)) {
+                            return true;
+                        }
+                        if (verticalWinHelper(ConnectFourSide.YELLOW, i, j)) {
+                            return true;
+                        }
+                        if (diagonalWinHelper(ConnectFourSide.YELLOW, i, j)) {
                             return true;
                         }
                         break;
@@ -72,14 +76,15 @@ public class ConnectFour extends AbstractBoardGame {
     private boolean horizontalWinHelper(ConnectFourSide side, int x, int y) {
         // check left
         int length = 1;
+        int i = x;
         while (length < WINLENGTH) {
+            i--;
             // overflow guard
-            if (x == 0) {
+            if (i <= 0) {
                 break;
             }
-            x--;
             // if piece to left is wrong colour stop checking for win
-            if (board[x][y].getSide() != side) {
+            if (board[i][y].getSide() != side) {
                 break;
             }
             // piece to left is right colour, keep looking
@@ -91,14 +96,15 @@ public class ConnectFour extends AbstractBoardGame {
         }
         length = 1;
         // check right
+        i = x;
         while (length < WINLENGTH) {
+            i++;
             // overflow guard
-            if (x == board[0].length - 1) {
+            if (i >= board[0].length - 1) {
                 break;
             }
-            x++;
             // if piece to right is wrong colour stop checking for win
-            if (board[x][y].getSide() != side) {
+            if (board[i][y].getSide() != side) {
                 break;
             }
             // piece to right is correct colour, keep looking
@@ -111,20 +117,146 @@ public class ConnectFour extends AbstractBoardGame {
         return false;
     }
 
-    /**
-     * Checks board for win vertically
-     * @return true on win vertical or false on no win
-     */
-    private boolean checkVerticalWin() {
-        //!TODO
+    private boolean verticalWinHelper(ConnectFourSide side, int x, int y) {
+        // check up
+        int length = 1;
+        int j = y;
+        while (length < WINLENGTH) {
+            j--;
+            // overflow guard
+            if (j <= 0) {
+                break;
+            }
+            // if piece up is wrong colour stop checking for win
+            if (board[x][j].getSide() != side) {
+                break;
+            }
+            // piece up is right colour, keep looking
+            length++;
+        }
+        // if length of sequence is long enough return that a win was found.
+        if (length >= WINLENGTH) {
+            return true;
+        }
+        length = 1;
+        // check down
+        j = y;
+        while (length < WINLENGTH) {
+            j++;
+            // overflow guard
+            if (j >= board[0].length - 1) {
+                break;
+            }
+            // if piece down is wrong colour stop checking for win
+            if (board[x][j].getSide() != side) {
+                break;
+            }
+            // piece down is correct colour, keep looking
+            length++;
+        }
+        // if length of sequence was long enough return that a win was found.
+        if (length >= WINLENGTH) {
+            return true;
+        }
+        return false;
     }
 
     /**
-     * Checks board for win diagonally
-     * @return true on win diagonal or false on no win
+     * check for diagonal win given a location and piece
+     * @param side the side to check the win for
+     * @param x the x location of the piece
+     * @param y the y location of the piece
+     * @return true if win
      */
-    private boolean checkDiagonalWin() {
-        //!TODO
+    private boolean diagonalWinHelper(ConnectFourSide side, int x, int y) {
+        // check up left
+        int length = 1;
+        int i = x, j = y;
+        while (length < WINLENGTH) {
+            // overflow guard
+            i--;
+            j--;
+            if (i <= 0 || j <= 0) {
+                break;
+            }
+            // if piece to left is wrong colour stop checking for win
+            if (board[i][j].getSide() != side) {
+                break;
+            }
+            // piece to down left is right colour, keep looking
+            length++;
+        }
+        // if length of sequence is long enough return that a win was found.
+        if (length >= WINLENGTH) {
+            return true;
+        }
+        // check up right
+        length = 1;
+        i = x;
+        j = y;
+        while (length < WINLENGTH) {
+            // overflow guard
+            i++;
+            j--;
+            if (i >= board[0].length || j <= 0) {
+                break;
+            }
+            // if piece to left is wrong colour stop checking for win
+            if (board[i][j].getSide() != side) {
+                break;
+            }
+            // piece to down left is right colour, keep looking
+            length++;
+        }
+        // if length of sequence is long enough return that a win was found.
+        if (length >= WINLENGTH) {
+            return true;
+        }
+        // check down left
+        length = 1;
+        i = x;
+        j = y;
+        while (length < WINLENGTH) {
+            // overflow guard
+            j++;
+            i--;
+            if (i <= 0 || j >= board.length - 1) {
+                break;
+            }
+            // if piece to right is wrong colour stop checking for win
+            if (board[x][y].getSide() != side) {
+                break;
+            }
+            // piece to right is correct colour, keep looking
+            length++;
+        }
+        // if length of sequence was long enough return that a win was found.
+        if (length >= WINLENGTH) {
+            return true;
+        }
+        // check down right
+        length = 1;
+        i = x;
+        j = y;
+        while (length < WINLENGTH) {
+            // overflow guard
+            j++;
+            i++;
+            if (i <= board[0].length || j >= board.length - 1) {
+                break;
+            }
+            // if piece to right is wrong colour stop checking for win
+            if (board[x][y].getSide() != side) {
+                break;
+            }
+            // piece to right is correct colour, keep looking
+            length++;
+        }
+        // if length of sequence was long enough return that a win was found.
+        if (length >= WINLENGTH) {
+            return true;
+        }
+        return false;
     }
 
     /**
