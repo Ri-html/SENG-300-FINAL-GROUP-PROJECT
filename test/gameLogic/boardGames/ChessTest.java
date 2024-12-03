@@ -67,8 +67,20 @@ public class ChessTest {
         Chess chess = new Chess();
         AbstractChessPiece[][] board = new AbstractChessPiece[8][8];
         board[1][2] = new Pawn(ChessSide.WHITE);
+        //check initial double move forward
+        board[1][2].makeMove();
+        //check single move forward
+    }
 
-        board[1][2].makeMove()
+    @Test
+    public void pawnTest2(){
+        Chess chess = new Chess();
+        AbstractChessPiece[][] board = new AbstractChessPiece[8][8];
+        board[1][2] = new Pawn(ChessSide.WHITE);
+        board[6][3] = new Pawn(ChessSide.BLACK);
+        //test pawn capturing
+
+        //test capture by en passant rule
     }
 
 
