@@ -1,6 +1,11 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
-import authProfile.*;
+import authProfile.ChessProfile;
+import authProfile.TicTacToeProfile;
+import authProfile.ConnectFourProfile;
+import authProfile.UserDatabase;
+import authProfile.User;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Manage_Profile_Controller {
 
@@ -60,18 +65,20 @@ public class Manage_Profile_Controller {
     private TicTacToeProfile ticTacToeProfile = new TicTacToeProfile();
     private ConnectFourProfile connectFourProfile = new ConnectFourProfile();
 
-    //User user = User.getCurrentUser();
-    User user = new User("Dummy Master", "dummySucks", "dummy@gmail.com");
 
 
     @FXML
     private void initialize() {
-        usernameText.setText(user.getUsername());
-        fullNameText.setText(user.getUserId());
+        UserDatabase userDb = UserDatabase.getInstance();
+        User currUser = userDb.getCurrentUser();
 
-        nameField.setText(user.getUserId());
-        usernameField.setText(user.getUsername());
-        emailField.setText(user.getEmail());
+
+        usernameText.setText(currUser.getUsername());
+        fullNameText.setText(currUser.getUserId());
+
+        nameField.setText(currUser.getUserId());
+        usernameField.setText(currUser.getUsername());
+        emailField.setText(currUser.getEmail());
 
         displayGameHistory();
     }
@@ -97,23 +104,26 @@ public class Manage_Profile_Controller {
 
 
     public void updateUserDetails() {
+        UserDatabase userDb = UserDatabase.getInstance();
+        User currUser = userDb.getCurrentUser();
+
         String newName = nameField.getText();
         String newUsername = usernameField.getText();
         String newEmail = emailField.getText();
 
-        if (!newName.equals(user.getUserId())) {
-            user.setUserId(newName);
+        if (!newName.equals(currUser.getUserId())) {
+            currUser.setUserId(newName);
             initialize();
         }
 
-        if (!newUsername.equals(user.getUsername())) {
-            user.setUsername(newUsername);
+        if (!newUsername.equals(currUser.getUsername())) {
+            currUser.setUsername(newUsername);
             initialize();
 
         }
 
-        if (!newEmail.equals(user.getEmail())) {
-            user.setEmail(newEmail);
+        if (!newEmail.equals(currUser.getEmail())) {
+            currUser.setEmail(newEmail);
             initialize();
 
         }
