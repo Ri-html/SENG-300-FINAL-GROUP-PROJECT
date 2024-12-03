@@ -35,7 +35,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="13.0" prefWidth="86.0" text="Login" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+      <Button fx:id="loginButton" onAction="#loginButtonFxn" mnemonicParsing="false" prefHeight="13.0" prefWidth="86.0" text="Login" GridPane.columnIndex="3" GridPane.rowIndex="10" />
       <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="176.0" text="Don't have an account？" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8" />
       <Hyperlink fx:id="signupLink" onMouseClicked="#signupLinkFxn" prefHeight="23.0" prefWidth="112.0" text="Sign up" GridPane.columnIndex="4" GridPane.rowIndex="8" />
       <TextField fx:id="usernameTxtField" text="Username..." GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="5" />
