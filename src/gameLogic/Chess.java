@@ -54,6 +54,13 @@ public class Chess extends AbstractBoardGame {
         return board;
     }
 
+    /**
+     * Returns gameBoard state
+     */
+    public Piece[][] getBoard() {
+        return gameBoard;
+    }
+
     @Override
     public GameEndState validateGameEnds() {
         return GameEndState.Ongoing;
