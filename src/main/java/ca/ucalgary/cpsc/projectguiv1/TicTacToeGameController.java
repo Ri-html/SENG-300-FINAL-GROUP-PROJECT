@@ -1,6 +1,7 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
 
+import authProfile.TicTacToeProfile;
 import authProfile.User;
 
 import gameLogic.TicTacToe;
@@ -222,7 +223,7 @@ public class TicTacToeGameController {
             alert.setTitle("Winner!");
             alert.setHeaderText("You Won!");
             alert.show();
-
+            saveEndData('W');
         } else if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Draw)) {
             exitBtnFunc();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -231,8 +232,13 @@ public class TicTacToeGameController {
             alert.show();
         }
     }
-    public void saveEndData(){
-
+    public void saveEndData(char result){ // Might have to change
+        TicTacToeProfile profOne = new TicTacToeProfile();
+        if(result == 'W') {
+            profOne.updateGameHistory(this.usrTwo.getUsername(), "W", 1);
+        }else if (result == 'L'){
+            profOne.updateGameHistory(this.usrTwo.getUsername(), "L", 1);
+        }
     }
 }
 
