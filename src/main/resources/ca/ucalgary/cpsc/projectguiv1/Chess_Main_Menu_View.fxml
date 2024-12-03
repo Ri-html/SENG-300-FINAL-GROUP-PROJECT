@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Chess_Main_Menu_Controller">
    <children>
-      <Button fx:id="playOnline" layoutX="331.0" layoutY="214.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="PLAY ONLINE" />
+      <Button fx:id="playOnline" layoutX="331.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#playOnlineFunc" prefHeight="40.0" prefWidth="150.0" text="PLAY ONLINE" />
       <Button fx:id="leaderboard" layoutX="332.0" layoutY="262.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="LEADERBOARD" />
       <Button fx:id="gameHistory" layoutX="332.0" layoutY="311.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="GAME HISTORY" />
       <Button fx:id="exit" layoutX="331.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#exitBtnFunc" prefHeight="40.0" prefWidth="150.0" text="EXIT" />

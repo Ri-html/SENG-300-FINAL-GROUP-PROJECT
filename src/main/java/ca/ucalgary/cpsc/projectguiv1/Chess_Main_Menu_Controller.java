@@ -44,7 +44,7 @@ public class Chess_Main_Menu_Controller {
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage newStg = new Stage();
         newStg.sizeToScene();
-        newStg.setTitle("Homepage");
+        newStg.setTitle(title);
         newStg.setScene(scene);
         newStg.show();
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();

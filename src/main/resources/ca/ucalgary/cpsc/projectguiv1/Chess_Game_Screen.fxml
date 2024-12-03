@@ -177,7 +177,7 @@
             <HBox prefHeight="81.0" prefWidth="238.0">
                <children>
                   <TextField fx:id="chatTxtField" prefHeight="26.0" prefWidth="191.0" />
-                  <Button fx:id="sendBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Send" />
+                  <Button fx:id="sendBtn" mnemonicParsing="false" onMouseClicked="#sendBtnFunc" prefHeight="26.0" prefWidth="62.0" text="Send" />
                </children>
             </HBox>
          </children>
