@@ -82,7 +82,7 @@ public abstract class AbstractBoardGame implements BoardGame {
      * validate whether move is correct
      * make the move in the game instance
      * then check for end game condition
-     * @param moves an array containing 2,4 integers representing [x,y] or [startingX,startingY,EndingX,EndingY]
+     * @param move an array containing 2,4 integers representing [x,y] or [startingX,startingY,EndingX,EndingY]
      */
     private void gameTurn(String move){
         //parsing the move from string to integer
