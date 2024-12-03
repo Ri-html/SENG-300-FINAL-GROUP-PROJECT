@@ -6,7 +6,7 @@ import gameLogic.side.TicTacToeSide;
 
 public class TicTacToe extends AbstractBoardGame {
     public TicTacToe(int playerNum) {
-        super(playerNum);
+        super(playerNum, 3, 3);
     }
 
     // Constants
