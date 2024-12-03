@@ -22,6 +22,25 @@ public abstract class AbstractChessPiece extends AbstractPiece {
         return location;
     }
 
+
+    /**
+     * Handles moving a piece on the board
+     * @param newX X coordinate to move piece to
+     * @param newY Y coordinate to move piece to
+     * @return the new location of the piece [newX,newY], or [-1,-1] for move invalid/not made
+     */
+    public int[] makeMove(int newX, int newY){
+        //get valid moves
+        for (int i = 0; i < validMoves.length; i++) {
+            //if move is in valid moves
+            //make move
+            //IMPLEMENT CAPTURE METHOD HERE IF WE CAPTURE WITH THIS MOVE
+            return new int[]{newX, newY};
+        }
+        //return -1 for false
+        return new int[]{-1, -1};
+    }
+
     public void setLocation(int[] location) {
         this.location = location;
     }

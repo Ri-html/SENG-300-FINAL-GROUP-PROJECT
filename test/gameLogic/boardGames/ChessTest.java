@@ -61,6 +61,16 @@ public class ChessTest {
         }
     }
 
+    //Test pawn movement
+    @Test
+    public void pawnTest1(){
+        Chess chess = new Chess();
+        AbstractChessPiece[][] board = new AbstractChessPiece[8][8];
+        board[1][2] = new Pawn(ChessSide.WHITE);
+
+        board[1][2].makeMove()
+    }
+
 
 
 }
