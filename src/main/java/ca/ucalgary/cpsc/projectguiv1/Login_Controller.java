@@ -19,7 +19,7 @@ public class Login_Controller {
         // Navigate to the Home Page
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Homepage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             Stage currentStage = (Stage) identity.getScene().getWindow();
             currentStage.setScene(scene);
         } catch (IOException e) {
@@ -33,7 +33,7 @@ public class Login_Controller {
         // Navigate to the Sign Up Page
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Signup.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             Stage currentStage = (Stage) identity.getScene().getWindow();
             currentStage.setScene(scene);
         } catch (IOException e) {

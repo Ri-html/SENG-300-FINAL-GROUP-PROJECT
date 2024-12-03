@@ -41,7 +41,7 @@ public class Chess_Main_Menu_Controller {
 
     public void loadFileFunc(String file, String title) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 800);
         Stage newStg = new Stage();
         newStg.sizeToScene();
         newStg.setTitle(title);
@@ -55,6 +55,12 @@ public class Chess_Main_Menu_Controller {
     public void playOnlineFunc() throws IOException {
         String file = "Chess_Game_Screen.fxml";
         loadFileFunc(file, "Playing Chess");
+    }
+
+    //Navigate to the Leaderboard Page
+    public void leaderboardButtonFxn() throws IOException{
+        String file = "Leaderboard.fxml";
+        loadFileFunc(file, "Chess Leaderboard");
     }
 
     public void exitBtnFunc() throws IOException {

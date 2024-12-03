@@ -325,7 +325,7 @@ public class ConnectFour extends AbstractBoardGame {
      * @return 2d array of ConnectFourPieces of the current gameBoard state
      */
     @Override
-    protected Piece[][] setUpBoard() {
+    public Piece[][] setUpBoard() {
         this.gameBoard = new ConnectFourPiece[6][7];
         return getBoard();
     }
