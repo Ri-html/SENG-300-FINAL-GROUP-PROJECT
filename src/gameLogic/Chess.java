@@ -18,12 +18,13 @@ public class Chess extends AbstractBoardGame {
     //chess can only take 2 players
     public Chess() {
         super(2);
+        setUpBoard();
     }
     
 
     @Override
     protected Piece[][] setUpBoard() {
-        Piece[][] board = this.gameBoard;
+        Piece[][] board = new Piece[8][8];
         //need to assign pieces to a player
         //add white pieces to board
         board[0][0] = new Rook(ChessSide.WHITE);
@@ -51,6 +52,7 @@ public class Chess extends AbstractBoardGame {
         for (int i = 0; i < 8; i++) {
             board[6][i] = new Pawn(ChessSide.BLACK);
         }
+        this.gameBoard = board;
         return board;
     }
 

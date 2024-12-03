@@ -1,5 +1,7 @@
+package gameLogic.boardGames;
+
 import gameLogic.side.ChessSide;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import gameLogic.Chess;
 import gameLogic.piece.chessPiece.*;
 
@@ -9,7 +11,7 @@ public class ChessTest {
 
     //test board setup
     @Test
-    void boardStart(){
+    public void boardSetup(){
         Chess chess = new Chess();
         AbstractChessPiece[][] testBoard = new AbstractChessPiece[8][8];
         //manually add all white pieces
@@ -48,7 +50,7 @@ public class ChessTest {
         testBoard[6][6] = new Pawn(ChessSide.WHITE);
         testBoard[6][7] = new Pawn(ChessSide.WHITE);
 
-        //check pieces in correct location
+        //check pieces are in correct location
         for (int i = 0; i < chess.getBoard().length; i++) {
             //even though this should be square, just make sure
             for (int j = 0; j < chess.getBoard()[0].length; j++) {
@@ -58,5 +60,7 @@ public class ChessTest {
             }
         }
     }
+
+
 
 }
