@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="chess" fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Game_Screen_Controller">
+<Pane id="chess" fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="828.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Game_Screen_Controller">
    <children>
       <GridPane layoutX="166.0" layoutY="40.0" prefHeight="520.0" prefWidth="568.0">
         <columnConstraints>
@@ -163,25 +164,30 @@
             </ScrollPane>
          </children>
       </VBox>
-      <VBox layoutX="-6.0" layoutY="430.0" prefHeight="170.0" prefWidth="237.0">
-         <children>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="173.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="200.0">
+      <VBox alignment="BOTTOM_LEFT" layoutY="532.0" prefHeight="125.0" prefWidth="276.0" />
+      <Button id="exit" fx:id="exit" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="92.0" text="Exit Game" />
+      <Accordion layoutX="349.0" layoutY="570.0">
+        <panes>
+          <TitledPane animated="false" prefWidth="202.0" text="Chat">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="179.0" prefWidth="204.0" />
+                    <AnchorPane layoutY="67.0" minHeight="0.0" minWidth="0.0" prefHeight="113.0" prefWidth="228.0">
+                           <children>
+                              <TextField alignment="BASELINE_LEFT" layoutX="7.0" layoutY="71.0" prefHeight="26.0" prefWidth="154.0" />
+                              <Button layoutX="130.0" layoutY="71.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" text="Send" />
+                           </children>
+                        </AnchorPane>
+                        <ScrollPane layoutY="-1.0" prefHeight="135.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
                      </children>
                   </AnchorPane>
-              </content>
-            </ScrollPane>
-            <HBox prefHeight="81.0" prefWidth="238.0">
-               <children>
-                  <TextField prefHeight="26.0" prefWidth="191.0" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Send" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <Button id="exit" fx:id="exit" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="92.0" text="Exit Game" />
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
    </children>
 </Pane>
