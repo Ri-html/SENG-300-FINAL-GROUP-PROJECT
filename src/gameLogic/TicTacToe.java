@@ -20,6 +20,7 @@ public class TicTacToe extends AbstractBoardGame {
     }
 
     /**
+     * Validate the game has ended
      * @return 0 for draw. 1 if X wins. 2 if Y wins. -1 if ongoing
      */
     @Override

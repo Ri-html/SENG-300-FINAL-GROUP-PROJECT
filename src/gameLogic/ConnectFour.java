@@ -8,7 +8,7 @@ import gameLogic.piece.Piece;
 public class ConnectFour extends AbstractBoardGame {
     private static final int WINLENGTH = 4;
     public ConnectFour(int playerNum) {
-        super(playerNum);
+        super(playerNum, 6, 7);
         this.gameBoard = new ConnectFourPiece[6][7];
     }
 
@@ -32,9 +32,9 @@ public class ConnectFour extends AbstractBoardGame {
 
     /**
      * Checks if win has been reached
-     * @return bool true on win or false on no win
+     * @return 0 if no win, 1 if RED win, 2 if YELLOW win
      */
-    public boolean checkWin() {
+    public int checkWin() {
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[0].length; j++) {
                 // guard
@@ -44,24 +44,24 @@ public class ConnectFour extends AbstractBoardGame {
                 switch (gameBoard[i][j].getSide()) {
                     case ConnectFourSide.RED:
                         if (horizontalWinHelper(ConnectFourSide.RED, j, i)) {
-                            return true;
+                            return 1;
                         }
                         if (verticalWinHelper(ConnectFourSide.RED, j, i)) {
-                            return true;
+                            return 1;
                         }
                         if (diagonalWinHelper(ConnectFourSide.RED, j, i)) {
-                            return true;
+                            return 1;
                         }
                         break;
                     case ConnectFourSide.YELLOW:
                         if (horizontalWinHelper(ConnectFourSide.YELLOW, j, i)) {
-                            return true;
+                            return 2;
                         }
                         if (verticalWinHelper(ConnectFourSide.YELLOW, j, i)) {
-                            return true;
+                            return 2;
                         }
                         if (diagonalWinHelper(ConnectFourSide.YELLOW, j, i)) {
-                            return true;
+                            return 2;
                         }
                         break;
                     default:
@@ -69,7 +69,7 @@ public class ConnectFour extends AbstractBoardGame {
                 }
             }
         }
-        return false;
+        return 0;
     }
 
     private boolean horizontalWinHelper(ConnectFourSide side, int x, int y) {
@@ -284,16 +284,20 @@ public class ConnectFour extends AbstractBoardGame {
 
     /**
      * check for a game ending condition
-     * @return GameEndState enum
+     * @return int 1 if RED won, 2 if YELLOW won
      */
     @Override
-    public GameEndState validateGameEnds() {
-        if (checkWin()) {
-            return GameEndState.Victory;
+    public int validateGameEnds() {
+        int x = checkWin();
+        if (x>0) {
+            //then we have a winner
+            return x;
         } else if (isFull()){
-            return GameEndState.Draw;
+            //draw
+            return 0;
         } else {
-            return GameEndState.Ongoing;
+            //game ongoing
+            return -1;
         }
     }
 

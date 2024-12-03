@@ -12,48 +12,44 @@ public class Chess extends AbstractBoardGame {
 
     public static ArrayList<Piece> capturedPieces;
 
-    //somehow set game board to be [8][8]?
-
     //constructor
-    //chess can only take 2 players
+    //chess can only take 2 players, board is 8x8
     public Chess() {
-        super(2);
+        super(2, 8, 8);
         setUpBoard();
     }
     
 
     @Override
     protected Piece[][] setUpBoard() {
-        Piece[][] board = new Piece[8][8];
         //need to assign pieces to a player
         //add white pieces to board
-        board[0][0] = new Rook(ChessSide.WHITE);
-        board[0][1] = new Knight(ChessSide.WHITE);
-        board[0][2] = new Bishop(ChessSide.WHITE);
-        board[0][3] = new Queen(ChessSide.WHITE);
-        board[0][4] = new King(ChessSide.WHITE);
-        board[0][5] = new Bishop(ChessSide.WHITE);
-        board[0][6] = new Knight(ChessSide.WHITE);
-        board[0][7] = new Rook(ChessSide.WHITE);
+        gameBoard[0][0] = new Rook(ChessSide.WHITE);
+        gameBoard[0][1] = new Knight(ChessSide.WHITE);
+        gameBoard[0][2] = new Bishop(ChessSide.WHITE);
+        gameBoard[0][3] = new Queen(ChessSide.WHITE);
+        gameBoard[0][4] = new King(ChessSide.WHITE);
+        gameBoard[0][5] = new Bishop(ChessSide.WHITE);
+        gameBoard[0][6] = new Knight(ChessSide.WHITE);
+        gameBoard[0][7] = new Rook(ChessSide.WHITE);
         //add white pawns
         for (int i = 0; i < 8; i++) {
-            board[1][i] = new Pawn(ChessSide.WHITE);
+            gameBoard[1][i] = new Pawn(ChessSide.WHITE);
         }
         //add black pieces to board
-        board[7][0] = new Rook(ChessSide.BLACK);
-        board[7][1] = new Knight(ChessSide.BLACK);
-        board[7][2] = new Bishop(ChessSide.BLACK);
-        board[7][3] = new Queen(ChessSide.BLACK);
-        board[7][4] = new King(ChessSide.BLACK);
-        board[7][5] = new Bishop(ChessSide.BLACK);
-        board[7][6] = new Knight(ChessSide.BLACK);
-        board[7][7] = new Rook(ChessSide.BLACK);
+        gameBoard[7][0] = new Rook(ChessSide.BLACK);
+        gameBoard[7][1] = new Knight(ChessSide.BLACK);
+        gameBoard[7][2] = new Bishop(ChessSide.BLACK);
+        gameBoard[7][3] = new Queen(ChessSide.BLACK);
+        gameBoard[7][4] = new King(ChessSide.BLACK);
+        gameBoard[7][5] = new Bishop(ChessSide.BLACK);
+        gameBoard[7][6] = new Knight(ChessSide.BLACK);
+        gameBoard[7][7] = new Rook(ChessSide.BLACK);
         //add black pawns
         for (int i = 0; i < 8; i++) {
-            board[6][i] = new Pawn(ChessSide.BLACK);
+            gameBoard[6][i] = new Pawn(ChessSide.BLACK);
         }
-        this.gameBoard = board;
-        return board;
+        return gameBoard;
     }
 
     /**
@@ -64,8 +60,8 @@ public class Chess extends AbstractBoardGame {
     }
 
     @Override
-    public GameEndState validateGameEnds() {
-        return GameEndState.Ongoing;
+    public int validateGameEnds() {
+        return -1;
     }
 
     @Override
