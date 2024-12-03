@@ -69,4 +69,31 @@ public class Chess extends AbstractBoardGame {
 
     }
 
+    // Helper function that will determine if king is in check.
+    public boolean isInCheck(ChessSide side)
+    {
+        int kingX = -1;
+        int kingY = -1;
+
+        // Find the king's position
+        // This can be delted, it's just brute force
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                Piece piece = gameBoard[i][j];
+                if (piece instanceof King && piece.getSide() == side)
+                {
+                    kingX = i;
+                    kingY = j;
+                    break;
+                }
+            }
+        }
+
+        // Need to add logic to look for attacking opp's
+
+        return false;
+    }
+
 }

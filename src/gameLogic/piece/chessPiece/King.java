@@ -49,11 +49,20 @@ public class King extends AbstractChessPiece{
 
     private boolean canCastleKingSide(Piece[][] board, int kingX, int kingY)
     {
+        // Moving once invalidates castling chance
+        If (this.hasMoved()) return false;
+
+        // Check Rook's movement
+        // If both have not moved, need to check that nothing is in the way
+
         return false;
     }
 
     private boolean canCastleQueenSide(Piece[][] board, int kingX, int kingY)
     {
+        // Moving once invalidates castling chance
+        If (this.hasMoved()) return false;
+
         return false;
     }
 }
