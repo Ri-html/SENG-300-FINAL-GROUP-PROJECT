@@ -41,7 +41,7 @@ public class Home_Page_Controller {
 
     public void selectionFxn(String file) throws IOException { // Switch to sign up page
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage newStg = new Stage();
         newStg.sizeToScene();
         newStg.setTitle("Main Menu");
