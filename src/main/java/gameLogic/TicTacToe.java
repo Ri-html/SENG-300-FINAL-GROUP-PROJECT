@@ -32,9 +32,9 @@ public class TicTacToe extends AbstractBoardGame {
                 return GameEndState.Victory;
         }
         // check diagonals
-        if (gameBoard[0][0] == gameBoard[1][1] && gameBoard[0][0] == gameBoard[2][2])
+        if (gameBoard[0][0] != null && gameBoard[0][0] == gameBoard[1][1] && gameBoard[0][0] == gameBoard[2][2])
             return GameEndState.Victory;
-        if (gameBoard[0][2] == gameBoard[1][1] && gameBoard[0][2] == gameBoard[2][0])
+        if (gameBoard[0][2] != null && gameBoard[0][2] == gameBoard[1][1] && gameBoard[0][2] == gameBoard[2][0])
             return GameEndState.Victory;
 
         // check for empty spaces

@@ -46,11 +46,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="connectfour" fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Game_Screen_Controller">
+<Pane id="connectfour" fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Connect4GameController">
    <children>
       <Pane layoutX="178.0" layoutY="80.0" prefHeight="440.0" prefWidth="540.0" style="-fx-background-color: blue; -fx-background-radius: 40;">
          <children>
-            <GridPane hgap="15.0" layoutX="17.0" layoutY="17.0" prefHeight="407.0" prefWidth="490.0" style="-fx-background-color: blue;" vgap="15.0">
+            <GridPane fx:id="gamePane" hgap="15.0" layoutX="17.0" layoutY="17.0" prefHeight="407.0" prefWidth="490.0" style="-fx-background-color: blue;" vgap="15.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -115,21 +115,21 @@
             </GridPane>
          </children>
       </Pane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="102.0" text="Exit Game" />
+      <Button fx:id="exitBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#exitBtnFunc" prefHeight="39.0" prefWidth="102.0" text="Exit Game" />
       <Pane layoutX="736.0" layoutY="196.0" prefHeight="209.0" prefWidth="137.0" style="-fx-background-radius: 20; -fx-background-color: grey;">
          <children>
             <Circle fill="#ff1f28" layoutX="67.0" layoutY="49.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="40.0" layoutY="105.0" prefHeight="20.0" prefWidth="55.0" text="Player 2">
+            <Label fx:id="player2Name" layoutX="40.0" layoutY="105.0" prefHeight="20.0" prefWidth="55.0" text="Player 2">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="38.0" layoutY="134.0" prefHeight="20.0" prefWidth="62.0" text="Wins: xx">
+            <Label fx:id="winLabelP2" layoutX="38.0" layoutY="134.0" prefHeight="20.0" prefWidth="62.0" text="Wins: xx">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="38.0" layoutY="161.0" prefHeight="20.0" prefWidth="62.0" text="Rank: xx">
+            <Label fx:id="rankLabelP2" layoutX="38.0" layoutY="161.0" prefHeight="20.0" prefWidth="62.0" text="Rank: xx">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -139,17 +139,17 @@
       <Pane layoutX="24.0" layoutY="196.0" prefHeight="209.0" prefWidth="137.0" style="-fx-background-radius: 20; -fx-background-color: grey;">
          <children>
             <Circle fill="#fff721" layoutX="67.0" layoutY="49.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="40.0" layoutY="105.0" prefHeight="20.0" prefWidth="55.0" text="Player 1">
+            <Label fx:id="player1Name" layoutX="40.0" layoutY="105.0" prefHeight="20.0" prefWidth="55.0" text="Player 1">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="38.0" layoutY="134.0" prefHeight="20.0" prefWidth="62.0" text="Wins: xx">
+            <Label fx:id="winLabelP1" layoutX="38.0" layoutY="134.0" prefHeight="20.0" prefWidth="62.0" text="Wins: xx">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="38.0" layoutY="161.0" prefHeight="20.0" prefWidth="62.0" text="Rank: xx">
+            <Label fx:id="rankLabelP1" layoutX="38.0" layoutY="161.0" prefHeight="20.0" prefWidth="62.0" text="Rank: xx">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -158,19 +158,19 @@
       </Pane>
       <VBox layoutY="405.0" prefHeight="200.0" prefWidth="262.0">
          <children>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="NEVER">
+            <ScrollPane fx:id="chatScrlPane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="NEVER">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="-1.0" prefHeight="200.0" prefWidth="202.0" />
+                        <VBox fx:id="chatBox" layoutX="-1.0" prefHeight="200.0" prefWidth="202.0" />
                      </children>
                   </AnchorPane>
               </content>
             </ScrollPane>
             <HBox prefHeight="47.0" prefWidth="262.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="199.0" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="63.0" text="Send" />
+                  <TextField fx:id="chatTxtField" prefHeight="26.0" prefWidth="199.0" />
+                  <Button fx:id="sendBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="63.0" text="Send" />
                </children>
             </HBox>
          </children>
