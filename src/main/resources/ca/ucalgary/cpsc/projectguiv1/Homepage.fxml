@@ -66,12 +66,12 @@
       </Label>
       <TextField fx:id="searchBar" onAction="#search" GridPane.columnIndex="7" GridPane.columnSpan="7" GridPane.rowIndex="4" />
       <Circle fill="WHITE" radius="31.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="3" />
-      <Button fx:id="chessSelection" mnemonicParsing="false" onMouseClicked="#chessSelectionFxn" prefHeight="143.0" prefWidth="228.0" text="Chess" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="4" />
-      <Button fx:id="tictactoeSelection" mnemonicParsing="false" onMouseClicked="#ticTacToeSelectionFxn" prefHeight="176.0" prefWidth="192.0" text="Tic-Tac-Toe" GridPane.columnIndex="7" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="4" />
-      <Button fx:id="connect4Selection" mnemonicParsing="false" onMouseClicked="#connect4SelectionFxn" prefHeight="176.0" prefWidth="192.0" text="Connect-4" GridPane.columnIndex="13" GridPane.columnSpan="5" GridPane.rowIndex="8" GridPane.rowSpan="4" />
-      <Label fx:id="rankingChessLbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="13" />
-      <Label fx:id="rankingTicTacToeLbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="13" />
-      <Label fx:id="rankingConnect4Lbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="13" GridPane.columnSpan="3" GridPane.rowIndex="13" />
+      <Button fx:id="chessSelection" mnemonicParsing="false" onMouseClicked="#chessSelectionFxn" prefHeight="176.0" prefWidth="192.0" text="Chess" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="10" GridPane.rowSpan="4" />
+      <Button fx:id="tictactoeSelection" mnemonicParsing="false" onMouseClicked="#ticTacToeSelectionFxn" prefHeight="176.0" prefWidth="192.0" text="Tic-Tac-Toe" GridPane.columnIndex="7" GridPane.columnSpan="5" GridPane.rowIndex="10" GridPane.rowSpan="4" />
+      <Button fx:id="connect4Selection" mnemonicParsing="false" onMouseClicked="#connect4SelectionFxn" prefHeight="176.0" prefWidth="192.0" text="Connect-4" GridPane.columnIndex="13" GridPane.columnSpan="5" GridPane.rowIndex="10" GridPane.rowSpan="4" />
+      <Label fx:id="rankingChessLbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="15" />
+      <Label fx:id="rankingTicTacToeLbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="15" />
+      <Label fx:id="rankingConnect4Lbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="13" GridPane.columnSpan="3" GridPane.rowIndex="15" />
       <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.columnSpan="7" GridPane.rowIndex="5" GridPane.rowSpan="2" />
    </children>
 </GridPane>
