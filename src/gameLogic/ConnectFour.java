@@ -191,7 +191,7 @@ public class ConnectFour extends AbstractBoardGame {
             // overflow guard
             i--;
             j--;
-            if (i <= 0 || j <= 0) {
+            if (i < 0 || j < 0) {
                 break;
             }
             // if no piece, break
@@ -202,7 +202,7 @@ public class ConnectFour extends AbstractBoardGame {
             if (gameBoard[j][i].getSide() != side) {
                 break;
             }
-            // piece to down left is right colour, keep looking
+            // piece to up left is right colour, keep looking
             length++;
         }
         // if length of sequence is long enough return that a win was found.
@@ -217,7 +217,7 @@ public class ConnectFour extends AbstractBoardGame {
             // overflow guard
             i++;
             j--;
-            if (i >= gameBoard[0].length || j <= 0) {
+            if (i >= gameBoard[0].length || j < 0) {
                 break;
             }
             // if no piece, break
@@ -232,58 +232,6 @@ public class ConnectFour extends AbstractBoardGame {
             length++;
         }
         // if length of sequence is long enough return that a win was found.
-        if (length >= WINLENGTH) {
-            return true;
-        }
-        // check down left
-        length = 1;
-        i = x;
-        j = y;
-        while (length < WINLENGTH) {
-            // overflow guard
-            j++;
-            i--;
-            if (i <= 0 || j >= gameBoard.length - 1) {
-                break;
-            }
-            // if no piece, break
-            if (gameBoard[j][i] == null) {
-                break;
-            }
-            // if piece to right is wrong colour stop checking for win
-            if (gameBoard[j][i].getSide() != side) {
-                break;
-            }
-            // piece to right is correct colour, keep looking
-            length++;
-        }
-        // if length of sequence was long enough return that a win was found.
-        if (length >= WINLENGTH) {
-            return true;
-        }
-        // check down right
-        length = 1;
-        i = x;
-        j = y;
-        while (length < WINLENGTH) {
-            // overflow guard
-            j++;
-            i++;
-            if (i <= gameBoard[0].length || j >= gameBoard.length - 1) {
-                break;
-            }
-            // if no piece, break
-            if (gameBoard[j][i] == null) {
-                break;
-            }
-            // if piece to right is wrong colour stop checking for win
-            if (gameBoard[j][i].getSide() != side) {
-                break;
-            }
-            // piece to right is correct colour, keep looking
-            length++;
-        }
-        // if length of sequence was long enough return that a win was found.
         if (length >= WINLENGTH) {
             return true;
         }
@@ -317,8 +265,12 @@ public class ConnectFour extends AbstractBoardGame {
      * @param x int of column to place
      */
     private boolean isValidMove(int x) {
+        if (x < 0 || x >= gameBoard[0].length) {
+            return false;
+        }
         return gameBoard[0][x] == null;
     }
+
 
     /**
      * Creates a new gameBoard for game

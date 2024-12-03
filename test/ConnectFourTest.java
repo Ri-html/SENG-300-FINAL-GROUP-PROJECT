@@ -24,7 +24,6 @@ public class ConnectFourTest {
 
 
 
-
     /*
     TEST PLACING PIECES
      */
@@ -67,6 +66,13 @@ public class ConnectFourTest {
     void canPlaceOnEmptyBoard() {
         ConnectFour connectFour = new ConnectFour(2);
         assertTrue(connectFour.validateMove(new int[]{0,0}));
+    }
+
+    @Test
+    void cannotPlaceInvalidXIndex() {
+        ConnectFour connectFour = new ConnectFour(2);
+        assertFalse(connectFour.validateMove(new int[]{-1,0}));
+        assertFalse(connectFour.validateMove(new int[]{connectFour.getBoard()[0].length, 0}));
     }
 
     @Test
@@ -160,6 +166,39 @@ public class ConnectFourTest {
     }
 
     @Test
+    void RecognizesDiagonalUpLeftWin() {
+        ConnectFour connectFour = new ConnectFour(2);
+        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+
+        connectFour.makeMove(new int[]{3,0});
+        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{2,0});
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{2,0});
+        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{1,0});
+        connectFour.makeMove(new int[]{1,0});
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{1,0});
+        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{0,0});
+        connectFour.makeMove(new int[]{0,0});
+        connectFour.makeMove(new int[]{0,0});
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{0,0});
+
+        System.out.println(connectFour);
+
+        assertEquals("Victory", connectFour.validateGameEnds().name());
+    }
+
+    @Test
     void drawOnBoardFullNoWins() {
         ConnectFour connectFour = new ConnectFour(2);
         for (int i = 0; i <= connectFour.getBoard().length; i++) {
@@ -169,7 +208,6 @@ public class ConnectFourTest {
                 connectFour.switchCurrentPlayer();
             }
         }
-        System.out.println(connectFour);
         assertEquals("Draw", connectFour.validateGameEnds().name());
     }
 }
