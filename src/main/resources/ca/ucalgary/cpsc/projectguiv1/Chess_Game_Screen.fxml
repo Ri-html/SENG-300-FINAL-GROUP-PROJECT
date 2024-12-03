@@ -15,9 +15,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="chess" fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Game_Screen_Controller">
+<Pane id="chess" fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.ChessGameController">
    <children>
-      <GridPane layoutX="166.0" layoutY="40.0" prefHeight="520.0" prefWidth="568.0">
+      <GridPane fx:id="gamePane" layoutX="166.0" layoutY="40.0" prefHeight="520.0" prefWidth="568.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -42,7 +42,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" smooth="false" stroke="BLACK" strokeType="INSIDE" width="69.0" GridPane.columnIndex="6" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="152.0" layoutY="8.0" smooth="false" stroke="BLACK" strokeType="INSIDE" width="69.0" GridPane.columnIndex="4" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="10.0" layoutY="8.0" smooth="false" stroke="BLACK" strokeType="INSIDE" width="69.0" GridPane.columnIndex="2" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="436.0" layoutY="8.0" smooth="false" stroke="BLACK" strokeType="INSIDE" width="69.0" />
+            <Rectangle fx:id="cell" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="436.0" layoutY="8.0" smooth="false" stroke="BLACK" strokeType="INSIDE" width="69.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="10.0" layoutY="8.0" smooth="false" stroke="BLACK" strokeType="INSIDE" width="69.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="81.0" layoutY="74.0" smooth="false" stroke="BLACK" strokeType="INSIDE" width="69.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="81.0" layoutY="74.0" smooth="false" stroke="BLACK" strokeType="INSIDE" width="69.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
@@ -108,17 +108,17 @@
       <Pane layoutX="746.0" layoutY="40.0" prefHeight="202.0" prefWidth="140.0" style="-fx-background-color: grey; -fx-background-radius: 20;">
          <children>
             <Circle fill="WHITE" layoutX="70.0" layoutY="66.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="44.0" layoutY="116.0" text="Player 1">
+            <Label fx:id="player1Name" layoutX="44.0" layoutY="116.0" text="Player 1">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="44.0" layoutY="142.0" text="Win: xx">
+            <Label fx:id="winLabelP1" layoutX="44.0" layoutY="142.0" text="Win: xx">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="45.0" layoutY="168.0" text="Rank: xx">
+            <Label fx:id="rankLabelP1" layoutX="45.0" layoutY="168.0" text="Rank: xx">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -128,17 +128,17 @@
       <Pane layoutX="746.0" layoutY="358.0" prefHeight="202.0" prefWidth="140.0" style="-fx-background-color: grey; -fx-background-radius: 20;">
          <children>
             <Circle layoutX="70.0" layoutY="66.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="44.0" layoutY="116.0" text="Player 2">
+            <Label fx:id="player2Name" layoutX="44.0" layoutY="116.0" text="Player 2">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="44.0" layoutY="142.0" text="Win: xx">
+            <Label fx:id="winLabelP2" layoutX="44.0" layoutY="142.0" text="Win: xx">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="45.0" layoutY="168.0" text="Rank: xx">
+            <Label fx:id="rankLabelP2" layoutX="45.0" layoutY="168.0" text="Rank: xx">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -165,23 +165,23 @@
       </VBox>
       <VBox layoutX="-6.0" layoutY="430.0" prefHeight="170.0" prefWidth="237.0">
          <children>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="173.0">
+            <ScrollPane fx:id="chatScrlPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="173.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="179.0" prefWidth="204.0" />
+                        <VBox fx:id="chatBox" prefHeight="179.0" prefWidth="204.0" />
                      </children>
                   </AnchorPane>
               </content>
             </ScrollPane>
             <HBox prefHeight="81.0" prefWidth="238.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="191.0" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Send" />
+                  <TextField fx:id="chatTxtField" prefHeight="26.0" prefWidth="191.0" />
+                  <Button fx:id="sendBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Send" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <Button id="exit" fx:id="exit" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="92.0" text="Exit Game" />
+      <Button id="Connect_4_Main_Menu_View.fxml" fx:id="exitBtn" accessibleText="Main Menu Tic-Tac-Toe" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="92.0" text="Exit Game" />
    </children>
 </Pane>

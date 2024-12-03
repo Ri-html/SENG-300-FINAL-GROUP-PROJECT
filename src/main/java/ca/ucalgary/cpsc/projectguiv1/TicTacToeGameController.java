@@ -34,6 +34,10 @@ public class TicTacToeGameController {
 
     private ArrayList<String> arrOfPaneCoords = new ArrayList<>();
 
+    private int amtOfMoves = 0;
+
+    private boolean allFilled = false;
+
     @FXML
     Pane identity;
     @FXML
@@ -139,73 +143,25 @@ public class TicTacToeGameController {
 
     public void makeMove(int[] coordsArr, Pane currPane) throws IOException {
         try {
-
-
             if (this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())) {
                 this.gameTicTacToe.makeMove(coordsArr);
+                this.amtOfMoves++;
                 this.gameTicTacToe.switchCurrentPlayer();
                 currPane.getChildren().add(new Label("              X")); // Later add an image or something
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
-                System.out.println("test");
+                checkEndCon();
+                makeRandMove();
             } else {
-                System.out.println("test");
-
-                Random rand = new Random();
-                int idx = rand.nextInt(9);
-                Pane randPane = this.arrOfPanes.get(idx);
-                String randCoords = this.arrOfPaneCoords.get(idx);
-                Scanner sc = new Scanner(randCoords);
-                int randXCoord = sc.nextInt();
-                int randYCoord = sc.nextInt();
-                int[] rCoordArr = {randYCoord, randXCoord};
-                boolean foundSpot = false;
-
-                while (!foundSpot) {
-                    try {
-                        this.gameTicTacToe.makeMove(rCoordArr);
-                        this.gameTicTacToe.switchCurrentPlayer();
-                        randPane.getChildren().add(new Label("              O")); // Later add an image or something
-                        this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
-
-                        foundSpot = true;
-                    } catch (IllegalArgumentException iae) {
-                        idx = rand.nextInt(9);
-                        randPane = this.arrOfPanes.get(idx);
-                        randCoords = this.arrOfPaneCoords.get(idx);
-                        sc = new Scanner(randCoords);
-                        randXCoord = sc.nextInt();
-                        randYCoord = sc.nextInt();
-                        rCoordArr[1] = randXCoord;
-                        rCoordArr[0] = randYCoord;
-
-                    }
-                }
-
+                makeRandMove();
             }
 
-            if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Victory)) {
-                exitBtnFunc();
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Winner!");
-                alert.setHeaderText("You Won!");
-                alert.show();
-
-            } else if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Draw)) {
-                exitBtnFunc();
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Draw!");
-                alert.setHeaderText("This Game Has Reached A Stalemate");
-                alert.show();
-            }
         } catch (IllegalArgumentException iae) {
-
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("Tile Already Occupied");
             alert.show();
 
         }
-        System.out.println(this.gameTicTacToe.toString());
     }
 
     public void sendBtnFunc() {
@@ -215,11 +171,71 @@ public class TicTacToeGameController {
         } else {
             chatTxt += this.usrTwo.getUsername() + ": ";
         }
-
         chatTxt += this.chatTxtFld.getText();
         this.chatBox.getChildren().add(new Label(chatTxt));
         this.chatScrlPane.setContent(this.chatBox);
     }
 
+    public void makeRandMove() throws IOException {
 
+        Random rand = new Random();
+        int idx = rand.nextInt(9);
+        Pane randPane = this.arrOfPanes.get(idx);
+        String randCoords = this.arrOfPaneCoords.get(idx);
+        Scanner sc = new Scanner(randCoords);
+        int randXCoord = sc.nextInt();
+        int randYCoord = sc.nextInt();
+        int[] rCoordArr = {randYCoord, randXCoord};
+        boolean foundSpot = false;
+        if(this.amtOfMoves >= 9){
+            allFilled = true;
+        }
+
+        while ((foundSpot == false) && (allFilled == false)) {
+            try {
+                this.gameTicTacToe.makeMove(rCoordArr);
+                this.gameTicTacToe.switchCurrentPlayer();
+                randPane.getChildren().add(new Label("              O")); // Later add an image or something
+                this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
+                checkEndCon();
+                this.amtOfMoves++;
+                foundSpot = true;
+            } catch (IllegalArgumentException iae) {
+                idx = rand.nextInt(9);
+                randPane = this.arrOfPanes.get(idx);
+                randCoords = this.arrOfPaneCoords.get(idx);
+                sc = new Scanner(randCoords);
+                randXCoord = sc.nextInt();
+                randYCoord = sc.nextInt();
+                rCoordArr[1] = randXCoord;
+                rCoordArr[0] = randYCoord;
+            }
+
+        }
+
+    }
+    @Deprecated
+    public void checkEndCon() throws IOException{ // game logic needs to add more end game states
+        if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Victory)) {
+            exitBtnFunc();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Winner!");
+            alert.setHeaderText("You Won!");
+            alert.show();
+
+        } else if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Draw)) {
+            exitBtnFunc();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Draw!");
+            alert.setHeaderText("This Game Has Reached A Stalemate");
+            alert.show();
+        }
+    }
+    public void saveEndData(){
+
+    }
 }
+
+
+
+
