@@ -29,10 +29,10 @@ public abstract class AbstractGameController implements BoardGameObserver {
                 break;
 
             case "TurnEnd":
-                testUpdate = list[2];
+                //testUpdate = list[2];
                 break;
             case "GameEnd":
-                testUpdate = list[2];
+                //testUpdate = list[2];
                 break;
     }
 }
@@ -43,4 +43,4 @@ public abstract class AbstractGameController implements BoardGameObserver {
 
     public void setUser2(User user2) {
         this.user2 = user2;
-    }
+    }}

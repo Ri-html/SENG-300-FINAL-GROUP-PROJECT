@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.event.MouseEvent;
+//import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class ChessGameController extends AbstractGameController {
@@ -90,13 +90,13 @@ public class ChessGameController extends AbstractGameController {
         stgWindw.close();
     }
 
-    @FXML
-    public void handleClicks(MouseEvent event) {
-        double x = event.getX();
-        double y = event.getY();
-        int row = (int) (y / CELL_SIZE); // Calculate row index
-        int col = (int) (x / CELL_SIZE); // Calculate column index
-    }
+//    @FXML
+//    public void handleClicks(MouseEvent event) {
+//        double x = event.getX();
+//        double y = event.getY();
+//        int row = (int) (y / CELL_SIZE); // Calculate row index
+//        int col = (int) (x / CELL_SIZE); // Calculate column index
+//    }
 
     @Override
     public void setUpBoard(String board) {
