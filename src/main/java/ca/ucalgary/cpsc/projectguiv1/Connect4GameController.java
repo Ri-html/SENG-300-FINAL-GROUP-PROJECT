@@ -148,7 +148,7 @@ public class Connect4GameController {
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage newStg = new Stage();
         newStg.sizeToScene();
-        newStg.setTitle("Main Menu Tic-Tac-Toe");
+        newStg.setTitle("Main Menu Connect-4");
         newStg.setScene(scene);
         newStg.show();
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();

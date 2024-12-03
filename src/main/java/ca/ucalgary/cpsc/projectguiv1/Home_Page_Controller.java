@@ -44,7 +44,7 @@ public class Home_Page_Controller {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         Stage newStg = new Stage();
         newStg.sizeToScene();
-        newStg.setTitle("Sign Up");
+        newStg.setTitle("Main Menu");
         newStg.setScene(scene);
         newStg.show();
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();

@@ -5,10 +5,15 @@ import authProfile.TicTacToeProfile;
 import authProfile.ConnectFourProfile;
 import authProfile.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Manage_Profile_Controller {
@@ -48,6 +53,9 @@ public class Manage_Profile_Controller {
 
     @FXML
     Text status;
+
+    @FXML
+    ScrollPane identity;
 
 
     private ChessProfile chessProfile = new ChessProfile();
@@ -106,6 +114,18 @@ public class Manage_Profile_Controller {
             user.setEmail(newEmail);
         }
 
+    }
+
+    public void exitBtnFunc() throws IOException { // Go to Homepage
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Homepage");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
     }
 
 

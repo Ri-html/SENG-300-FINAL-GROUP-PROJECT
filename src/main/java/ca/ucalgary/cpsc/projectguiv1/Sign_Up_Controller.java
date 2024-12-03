@@ -49,7 +49,7 @@ public class Sign_Up_Controller {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         Stage newStg = new Stage();
         newStg.sizeToScene();
-        newStg.setTitle("Sign Up");
+        newStg.setTitle("Login");
         newStg.setScene(scene);
         newStg.show();
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();
