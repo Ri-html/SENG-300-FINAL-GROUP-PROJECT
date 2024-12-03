@@ -26,19 +26,20 @@ public abstract class AbstractBoardGame implements BoardGame {
     int[]moves;
     private GameState gameState;
 
-    public AbstractBoardGame(int playerNum) {
+    public AbstractBoardGame(int playerNum, int x, int y) {
         gameState = GameState.WAITING;
         playerNumber = playerNum;
         players = new String[playerNum];
         //get a unique game id
         gameID= UUID.randomUUID().toString();
+        gameBoard = new Piece[x][y];
     }
 
     //methods that should be implemented in the subclass
         //sets up the Board for the specific board game
     abstract protected Piece[][] setUpBoard();
         //validates if an ending condition is met
-    abstract public GameEndState validateGameEnds();
+    abstract public int validateGameEnds();
         //validates if the move is legal
     abstract public boolean validateMove(int[] moves);
         //changes the board according to how pieces move in the game and the moves received by the networking team
@@ -118,10 +119,12 @@ public abstract class AbstractBoardGame implements BoardGame {
      * notify the winner to the leaderboard and both frontends
      */
     private void endGame(){
-        if(validateGameEnds()==GameEndState.Draw){
+        if(validateGameEnds()==0){
+            //draw
             gameState=GameState.OVER;
             notifyGameEnd();
-        } else if (validateGameEnds()==GameEndState.Victory) {
+        } else if (validateGameEnds()>0) {
+            //victory
             gameState=GameState.OVER;
             winner = players[currentPlayer];
             notifyGameEnd();
