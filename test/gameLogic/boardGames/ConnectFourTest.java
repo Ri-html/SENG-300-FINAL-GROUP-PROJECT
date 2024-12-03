@@ -1,3 +1,5 @@
+package gameLogic.boardGames;
+
 import gameLogic.side.ConnectFourSide;
 import org.junit.jupiter.api.Test;
 import gameLogic.ConnectFour;
