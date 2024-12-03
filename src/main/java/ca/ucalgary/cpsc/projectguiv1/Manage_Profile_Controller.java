@@ -1,9 +1,6 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
-import authProfile.ChessProfile;
-import authProfile.TicTacToeProfile;
-import authProfile.ConnectFourProfile;
-import authProfile.User;
+import authProfile.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -65,6 +62,7 @@ public class Manage_Profile_Controller {
 
     //User user = User.getCurrentUser();
     User user = new User("Dummy Master", "dummySucks", "dummy@gmail.com");
+
 
     @FXML
     private void initialize() {
