@@ -7,6 +7,7 @@ import authProfile.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -34,7 +35,7 @@ public class Manage_Profile_Controller {
     TextField usernameField;
 
     @FXML
-    TextField email;
+    TextField emailField;
 
     @FXML
     Text game1;
@@ -72,7 +73,7 @@ public class Manage_Profile_Controller {
 
         nameField.setText(user.getUserId());
         usernameField.setText(user.getUsername());
-        email.setText(user.getEmail());
+        emailField.setText(user.getEmail());
 
         displayGameHistory();
     }
@@ -96,23 +97,35 @@ public class Manage_Profile_Controller {
 
     }
 
-    @FXML
-    private void updateUserDetails() {
+
+    public void updateUserDetails() {
         String newName = nameField.getText();
         String newUsername = usernameField.getText();
-        String newEmail = email.getText();
+        String newEmail = emailField.getText();
 
         if (!newName.equals(user.getUserId())) {
             user.setUserId(newName);
+            initialize();
         }
 
         if (!newUsername.equals(user.getUsername())) {
             user.setUsername(newUsername);
+            initialize();
+
         }
 
         if (!newEmail.equals(user.getEmail())) {
             user.setEmail(newEmail);
+            initialize();
+
         }
+
+    }
+
+    public void test(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Changes have been saved. Click back to exit screen.");
+        alert.setTitle("Saved");
 
     }
 

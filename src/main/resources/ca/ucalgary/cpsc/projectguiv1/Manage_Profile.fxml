@@ -21,7 +21,7 @@
             <Text fx:id="status" layoutX="292.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#exitBtnFunc" text="Back" />
             <TextField fx:id="nameField" layoutX="54.0" layoutY="163.0" />
-            <TextField fx:id="email" layoutX="54.0" layoutY="220.0" />
+            <TextField fx:id="emailField" layoutX="54.0" layoutY="220.0" />
             <TextField fx:id="usernameField" layoutX="299.0" layoutY="163.0" />
             <Text layoutX="245.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game History">
                <font>
@@ -31,7 +31,7 @@
             <Text layoutX="54.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
             <Text layoutX="299.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
             <Text layoutX="55.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-            <Button layoutX="255.0" layoutY="880.0" mnemonicParsing="false" onAction="#updateUserDetails" text="Save Changes" />
+            <Button layoutX="255.0" layoutY="880.0" mnemonicParsing="false" onMouseClicked="#updateUserDetails" text="Save Changes" />
             <Text layoutX="232.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent Matches">
                <font>
                   <Font size="18.0" />
