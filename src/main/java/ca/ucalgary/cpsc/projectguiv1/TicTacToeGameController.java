@@ -7,6 +7,7 @@ import gameLogic.TicTacToe;
 import gameLogic.boardGames.AbstractBoardGame;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -16,7 +17,10 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class TicTacToeGameController {
     private User usrOne;
@@ -25,6 +29,10 @@ public class TicTacToeGameController {
     private TicTacToe gameTicTacToe;
 
     private boolean setup = false;
+
+    private ArrayList<Pane> arrOfPanes = new ArrayList<>();
+
+    private ArrayList<String> arrOfPaneCoords = new ArrayList<>();
 
     @FXML
     Pane identity;
@@ -99,11 +107,13 @@ public class TicTacToeGameController {
                     int xCoord = x;
                     int yCoord = y;
                     this.gamePane.add(currPane, y, x);
+                    arrOfPanes.add(currPane);
+                    arrOfPaneCoords.add(y + " " + x);
                     currPane.setOnMouseClicked(mouseEvent -> {
                         int[] coordsArr = {xCoord, yCoord};
                         try {
                             makeMove(coordsArr, currPane);
-                        }catch (IOException ioe){
+                        } catch (IOException ioe) {
                             System.out.println("io exception");
                         }
                     });
@@ -111,13 +121,13 @@ public class TicTacToeGameController {
             }
             Random randInt = new Random();
             this.gameTicTacToe.setCurrentPlayer(randInt.nextInt(2));
-            if(this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())){
+            if (this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())) {
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
-            }else{
+            } else {
                 this.infoLabel.setText(this.usrTwo.getUsername() + "'s move!");
             }
-            this.player1Name.setText("Win: " + this.usrOne.getUsername());
-            this.player2Name.setText("Win: " + this.usrTwo.getUsername());
+            this.player1Name.setText(this.usrOne.getUsername());
+            this.player2Name.setText(this.usrTwo.getUsername());
             this.winLabelP1.setText("Win: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins());
             this.winLabelP2.setText("Win: " + this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins());
             this.rankLabelP1.setText("Rank: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank());
@@ -127,20 +137,53 @@ public class TicTacToeGameController {
 
     }
 
-    public void makeMove(int[] coordsArr, Pane currPane) throws IOException{
+    public void makeMove(int[] coordsArr, Pane currPane) throws IOException {
         try {
-            this.gameTicTacToe.makeMove(coordsArr);
-            this.gameTicTacToe.switchCurrentPlayer();
 
-            if(this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())){
-                currPane.getChildren().add(new Label("              O")); // Later add an image or something
-                this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
 
-            }else{
+            if (this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())) {
+                this.gameTicTacToe.makeMove(coordsArr);
+                this.gameTicTacToe.switchCurrentPlayer();
                 currPane.getChildren().add(new Label("              X")); // Later add an image or something
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
+                System.out.println("test");
+            } else {
+                System.out.println("test");
+
+                Random rand = new Random();
+                int idx = rand.nextInt(9);
+                Pane randPane = this.arrOfPanes.get(idx);
+                String randCoords = this.arrOfPaneCoords.get(idx);
+                Scanner sc = new Scanner(randCoords);
+                int randXCoord = sc.nextInt();
+                int randYCoord = sc.nextInt();
+                int[] rCoordArr = {randYCoord, randXCoord};
+                boolean foundSpot = false;
+
+                while (!foundSpot) {
+                    try {
+                        this.gameTicTacToe.makeMove(rCoordArr);
+                        this.gameTicTacToe.switchCurrentPlayer();
+                        randPane.getChildren().add(new Label("              O")); // Later add an image or something
+                        this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
+
+                        foundSpot = true;
+                    } catch (IllegalArgumentException iae) {
+                        idx = rand.nextInt(9);
+                        randPane = this.arrOfPanes.get(idx);
+                        randCoords = this.arrOfPaneCoords.get(idx);
+                        sc = new Scanner(randCoords);
+                        randXCoord = sc.nextInt();
+                        randYCoord = sc.nextInt();
+                        rCoordArr[1] = randXCoord;
+                        rCoordArr[0] = randYCoord;
+
+                    }
+                }
+
             }
-            if(this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Victory)){
+
+            if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Victory)) {
                 exitBtnFunc();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
@@ -155,18 +198,21 @@ public class TicTacToeGameController {
                 alert.show();
             }
         } catch (IllegalArgumentException iae) {
+
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("Tile Already Occupied");
             alert.show();
+
         }
+        System.out.println(this.gameTicTacToe.toString());
     }
 
-    public void sendBtnFunc(){
+    public void sendBtnFunc() {
         String chatTxt = "";
-        if(this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())){
+        if (this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())) {
             chatTxt += this.usrOne.getUsername() + ": ";
-        }else{
+        } else {
             chatTxt += this.usrTwo.getUsername() + ": ";
         }
 
