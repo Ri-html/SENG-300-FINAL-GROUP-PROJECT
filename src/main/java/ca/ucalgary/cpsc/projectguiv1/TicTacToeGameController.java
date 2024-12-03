@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -153,7 +155,12 @@ public class TicTacToeGameController {
                 this.gameTicTacToe.makeMove(coordsArr);
                 this.amtOfMoves++;
                 this.gameTicTacToe.switchCurrentPlayer();
-                currPane.getChildren().add(new Label("              X")); // Later add an image or something
+
+                Label xLbl = new Label();
+                xLbl.setTextFill(Color.RED);
+                xLbl.setFont(new Font("Comic Sans", 100));
+                xLbl.setText("          X");
+                currPane.getChildren().add(xLbl);
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
                 checkEndCon();
                 makeRandMove();
@@ -201,7 +208,11 @@ public class TicTacToeGameController {
             try {
                 this.gameTicTacToe.makeMove(rCoordArr);
                 this.gameTicTacToe.switchCurrentPlayer();
-                randPane.getChildren().add(new Label("              O")); // Later add an image or something
+                Label oLbl = new Label();
+                oLbl.setTextFill(Color.RED);
+                oLbl.setFont(new Font("Comic Sans", 100));
+                oLbl.setText("          O");
+                randPane.getChildren().add(oLbl);
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
                 checkEndCon();
                 this.amtOfMoves++;
@@ -240,9 +251,9 @@ public class TicTacToeGameController {
     public void saveEndData(char result){ // Might have to change
         TicTacToeProfile profOne = new TicTacToeProfile();
         if(result == 'W') {
-            profOne.updateGameHistory(this.usrTwo.getUsername(), "W", 1);
+            profOne.updateGameHistory(this.usrOne.getUsername(), "W", 1);
         }else if (result == 'L'){
-            profOne.updateGameHistory(this.usrTwo.getUsername(), "L", 1);
+            profOne.updateGameHistory(this.usrOne.getUsername(), "L", 1);
         }
     }
 }
