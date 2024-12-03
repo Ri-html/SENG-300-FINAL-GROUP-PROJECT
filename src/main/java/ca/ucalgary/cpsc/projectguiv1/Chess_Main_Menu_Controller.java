@@ -39,8 +39,8 @@ public class Chess_Main_Menu_Controller {
     @FXML
     AnchorPane identity;
 
-    public void exitBtnFunc() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
+    public void loadFileFunc(String file, String title) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage newStg = new Stage();
         newStg.sizeToScene();
@@ -51,15 +51,19 @@ public class Chess_Main_Menu_Controller {
         stgWindw.close();
     }
 
+    // play online
+    public void playOnlineFunc() throws IOException {
+        String file = "Chess_Game_Screen.fxml";
+        loadFileFunc(file, "Playing Chess");
+    }
+
+    public void exitBtnFunc() throws IOException {
+        String file = "Homepage.fxml";
+        loadFileFunc(file, "Homepage");
+    }
+
     public void profileFunc() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Manage_Profile.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
-        Stage newStg = new Stage();
-        newStg.sizeToScene();
-        newStg.setTitle("Manage Profile");
-        newStg.setScene(scene);
-        newStg.show();
-        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
-        stgWindw.close();
+        String file = "Manage_Profile.fxml";
+        loadFileFunc(file, "Manage Profile");
     }
 }

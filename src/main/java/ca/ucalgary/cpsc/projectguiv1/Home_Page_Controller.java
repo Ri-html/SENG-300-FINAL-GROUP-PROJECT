@@ -1,5 +1,6 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
+import authProfile.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,11 @@ public class Home_Page_Controller implements Initializable {
 
     @FXML
     ListView<String> listView;
+    private User user1;
+
+    public Home_Page_Controller(){
+        user1 = new User("1", "john", "john@email.com");
+    }
 
     ArrayList<String> words = new ArrayList<>(
             Arrays.asList("John", "Macy", "Sarah")
@@ -64,6 +70,11 @@ public class Home_Page_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         listView.getItems().addAll(words);
+
+        // Labels under games
+        rankingTicTacToeLbl.setText("Ranking: " + user1.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+        rankingConnect4Lbl.setText("Ranking: " + user1.getPlayerProfile().getConnectFourProfile().getScoreRank());
+        rankingChessLbl.setText("Ranking: "+ user1.getPlayerProfile().getChessProfile().getScoreRank());
     }
 
     private List<String> searchList(String searchWords, List<String> listOfStrings){

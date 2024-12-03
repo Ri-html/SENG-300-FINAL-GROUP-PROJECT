@@ -18,7 +18,7 @@ public class Sign_Up_Controller {
     public void loginLinkFxn(ActionEvent event) throws IOException {
         // Navigate back to the Login Page
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage currentStage = (Stage) identity.getScene().getWindow();
         currentStage.setScene(scene);
     }
@@ -28,7 +28,7 @@ public class Sign_Up_Controller {
         // Navigate to the Home Page
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Homepage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
             Stage currentStage = (Stage) identity.getScene().getWindow();
             currentStage.setScene(scene);
         } catch (IOException e) {
