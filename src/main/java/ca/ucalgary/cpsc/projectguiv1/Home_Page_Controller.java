@@ -1,25 +1,31 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
-public class Home_Page_Controller {
+public class Home_Page_Controller implements Initializable {
     @FXML
     GridPane identity;
 
     @FXML
     Label mainTitle;
-
-    @FXML
-    TextField searchBar;
 
     @FXML
     Button chessSelection;
@@ -38,6 +44,36 @@ public class Home_Page_Controller {
 
     @FXML
     Label rankingConnect4Lbl;
+
+    @FXML
+    TextField searchBar;
+
+    @FXML
+    ListView<String> listView;
+
+    ArrayList<String> words = new ArrayList<>(
+            Arrays.asList("John", "Macy", "Sarah")
+    );
+
+    @FXML
+    void search(ActionEvent event){
+        listView.getItems().clear();
+        listView.getItems().addAll(searchList(searchBar.getText(), words));
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        listView.getItems().addAll(words);
+    }
+
+    private List<String> searchList(String searchWords, List<String> listOfStrings){
+        List<String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
+        return listOfStrings.stream().filter(input -> {
+            return searchWordsArray.stream().allMatch(word ->
+                    input.toLowerCase().contains(word.toLowerCase()));
+        }).collect(Collectors.toList());
+    }
+
 
     public void selectionFxn(String file) throws IOException { // Switch to sign up page
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
