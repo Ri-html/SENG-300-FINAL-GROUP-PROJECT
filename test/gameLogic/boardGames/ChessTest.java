@@ -61,19 +61,34 @@ public class ChessTest {
         }
     }
 
+    //Test pawn valid moves
+    @Test
+    public void pawnValidMovesTest(){
+        Chess chess = new Chess();
+        AbstractChessPiece[][] testBoard = new AbstractChessPiece[8][8];
+        testBoard[1][2] = new Pawn(ChessSide.WHITE);
+        //its valid moves should be to (2,2) and (3,2)
+        testBoard[1][2].
+    }
+
     //Test pawn movement
     @Test
-    public void pawnTest1(){
+    public void pawnMoveTest1(){
         Chess chess = new Chess();
         AbstractChessPiece[][] board = new AbstractChessPiece[8][8];
         board[1][2] = new Pawn(ChessSide.WHITE);
         //check initial double move forward
-        board[1][2].makeMove();
+        board[1][2].makeMove(3, 2);
+        //check old location has been cleared correctly
+        //is an empty square null or something else?
+        assertNull(board[1][2]);
+        assertNotNull(board[3][2]); //check piece has moved to (3,2)
         //check single move forward
+
     }
 
     @Test
-    public void pawnTest2(){
+    public void pawnMoveTest2(){
         Chess chess = new Chess();
         AbstractChessPiece[][] board = new AbstractChessPiece[8][8];
         board[1][2] = new Pawn(ChessSide.WHITE);
