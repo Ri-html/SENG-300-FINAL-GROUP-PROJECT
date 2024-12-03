@@ -24,7 +24,7 @@ public class TicTacToe_Main_Menu_Controller {
     Button playOnline;
 
     @FXML
-    Button leaderboard;
+    Button leaderboard; //leads to leaderboard page
 
     @FXML
     Button gameHistory;
@@ -53,6 +53,19 @@ public class TicTacToe_Main_Menu_Controller {
     public void getLeaderboard(){
 
 
+    }
+
+    //Navigate to the Leaderboard Page
+    public void leaderboardButtonFxn() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Leaderboard.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),600,800);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Leaderboard");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
     }
 
     // Game History:

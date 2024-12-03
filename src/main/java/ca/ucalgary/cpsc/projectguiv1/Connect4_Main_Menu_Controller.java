@@ -64,5 +64,18 @@ public class Connect4_Main_Menu_Controller {
         stgWindw.close();
     }
 
+    //Navigate to the Leaderboard Page
+    public void leaderboardButtonFxn() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Leaderboard.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),600,800);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Leaderboard");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
+    }
+
 
 }
