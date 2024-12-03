@@ -146,9 +146,7 @@ public class TicTacToeGameController {
                 this.gameTicTacToe.switchCurrentPlayer();
                 currPane.getChildren().add(new Label("              X")); // Later add an image or something
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
-                System.out.println("test");
             } else {
-                System.out.println("test");
 
                 Random rand = new Random();
                 int idx = rand.nextInt(9);
@@ -205,7 +203,6 @@ public class TicTacToeGameController {
             alert.show();
 
         }
-        System.out.println(this.gameTicTacToe.toString());
     }
 
     public void sendBtnFunc() {
