@@ -10,22 +10,12 @@ import java.util.ArrayList;
 
 public class Chess extends AbstractBoardGame {
 
-    public ArrayList<BoardGameObserver> boardSetupObservers;
-    public ArrayList<BoardGameObserver> turnEndObservers;
-    public ArrayList<BoardGameObserver> gameEndObservers;
-    private String winner = null;
-    private String gameID;
-    private int currentPlayer;
-    private String[] players = new String[2];
-    //define size of board
-    /*Board assumes that square [0][0-7] is white's side (1A-H).
-    It will look upside down if you print it for testing. Sorry.*/
-    protected Piece[][] gameBoard = new Piece[8][8];
-    int addedPlayers=0;
-    //Chess is a 2-player game
-    int playerNumber = 2;
-    int[]moves;
+    public static ArrayList<Piece> capturedPieces;
 
+    //somehow set game board to be [8][8]?
+
+    //constructor
+    //chess can only take 2 players
     public Chess() {
         super(2);
     }
