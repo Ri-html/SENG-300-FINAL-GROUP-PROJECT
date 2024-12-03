@@ -87,10 +87,25 @@ public class Manage_Profile_Controller {
 
     }
 
-    private void displayRecentMatches() {
+    @FXML
+    private void updateUserDetails() {
+        String newName = nameField.getText();
+        String newUsername = usernameField.getText();
+        String newEmail = email.getText();
+
+        if (!newName.equals(user.getUserId())) {
+            user.setUserId(newName);
+        }
+
+        if (!newUsername.equals(user.getUsername())) {
+            user.setUsername(newUsername);
+        }
+
+        if (!newEmail.equals(user.getEmail())) {
+            user.setEmail(newEmail);
+        }
 
     }
-
 
 
 }
