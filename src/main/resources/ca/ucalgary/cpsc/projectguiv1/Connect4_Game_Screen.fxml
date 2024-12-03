@@ -36,6 +36,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -46,11 +47,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="connectfour" fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Connect4GameController">
+<Pane id="connectfour" fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="724.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Chess_Game_Screen_Controller">
    <children>
       <Pane layoutX="178.0" layoutY="80.0" prefHeight="440.0" prefWidth="540.0" style="-fx-background-color: blue; -fx-background-radius: 40;">
          <children>
-            <GridPane fx:id="gamePane" hgap="15.0" layoutX="17.0" layoutY="17.0" prefHeight="407.0" prefWidth="490.0" style="-fx-background-color: blue;" vgap="15.0">
+            <GridPane fx:id="gamePane" hgap="15.0" layoutX="17.0" layoutY="17.0" onMouseEntered="#setupGrid" prefHeight="407.0" prefWidth="490.0" style="-fx-background-color: blue;" vgap="15.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -156,24 +157,30 @@
             </Label>
          </children>
       </Pane>
-      <VBox layoutY="405.0" prefHeight="200.0" prefWidth="262.0">
+      <VBox layoutX="317.0" layoutY="520.0" prefHeight="200.0" prefWidth="262.0">
          <children>
-            <ScrollPane fx:id="chatScrlPane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="NEVER">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+            <HBox prefHeight="47.0" prefWidth="262.0" />
+            <TitledPane animated="false" prefWidth="202.0" text="Chat">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="230.0">
                      <children>
-                        <VBox fx:id="chatBox" layoutX="-1.0" prefHeight="200.0" prefWidth="202.0" />
+                        <AnchorPane layoutX="38.0" layoutY="52.0" minHeight="0.0" minWidth="0.0" prefHeight="128.0" prefWidth="262.0">
+                           <children>
+                              <TextField alignment="BASELINE_LEFT" layoutX="7.0" layoutY="71.0" prefHeight="26.0" prefWidth="154.0" />
+                              <Button layoutX="130.0" layoutY="71.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" text="Send" />
+                           </children>
+                        </AnchorPane>
+                        <ScrollPane layoutX="1.0" layoutY="-1.0" prefHeight="123.0" prefWidth="262.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
                      </children>
                   </AnchorPane>
-              </content>
-            </ScrollPane>
-            <HBox prefHeight="47.0" prefWidth="262.0">
-               <children>
-                  <TextField fx:id="chatTxtField" prefHeight="26.0" prefWidth="199.0" />
-                  <Button fx:id="sendBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="63.0" text="Send" />
-               </children>
-            </HBox>
+               </content>
+            </TitledPane>
          </children>
       </VBox>
+      <Label fx:id="infoLabel" layoutX="434.0" layoutY="25.0" />
    </children>
 </Pane>

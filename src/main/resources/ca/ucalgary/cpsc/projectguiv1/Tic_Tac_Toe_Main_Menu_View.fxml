@@ -13,11 +13,11 @@
       <Button fx:id="playOnline" layoutX="331.0" layoutY="214.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="PLAY ONLINE" />
       <Button fx:id="leaderboard" layoutX="332.0" layoutY="262.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="LEADERBOARD" />
       <Button fx:id="gameHistory" layoutX="332.0" layoutY="311.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="GAME HISTORY" />
-      <Button fx:id="exit" layoutX="331.0" layoutY="361.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="EXIT" />
+      <Button fx:id="exit" layoutX="331.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#exitBtnFunc" prefHeight="40.0" prefWidth="150.0" text="EXIT" />
       <AnchorPane layoutX="301.0" layoutY="350.0" prefHeight="10.0" prefWidth="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="110.0" layoutX="119.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" width="570.0" />
-      <Button fx:id="back" layoutX="16.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Back" />
-      <Button fx:id="profile" layoutX="734.0" layoutY="17.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="67.0" text="Profile" />
+      <Button fx:id="back" layoutX="16.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#exitBtnFunc" prefHeight="30.0" prefWidth="60.0" text="Back" />
+      <Button fx:id="profile" layoutX="734.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#profileFunc" prefHeight="67.0" prefWidth="67.0" text="Profile" />
       <Text layoutX="297.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe" wrappingWidth="220.4166335190779">
          <font>
             <Font name="Helvetica Bold" size="40.0" />
