@@ -10,7 +10,7 @@ public class User {
     private boolean isLoggedIn; // Tracks if the user is logged in
 
     // Field to store the current user logged in
-    private static User currentUser;
+//    private static User currentUser;
 
     // Constructor
     public User(String userId, String username, String email) {
@@ -53,13 +53,13 @@ public class User {
         this.playerProfile = playerProfile;
     }
 
-    public static void setCurrentUser(User user) {
-        currentUser = user;
-    }
+//    public static void setCurrentUser(User user) {
+//        currentUser = user;
+//    }
 
-    public static User getCurrentUser() {
-        return currentUser;
-    }
+//    public static User getCurrentUser() {
+//        return currentUser;
+//    }
 
     // Getter and setter for password
     public String getPassword() {
@@ -79,7 +79,7 @@ public class User {
     public void loginUser() {
         //in practice we would send password textbox contents to the database, ideally hashed so a hacker cannot listen in on the network activity and get a password in plaintext (known as sniffing) 
         isLoggedIn = true;
-        User.setCurrentUser(this);  // Setting the current user
+//        User.setCurrentUser(this);  // Setting the current user
         System.out.println("User logged in successfully.");
     }
 

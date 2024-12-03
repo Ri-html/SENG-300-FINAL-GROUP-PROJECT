@@ -54,7 +54,8 @@ public class Manage_Profile_Controller {
     private TicTacToeProfile ticTacToeProfile = new TicTacToeProfile();
     private ConnectFourProfile connectFourProfile = new ConnectFourProfile();
 
-    User user = User.getCurrentUser();
+    //User user = User.getCurrentUser();
+    User user = new User("Dummy Master", "dummySucks", "dummy@gmail.com");
 
     @FXML
     private void initialize() {
