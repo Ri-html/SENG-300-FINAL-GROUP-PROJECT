@@ -1,5 +1,7 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
+import authProfile.User;
+import authProfile.UserDatabase;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -40,6 +42,15 @@ public class Game_History_Screen_Controller {
     @FXML
     BorderPane ninthMostRecent;
 
+    private static User currUsr = HelloApplication.usrDb.getCurrentUser();;
+
+    public Game_History_Screen_Controller(){
+        setMatchHistory();
+    }
+
+    public void setMatchHistory(){
+        //this.mostRecent.getChildren().add(new )
+    }
 
 }
 

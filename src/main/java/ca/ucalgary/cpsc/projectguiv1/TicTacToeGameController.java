@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -127,9 +128,13 @@ public class TicTacToeGameController {
             Random randInt = new Random();
             this.gameTicTacToe.setCurrentPlayer(randInt.nextInt(2));
             if (this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())) {
-                this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
+                //this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
+                this.infoLabel.setFont(new Font("Comic Sans", 20));
+                this.infoLabel.setText("Click to start!");
+
             } else {
-                this.infoLabel.setText(this.usrTwo.getUsername() + "'s move!");
+                //this.infoLabel.setText(this.usrTwo.getUsername() + "'s move!");
+                this.infoLabel.setText("Click to start!");
             }
             this.player1Name.setText(this.usrOne.getUsername());
             this.player2Name.setText(this.usrTwo.getUsername());
