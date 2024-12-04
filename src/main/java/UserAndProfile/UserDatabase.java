@@ -6,6 +6,7 @@ import java.util.List;
 public class UserDatabase {
     private List<User> users;
     private User currentUser; // Keeps track of the currently logged-in user
+    private static UserDatabase instance;
 
     // Constructor
     public UserDatabase() {
@@ -30,6 +31,14 @@ public class UserDatabase {
         }
         return null;
     }
+
+    public static UserDatabase getInstance() {
+        if (instance == null) {
+            instance = new UserDatabase();
+        }
+        return instance;
+    }
+
 
     // Search for a user by email
     public User searchByEmail(String email) {
