@@ -1,10 +1,10 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
-import authProfile.ChessProfile;
-import authProfile.TicTacToeProfile;
-import authProfile.ConnectFourProfile;
-import authProfile.UserDatabase;
-import authProfile.User;
+import UserAndProfile.ChessProfile;
+import UserAndProfile.TicTacToeProfile;
+import UserAndProfile.ConnectFourProfile;
+import UserAndProfile.UserDatabase;
+import UserAndProfile.User;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

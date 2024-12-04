@@ -1,8 +1,8 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
 
-import authProfile.TicTacToeProfile;
-import authProfile.User;
+import UserAndProfile.TicTacToeProfile;
+import UserAndProfile.User;
 
 import gameLogic.TicTacToe;
 import gameLogic.boardGames.AbstractBoardGame;
@@ -90,6 +90,7 @@ public class TicTacToeGameController {
     public TicTacToeGameController() {
         this.usrOne = new User("1", "firsstUsr", "email@google.com");
         this.usrTwo = new User("2", "scndUsr", "otheremail@google.com");
+        HelloApplication.usrDb.addUser(this.usrOne);
 
         this.gameTicTacToe = new TicTacToe(2);
         this.gameTicTacToe.addPlayer(this.usrOne.getUsername());

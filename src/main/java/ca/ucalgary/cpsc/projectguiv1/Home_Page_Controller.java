@@ -1,6 +1,6 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
-import authProfile.User;
+import UserAndProfile.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
