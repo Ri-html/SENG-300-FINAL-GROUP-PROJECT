@@ -1,7 +1,7 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
-import authProfile.User;
-import authProfile.UserDatabase;
+import UserAndProfile.User;
+import UserAndProfile.UserDatabase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
