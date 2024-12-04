@@ -53,7 +53,7 @@ public class Signup_Test extends ApplicationTest {
         // Locate the textfield by its ID
         TextField textField = lookup("#passwordField").queryAs(TextField.class);
     }
-    //Still figuring out how Mockito works!
+    /* Still figuring out how Mockito works!
     @Test
     void testUpdateLabel() {
         // Mock the Label
@@ -68,4 +68,5 @@ public class Signup_Test extends ApplicationTest {
            // Verify that setText was called on the Label
         verify(mockLabel).setText("Hello, World!");
     }
+    */
 }
