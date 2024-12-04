@@ -46,4 +46,46 @@ public class ChessLeaderboard {
     public synchronized PlayerStats getPlayerStats(String playerId) {
         return playerStatsMap.get(playerId);
     }
+
+    // Example user data
+    public static void initializeSampleData() {
+        ChessLeaderboard leaderboard = ChessLeaderboard.getInstance();
+
+        // Simulate some player wins
+        leaderboard.recordWin("Alice");
+        leaderboard.recordWin("Alice");
+        leaderboard.recordWin("Alice");
+
+        leaderboard.recordWin("Bob");
+        leaderboard.recordWin("Bob");
+
+        leaderboard.recordWin("Charlie");
+        leaderboard.recordWin("Charlie");
+        leaderboard.recordWin("Charlie");
+        leaderboard.recordWin("Charlie");
+
+        leaderboard.recordWin("Diana");
+
+        leaderboard.recordWin("Eve");
+        leaderboard.recordWin("Eve");
+        leaderboard.recordWin("Eve");
+
+        leaderboard.recordWin("Frank");
+        leaderboard.recordWin("Frank");
+        leaderboard.recordWin("Frank");
+        leaderboard.recordWin("Frank");
+        leaderboard.recordWin("Frank");
+
+        leaderboard.recordWin("Grace");
+        leaderboard.recordWin("Grace");
+
+        leaderboard.recordWin("Henry");
+        leaderboard.recordWin("Henry");
+        leaderboard.recordWin("Henry");
+
+        leaderboard.recordWin("Isabelle");
+
+        leaderboard.recordWin("Jack");
+        leaderboard.recordWin("Jack");
+    }
 }

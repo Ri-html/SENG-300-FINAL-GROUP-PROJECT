@@ -1,22 +1,24 @@
 package leaderboard.connect4Leaderboard;
 
+import leaderboard.chessLeaderboard.ChessLeaderboard;
+
 import java.util.*;
 
-public class ConnectFourLeaderboard {
+public class Connect4Leaderboard {
     // Singleton instance of the leaderboard
-    private static ConnectFourLeaderboard instance = null;
+    private static Connect4Leaderboard instance = null;
     // Map to store player stats with player ID as the key
     private Map<String, PlayerStats> playerStatsMap;
 
     // Private constructor to enforce singleton pattern
-    private ConnectFourLeaderboard() {
+    private Connect4Leaderboard() {
         playerStatsMap = new HashMap<>();
     }
 
     // Synchronized method to get the singleton instance
-    public static synchronized ConnectFourLeaderboard getInstance() {
+    public static synchronized Connect4Leaderboard getInstance() {
         if (instance == null) {
-            instance = new ConnectFourLeaderboard();
+            instance = new Connect4Leaderboard();
         }
         return instance;
     }
@@ -69,4 +71,45 @@ public class ConnectFourLeaderboard {
     public synchronized PlayerStats getPlayerStats(String playerId) {
         return playerStatsMap.get(playerId);
     }
+
+    public static void initializeSampleData() {
+        // Get the singleton instance of the leaderboard
+        Connect4Leaderboard leaderboard = Connect4Leaderboard.getInstance();
+
+        // Add sample data
+        leaderboard.recordWin("Alice");
+        leaderboard.recordWin("Alice");
+        leaderboard.recordWin("Alice");
+        leaderboard.recordLoss("Alice");
+
+        leaderboard.recordWin("Bob");
+        leaderboard.recordWin("Bob");
+        leaderboard.recordLoss("Bob");
+        leaderboard.recordLoss("Bob");
+
+        leaderboard.recordWin("Charlie");
+        leaderboard.recordWin("Charlie");
+        leaderboard.recordLoss("Charlie");
+
+        leaderboard.recordWin("Diana");
+        leaderboard.recordLoss("Diana");
+
+        leaderboard.recordWin("Eve");
+        leaderboard.recordWin("Eve");
+
+        leaderboard.recordWin("Frank");
+        leaderboard.recordWin("Frank");
+        leaderboard.recordLoss("Frank");
+
+        leaderboard.recordWin("Grace");
+        leaderboard.recordLoss("Grace");
+        leaderboard.recordLoss("Grace");
+
+        leaderboard.recordWin("Henry");
+        leaderboard.recordLoss("Henry");
+        leaderboard.recordLoss("Henry");
+
+    }
+
+
 }
