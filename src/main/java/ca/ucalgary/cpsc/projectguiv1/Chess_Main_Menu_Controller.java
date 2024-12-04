@@ -41,7 +41,7 @@ public class Chess_Main_Menu_Controller {
 
     public void loadFileFunc(String file, String title) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage newStg = new Stage();
         newStg.sizeToScene();
         newStg.setTitle(title);
@@ -54,7 +54,16 @@ public class Chess_Main_Menu_Controller {
     // play online
     public void playOnlineFunc() throws IOException {
         String file = "Chess_Game_Screen.fxml";
-        loadFileFunc(file, "Playing Chess");
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 700);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Playing Chess");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
     }
 
     //Navigate to the Leaderboard Page

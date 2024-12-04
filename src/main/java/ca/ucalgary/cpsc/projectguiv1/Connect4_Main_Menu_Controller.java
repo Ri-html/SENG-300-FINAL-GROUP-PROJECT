@@ -40,10 +40,7 @@ public class Connect4_Main_Menu_Controller {
     @FXML
     AnchorPane identity;
 
-    public void playOnlineFunc() throws IOException {
-        String file = "Connect4_Game_Screen.fxml";
-        loadFileFunc(file, "Playing Connect 4!");
-    }
+
 
     public void exitBtnFunc() throws IOException {
         String file = "Homepage.fxml";
@@ -63,10 +60,24 @@ public class Connect4_Main_Menu_Controller {
 
     public void loadFileFunc(String file, String title) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage newStg = new Stage();
         newStg.sizeToScene();
         newStg.setTitle(title);
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
+    }
+
+    public void playOnlineFunc() throws IOException {
+        String file = "Connect4_Game_Screen.fxml";
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 700);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Playing Connect 4!");
         newStg.setScene(scene);
         newStg.show();
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();

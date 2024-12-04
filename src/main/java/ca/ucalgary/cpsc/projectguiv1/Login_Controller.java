@@ -38,7 +38,7 @@ public class Login_Controller {
 
             // Navigate to the Home Page
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Homepage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
             Stage currentStage = (Stage) identity.getScene().getWindow();
             currentStage.setScene(scene);
         } else {
@@ -52,7 +52,7 @@ public class Login_Controller {
     public void signupLinkFxn(ActionEvent event) throws IOException {
         // Navigate to the Sign Up Page
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Signup.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage currentStage = (Stage) identity.getScene().getWindow();
         currentStage.setScene(scene);
     }

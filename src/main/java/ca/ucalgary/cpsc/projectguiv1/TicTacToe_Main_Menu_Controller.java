@@ -51,7 +51,7 @@ public class TicTacToe_Main_Menu_Controller {
 
     public void loadFileFunc(String file, String title) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
-        Scene scene = new Scene(fxmlLoader.load(),600,800);
+        Scene scene = new Scene(fxmlLoader.load(),800,500);
         Stage newStg = new Stage();
         newStg.sizeToScene();
         newStg.setTitle(title);
@@ -69,8 +69,15 @@ public class TicTacToe_Main_Menu_Controller {
 
     // Play the game
     public void playOnlineFunc() throws IOException {
-        String file = "TicTacToe_Game_Screen.fxml";
-        loadFileFunc(file, "Playing Tic-Tac-Toe!");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TicTacToe_Game_Screen.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(),900,700);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Playing TicTacToe");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
     }
 
     // Exit to homepage

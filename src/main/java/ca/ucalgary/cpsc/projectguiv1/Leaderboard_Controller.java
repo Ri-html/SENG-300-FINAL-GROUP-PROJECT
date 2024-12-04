@@ -184,7 +184,7 @@ public class Leaderboard_Controller {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
 
         // Load the scene from the FXML file
-        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
 
         // Create and set up the new stage
         Stage newStage = new Stage();
