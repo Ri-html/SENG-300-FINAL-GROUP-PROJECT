@@ -74,6 +74,9 @@ public class Leaderboard_Controller {
         javafx.application.Platform.runLater(() -> {
             Stage stage = (Stage) identity.getScene().getWindow();
             String windowTitle = stage.getTitle().replaceAll(" ", ""); // Remove spaces
+            stage.setWidth(600);
+            stage.setHeight(800);
+            stage.setResizable(false);
 
             // Dynamically determine which leaderboard to load
             switch (windowTitle) {
@@ -209,6 +212,18 @@ public class Leaderboard_Controller {
     public void exitBtnFunc() throws IOException {
         String file = "Homepage.fxml";
         loadFileFunc(file, "Homepage");
+    }
+
+    /**
+     * Return to the user's profile by loading the corresponding FXML file.
+     *
+     * @throws IOException If the file cannot be loaded
+     */
+    public  void viewOtherUserProfile() throws IOException {
+        String buttonText = button.getText(); // 获取按钮文本
+        String playerName = buttonText.split(" - ")[0]; // 使用分隔符 "-" 截取
+        String file = "View_Other_User_Profile.fxml";
+        loadFileFunc(file,playerName + "'s Profile");
     }
 
 }
