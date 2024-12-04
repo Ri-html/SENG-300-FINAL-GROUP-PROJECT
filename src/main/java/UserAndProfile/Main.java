@@ -2,11 +2,8 @@ package UserAndProfile;
 
 public class Main {
     public static void main(String[] args) {
-        // Initialize the user database
+        // Initialize the user database (automatically loads users from the file)
         UserDatabase userDatabase = UserDatabase.getInstance();
-
-        // Load users from the file
-        userDatabase.loadUsersFromFile("userDatabase.txt");
 
         // Test adding a user
         User newUser = new User("4", "NewUser", "newuser@example.com");

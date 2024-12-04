@@ -5,12 +5,14 @@ import java.util.List;
 
 public class UserDatabase {
     private List<User> users;
-    private User currentUser; // Keeps track of the currently logged-in user
+    private User currentUser;
     private static UserDatabase instance;
+    private static final String USER_DATABASE_FILE = "userDatabase.txt"; // Centralized file name
 
     // Private Constructor
     private UserDatabase() {
         this.users = new ArrayList<>();
+        loadUsersFromFile(); // Automatically load users when the database is instantiated
     }
 
     // Singleton Pattern
@@ -21,23 +23,28 @@ public class UserDatabase {
         return instance;
     }
 
-    // Load users from a file
-    public void loadUsersFromFile(String fileName) {
+    // Load users from the file
+    private void loadUsersFromFile() {
         try {
-            UserFileReader.readUsersFromFile(fileName, this);
-            System.out.println("Loaded users from file.");
+            UserFileReader.readUsersFromFile(USER_DATABASE_FILE, this);
+            System.out.println("Users loaded successfully from file.");
         } catch (Exception e) {
             System.out.println("Error loading users: " + e.getMessage());
         }
     }
 
+    // Save users to the file
+    public void saveUsersToFile() {
+        try {
+            UserFileWriter.writeUsersToFile(this, USER_DATABASE_FILE);
+            System.out.println("Users saved successfully to file.");
+        } catch (Exception e) {
+            System.out.println("Error saving users: " + e.getMessage());
+        }
+    }
+
     // Add a user to the database
     public void addUser(User user) {
-        if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            user.setPassword("12345678"); // Assign default password if not set
-        }
-
-        // Prevent duplicate usernames or emails
         if (searchByUsername(user.getUsername()) != null) {
             System.out.println("Error: Username already exists.");
             return;
@@ -49,40 +56,37 @@ public class UserDatabase {
 
         users.add(user);
         System.out.println("User added: " + user.getUsername());
+        saveUsersToFile(); // Save the updated user list
     }
 
     // Search for a user by username
     public User searchByUsername(String username) {
-        for (User user : users) {
-            if (user.getUsername().equalsIgnoreCase(username)) {
-                return user;
-            }
-        }
-        return null;
+        return users.stream()
+                .filter(user -> user.getUsername().equalsIgnoreCase(username))
+                .findFirst()
+                .orElse(null);
     }
 
     // Search for a user by email
     public User searchByEmail(String email) {
-        for (User user : users) {
-            if (user.getEmail().equalsIgnoreCase(email)) {
-                return user;
-            }
-        }
-        return null;
+        return users.stream()
+                .filter(user -> user.getEmail().equalsIgnoreCase(email))
+                .findFirst()
+                .orElse(null);
     }
 
-    // Set the currently logged-in user
-    public void setCurrentUser(User user) {
-        this.currentUser = user;
+    // Get all users
+    public List<User> getAllUsers() {
+        return new ArrayList<>(users);
     }
 
-    // Get the currently logged-in user
+    // Get current user
     public User getCurrentUser() {
         return currentUser;
     }
 
-    // Returns a list of all users
-    public List<User> getAllUsers() {
-        return new ArrayList<>(users);
+    // Set current user
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }
