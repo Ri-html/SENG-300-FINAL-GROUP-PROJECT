@@ -5,6 +5,9 @@ import gameLogic.piece.ConnectFourPiece;
 import gameLogic.side.ConnectFourSide;
 import gameLogic.piece.Piece;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class ConnectFour extends AbstractBoardGame {
     private static final int WINLENGTH = 4;
     public ConnectFour(int playerNum) {
@@ -269,6 +272,23 @@ public class ConnectFour extends AbstractBoardGame {
             return false;
         }
         return gameBoard[0][x] == null;
+    }
+
+    public boolean makeRandomMove() {
+        ArrayList<Integer> possibleMoves = new ArrayList<>();
+        for (int i = 0; i < gameBoard[0].length; i++) {
+            if (isValidMove(i)) {
+                possibleMoves.add(i);
+            }
+        }
+        if (possibleMoves.isEmpty()) {
+            return false;
+        } else {
+            Random random = new Random();
+            int index = random.nextInt(possibleMoves.size());
+            makeMove(new int[]{index, 0});
+            return true;
+        }
     }
 
 

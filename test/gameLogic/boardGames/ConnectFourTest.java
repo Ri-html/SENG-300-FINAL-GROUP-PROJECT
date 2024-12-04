@@ -212,4 +212,17 @@ public class ConnectFourTest {
         }
         assertEquals("Draw", connectFour.validateGameEnds().name());
     }
+
+    @Test
+    void randomMoveWorks() {
+        ConnectFour connectFour = new ConnectFour(2);
+        connectFour.makeRandomMove();
+        boolean moveMade = false;
+        for (int i = 0; i < connectFour.getBoard()[0].length; i++) {
+            if (connectFour.getBoard()[connectFour.getBoard().length-1] != null) {
+                moveMade = true;
+            }
+        }
+        assertTrue(moveMade);
+    }
 }
