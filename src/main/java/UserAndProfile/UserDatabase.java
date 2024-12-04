@@ -139,6 +139,7 @@ public class UserDatabase {
             //user needs to enter their current password into a textbox, to check that it is correct. after this occurs, they enter their new password.
             //after successful change, an email may be sent to the user.
         }
+        return false;
     }
 
     // Returns a list of all users in the database
