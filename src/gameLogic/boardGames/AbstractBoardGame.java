@@ -107,7 +107,7 @@ public abstract class AbstractBoardGame implements BoardGame {
      * checks whether the game end condition is met
      */
     protected void checkForEndGame(String moves){
-        if(validateGameEnds()!=null && validateGameEnds()!=GameEndState.Ongoing){
+        if(validateGameEnds()!=-1){
             endGame();
         }else{
             switchCurrentPlayer();
