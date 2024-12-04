@@ -1,6 +1,8 @@
 package leaderboard.tictactoeLeaderboard;
 
 import java.util.*;
+
+import leaderboard.chessLeaderboard.ChessLeaderboard;
 import leaderboard.tictactoeLeaderboard.PlayerStats;
 
 public class TicTacToeLeaderboard {
@@ -70,4 +72,44 @@ public class TicTacToeLeaderboard {
     public synchronized PlayerStats getPlayerStats(String playerId) {
         return playerStatsMap.get(playerId);
     }
+
+    public static void initializeSampleData() {
+        // Get the singleton instance of the leaderboard
+        TicTacToeLeaderboard leaderboard = TicTacToeLeaderboard.getInstance();
+
+        // Add sample data
+        leaderboard.recordWin("Alice");
+        leaderboard.recordWin("Alice");
+        leaderboard.recordWin("Alice");
+        leaderboard.recordLoss("Alice");
+
+        leaderboard.recordWin("Bob");
+        leaderboard.recordWin("Bob");
+        leaderboard.recordLoss("Bob");
+        leaderboard.recordLoss("Bob");
+
+        leaderboard.recordWin("Charlie");
+        leaderboard.recordWin("Charlie");
+        leaderboard.recordLoss("Charlie");
+
+        leaderboard.recordWin("Diana");
+        leaderboard.recordLoss("Diana");
+
+        leaderboard.recordWin("Eve");
+        leaderboard.recordWin("Eve");
+
+        leaderboard.recordWin("Frank");
+        leaderboard.recordWin("Frank");
+        leaderboard.recordLoss("Frank");
+
+        leaderboard.recordWin("Grace");
+        leaderboard.recordLoss("Grace");
+        leaderboard.recordLoss("Grace");
+
+        leaderboard.recordWin("Henry");
+        leaderboard.recordLoss("Henry");
+        leaderboard.recordLoss("Henry");
+
+    }
+
 }
