@@ -7,6 +7,7 @@ import UserAndProfile.User;
 import gameLogic.TicTacToe;
 import gameLogic.boardGames.AbstractBoardGame;
 import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -86,6 +87,12 @@ public class TicTacToeGameController {
     @FXML
     ScrollPane chatScrlPane;
 
+    @FXML
+    Label xTxtLbl;
+
+    @FXML
+    Label oTxtLbl;
+
     @Deprecated
     public TicTacToeGameController() {
         this.usrOne = new User("1", "firsstUsr", "email@google.com");
@@ -111,6 +118,16 @@ public class TicTacToeGameController {
     }
 
     public void setupGrid() {
+        this.xTxtLbl.setTextFill(Color.BLUE);
+        this.xTxtLbl.setFont(new Font("Comic Sans", 100));
+        this.xTxtLbl.setAlignment(Pos.TOP_CENTER);
+        this.xTxtLbl.setText("X");
+
+        this.oTxtLbl.setTextFill(Color.RED);
+        this.oTxtLbl.setFont(new Font("Comic Sans", 100));
+        this.oTxtLbl.setText("O  ");
+
+
         // Adding clickable panes to the grid
         if (this.setup == false) {
             for (int x = 0; x < 3; x++) {
@@ -134,7 +151,6 @@ public class TicTacToeGameController {
             Random randInt = new Random();
             this.gameTicTacToe.setCurrentPlayer(randInt.nextInt(2));
             if (this.gameTicTacToe.getCurrentPlayer().equals(this.usrOne.getUsername())) {
-                //this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
                 this.infoLabel.setFont(new Font("Comic Sans", 20));
                 this.infoLabel.setText("Click to start!");
 
@@ -240,14 +256,21 @@ public class TicTacToeGameController {
     }
     @Deprecated
     public void checkEndCon() throws IOException{ // game logic needs to add more end game states
-        if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Victory)) {
+        if (this.gameTicTacToe.validateGameEnds() == 1) {
             exitBtnFunc();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Winner!");
-            alert.setHeaderText("You Won!");
+            alert.setHeaderText("X's Win!");
             alert.show();
             saveEndData('W');
-        } else if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Draw)) {
+        }else if (this.gameTicTacToe.validateGameEnds() == 2) {
+            exitBtnFunc();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Winner!");
+            alert.setHeaderText("O's Win!");
+            alert.show();
+            saveEndData('W');
+        }  else if (this.gameTicTacToe.validateGameEnds() == 3) {
             exitBtnFunc();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Draw!");

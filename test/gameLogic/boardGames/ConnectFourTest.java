@@ -1,3 +1,5 @@
+package gameLogic.boardGames;
+
 import gameLogic.side.ConnectFourSide;
 import org.junit.jupiter.api.Test;
 import gameLogic.ConnectFour;
@@ -21,7 +23,6 @@ public class ConnectFourTest {
             }
         }
     }
-
 
 
 
@@ -70,6 +71,13 @@ public class ConnectFourTest {
     }
 
     @Test
+    void cannotPlaceInvalidXIndex() {
+        ConnectFour connectFour = new ConnectFour(2);
+        assertFalse(connectFour.validateMove(new int[]{-1,0}));
+        assertFalse(connectFour.validateMove(new int[]{connectFour.getBoard()[0].length, 0}));
+    }
+
+    @Test
     void cannotPlaceOnFullColumn() {
         ConnectFour connectFour = new ConnectFour(2);
         connectFour.makeMove(new int[]{0,0});
@@ -95,59 +103,75 @@ public class ConnectFourTest {
     @Test
     void RecognizesOngoingBoard() {
         ConnectFour connectFour = new ConnectFour(2);
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
         connectFour.makeMove(new int[]{0,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
     }
 
     @Test
     void RecognizesHorizontalWin() {
         ConnectFour connectFour = new ConnectFour(2);
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
         connectFour.makeMove(new int[]{0,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
         connectFour.makeMove(new int[]{1,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
         connectFour.makeMove(new int[]{2,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
         connectFour.makeMove(new int[]{3,0});
-        assertEquals("Victory", connectFour.validateGameEnds().name());
+        //assertEquals("Victory", connectFour.validateGameEnds().name());
+        assertEquals(1, connectFour.validateGameEnds());
     }
 
     @Test
     void RecognizesVerticalWin() {
         ConnectFour connectFour = new ConnectFour(2);
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
         connectFour.makeMove(new int[]{0,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
         connectFour.makeMove(new int[]{0,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
         connectFour.makeMove(new int[]{0,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
         connectFour.makeMove(new int[]{0,0});
-        assertEquals("Victory", connectFour.validateGameEnds().name());
+        //assertEquals("Victory", connectFour.validateGameEnds().name());
+        assertEquals(1, connectFour.validateGameEnds());
     }
 
     @Test
     void RecognizesDiagonalUpRightWin() {
         ConnectFour connectFour = new ConnectFour(2);
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
 
         connectFour.makeMove(new int[]{0,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
 
         connectFour.switchCurrentPlayer();
         connectFour.makeMove(new int[]{1,0});
         connectFour.switchCurrentPlayer();
         connectFour.makeMove(new int[]{1,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
 
         connectFour.switchCurrentPlayer();
         connectFour.makeMove(new int[]{2,0});
         connectFour.makeMove(new int[]{2,0});
         connectFour.switchCurrentPlayer();
         connectFour.makeMove(new int[]{2,0});
-        assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
 
         connectFour.switchCurrentPlayer();
         connectFour.makeMove(new int[]{3,0});
@@ -156,7 +180,46 @@ public class ConnectFourTest {
         connectFour.switchCurrentPlayer();
         connectFour.makeMove(new int[]{3,0});
 
-        assertEquals("Victory", connectFour.validateGameEnds().name());
+        //assertEquals("Victory", connectFour.validateGameEnds().name());
+        assertEquals(1, connectFour.validateGameEnds());
+    }
+
+    @Test
+    void RecognizesDiagonalUpLeftWin() {
+        ConnectFour connectFour = new ConnectFour(2);
+        assertEquals(-1, connectFour.validateGameEnds());
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+
+        connectFour.makeMove(new int[]{3,0});
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
+
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{2,0});
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{2,0});
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
+
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{1,0});
+        connectFour.makeMove(new int[]{1,0});
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{1,0});
+        //assertEquals("Ongoing", connectFour.validateGameEnds().name());
+        assertEquals(-1, connectFour.validateGameEnds());
+
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{0,0});
+        connectFour.makeMove(new int[]{0,0});
+        connectFour.makeMove(new int[]{0,0});
+        connectFour.switchCurrentPlayer();
+        connectFour.makeMove(new int[]{0,0});
+
+        System.out.println(connectFour);
+
+        //assertEquals("Victory", connectFour.validateGameEnds().name());
+        assertEquals(1, connectFour.validateGameEnds());
     }
 
     @Test
@@ -169,7 +232,19 @@ public class ConnectFourTest {
                 connectFour.switchCurrentPlayer();
             }
         }
-        System.out.println(connectFour);
-        assertEquals("Draw", connectFour.validateGameEnds().name());
+        assertEquals(0, connectFour.validateGameEnds());
+    }
+
+    @Test
+    void randomMoveWorks() {
+        ConnectFour connectFour = new ConnectFour(2);
+        connectFour.makeRandomMove();
+        boolean moveMade = false;
+        for (int i = 0; i < connectFour.getBoard()[0].length; i++) {
+            if (connectFour.getBoard()[connectFour.getBoard().length-1] != null) {
+                moveMade = true;
+            }
+        }
+        assertTrue(moveMade);
     }
 }

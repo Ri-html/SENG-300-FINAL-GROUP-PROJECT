@@ -118,10 +118,10 @@ public class AbstractBoardGameTest implements BoardGameObserver{
 
     private static class SomeBoardGame extends AbstractBoardGame {
 
-        GameEndState state;
+        int state;
         Boolean isMoveCorrect;
         public SomeBoardGame(int playerNum) {
-            super(playerNum);
+            super(playerNum, 1, 1);
         }
 
         @Override
@@ -130,7 +130,7 @@ public class AbstractBoardGameTest implements BoardGameObserver{
         }
 
         @Override
-        public GameEndState validateGameEnds() {
+        public int validateGameEnds() {
             return state;
         }
 
@@ -146,7 +146,7 @@ public class AbstractBoardGameTest implements BoardGameObserver{
             this.placeBoardPiece(one, moves[0], moves[1]);
         }
 
-        public void setState(GameEndState state) {
+        public void setState(int state) {
             this.state = state;
         }
 

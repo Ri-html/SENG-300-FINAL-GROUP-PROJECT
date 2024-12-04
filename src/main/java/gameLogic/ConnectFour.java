@@ -5,10 +5,13 @@ import gameLogic.piece.ConnectFourPiece;
 import gameLogic.side.ConnectFourSide;
 import gameLogic.piece.Piece;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class ConnectFour extends AbstractBoardGame {
     private static final int WINLENGTH = 4;
     public ConnectFour(int playerNum) {
-        super(playerNum);
+        super(playerNum, 6, 7);
         this.gameBoard = new ConnectFourPiece[6][7];
     }
 
@@ -32,9 +35,9 @@ public class ConnectFour extends AbstractBoardGame {
 
     /**
      * Checks if win has been reached
-     * @return bool true on win or false on no win
+     * @return 0 if no win, 1 if RED win, 2 if YELLOW win
      */
-    public boolean checkWin() {
+    public int checkWin() {
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[0].length; j++) {
                 // guard
@@ -44,24 +47,24 @@ public class ConnectFour extends AbstractBoardGame {
                 switch (gameBoard[i][j].getSide()) {
                     case ConnectFourSide.RED:
                         if (horizontalWinHelper(ConnectFourSide.RED, j, i)) {
-                            return true;
+                            return 1;
                         }
                         if (verticalWinHelper(ConnectFourSide.RED, j, i)) {
-                            return true;
+                            return 1;
                         }
                         if (diagonalWinHelper(ConnectFourSide.RED, j, i)) {
-                            return true;
+                            return 1;
                         }
                         break;
                     case ConnectFourSide.YELLOW:
                         if (horizontalWinHelper(ConnectFourSide.YELLOW, j, i)) {
-                            return true;
+                            return 2;
                         }
                         if (verticalWinHelper(ConnectFourSide.YELLOW, j, i)) {
-                            return true;
+                            return 2;
                         }
                         if (diagonalWinHelper(ConnectFourSide.YELLOW, j, i)) {
-                            return true;
+                            return 2;
                         }
                         break;
                     default:
@@ -69,7 +72,7 @@ public class ConnectFour extends AbstractBoardGame {
                 }
             }
         }
-        return false;
+        return 0;
     }
 
     private boolean horizontalWinHelper(ConnectFourSide side, int x, int y) {
@@ -191,7 +194,7 @@ public class ConnectFour extends AbstractBoardGame {
             // overflow guard
             i--;
             j--;
-            if (i <= 0 || j <= 0) {
+            if (i < 0 || j < 0) {
                 break;
             }
             // if no piece, break
@@ -202,7 +205,7 @@ public class ConnectFour extends AbstractBoardGame {
             if (gameBoard[j][i].getSide() != side) {
                 break;
             }
-            // piece to down left is right colour, keep looking
+            // piece to up left is right colour, keep looking
             length++;
         }
         // if length of sequence is long enough return that a win was found.
@@ -217,7 +220,7 @@ public class ConnectFour extends AbstractBoardGame {
             // overflow guard
             i++;
             j--;
-            if (i >= gameBoard[0].length || j <= 0) {
+            if (i >= gameBoard[0].length || j < 0) {
                 break;
             }
             // if no piece, break
@@ -232,58 +235,6 @@ public class ConnectFour extends AbstractBoardGame {
             length++;
         }
         // if length of sequence is long enough return that a win was found.
-        if (length >= WINLENGTH) {
-            return true;
-        }
-        // check down left
-        length = 1;
-        i = x;
-        j = y;
-        while (length < WINLENGTH) {
-            // overflow guard
-            j++;
-            i--;
-            if (i <= 0 || j >= gameBoard.length - 1) {
-                break;
-            }
-            // if no piece, break
-            if (gameBoard[j][i] == null) {
-                break;
-            }
-            // if piece to right is wrong colour stop checking for win
-            if (gameBoard[j][i].getSide() != side) {
-                break;
-            }
-            // piece to right is correct colour, keep looking
-            length++;
-        }
-        // if length of sequence was long enough return that a win was found.
-        if (length >= WINLENGTH) {
-            return true;
-        }
-        // check down right
-        length = 1;
-        i = x;
-        j = y;
-        while (length < WINLENGTH) {
-            // overflow guard
-            j++;
-            i++;
-            if (i <= gameBoard[0].length || j >= gameBoard.length - 1) {
-                break;
-            }
-            // if no piece, break
-            if (gameBoard[j][i] == null) {
-                break;
-            }
-            // if piece to right is wrong colour stop checking for win
-            if (gameBoard[j][i].getSide() != side) {
-                break;
-            }
-            // piece to right is correct colour, keep looking
-            length++;
-        }
-        // if length of sequence was long enough return that a win was found.
         if (length >= WINLENGTH) {
             return true;
         }
@@ -317,8 +268,29 @@ public class ConnectFour extends AbstractBoardGame {
      * @param x int of column to place
      */
     private boolean isValidMove(int x) {
+        if (x < 0 || x >= gameBoard[0].length) {
+            return false;
+        }
         return gameBoard[0][x] == null;
     }
+
+    public boolean makeRandomMove() {
+        ArrayList<Integer> possibleMoves = new ArrayList<>();
+        for (int i = 0; i < gameBoard[0].length; i++) {
+            if (isValidMove(i)) {
+                possibleMoves.add(i);
+            }
+        }
+        if (possibleMoves.isEmpty()) {
+            return false;
+        } else {
+            Random random = new Random();
+            int index = random.nextInt(possibleMoves.size());
+            makeMove(new int[]{index, 0});
+            return true;
+        }
+    }
+
 
     /**
      * Creates a new gameBoard for game
@@ -332,16 +304,20 @@ public class ConnectFour extends AbstractBoardGame {
 
     /**
      * check for a game ending condition
-     * @return GameEndState enum
+     * @return int 1 if RED won, 2 if YELLOW won
      */
     @Override
-    public GameEndState validateGameEnds() {
-        if (checkWin()) {
-            return GameEndState.Victory;
+    public int validateGameEnds() {
+        int x = checkWin();
+        if (x>0) {
+            //then we have a winner
+            return x;
         } else if (isFull()){
-            return GameEndState.Draw;
+            //draw
+            return 0;
         } else {
-            return GameEndState.Ongoing;
+            //game ongoing
+            return -1;
         }
     }
 
