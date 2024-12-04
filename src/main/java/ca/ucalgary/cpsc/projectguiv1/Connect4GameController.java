@@ -22,9 +22,9 @@ import java.util.Random;
 
 public class Connect4GameController{
 
-    private User user1;
-    private User user2;
     private ConnectFour gameConnect4;
+    @FXML
+    Circle circle00;
 
     @FXML
     Pane identity;
@@ -72,132 +72,142 @@ public class Connect4GameController{
 
     private static final int ROWS = 6;
     private static final int COLS = 7;
+    private User user1;
+    private User user2;
 
-    @FXML
-    public void initialize() {
-        // Initialize the game
-        game = new ConnectFour(2);
-
-        // Create the board UI
-        initializeBoard();
-    }
-
-    /**
-     * Initialize the board with interactive columns for dropping pieces.
-     */
-    private void initializeBoard() {
-        for (int col = 0; col < COLS; col++) {
-            for (int row = 0; row < ROWS; row++) {
-                Pane cell = new Pane();
-                //cell.setStyle("-fx-border-color: black; -fx-background-color: white;");
-                cell.setPrefSize(60, 60);
-
-                Circle circle = new Circle(25);
-                circle.setFill(Color.WHITE);
-                circle.setCenterX(30);
-                circle.setCenterY(30);
-                cell.getChildren().add(circle);
-
-                // Add click handling for the column
-                if (row == ROWS - 1) {
-                    int finalCol = col;
-                    cell.setOnMouseClicked(event -> handleColumnClick(finalCol));
-                }
-
-                gamePane.add(cell, col, row);
-            }
-        }
-    }
-
-    /**
-     * Handle a column click to place a piece.
-     *
-     * @param column The column index clicked.
-     */
-    private void handleColumnClick(int column) {
-        if (!game.validateMove(new int[]{column})) {
-            showAlert("Invalid Move", "This column is full!");
-            return;
-        }
-
-        game.makeMove(new int[]{column});
-        updateBoard();
-
-        // Check game end conditions
-        switch (game.validateGameEnds()) {
-            case Victory:
-                showAlert("Game Over", "Player " + (game.getCurrentPlayer() + 1) + " wins!");
-                resetGame();
-                break;
-            case Draw:
-                showAlert("Game Over", "The game is a draw!");
-                resetGame();
-                break;
-            default:
-                game.switchCurrentPlayer();
-                break;
-        }
-    }
-
-    /**
-     * Update the UI board with the current game state.
-     */
-    private void updateBoard() {
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
-                ConnectFourPiece piece = (ConnectFourPiece) game.getBoard()[row][col];
-                Pane cell = (Pane) getNodeFromGridPane(gamePane, col, row);
-                Circle circle = (Circle) cell.getChildren().get(0);
-
-                if (piece == null) {
-                    circle.setFill(Color.WHITE);
-                } else if (piece.getSide() == ConnectFourSide.RED) {
-                    circle.setFill(Color.RED);
-                } else if (piece.getSide() == ConnectFourSide.YELLOW) {
-                    circle.setFill(Color.YELLOW);
-                }
-            }
-        }
-    }
-
-    /**
-     * Reset the game state and board.
-     */
-    private void resetGame() {
-        game.setUpBoard();
-        updateBoard();
-    }
-
-    /**
-     * Show an alert dialog with a title and message.
-     *
-     * @param title   The title of the alert.
-     * @param message The message of the alert.
-     */
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    /**
-     * Get a specific node from the GridPane.
-     *
-     * @param gridPane The GridPane to search.
-     * @param col      The column index.
-     * @param row      The row index.
-     * @return The node at the specified position.
-     */
-    private Pane getNodeFromGridPane(GridPane gridPane, int col, int row) {
-        for (var node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-                return (Pane) node;
-            }
-        }
-        return null;
-    }
+//    @FXML
+//    public void initialize() {
+//        circle00.setFill(Color.RED);
+//        this.user1 = new User("1", "firsstUsr", "email@google.com");
+//        this.user2 = new User("2", "scndUsr", "otheremail@google.com");
+//        // Initialize the game
+//        game = new ConnectFour(2);
+//        game.addPlayer(this.user1.getUsername());
+//        game.addPlayer(this.user2.getUsername());
+//
+//        // Create the board UI
+//        initializeBoard();
+//    }
+//
+//    /**
+//     * Initialize the board with interactive columns for dropping pieces.
+//     */
+//    private void initializeBoard() {
+//        for (int col = 0; col < COLS; col++) {
+//            for (int row = 0; row < ROWS; row++) {
+//                Pane cell = new Pane();
+//                //cell.setStyle("-fx-border-color: black; -fx-background-color: white;");
+//                cell.setPrefSize(60, 60);
+//
+////                Circle circle = new Circle(25);
+////                circle.setFill(Color.WHITE);
+////                circle.setCenterX(30);
+////                circle.setCenterY(30);
+////                cell.getChildren().add(circle);
+//
+//                // Add click handling for the column
+//                if (row == ROWS - 1) {
+//                    int finalCol = col;
+//                    cell.setOnMouseClicked(event -> handleColumnClick(finalCol));
+//                }
+//
+//                gamePane.add(cell, col, row);
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Handle a column click to place a piece.
+//     *
+//     * @param column The column index clicked.
+//     */
+//    private void handleColumnClick(int column) {
+//        if (!game.validateMove(new int[]{column})) {
+//            showAlert("Invalid Move", "This column is full!");
+//            return;
+//        }
+//
+//        game.makeMove(new int[]{column});
+//        // set color of the circle
+//        gamePane.getChildren().
+//        //game.switchCurrentPlayer();
+//        updateBoard();
+//
+//        // Check game end conditions
+//        switch (game.validateGameEnds()) {
+//            case Victory:
+//                showAlert("Game Over", "Player " + (game.getCurrentPlayer() + 1) + " wins!");
+//                resetGame();
+//                break;
+//            case Draw:
+//                showAlert("Game Over", "The game is a draw!");
+//                resetGame();
+//                break;
+//            default:
+//                game.switchCurrentPlayer();
+//                break;
+//        }
+//    }
+//
+//    /**
+//     * Update the UI board with the current game state.
+//     */
+//    private void updateBoard() {
+//        for (int row = 0; row < ROWS; row++) {
+//            for (int col = 0; col < COLS; col++) {
+//                ConnectFourPiece piece = (ConnectFourPiece) game.getBoard()[row][col];
+//                Pane cell = (Pane) getNodeFromGridPane(gamePane, col, row);
+//                Circle circle = (Circle) cell.getChildren().get(0);
+//
+//                if (piece == null) {
+//                    circle.setFill(Color.WHITE);
+//                } else if (piece.getSide() == ConnectFourSide.RED) {
+//                    circle.setFill(Color.RED);
+//                } else if (piece.getSide() == ConnectFourSide.YELLOW) {
+//                    circle.setFill(Color.YELLOW);
+//                }
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Reset the game state and board.
+//     */
+//    private void resetGame() {
+//        game.setUpBoard();
+//        updateBoard();
+//    }
+//
+//    /**
+//     * Show an alert dialog with a title and message.
+//     *
+//     * @param title   The title of the alert.
+//     * @param message The message of the alert.
+//     */
+//    private void showAlert(String title, String message) {
+//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//        alert.setTitle(title);
+//        alert.setHeaderText(null);
+//        alert.setContentText(message);
+//        alert.showAndWait();
+//    }
+//
+//    /**
+//     * Get a specific node from the GridPane.
+//     *
+//     * @param gridPane The GridPane to search.
+//     * @param col      The column index.
+//     * @param row      The row index.
+//     * @return The node at the specified position.
+//     */
+//    private Pane getNodeFromGridPane(GridPane gridPane, int col, int row) {
+//        for (var node : gridPane.getChildren()) {
+//            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+//                return (Pane) node;
+//            }
+//        }
+//        return null;
+//    }
 
 
 //    private void updateBoard(){
