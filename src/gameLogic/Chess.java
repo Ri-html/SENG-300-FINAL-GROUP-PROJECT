@@ -80,6 +80,11 @@ public class Chess extends AbstractBoardGame {
      */
     @Override
     public boolean validateMove(int[] moves) {
+        if (getBoard()[moves[0]][moves[1]] == null) {
+            return false;
+        } else{
+            //getBoard()[moves[0]][moves[1]].
+        }
         return false;
     }
 

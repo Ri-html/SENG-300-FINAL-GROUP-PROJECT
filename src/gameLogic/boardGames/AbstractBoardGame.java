@@ -35,6 +35,10 @@ public abstract class AbstractBoardGame implements BoardGame {
         gameBoard = new Piece[x][y];
     }
 
+    public void setGameBoard(Piece[][] gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
     //methods that should be implemented in the subclass
         //sets up the Board for the specific board game
     abstract protected Piece[][] setUpBoard();
