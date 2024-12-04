@@ -44,19 +44,25 @@ public class Sign_Up_Controller {
 
         // Validation
         if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
-            System.out.println("Error: All fields are required.");
-            return;
+            showErrorPopup("Error: All fields are required.");
+            return;  // Exit early if any field is empty
+        }
+
+        // Check if the email is valid (contains '@')
+        if (!email.contains("@")) {
+            showErrorPopup("Error: Invalid email address. It must contain '@'.");
+            return;  // Exit early if email is invalid
         }
 
         // Check if the username or email already exists
         UserDatabase userDatabase = UserDatabase.getInstance();
         if (userDatabase.searchByUsername(username) != null) {
-            System.out.println("Error: Username already exists.");
-            return;
+            showErrorPopup("Error: Username already exists.");
+            return;  // Exit early if username exists
         }
         if (userDatabase.searchByEmail(email) != null) {
-            System.out.println("Error: Email already registered.");
-            return;
+            showErrorPopup("Error: Email already registered.");
+            return;  // Exit early if email exists
         }
 
         // Add user to the database
@@ -66,10 +72,22 @@ public class Sign_Up_Controller {
         // Confirm successful registration
         System.out.println("User registered successfully!");
 
-        // Navigate to the Home Page
+        // Navigate to the Home Page only after successful registration
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Homepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage currentStage = (Stage) identity.getScene().getWindow();
         currentStage.setScene(scene);
+    }
+
+    // Method to show error popup
+    private void showErrorPopup(String message) {
+        // Create an error alert dialog
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alert.setTitle("Error");               // Set the title of the alert
+        alert.setHeaderText(null);             // No header for the error (optional)
+        alert.setContentText(message);        // Set the content message (your error message)
+
+        // Show the alert and wait for the user to dismiss it
+        alert.showAndWait();
     }
 }
