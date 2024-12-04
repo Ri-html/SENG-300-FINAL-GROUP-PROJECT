@@ -26,6 +26,8 @@ public class Home_Page_Controller implements Initializable {
     GridPane identity;
 
     @FXML
+    Button gameHistory;
+    @FXML
     Label mainTitle;
 
     @FXML
@@ -111,6 +113,11 @@ public class Home_Page_Controller implements Initializable {
 
     public void connect4SelectionFxn() throws IOException {
         String file = "Connect_4_Main_Menu_View.fxml";
+        selectionFxn(file);
+    }
+
+    public void gameHistorySelectionFxn() throws IOException {
+        String file = "Game_History_Screen.fxml";
         selectionFxn(file);
     }
 

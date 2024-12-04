@@ -65,10 +65,12 @@ public class PlayerProfile {
     // Methods to display each profile section data
 
     // Game history display method
-    public void displayGameHistory() {
-        System.out.println("Game History for Chess: " + chessProfile.getLastOpponent() + ", " + chessProfile.getLastGameResult() + ", " + chessProfile.getLastGameScore());
-        System.out.println("Game History for TicTacToe: " + ticTacToeProfile.getLastOpponent() + ", " + ticTacToeProfile.getLastGameResult() + ", " + ticTacToeProfile.getLastGameScore());
-        System.out.println("Game History for ConnectFour: " + connectFourProfile.getLastOpponent() + ", " + connectFourProfile.getLastGameResult() + ", " + connectFourProfile.getLastGameScore());
+    public String displayGameHistory() {
+        String retStr = "";
+        retStr += "Game History for Chess: " + chessProfile.getLastOpponent() + ", " + chessProfile.getLastGameResult() + ", " + chessProfile.getLastGameScore();
+        retStr += "\n Game History for TicTacToe: " + ticTacToeProfile.getLastOpponent() + ", " + ticTacToeProfile.getLastGameResult() + ", " + ticTacToeProfile.getLastGameScore();
+        retStr += "Game History for ConnectFour: " + connectFourProfile.getLastOpponent() + ", " + connectFourProfile.getLastGameResult() + ", " + connectFourProfile.getLastGameScore();
+        return retStr;
     }
 
     // Player status display method
