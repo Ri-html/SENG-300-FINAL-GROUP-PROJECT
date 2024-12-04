@@ -20,7 +20,7 @@ public class ConnectFour extends AbstractBoardGame {
     private void placePiece(int x) {
         for (int i = gameBoard.length - 1; i >= 0; i--) {
             if (gameBoard[i][x] == null) {
-                if (currentPlayer == 0) {
+                if (currentPlayer == 1) {
                     gameBoard[i][x] = new ConnectFourPiece(ConnectFourSide.RED);
                 } else {
                     gameBoard[i][x] = new ConnectFourPiece(ConnectFourSide.YELLOW);
