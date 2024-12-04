@@ -69,6 +69,10 @@ public class Chess extends AbstractBoardGame {
         return false;
     }
 
+
+    /**
+     * Deprecated - use makeMove in AbstractChessPiece
+     */
     @Override
     public void makeMove(int[] moves) {
 

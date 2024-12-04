@@ -51,7 +51,6 @@ public abstract class AbstractChessPiece extends AbstractPiece {
                 setLocation(validMoves[i]);
                 //clear old board location
                 board[oldX][oldY] = null;
-                //IMPLEMENT CAPTURE METHOD HERE IF WE CAPTURE WITH THIS MOVE
                 return newLoc;
             }
         }
