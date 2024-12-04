@@ -125,7 +125,9 @@ public class Game_History_Screen_Controller {
     }
 
     public void setMatchHistory(){
-        this.mostRecentData.setText(this.currUsr.getPlayerProfile().displayGameHistory());
+        if(this.currUsr != null) {
+            this.mostRecentData.setText(this.currUsr.getPlayerProfile().displayGameHistory());
+        }
 
     }
     public String matchToString(User theUsr){
