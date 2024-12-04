@@ -5,7 +5,7 @@ import gameLogic.side.Side;
 import java.util.Objects;
 
 public abstract class AbstractPiece implements Piece {
-    private final Side side;
+    protected final Side side;
     protected char display;
     public AbstractPiece(Side side) {
         this.side = side;
