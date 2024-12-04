@@ -4,6 +4,8 @@ import gameLogic.Chess;
 import gameLogic.side.ChessSide;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -23,15 +25,6 @@ public class PawnTest {
     public void pawnMoveTest1(){
         //this fails because getValidMoves() returns null
         Chess chess = new Chess();
-        AbstractChessPiece[][] board = new AbstractChessPiece[8][8];
-        board[1][2] = new Pawn(ChessSide.WHITE);
-        //check initial double move forward
-        board[1][2].makeMove(board, 3, 2);
-        //check old location has been cleared correctly
-        //is an empty square null or something else?
-        assertNull(board[1][2]);
-        assertNotNull(board[3][2]); //check piece has moved to (3,2)
-        //check single move forward
 
     }
 

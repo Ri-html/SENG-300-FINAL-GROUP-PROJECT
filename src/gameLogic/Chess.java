@@ -49,6 +49,16 @@ public class Chess extends AbstractBoardGame {
         for (int i = 0; i < 8; i++) {
             gameBoard[6][i] = new Pawn(ChessSide.BLACK);
         }
+
+        //update internal locations to reflect placement on board
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if(gameBoard[i][j] instanceof AbstractChessPiece){
+                    ((AbstractChessPiece) gameBoard[i][j]).setLocation(new int[]{i,j});
+                }
+            }
+        }
+
         return gameBoard;
     }
 
@@ -64,6 +74,9 @@ public class Chess extends AbstractBoardGame {
         return -1;
     }
 
+    /**
+     * Deprecated.
+     */
     @Override
     public boolean validateMove(int[] moves) {
         return false;
@@ -71,11 +84,15 @@ public class Chess extends AbstractBoardGame {
 
 
     /**
-     * Deprecated - use makeMove in AbstractChessPiece
+     * Calls makeMove in AbstractChessPiece
      */
     @Override
     public void makeMove(int[] moves) {
-
+        int currX = moves[0];
+        int currY = moves[1];
+        int newX = moves[2];
+        int newY = moves[3];
+        ((AbstractChessPiece)gameBoard[currX][currY])
     }
 
     // Helper function that will determine if king is in check.
