@@ -7,6 +7,7 @@ import gameLogic.piece.chessPiece.*;
 import gameLogic.side.ChessSide;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Chess extends AbstractBoardGame {
 
@@ -92,7 +93,10 @@ public class Chess extends AbstractBoardGame {
         int currY = moves[1];
         int newX = moves[2];
         int newY = moves[3];
-        ((AbstractChessPiece)gameBoard[currX][currY])
+        //if can make move, make move (in if block), then update piece x, y
+        int[] move = ((AbstractChessPiece)gameBoard[currX][currY]).makeMove(gameBoard, newX, newY);
+
+
     }
 
     // Helper function that will determine if king is in check.
