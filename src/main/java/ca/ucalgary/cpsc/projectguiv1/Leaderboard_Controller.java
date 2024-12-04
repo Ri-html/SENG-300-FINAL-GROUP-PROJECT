@@ -83,7 +83,7 @@ public class Leaderboard_Controller {
                 case "Connect4Leaderboard":
                     loadConnect4Leaderboard();
                     break;
-                case "TicTacToeLeaderboard":
+                case "Tic-Tac-ToeLeaderboard":
                     loadTicTacToeLeaderboard();
                     break;
                 default:
