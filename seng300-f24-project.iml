@@ -20,6 +20,11 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="javafx-swt" level="project" />
+    <orderEntry type="library" exported="" name="JAvaFX" level="project" />
+    <orderEntry type="library" name="net.christophermerrill.TestFxUtils" level="project" />
+    <orderEntry type="library" name="testfx.core" level="project" />
+    <orderEntry type="library" name="bluecatcode.junit.4.10.extended" level="project" />
+    <orderEntry type="library" exported="" name="testfx.junit4" level="project" />
+    <orderEntry type="library" exported="" name="Mockito" level="project" />
   </component>
 </module>
