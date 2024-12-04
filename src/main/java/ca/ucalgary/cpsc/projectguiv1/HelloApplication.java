@@ -1,7 +1,7 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
-import authProfile.User;
-import authProfile.UserDatabase;
+import UserAndProfile.User;
+import UserAndProfile.UserDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+
+    public static UserDatabase usrDb = new UserDatabase();
 
 
     @Override
