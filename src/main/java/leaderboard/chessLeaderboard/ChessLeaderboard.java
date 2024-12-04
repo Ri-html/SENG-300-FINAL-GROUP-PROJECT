@@ -2,17 +2,17 @@ package leaderboard.chessLeaderboard;
 
 import java.util.*;
 
-public class Leaderboard {
-    private static Leaderboard instance = null;
+public class ChessLeaderboard {
+    private static ChessLeaderboard instance = null;
     private Map<String, PlayerStats> playerStatsMap;
 
-    private Leaderboard() {
+    private ChessLeaderboard() {
         playerStatsMap = new HashMap<>();
     }
 
-    public static synchronized Leaderboard getInstance() {
+    public static synchronized ChessLeaderboard getInstance() {
         if (instance == null) {
-            instance = new Leaderboard();
+            instance = new ChessLeaderboard();
         }
         return instance;
     }

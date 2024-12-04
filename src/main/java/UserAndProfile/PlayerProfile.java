@@ -1,4 +1,4 @@
-package authProfile;
+package UserAndProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +20,28 @@ public class PlayerProfile {
             "Win/Loss Record",
             "Ranking"
     );
+
+    // 1. Get all game records for each individual game
+    public List<GameRecord> getChessGameRecords() {
+        return chessProfile.getAllGameRecords();
+    }
+
+    public List<GameRecord> getTicTacToeGameRecords() {
+        return ticTacToeProfile.getAllGameRecords();
+    }
+
+    public List<GameRecord> getConnectFourGameRecords() {
+        return connectFourProfile.getAllGameRecords();
+    }
+
+    // 2. Get all game records across all games
+    public List<GameRecord> getAllGameRecords() {
+        List<GameRecord> allGameRecords = new ArrayList<>();
+        allGameRecords.addAll(chessProfile.getAllGameRecords());
+        allGameRecords.addAll(ticTacToeProfile.getAllGameRecords());
+        allGameRecords.addAll(connectFourProfile.getAllGameRecords());
+        return allGameRecords;
+    }
 
 
     // Constructor
@@ -65,10 +87,12 @@ public class PlayerProfile {
     // Methods to display each profile section data
 
     // Game history display method
-    public void displayGameHistory() {
-        System.out.println("Game History for Chess: " + chessProfile.getLastOpponent() + ", " + chessProfile.getLastGameResult() + ", " + chessProfile.getLastGameScore());
-        System.out.println("Game History for TicTacToe: " + ticTacToeProfile.getLastOpponent() + ", " + ticTacToeProfile.getLastGameResult() + ", " + ticTacToeProfile.getLastGameScore());
-        System.out.println("Game History for ConnectFour: " + connectFourProfile.getLastOpponent() + ", " + connectFourProfile.getLastGameResult() + ", " + connectFourProfile.getLastGameScore());
+    public String displayGameHistory() {
+        String retStr = "";
+        retStr += "Game History for Chess: " + chessProfile.getLastOpponent() + ", " + chessProfile.getLastGameResult() + ", " + chessProfile.getLastGameScore();
+        retStr += "\nGame History for TicTacToe: " + ticTacToeProfile.getLastOpponent() + ", " + ticTacToeProfile.getLastGameResult() + ", " + ticTacToeProfile.getLastGameScore();
+        retStr += "\nGame History for ConnectFour: " + connectFourProfile.getLastOpponent() + ", " + connectFourProfile.getLastGameResult() + ", " + connectFourProfile.getLastGameScore();
+        return retStr;
     }
 
     // Player status display method

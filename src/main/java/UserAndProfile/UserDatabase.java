@@ -1,4 +1,4 @@
-package authProfile;
+package UserAndProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,6 @@ public class UserDatabase {
     private User currentUser; // Keeps track of the currently logged-in user
     private static UserDatabase instance;
 
-
     // Constructor
     public UserDatabase() {
         this.users = new ArrayList<>();
@@ -16,7 +15,11 @@ public class UserDatabase {
 
     // Add a user to the database
     public void addUser(User user) {
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            user.setPassword("12345678"); // Assign default password if not set
+        }
         users.add(user);
+        System.out.println("User added: " + user.getUsername() + " (Default password applied if none was set)");
     }
 
     // Search for a user by username
@@ -35,6 +38,7 @@ public class UserDatabase {
         }
         return instance;
     }
+
 
     // Search for a user by email
     public User searchByEmail(String email) {
@@ -55,7 +59,6 @@ public class UserDatabase {
     public User getCurrentUser() {
         return currentUser;
     }
-
 
     // Log out the currently logged-in user
     public boolean logoutCurrentUser() {
@@ -88,6 +91,10 @@ public class UserDatabase {
     public boolean resetPassword(String email, String newPassword) {
         User user = searchByEmail(email); // Find the user by email
         if (user != null) {
+            if (newPassword == null || newPassword.isEmpty()) {
+                System.out.println("Error: New password cannot be empty.");
+                return false;
+            }
             user.setPassword(newPassword); // Update the password
             System.out.println("Password reset successfully for user: " + email);
             return true;
@@ -96,6 +103,7 @@ public class UserDatabase {
             return false;
         }
     }
+
     /**
      * Edit the currently logged-in user's profile modules.
      *
@@ -124,6 +132,28 @@ public class UserDatabase {
             System.out.println("Failed to update profile. Please ensure all modules are valid.");
             return false;
         }
+    }
+
+    /**
+     * Edit the currently logged-in user's account details, such as password or username. Email cannot be changed.
+     *
+     * @param item Item that the user wants to change. Can be "username" or "password"
+     * @return true if the profile was updated successfully, false otherwise.
+     */
+    public boolean editAccount(String item){
+        if (item == "username"){
+            //the user will set their new username into a textbox which may be incorporated into an alert.
+            //after successful change, an email may be sent to the user.
+        }else if (item == "password"){
+            //user needs to enter their current password into a textbox, to check that it is correct. after this occurs, they enter their new password.
+            //after successful change, an email may be sent to the user.
+        }
+        return false;
+    }
+
+    // Returns a list of all users in the database
+    public List<User> getAllUsers() {
+        return new ArrayList<>(users); // Return a copy of the users list to avoid direct modification
     }
 
 

@@ -1,6 +1,6 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
-import authProfile.User;
+import UserAndProfile.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +25,8 @@ public class Home_Page_Controller implements Initializable {
     @FXML
     GridPane identity;
 
+    @FXML
+    Button gameHistory;
     @FXML
     Label mainTitle;
 
@@ -111,6 +113,11 @@ public class Home_Page_Controller implements Initializable {
 
     public void connect4SelectionFxn() throws IOException {
         String file = "Connect_4_Main_Menu_View.fxml";
+        selectionFxn(file);
+    }
+
+    public void gameHistorySelectionFxn() throws IOException {
+        String file = "Game_History_Screen.fxml";
         selectionFxn(file);
     }
 

@@ -1,8 +1,8 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
 
-import authProfile.TicTacToeProfile;
-import authProfile.User;
+import UserAndProfile.TicTacToeProfile;
+import UserAndProfile.User;
 
 import gameLogic.TicTacToe;
 import gameLogic.boardGames.AbstractBoardGame;
@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -89,6 +90,7 @@ public class TicTacToeGameController {
     public TicTacToeGameController() {
         this.usrOne = new User("1", "firsstUsr", "email@google.com");
         this.usrTwo = new User("2", "scndUsr", "otheremail@google.com");
+        HelloApplication.usrDb.addUser(this.usrOne);
 
         this.gameTicTacToe = new TicTacToe(2);
         this.gameTicTacToe.addPlayer(this.usrOne.getUsername());
@@ -161,7 +163,8 @@ public class TicTacToeGameController {
                 Label xLbl = new Label();
                 xLbl.setTextFill(Color.BLUE);
                 xLbl.setFont(new Font("Comic Sans", 100));
-                xLbl.setText("X");
+                xLbl.setText("  X");
+                xLbl.setAlignment(Pos.CENTER);
                 currPane.getChildren().add(xLbl);
 
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
@@ -214,7 +217,8 @@ public class TicTacToeGameController {
                 Label oLbl = new Label();
                 oLbl.setTextFill(Color.RED);
                 oLbl.setFont(new Font("Comic Sans", 100));
-                oLbl.setText("O");
+                oLbl.setText("  O");
+                oLbl.setAlignment(Pos.CENTER);
                 randPane.getChildren().add(oLbl);
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
                 checkEndCon();

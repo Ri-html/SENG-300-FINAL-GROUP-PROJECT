@@ -1,9 +1,15 @@
-package authProfile;
+package UserAndProfile;
 
-public class TicTacToeProfile extends AbstractGameProfile {
+
+import java.util.List;
+
+public class ChessProfile extends AbstractGameProfile {
+
+    // List to store all game records
+    private List<GameRecord> gameRecords;
 
     // Constructor
-    public TicTacToeProfile() {
+    public ChessProfile() {
         super();
     }
 
@@ -18,6 +24,7 @@ public class TicTacToeProfile extends AbstractGameProfile {
         setTotalGamesPlayed(getTotalGamesPlayed() + 1);
         setTotalScore(getTotalScore() + score);
     }
+
 
     // Updates player status, including total games, score, and win rate
     @Override
@@ -47,4 +54,28 @@ public class TicTacToeProfile extends AbstractGameProfile {
         setScoreRank(scoreRank);
         setWinRateRank(winRateRank);
     }
+
+    // Adds a game record manually (optional method)
+
+    public List<GameRecord> getAllGameRecords() {
+        return gameRecords;
+    }
+
+    // Adds a game record manually (optional method)
+
+    public void addGameRecord(GameRecord record) {
+        gameRecords.add(record);
+        setLastOpponent(record.getOpponent());
+        setLastGameResult(record.getResult());
+        setLastGameScore(record.getScore());
+    }
+
+    // Prints all game records (optional, for debugging)
+    public void printGameRecords() {
+        for (GameRecord record : gameRecords) {
+            System.out.println(record);
+        }
+    }
+
+
 }

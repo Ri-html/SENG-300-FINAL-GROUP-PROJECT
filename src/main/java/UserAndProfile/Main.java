@@ -1,4 +1,4 @@
-package authProfile;
+package UserAndProfile;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +15,12 @@ public class Main {
         user2.setPassword("anotherpass");
         userDatabase.addUser(user1);
         userDatabase.addUser(user2);
+
+        //Test creating a user without setting a password
+        System.out.println("\nSijia: Testing default password functionality...");
+        User user3 = new User("3", "Charlie", "charlie@example.com");
+        userDatabase.addUser(user3); // Default password should be applied
+        System.out.println("Charlie's default password: " + user3.getPassword());
 
         // Test logging in
         System.out.println("Testing login:");

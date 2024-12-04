@@ -70,7 +70,6 @@
             <Button fx:id="player_11th_button" prefHeight="26.0" prefWidth="276.0" style="-fx-background-color: dcdcdc;" text="11th player and stats" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.rowIndex="16" />
             <Button fx:id="player_12th_button" prefHeight="26.0" prefWidth="294.0" style="-fx-background-color: dcdcdc;" text="12th player and stats" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="18" />
             <Button fx:id="player_13th_button" prefHeight="26.0" prefWidth="320.0" style="-fx-background-color: dcdcdc;" text="13th player and stats" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.rowIndex="18" />
-         <Button fx:id="refresh_button" mnemonicParsing="false" prefHeight="53.0" prefWidth="110.0" text="Refresh" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="1" />
       </children>
    </GridPane>
 
