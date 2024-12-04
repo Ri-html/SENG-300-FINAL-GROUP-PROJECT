@@ -38,21 +38,35 @@ public class UserDatabase {
         addUser(user, true); // Default behavior: Save to file
     }
 
-    // Add user with control over file writing
     public void addUser(User user, boolean saveToFile) {
+        // Check if username already exists
         if (searchByUsername(user.getUsername()) != null) {
             showErrorPopup("Error: Username already exists.");
-            return;
+            return;  // Exit early, no further action
         }
+
+        // Check if email already exists
         if (searchByEmail(user.getEmail()) != null) {
             showErrorPopup("Error: Email already registered.");
-            return;
+            return;  // Exit early, no further action
         }
+
+        // Check if email contains "@" symbol
+        if (!user.getEmail().contains("@")) {
+            showErrorPopup("Error: Invalid email address. It must contain '@'.");
+            return;  // Exit early, no further action
+        }
+
+        // If all validations pass, add user to the database
         users.add(user);
         if (saveToFile) {
             UserFileWriter.appendUserToFile(user, USER_DATABASE_FILE); // Append user to the file
         }
+
+        // Code to navigate to the home screen or the next screen (if validation passes)
+        // Make sure to only navigate here if the user is valid and added.
     }
+
 
     // Search by username
     public User searchByUsername(String username) {
