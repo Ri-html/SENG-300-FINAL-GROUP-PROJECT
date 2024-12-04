@@ -5,12 +5,10 @@ import gameLogic.ConnectFour;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -53,6 +51,16 @@ public class Connect4GameController {
     private Label winLabelP2;
     @FXML
     private Label rankLabelP2;
+
+    @FXML
+    TextField chatTxtField;
+
+    @FXML
+    VBox chatBox;
+
+    @FXML
+    ScrollPane chatScrlPane;
+
 
     // Initialization method
     @FXML
@@ -247,8 +255,30 @@ public class Connect4GameController {
     }
 
     // Placeholder for chat feature (not implemented)
-    @FXML
-    private void sendBtnFunc() {
-        infoLabel.setText("Chat feature not implemented yet.");
+
+    public void sendBtnFunc() {
+        // Get the text from the input field
+        String message = this.chatTxtField.getText();
+        // Check if the message is not empty
+        if (message.isEmpty()) {
+            infoLabel.setText("Cannot send an empty message!");
+            return;
+        }
+
+        // Create a new Label for the chat message
+        //Label chatMessage = new Label("Player 1: " + message);
+
+        String chatTxt = "";
+        chatTxt += "Player 1: " + message;
+
+        // Add the message to the chatBox
+        this.chatBox.getChildren().add(new Label(chatTxt));
+
+        // Scroll to the bottom of the chat box
+        this.chatScrlPane.setContent(this.chatBox);
+
+        // Clear the input field
+        chatTxtField.clear();
     }
-}
+
+    }
