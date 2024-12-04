@@ -3,9 +3,15 @@ package ca.ucalgary.cpsc.projectguiv1;
 import authProfile.User;
 import authProfile.UserDatabase;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 
 public class Game_History_Screen_Controller {
@@ -94,8 +100,25 @@ public class Game_History_Screen_Controller {
     @FXML
     private Text thirdMostRecentWL;
 
+    @FXML
+    private AnchorPane identity;
+
 
     private User currUsr = HelloApplication.usrDb.getCurrentUser();
+
+
+    public void loadFileFunc(String file, String title) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 800);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle(title);
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
+    }
+
 
     public Game_History_Screen_Controller(){
         setMatchHistory();
@@ -108,6 +131,11 @@ public class Game_History_Screen_Controller {
     public String matchToString(User theUsr){
 
         return "";
+    }
+
+    public void exitBtnFunc() throws IOException {
+        String file = "Homepage.fxml";
+        loadFileFunc(file, "Homepage");
     }
 }
 
