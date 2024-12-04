@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TicTacToe_Game_Screen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Tic_Tac_Toe_Main_Menu_View"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         stage.setTitle("Login");
         stage.setScene(scene);
