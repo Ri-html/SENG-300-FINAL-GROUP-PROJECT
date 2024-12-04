@@ -240,20 +240,27 @@ public class TicTacToeGameController {
     }
     @Deprecated
     public void checkEndCon() throws IOException{ // game logic needs to add more end game states
-//        if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Victory)) {
-//            exitBtnFunc();
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Winner!");
-//            alert.setHeaderText("You Won!");
-//            alert.show();
-//            saveEndData('W');
-//        } else if (this.gameTicTacToe.validateGameEnds().equals(AbstractBoardGame.GameEndState.Draw)) {
-//            exitBtnFunc();
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Draw!");
-//            alert.setHeaderText("This Game Has Reached A Stalemate");
-//            alert.show();
-//        }
+        if (this.gameTicTacToe.validateGameEnds() == 1) {
+            exitBtnFunc();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Winner!");
+            alert.setHeaderText("X's Win!");
+            alert.show();
+            saveEndData('W');
+        }else if (this.gameTicTacToe.validateGameEnds() == 2) {
+            exitBtnFunc();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Winner!");
+            alert.setHeaderText("O's Win!");
+            alert.show();
+            saveEndData('W');
+        }  else if (this.gameTicTacToe.validateGameEnds() == 3) {
+            exitBtnFunc();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Draw!");
+            alert.setHeaderText("This Game Has Reached A Stalemate");
+            alert.show();
+        }
     }
     public void saveEndData(char result){ // Might have to change
         TicTacToeProfile profOne = new TicTacToeProfile();
