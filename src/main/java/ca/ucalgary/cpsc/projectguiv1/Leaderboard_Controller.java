@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import leaderboard.chessLeaderboard.ChessLeaderboard;
 import leaderboard.connect4Leaderboard.Connect4Leaderboard;
 import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
-import leaderboard.chessLeaderboard.PlayerStats;
 
 
 import java.io.IOException;
@@ -71,27 +70,107 @@ public class Leaderboard_Controller {
                 player_10th_button, player_11th_button, player_12th_button, player_13th_button
         };
 
+        // Use Platform.runLater to delay execution until the Scene is fully initialized
+        javafx.application.Platform.runLater(() -> {
+            Stage stage = (Stage) identity.getScene().getWindow();
+            String windowTitle = stage.getTitle().replaceAll(" ", ""); // Remove spaces
+
+            // Dynamically determine which leaderboard to load
+            switch (windowTitle) {
+                case "ChessLeaderboard":
+                    loadChessLeaderboard();
+                    break;
+                case "Connect4Leaderboard":
+                    loadConnect4Leaderboard();
+                    break;
+                case "TicTacToeLeaderboard":
+                    loadTicTacToeLeaderboard();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown leaderboard type: " + windowTitle);
+            }
+        });
+    }
+
+
+    /**
+     * Loads data for Connect4 Leaderboard and updates the UI.
+     */
+    private void loadConnect4Leaderboard() {
+        Connect4Leaderboard.initializeSampleData();
+        Connect4Leaderboard leaderboard = Connect4Leaderboard.getInstance();
+        List<?> topPlayers = leaderboard.getTopPlayers(); // Default returns 10 players
+        updateLeaderboardUI(topPlayers);
+    }
+
+    /**
+     * Loads data for Chess Leaderboard and updates the UI.
+     */
+    private void loadChessLeaderboard() {
         ChessLeaderboard.initializeSampleData();
-
-        // Get the leaderboard instance (Singleton pattern)
         ChessLeaderboard leaderboard = ChessLeaderboard.getInstance();
+        List<?> topPlayers = leaderboard.getTopPlayers(13); // Get top 13 players
+        updateLeaderboardUI(topPlayers);
+    }
 
-        // Retrieve the top 13 players
-        List<PlayerStats> topPlayers = leaderboard.getTopPlayers(13);
+    /**
+     * Loads data for Tic Tac Toe Leaderboard and updates the UI.
+     */
+    private void loadTicTacToeLeaderboard() {
+        TicTacToeLeaderboard.initializeSampleData();
+        TicTacToeLeaderboard leaderboard = TicTacToeLeaderboard.getInstance();
+        List<?> topPlayers = leaderboard.getTopPlayers(); // Default returns 10 players
+        updateLeaderboardUI(topPlayers);
+    }
 
-        // Update the text of each button with player information
+
+    /**
+     * Updates the leaderboard UI based on the provided player data.
+     *
+     * @param topPlayers The list of top players to display.
+     */
+    /**
+     * Updates the leaderboard UI based on the provided player data.
+     *
+     * @param topPlayers The list of top players to display, with raw Object type.
+     */
+    private void updateLeaderboardUI(List<?> topPlayers) {
         for (int i = 0; i < topPlayers.size(); i++) {
-            PlayerStats player = topPlayers.get(i);
+            Object player = topPlayers.get(i);
+
+            String buttonText;
+            if (player instanceof leaderboard.chessLeaderboard.PlayerStats) {
+                // Handle Chess PlayerStats
+                leaderboard.chessLeaderboard.PlayerStats chessPlayer =
+                        (leaderboard.chessLeaderboard.PlayerStats) player;
+                buttonText = chessPlayer.getPlayerId() + " - Wins: " + chessPlayer.getTotalWins();
+            } else if (player instanceof leaderboard.connect4Leaderboard.PlayerStats) {
+                // Handle Connect4 PlayerStats
+                leaderboard.connect4Leaderboard.PlayerStats connect4Player =
+                        (leaderboard.connect4Leaderboard.PlayerStats) player;
+                buttonText = connect4Player.getPlayerId() + " - Wins: " + connect4Player.getTotalWins();
+            } else if (player instanceof leaderboard.tictactoeLeaderboard.PlayerStats) {
+                // Handle TicTacToe PlayerStats
+                leaderboard.tictactoeLeaderboard.PlayerStats tttPlayer =
+                        (leaderboard.tictactoeLeaderboard.PlayerStats) player;
+                buttonText = tttPlayer.getPlayerId() + " - Wins: " + tttPlayer.getTotalWins();
+            } else {
+                // If the object is not a known PlayerStats type, skip it
+                continue;
+            }
+
+            // Update button text
             Button button = playerButtons[i];
-            // Set the button text as "Player Name - Wins: TotalWins"
-            button.setText(player.getPlayerId() + " - Wins: " + player.getTotalWins());
+            button.setText(buttonText);
         }
 
-        // Hide buttons that are not used (if there are fewer than 13 players)
+        // Hide unused buttons
         for (int i = topPlayers.size(); i < playerButtons.length; i++) {
             playerButtons[i].setVisible(false);
         }
     }
+
+
 
     /**
      * Loads a new FXML file and displays it in a new window.
