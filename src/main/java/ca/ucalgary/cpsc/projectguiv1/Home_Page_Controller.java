@@ -26,6 +26,8 @@ public class Home_Page_Controller implements Initializable {
     GridPane identity;
 
     @FXML
+    Button gameHistory;
+    @FXML
     Label mainTitle;
 
     @FXML
