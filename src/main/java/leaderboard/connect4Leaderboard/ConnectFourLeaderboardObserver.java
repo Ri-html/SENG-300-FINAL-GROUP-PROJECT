@@ -1,6 +1,7 @@
-package connectFourLeaderboard;
+package leaderboard.connect4Leaderboard;
 
 import gameLogic.boardGames.BoardGameObserver;
+import leaderboard.connect4Leaderboard.ConnectFourLeaderboard;
 
 public class ConnectFourLeaderboardObserver implements BoardGameObserver {
     // Reference to the singleton instance of the Connect Four leaderboard
