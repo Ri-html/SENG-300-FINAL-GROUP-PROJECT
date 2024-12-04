@@ -7,7 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import leaderboard.chessLeaderboard.ChessLeaderboard;
+import leaderboard.connect4Leaderboard.Connect4Leaderboard;
+import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 import leaderboard.chessLeaderboard.PlayerStats;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -15,9 +18,6 @@ import java.util.List;
 public class Leaderboard_Controller {
     @FXML
     private GridPane identity;
-
-    @FXML
-    private Button back_button;
 
     @FXML
     private Button player_1st_button;
@@ -65,20 +65,13 @@ public class Leaderboard_Controller {
     public void initialize() {
         // Initialize the array of player buttons
         playerButtons = new Button[]{
-                player_1st_button,
-                player_2nd_button,
-                player_3rd_button,
-                player_4th_button,
-                player_5th_button,
-                player_6th_button,
-                player_7th_button,
-                player_8th_button,
-                player_9th_button,
-                player_10th_button,
-                player_11th_button,
-                player_12th_button,
-                player_13th_button
+                player_1st_button, player_2nd_button, player_3rd_button,
+                player_4th_button, player_5th_button, player_6th_button,
+                player_7th_button, player_8th_button, player_9th_button,
+                player_10th_button, player_11th_button, player_12th_button, player_13th_button
         };
+
+        ChessLeaderboard.initializeSampleData();
 
         // Get the leaderboard instance (Singleton pattern)
         ChessLeaderboard leaderboard = ChessLeaderboard.getInstance();
@@ -103,43 +96,31 @@ public class Leaderboard_Controller {
     /**
      * Loads a new FXML file and displays it in a new window.
      *
-     * @param file  The FXML file to load.
+     * @param file  The name of the FXML file to load (e.g., "leaderboard.fxml" or "homepage.fxml").
      * @param title The title of the new window.
-     * @throws IOException If the file cannot be loaded.
+     * @throws IOException If the FXML file cannot be loaded.
      */
     public void loadFileFunc(String file, String title) throws IOException {
-        // Remove spaces from the title
-        String processedTitle = title.replaceAll(" ", "");
+        // Create the FXMLLoader with the provided FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
 
-        // Determine the FXML file to load based on the processed title
-        String fxmlFile;
-        switch (processedTitle) {
-            case "ChessLeaderboard":
-                fxmlFile = "ChessLeaderboard.fxml";
-                break;
-            case "TicTacToeLeaderboard":
-                fxmlFile = "TicTacToeLeaderboard.fxml";
-                break;
-            case "Connect4Leaderboard":
-                fxmlFile = "Connect4Leaderboard.fxml";
-                break;
-            default:
-                fxmlFile = "Homepage.fxml"; // Load a default board if title doesn't match
-                break;
-        }
-
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlFile));
+        // Load the scene from the FXML file
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-        Stage newStg = new Stage();
-        newStg.sizeToScene();
-        newStg.setTitle(title);
-        newStg.setScene(scene);
-        newStg.show();
+
+        // Create and set up the new stage
+        Stage newStage = new Stage();
+        newStage.sizeToScene();
+        newStage.setTitle(title);
+        newStage.setScene(scene);
+        newStage.show();
 
         // Close the current window
-        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
-        stgWindw.close();
+        Stage currentStage = (Stage) this.identity.getScene().getWindow();
+        currentStage.close();
     }
+
+
+
 
     /**
      * Returns to the homepage by loading the corresponding FXML file.
