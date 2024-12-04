@@ -18,7 +18,7 @@ public abstract class AbstractBoardGame implements BoardGame {
     public ArrayList<BoardGameObserver> gameEndObservers=new ArrayList<>();
     protected String winner = null;
     protected String gameID;
-    protected int currentPlayer;
+    protected int currentPlayer = 0;
     protected final String[] players;
     protected Piece[][] gameBoard;
     int addedPlayers=0;
@@ -63,7 +63,7 @@ public abstract class AbstractBoardGame implements BoardGame {
     protected void checkStartCondition(){
         if (addedPlayers>=playerNumber && gameState==GameState.WAITING) {
             gameState = GameState.INPROGRESS;
-            //startGame();
+            startGame();
             System.out.println("Game has started");
         }
     }
