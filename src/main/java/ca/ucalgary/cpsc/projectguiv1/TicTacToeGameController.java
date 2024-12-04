@@ -46,6 +46,8 @@ public class TicTacToeGameController {
 
     private boolean allFilled = false;
 
+    private boolean oneAlert = false;
+
     @FXML
     Pane identity;
     @FXML
@@ -95,9 +97,10 @@ public class TicTacToeGameController {
 
     @Deprecated
     public TicTacToeGameController() {
-        this.usrOne = new User("1", "firsstUsr", "email@google.com");
-        this.usrTwo = new User("2", "scndUsr", "otheremail@google.com");
-        HelloApplication.usrDb.addUser(this.usrOne);
+        this.usrOne = HelloApplication.usrDb.getCurrentUser();
+        //this.usrTwo = new User("SndUsr", "otheremail@google.com", "passwd");
+        this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
+        HelloApplication.usrDb.addUser(this.usrTwo);
 
         this.gameTicTacToe = new TicTacToe(2);
         this.gameTicTacToe.addPlayer(this.usrOne.getUsername());
@@ -143,7 +146,7 @@ public class TicTacToeGameController {
                         try {
                             makeMove(coordsArr, currPane);
                         } catch (IOException ioe) {
-                            System.out.println("io exception");
+                            System.out.println("io exception on setup");
                         }
                     });
                 }
@@ -155,15 +158,15 @@ public class TicTacToeGameController {
                 this.infoLabel.setText("Click to start!");
 
             } else {
-                //this.infoLabel.setText(this.usrTwo.getUsername() + "'s move!");
+                this.infoLabel.setFont(new Font("Comic Sans", 20));
                 this.infoLabel.setText("Click to start!");
             }
             this.player1Name.setText(this.usrOne.getUsername());
             this.player2Name.setText(this.usrTwo.getUsername());
-            this.winLabelP1.setText("Win: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins());
-            this.winLabelP2.setText("Win: " + this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins());
-            this.rankLabelP1.setText("Rank: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank());
-            this.rankLabelP2.setText("Rank: " + this.usrTwo.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+            this.winLabelP1.setText("Wins: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+            this.winLabelP2.setText("Wins: " + this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+            this.rankLabelP1.setText("Rank: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getWinRate());
+            this.rankLabelP2.setText("Rank: " + this.usrTwo.getPlayerProfile().getTicTacToeProfile().getWinRate());
             this.setup = true;
         }
 
@@ -213,7 +216,7 @@ public class TicTacToeGameController {
         this.chatScrlPane.setContent(this.chatBox);
     }
 
-    public void makeRandMove() throws IOException {
+    public void makeRandMove() {
 
         Random rand = new Random();
         int idx = rand.nextInt(9);
@@ -256,36 +259,69 @@ public class TicTacToeGameController {
         }
 
     }
-    @Deprecated
-    public void checkEndCon() throws IOException{ // game logic needs to add more end game states
-        if (this.gameTicTacToe.validateGameEnds() == 1) {
-            exitBtnFunc();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Winner!");
-            alert.setHeaderText("X's Win!");
-            alert.show();
-            saveEndData('W');
-        }else if (this.gameTicTacToe.validateGameEnds() == 2) {
-            exitBtnFunc();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Winner!");
-            alert.setHeaderText("O's Win!");
-            alert.show();
-            saveEndData('W');
-        }  else if (this.gameTicTacToe.validateGameEnds() == 3) {
-            exitBtnFunc();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Draw!");
-            alert.setHeaderText("This Game Has Reached A Stalemate");
-            alert.show();
+
+    public void checkEndCon() {
+        if(this.oneAlert == false) {
+            if (this.gameTicTacToe.validateGameEnds() == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Winner!");
+                alert.setHeaderText("X's Win!");
+                alert.show();
+                alert.setOnHidden(dialogEvent -> {
+                    saveEndData('W', 1);
+                    try {
+                        exitBtnFunc();
+                    } catch (IOException ioe) {
+                        System.out.println("IOExecption tictactoe exit btn func");
+                    }
+                });
+
+                this.oneAlert = true;
+            } else if (this.gameTicTacToe.validateGameEnds() == 2) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Winner!");
+                alert.setHeaderText("O's Win!");
+                alert.show();
+                alert.setOnHidden(dialogEvent -> {
+                    saveEndData('W', 2);
+                    try {
+                        exitBtnFunc();
+                    } catch (IOException ioe) {
+                        System.out.println("IOExecption tictactoe exit btn func");
+                    }
+                });
+                this.oneAlert = true;
+            } else if (this.gameTicTacToe.validateGameEnds() == 3) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Draw!");
+                alert.setHeaderText("This Game Has Reached A Stalemate");
+                alert.show();
+
+                alert.setOnHidden(dialogEvent -> {
+                    try {
+                        exitBtnFunc();
+                    } catch (IOException ioe) {
+                        System.out.println("IOExecption tictactoe exit btn func");
+                    }
+                });
+                this.oneAlert = true;
+            }
         }
     }
-    public void saveEndData(char result){ // Might have to change
-        TicTacToeProfile profOne = new TicTacToeProfile();
-        if(result == 'W') {
-            profOne.updateGameHistory(this.usrOne.getUsername(), "W", 1);
-        }else if (result == 'L'){
-            profOne.updateGameHistory(this.usrOne.getUsername(), "L", 1);
+    public void saveEndData(char result, int player){ // Might have to change
+        this.usrTwo = HelloApplication.usrDb.searchByUsername(this.usrTwo.getUsername());
+
+        if((result == 'W') && (player == 1)) {
+            this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
+            this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
+            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrOne.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
+            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistory(this.usrTwo.getUsername(), "W", 1);
+
+        }else if ((result == 'W') && (player == 2)){
+            this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
+            this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
+            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrTwo.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
+            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateGameHistory(this.usrOne.getUsername(), "W", 1);
         }
     }
 }
