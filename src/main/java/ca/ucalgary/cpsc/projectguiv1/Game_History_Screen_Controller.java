@@ -95,14 +95,15 @@ public class Game_History_Screen_Controller {
     private Text thirdMostRecentWL;
 
 
-    private User currUsr = HelloApplication.usrDb.getCurrentUser();;
+    private User currUsr = HelloApplication.usrDb.getCurrentUser();
 
     public Game_History_Screen_Controller(){
         setMatchHistory();
     }
 
     public void setMatchHistory(){
-        //this.mostRecent.getChildren().add(matchToString(this.currUsr));
+        this.mostRecentData.setText(this.currUsr.getPlayerProfile().displayGameHistory());
+
     }
     public String matchToString(User theUsr){
 
