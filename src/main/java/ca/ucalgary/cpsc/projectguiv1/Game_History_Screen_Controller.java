@@ -42,15 +42,19 @@ public class Game_History_Screen_Controller {
     @FXML
     BorderPane ninthMostRecent;
 
-    private static User currUsr = HelloApplication.usrDb.getCurrentUser();;
+
+    private User currUsr = HelloApplication.usrDb.getCurrentUser();;
 
     public Game_History_Screen_Controller(){
         setMatchHistory();
     }
 
     public void setMatchHistory(){
-        //this.mostRecent.getChildren().add(new )
+        //this.mostRecent.getChildren().add(matchToString(this.currUsr));
     }
+    public String matchToString(User theUsr){
 
+        return "";
+    }
 }
 
