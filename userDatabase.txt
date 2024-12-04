@@ -1,0 +1,2 @@
+Dummy Regald,dummy@gmail.com,securepass,Games Played,Player Stats,Win/Loss Record,Ranking
+IgotThis@gmail.com,ShitLightWork,12345678,Games Played,Player Stats,Win/Loss Record,Ranking
