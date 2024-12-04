@@ -2,6 +2,7 @@ package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.User;
 import gameLogic.Chess;
+import gameLogic.boardGames.AbstractBoardGame;
 import gameLogic.boardGames.BoardGameObserver;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ChessGameController extends AbstractGameController {
+public class ChessGameController {
 
     //Chat related properties
     @FXML
@@ -68,11 +69,25 @@ public class ChessGameController extends AbstractGameController {
     @FXML
     AnchorPane afterlife2;
 
+    AbstractBoardGame game;
+
+    protected String currentPlayer;
+
+    protected User user1= new User("1", "firsstUsr", "email@google.com");
+
+    protected User user2= new User("2", "scndUsr", "otheremail@google.com");
+
+
+
     private boolean setup = false;
 
     private ArrayList<Pane> arrOfPanes = new ArrayList<>();
 
     private ArrayList<String> arrOfPaneCoords = new ArrayList<>();
+
+    public ChessGameController() {
+        currentPlayer = user1.getUsername();
+    }
 
     @FXML
     public void initialize() {
@@ -84,6 +99,7 @@ public class ChessGameController extends AbstractGameController {
         this.currentPlayer=user1.getUsername();
         rankLabelP1.setText(String.valueOf(user1.getPlayerProfile().getChessProfile().getScoreRank()));
         rankLabelP2.setText(String.valueOf(user2.getPlayerProfile().getChessProfile().getScoreRank()));
+
 
     }
 
