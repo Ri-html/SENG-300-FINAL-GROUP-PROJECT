@@ -88,12 +88,12 @@ public class Home_Page_Controller implements Initializable {
     }
 
 
-    public void selectionFxn(String file) throws IOException { // Switch to sign up page
+    public void selectionFxn(String file, String title) throws IOException { // Switch to sign up page
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Stage newStg = new Stage();
         newStg.sizeToScene();
-        newStg.setTitle("Main Menu");
+        newStg.setTitle(title);
         newStg.setScene(scene);
         newStg.show();
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();
@@ -103,22 +103,22 @@ public class Home_Page_Controller implements Initializable {
 
     public void chessSelectionFxn() throws IOException {
         String file = "Chess_Main_Menu_View.fxml";
-        selectionFxn(file);
+        selectionFxn(file, "Chess Main Menu");
     }
 
     public void ticTacToeSelectionFxn() throws IOException {
         String file = "Tic_Tac_Toe_Main_Menu_View.fxml";
-        selectionFxn(file);
+        selectionFxn(file, "Tic-Tac-Toe Main Menu");
     }
 
     public void connect4SelectionFxn() throws IOException {
         String file = "Connect_4_Main_Menu_View.fxml";
-        selectionFxn(file);
+        selectionFxn(file, "Connect 4 Main Menu");
     }
 
     public void gameHistorySelectionFxn() throws IOException {
         String file = "Game_History_Screen.fxml";
-        selectionFxn(file);
+        selectionFxn(file, "Game History");
     }
 
 }
