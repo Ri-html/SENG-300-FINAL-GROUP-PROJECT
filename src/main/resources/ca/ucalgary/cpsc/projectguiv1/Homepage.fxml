@@ -75,6 +75,6 @@
       <Label fx:id="rankingTicTacToeLbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="15" />
       <Label fx:id="rankingConnect4Lbl" prefHeight="17.0" prefWidth="145.0" text="Ranking:XXXX" GridPane.columnIndex="13" GridPane.columnSpan="3" GridPane.rowIndex="15" />
       <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.columnSpan="7" GridPane.rowIndex="5" GridPane.rowSpan="2" />
-      <Button fx:id="gameHistory" mnemonicParsing="false" text="Game History" GridPane.columnIndex="8" GridPane.columnSpan="7" GridPane.rowIndex="19" GridPane.rowSpan="2" />
+      <Button fx:id="gameHistory" mnemonicParsing="false" onAction="#gameHistorySelectionFxn" text="Game History" GridPane.columnIndex="8" GridPane.columnSpan="7" GridPane.rowIndex="19" GridPane.rowSpan="2" />
    </children>
 </GridPane>

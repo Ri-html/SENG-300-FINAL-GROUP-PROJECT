@@ -1,5 +1,7 @@
-package authProfile;
-import java.util.Date;
+package UserAndProfile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractGameProfile {
 
@@ -20,6 +22,25 @@ public abstract class AbstractGameProfile {
     // Ranking fields
     private int scoreRank;
     private int winRateRank;
+
+    // List to store all game records
+    private List<GameRecord> gameRecords;
+
+    // Add a game record
+    public void addGameRecord(String opponent, String result, int score) {
+        GameRecord newRecord = new GameRecord(opponent, result, score);
+        this.gameRecords.add(newRecord);
+
+        // Update the last game details
+        setLastOpponent(opponent);
+        setLastGameResult(result);
+        setLastGameScore(score);
+    }
+
+    // Get all game records
+    public List<GameRecord> getAllGameRecords() {
+        return new ArrayList<>(this.gameRecords); // Return a copy of the list to preserve encapsulation
+    }
 
     // Constructor
     public AbstractGameProfile() {
