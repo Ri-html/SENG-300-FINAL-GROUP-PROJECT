@@ -11,10 +11,12 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
+
     public static UserDatabase usrDb = new UserDatabase();
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TicTacToe_Game_Screen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Game_History_Screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         stage.setTitle("Login");
         stage.setScene(scene);

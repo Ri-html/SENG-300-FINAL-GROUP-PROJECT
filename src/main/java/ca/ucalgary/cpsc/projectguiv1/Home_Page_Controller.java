@@ -116,4 +116,9 @@ public class Home_Page_Controller implements Initializable {
         selectionFxn(file);
     }
 
+    public void gameHistorySelectionFxn() throws IOException {
+        String file = "Game_History_Screen.fxml";
+        selectionFxn(file);
+    }
+
 }
