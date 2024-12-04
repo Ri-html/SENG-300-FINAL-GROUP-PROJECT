@@ -5,8 +5,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -49,16 +47,16 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="113.0" fitWidth="115.0" layoutX="19.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../Downloads/Untitled%204.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="95.0" fitWidth="111.0" layoutX="34.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../Downloads/Untitled%203.png" />
-                     </image>
-                  </ImageView>
+                  <Pane layoutX="12.0" layoutY="11.0" prefHeight="119.0" prefWidth="132.0">
+                     <children>
+                        <Label layoutX="66.0" layoutY="48.0" prefHeight="17.0" prefWidth="2.0" fx:id="xTxtLbl1" />
+                        <Label fx:id="oTxtLbl" layoutX="27.0" layoutY="-3.0" prefHeight="126.0" prefWidth="115.0" text="O">
+                           <font>
+                              <Font size="100.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
                </children>
             </Pane>
             <Pane layoutX="34.0" layoutY="180.0" prefHeight="240.0" prefWidth="155.0" style="-fx-background-color: grey; -fx-background-radius: 20;">
@@ -78,11 +76,15 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="97.0" fitWidth="98.0" layoutX="39.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../Downloads/Untitled%202.png" />
-                     </image>
-                  </ImageView>
+                  <Pane layoutX="12.0" layoutY="14.0" prefHeight="119.0" prefWidth="132.0">
+                     <children>
+                        <Label layoutX="34.0" layoutY="-2.0" prefHeight="123.0" prefWidth="62.0" text="X" fx:id="xTxtLbl">
+                           <font>
+                              <Font size="100.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
                </children>
             </Pane>
             <Button fx:id="exitBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#exitBtnFunc" prefHeight="36.0" prefWidth="94.0" text="Exit Game" />
