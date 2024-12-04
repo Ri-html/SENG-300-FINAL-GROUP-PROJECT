@@ -5,42 +5,94 @@ import authProfile.UserDatabase;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 
 
 public class Game_History_Screen_Controller {
 
     @FXML
-    Button back;
+    private Button back;
 
     @FXML
-    Button profile;
+    private BorderPane eighthMostRecent;
 
     @FXML
-    BorderPane mostRecent;
+    Text eighthMostRecentData;
 
     @FXML
-    BorderPane secondMostRecent;
+    private Text eighthMostRecentWL;
 
     @FXML
-    BorderPane thirdMostRecent;
+    private BorderPane fifthMostRecent;
 
     @FXML
-    BorderPane fourthMostRecent;
+    private Text fifthMostRecentData;
 
     @FXML
-    BorderPane fifthMostRecent;
+    private Text fifthMostRecentWL;
 
     @FXML
-    BorderPane sixthMostRecent;
+    private BorderPane fourthMostRecent;
 
     @FXML
-    BorderPane seventhMostRecent;
+    private Text fourthMostRecentData;
 
     @FXML
-    BorderPane eighthMostRecent;
+    private BorderPane mostRecent;
 
     @FXML
-    BorderPane ninthMostRecent;
+    private Text mostRecentData;
+
+    @FXML
+    private Text mostRecentWL;
+
+    @FXML
+    private BorderPane ninthMostRecent;
+
+    @FXML
+    private Text ninthMostRecentData;
+
+    @FXML
+    private Text ninthMostRecentWL;
+
+    @FXML
+    private Button profile;
+
+    @FXML
+    private BorderPane secondMostRecent;
+
+    @FXML
+    private Text secondMostRecentData;
+
+    @FXML
+    private Text secondMostRecentWL;
+
+    @FXML
+    private BorderPane seventhMostRecent;
+
+    @FXML
+    private Text seventhMostRecentData;
+
+    @FXML
+    private Text seventhMostRecentWL;
+
+    @FXML
+    private BorderPane sixthMostRecent;
+
+    @FXML
+    private Text sixthMostRecentData;
+
+    @FXML
+    private Text sixthMostRecentWL;
+
+    @FXML
+    private BorderPane thirdMostRecent;
+
+    @FXML
+    private Text thirdMostRecentData;
+
+    @FXML
+    private Text thirdMostRecentWL;
 
     private static User currUsr = HelloApplication.usrDb.getCurrentUser();;
 
