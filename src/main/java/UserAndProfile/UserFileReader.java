@@ -5,7 +5,8 @@ import java.util.*;
 
 public class UserFileReader {
 
-    public static void readUsersFromFile(String fileName, UserDatabase userDatabase) {
+    // Modify this method to avoid calling addUser (which triggers the constructor again)
+    public static void readUsersFromFileWithoutAdd(String fileName, UserDatabase userDatabase) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -16,7 +17,7 @@ public class UserFileReader {
                     String password = data[2].trim();
 
                     User user = new User(username, email, password);
-                    userDatabase.addUser(user);
+                    userDatabase.addUserDirectly(user); // Directly add to the list without triggering recursion
                 }
             }
         } catch (IOException e) {
