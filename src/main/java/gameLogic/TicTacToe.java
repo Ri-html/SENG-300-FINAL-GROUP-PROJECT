@@ -29,16 +29,16 @@ public class TicTacToe extends AbstractBoardGame {
         // check for win
         for (int i = 0; i < WIDTH; i++) {
             // check columns
-            if (gameBoard[i][0] != null && gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][0] == gameBoard[i][2])
+            if (gameBoard[i][0] != null && gameBoard[i][0].equals(gameBoard[i][1]) && gameBoard[i][0].equals(gameBoard[i][2]))
                 return gameBoard[i][0].getSide()==TicTacToeSide.X ? 1 : 2;
             // check rows
-            if (gameBoard[0][i] != null && gameBoard[0][i] == gameBoard[1][i] && gameBoard[0][i] == gameBoard[2][i])
+            if (gameBoard[0][i] != null && gameBoard[0][i].equals(gameBoard[1][i]) && gameBoard[0][i].equals(gameBoard[2][i]))
                 return gameBoard[0][i].getSide()==TicTacToeSide.X ? 1 : 2;
         }
         // check diagonals
-        if (gameBoard[0][0] != null && gameBoard[0][0] == gameBoard[1][1] && gameBoard[0][0] == gameBoard[2][2])
+        if (gameBoard[0][0] != null && gameBoard[0][0].equals(gameBoard[1][1]) && gameBoard[0][0].equals(gameBoard[2][2]))
             return gameBoard[0][0].getSide()==TicTacToeSide.X ? 1 : 2;
-        if (gameBoard[0][2] != null && gameBoard[0][2] == gameBoard[1][1] && gameBoard[0][2] == gameBoard[2][0])
+        if (gameBoard[0][2] != null && gameBoard[0][2].equals(gameBoard[1][1]) && gameBoard[0][2].equals(gameBoard[2][0]))
             return gameBoard[0][2].getSide()==TicTacToeSide.X ? 1 : 2;
 
         // check for empty spaces

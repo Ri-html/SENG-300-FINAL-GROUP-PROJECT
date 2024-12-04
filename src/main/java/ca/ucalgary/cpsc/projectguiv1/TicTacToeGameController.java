@@ -186,8 +186,10 @@ public class TicTacToeGameController {
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
                 checkEndCon();
                 makeRandMove();
+                checkEndCon();
             } else {
                 makeRandMove();
+                checkEndCon();
             }
 
         } catch (IllegalArgumentException iae) {
