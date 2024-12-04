@@ -116,7 +116,7 @@
             </GridPane>
          </children>
       </Pane>
-      <Button fx:id="exitBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#exitBtnFunc" prefHeight="39.0" prefWidth="102.0" text="Exit Game" />
+      <Button fx:id="exitBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitBtnFunc" prefHeight="39.0" prefWidth="102.0" text="Exit Game" />
       <Pane layoutX="736.0" layoutY="196.0" prefHeight="209.0" prefWidth="137.0" style="-fx-background-radius: 20; -fx-background-color: grey;">
          <children>
             <Circle fill="#ff1f28" layoutX="67.0" layoutY="49.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />

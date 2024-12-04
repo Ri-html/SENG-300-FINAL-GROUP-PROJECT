@@ -1,13 +1,13 @@
 package leaderboard.tictactoeLeaderboard;
 
 import java.util.*;
-import ticTacToeLeaderboard.PlayerStats;
+import leaderboard.tictactoeLeaderboard.PlayerStats;
 
 public class TicTacToeLeaderboard {
     // Singleton instance of the leaderboard
     private static TicTacToeLeaderboard instance = null;
     // Map to store player stats with player ID as the key
-    private Map<String, ticTacToeLeaderboard.PlayerStats> playerStatsMap;
+    private Map<String, PlayerStats> playerStatsMap;
 
     // Private constructor to enforce singleton pattern
     private TicTacToeLeaderboard() {
@@ -24,7 +24,7 @@ public class TicTacToeLeaderboard {
 
     // Record a win for the specified player
     public synchronized void recordWin(String playerId) {
-        ticTacToeLeaderboard.PlayerStats stats = playerStatsMap.get(playerId);
+        PlayerStats stats = playerStatsMap.get(playerId);
         // If player doesn't exist, create a new entry
         if (stats == null) {
             stats = new PlayerStats(playerId);
