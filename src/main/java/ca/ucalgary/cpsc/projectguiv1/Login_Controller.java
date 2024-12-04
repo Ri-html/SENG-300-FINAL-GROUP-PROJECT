@@ -42,11 +42,10 @@ public class Login_Controller {
             Stage currentStage = (Stage) identity.getScene().getWindow();
             currentStage.setScene(scene);
         } else {
-            System.out.println("Error: Invalid username or password.");
+            // Show error pop-up instead of printing to the console
+            showErrorPopup("Error: Invalid username or password.");
         }
     }
-
-
 
     @FXML
     public void signupLinkFxn(ActionEvent event) throws IOException {
@@ -55,5 +54,14 @@ public class Login_Controller {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         Stage currentStage = (Stage) identity.getScene().getWindow();
         currentStage.setScene(scene);
+    }
+
+    // Method to show error popups
+    private void showErrorPopup(String message) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alert.setTitle("Login Error");
+        alert.setHeaderText(null); // No header
+        alert.setContentText(message); // Set the error message
+        alert.showAndWait(); // Show the alert and wait for user action
     }
 }
