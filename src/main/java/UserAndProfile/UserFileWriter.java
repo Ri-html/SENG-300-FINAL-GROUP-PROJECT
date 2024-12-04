@@ -4,31 +4,30 @@ import java.io.*;
 
 public class UserFileWriter {
 
+    // Save all users to the file
     public static void writeUsersToFile(UserDatabase userDatabase, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (User user : userDatabase.getAllUsers()) {
-                // Format: username,email,password,profileModule1,profileModule2,...
-                StringBuilder userData = new StringBuilder();
-                userData.append(user.getUsername()).append(",");
-                userData.append(user.getEmail()).append(",");
-                userData.append(user.getPassword());
-
-                // Get the user's PlayerProfile
-                PlayerProfile profile = user.getPlayerProfile();
-                if (profile != null) {
-                    // Append all selected modules to the user data
-                    for (String module : profile.getSelectedModules()) {
-                        userData.append(",").append(module);
-                    }
-                }
-
-                // Write user data to the file
-                writer.write(userData.toString());
+                // Write username, email, and password in the correct order
+                String userData = user.getUsername() + "," + user.getEmail() + "," + user.getPassword();
+                writer.write(userData);
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error writing users to file: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+
+    // Append a single user to the file
+    public static void appendUserToFile(User user, String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
+            // Ensure proper format: username,email,password
+            String userData = user.getUsername().trim() + "," + user.getEmail().trim() + "," + user.getPassword().trim();
+            writer.write(userData);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Error appending user to file: " + e.getMessage());
         }
     }
 }

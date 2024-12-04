@@ -1,4 +1,10 @@
-dummy@gmail.com,securepass,12345678,Games Played,Player Stats,Win/Loss Record,Ranking
-ShitLightWork,12345678,12345678,Games Played,Player Stats,Win/Loss Record,Ranking
-Dummy Regald,dummy@gmail.com,securepass,Games Played,Player Stats,Win/Loss Record,Ranking
-IgotThis@gmail.com,helpmeplease,12345678,Games Played,Player Stats,Win/Loss Record,Ranking
+something@gmail.com,IGotThis,12345678
+IGotThis,12345678,12345678
+IGotThis,12345678,12345678
+something@gmail.com,IGotThis,12345678
+something@gmail.com,IGotThis,12345678
+IGotThis,12345678,12345678
+Stimpy,something@gmail.com,IGotThis
+something@gmail.com,IGotThis,12345678
+IGotThis,12345678,12345678
+Stimpy,something@gmail.com,IGotThis

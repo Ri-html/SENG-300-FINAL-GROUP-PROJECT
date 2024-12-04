@@ -1,6 +1,7 @@
 package UserAndProfile;
 
 import java.io.*;
+import java.util.*;
 
 public class UserFileReader {
 
@@ -9,10 +10,10 @@ public class UserFileReader {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length >= 3) {
-                    String username = data[0];
-                    String email = data[1];
-                    String password = data[2];
+                if (data.length == 3) {
+                    String username = data[0].trim();
+                    String email = data[1].trim();
+                    String password = data[2].trim();
 
                     User user = new User(username, email, password);
                     userDatabase.addUser(user);

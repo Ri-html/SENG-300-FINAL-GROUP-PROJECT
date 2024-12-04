@@ -2,17 +2,23 @@ package UserAndProfile;
 
 public class Main {
     public static void main(String[] args) {
-        // Initialize the user database (automatically loads users from the file)
-        UserDatabase userDatabase = UserDatabase.getInstance();
+        // Initialize the user database
+        UserDatabase userDb = UserDatabase.getInstance();
 
-        // Test adding a user
-        User newUser = new User("4", "NewUser", "newuser@example.com");
-        newUser.setPassword("newpassword");
-        userDatabase.addUser(newUser);
+        // Display loaded users
+        System.out.println("Loaded users:");
+        for (User user : userDb.getAllUsers()) {
+            System.out.println("Username: " + user.getUsername() + ", Email: " + user.getEmail());
+        }
 
-        // Display all users
-        for (User user : userDatabase.getAllUsers()) {
-            System.out.println("User: " + user.getUsername() + ", Email: " + user.getEmail());
+        // Test adding a new user
+        User newUser = new User("testUser", "test@example.com", "password123");
+        userDb.addUser(newUser);
+
+        // Display updated users
+        System.out.println("Updated users:");
+        for (User user : userDb.getAllUsers()) {
+            System.out.println("Username: " + user.getUsername() + ", Email: " + user.getEmail());
         }
     }
 }

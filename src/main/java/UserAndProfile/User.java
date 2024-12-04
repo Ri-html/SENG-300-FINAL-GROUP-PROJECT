@@ -5,7 +5,6 @@ import java.util.List;
 
 public class User {
 
-    private String userId;
     private String username;
     private String email;
     private String password; // User's account password
@@ -13,25 +12,16 @@ public class User {
     private List<User> friends; // List to store user's friends
     private PlayerProfile playerProfile; // Added PlayerProfile field
 
-    // Constructor
-    public User(String userId, String username, String email) {
-        this.userId = userId;
+    // Constructor for creating a user with all fields
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        this.password = "12345678"; // Assign default password
+        setPassword(password); // Use the setter to handle password validation
         this.friends = new ArrayList<>();
         this.playerProfile = new PlayerProfile(); // Initialize the PlayerProfile
     }
 
     // Getters and Setters for User fields
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -54,8 +44,7 @@ public class User {
 
     public void setPassword(String password) {
         if (password == null || password.isEmpty()) {
-            System.out.println("Password cannot be empty. Default password '12345678' is set.");
-            this.password = "12345678"; // Keep default password if empty
+            throw new IllegalArgumentException("Password cannot be empty.");
         } else {
             this.password = password;
         }

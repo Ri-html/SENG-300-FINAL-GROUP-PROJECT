@@ -23,17 +23,15 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        UserDatabase userDb = UserDatabase.getInstance(); // Ensure UserDatabase is a singleton
+        UserDatabase userDb = UserDatabase.getInstance();
 
-        // Create a dummy user for testing
-        User dummyUser = new User("dummySlame", "Dummy Regald", "dummy@gmail.com");
-        dummyUser.setPassword("securepass"); // Set a secure password
-        userDb.addUser(dummyUser); // Add the dummy user to the database
+        // Check if the database is empty
+        if (userDb.getAllUsers().isEmpty()) {
+            // Optionally add dummy data only if no users exist
+            System.out.println("No users found in database. Starting with an empty database.");
+        }
 
-        // Set the dummy user as the current user
-        userDb.setCurrentUser(dummyUser);
-
-        // Launch the application
         launch();
     }
+
 }

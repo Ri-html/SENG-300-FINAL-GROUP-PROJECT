@@ -7,15 +7,15 @@ public class UserDatabase {
     private List<User> users;
     private User currentUser;
     private static UserDatabase instance;
-    private static final String USER_DATABASE_FILE = "userDatabase.txt"; // Centralized file name
+    private static final String USER_DATABASE_FILE = "userDatabase.txt";
 
-    // Private Constructor
+    // Constructor
     private UserDatabase() {
         this.users = new ArrayList<>();
-        loadUsersFromFile(); // Automatically load users when the database is instantiated
+        loadUsersFromFile(); // Load users when the database is initialized
     }
 
-    // Singleton Pattern
+    // Singleton Instance
     public static UserDatabase getInstance() {
         if (instance == null) {
             instance = new UserDatabase();
@@ -25,26 +25,16 @@ public class UserDatabase {
 
     // Load users from the file
     private void loadUsersFromFile() {
-        try {
-            UserFileReader.readUsersFromFile(USER_DATABASE_FILE, this);
-            System.out.println("Users loaded successfully from file.");
-        } catch (Exception e) {
-            System.out.println("Error loading users: " + e.getMessage());
-        }
+        UserFileReader.readUsersFromFile(USER_DATABASE_FILE, this);
     }
 
-    // Save users to the file
-    public void saveUsersToFile() {
-        try {
-            UserFileWriter.writeUsersToFile(this, USER_DATABASE_FILE);
-            System.out.println("Users saved successfully to file.");
-        } catch (Exception e) {
-            System.out.println("Error saving users: " + e.getMessage());
-        }
-    }
-
-    // Add a user to the database
+    // Add a user and save to the file
     public void addUser(User user) {
+        addUser(user, true); // Default behavior: Save to file
+    }
+
+    // Add user with control over file writing
+    public void addUser(User user, boolean saveToFile) {
         if (searchByUsername(user.getUsername()) != null) {
             System.out.println("Error: Username already exists.");
             return;
@@ -53,13 +43,13 @@ public class UserDatabase {
             System.out.println("Error: Email already registered.");
             return;
         }
-
         users.add(user);
-        System.out.println("User added: " + user.getUsername());
-        saveUsersToFile(); // Save the updated user list
+        if (saveToFile) {
+            UserFileWriter.appendUserToFile(user, USER_DATABASE_FILE); // Append user to the file
+        }
     }
 
-    // Search for a user by username
+    // Search by username
     public User searchByUsername(String username) {
         return users.stream()
                 .filter(user -> user.getUsername().equalsIgnoreCase(username))
@@ -67,7 +57,7 @@ public class UserDatabase {
                 .orElse(null);
     }
 
-    // Search for a user by email
+    // Search by email
     public User searchByEmail(String email) {
         return users.stream()
                 .filter(user -> user.getEmail().equalsIgnoreCase(email))
@@ -86,7 +76,7 @@ public class UserDatabase {
     }
 
     // Set current user
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
     }
 }
