@@ -8,9 +8,11 @@ import gameLogic.TicTacToe;
 import gameLogic.boardGames.AbstractBoardGame;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -157,10 +159,11 @@ public class TicTacToeGameController {
                 this.gameTicTacToe.switchCurrentPlayer();
 
                 Label xLbl = new Label();
-                xLbl.setTextFill(Color.RED);
+                xLbl.setTextFill(Color.BLUE);
                 xLbl.setFont(new Font("Comic Sans", 100));
-                xLbl.setText("          X");
+                xLbl.setText("X");
                 currPane.getChildren().add(xLbl);
+
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
                 checkEndCon();
                 makeRandMove();
@@ -211,7 +214,7 @@ public class TicTacToeGameController {
                 Label oLbl = new Label();
                 oLbl.setTextFill(Color.RED);
                 oLbl.setFont(new Font("Comic Sans", 100));
-                oLbl.setText("          O");
+                oLbl.setText("O");
                 randPane.getChildren().add(oLbl);
                 this.infoLabel.setText(this.gameTicTacToe.getCurrentPlayer() + "'s move!");
                 checkEndCon();

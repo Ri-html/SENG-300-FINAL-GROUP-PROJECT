@@ -63,7 +63,7 @@ public abstract class AbstractBoardGame implements BoardGame {
     protected void checkStartCondition(){
         if (addedPlayers>=playerNumber && gameState==GameState.WAITING) {
             gameState = GameState.INPROGRESS;
-            //startGame();
+            startGame();
             System.out.println("Game has started");
         }
     }

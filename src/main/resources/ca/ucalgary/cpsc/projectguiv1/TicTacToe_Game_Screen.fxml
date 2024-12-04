@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,11 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.TicTacToeGameController">
    <content>
@@ -36,7 +34,6 @@
             </GridPane>
             <Pane layoutX="701.0" layoutY="191.0" prefHeight="240.0" prefWidth="155.0" style="-fx-background-color: grey; -fx-background-radius: 20;">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="114.0" layoutX="22.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="112.0" />
                   <Label fx:id="player2Name" layoutX="52.0" layoutY="146.0" text="Player 2">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -52,14 +49,20 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Circle fill="WHITE" layoutX="78.0" layoutY="71.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" />
+                  <ImageView fitHeight="113.0" fitWidth="115.0" layoutX="19.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../Downloads/Untitled%204.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="95.0" fitWidth="111.0" layoutX="34.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../Downloads/Untitled%203.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="34.0" layoutY="180.0" prefHeight="240.0" prefWidth="155.0" style="-fx-background-color: grey; -fx-background-radius: 20;">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="114.0" layoutX="22.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="112.0" />
-                  <Line endX="95.4000244140625" endY="-98.19999694824219" layoutX="22.0" layoutY="128.0" startX="17.800048828125" startY="-17.399993896484375" />
-                  <Line endX="81.4000244140625" endY="-33.0" layoutX="32.0" layoutY="138.0" startX="4.5999755859375" startY="-108.19999694824219" />
                   <Label fx:id="player1Name" layoutX="52.0" layoutY="146.0" text="Player 1">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -75,6 +78,11 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="97.0" fitWidth="98.0" layoutX="39.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../Downloads/Untitled%202.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Button fx:id="exitBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#exitBtnFunc" prefHeight="36.0" prefWidth="94.0" text="Exit Game" />
