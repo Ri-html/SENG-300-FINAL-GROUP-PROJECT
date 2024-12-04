@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import leaderboard.chessLeaderboard.Leaderboard;
+import leaderboard.chessLeaderboard.ChessLeaderboard;
 import leaderboard.chessLeaderboard.PlayerStats;
 
 import java.io.IOException;
@@ -81,7 +81,7 @@ public class Leaderboard_Controller {
         };
 
         // Get the leaderboard instance (Singleton pattern)
-        Leaderboard leaderboard = Leaderboard.getInstance();
+        ChessLeaderboard leaderboard = ChessLeaderboard.getInstance();
 
         // Retrieve the top 13 players
         List<PlayerStats> topPlayers = leaderboard.getTopPlayers(13);
@@ -108,7 +108,27 @@ public class Leaderboard_Controller {
      * @throws IOException If the file cannot be loaded.
      */
     public void loadFileFunc(String file, String title) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        // Remove spaces from the title
+        String processedTitle = title.replaceAll(" ", "");
+
+        // Determine the FXML file to load based on the processed title
+        String fxmlFile;
+        switch (processedTitle) {
+            case "ChessLeaderboard":
+                fxmlFile = "ChessLeaderboard.fxml";
+                break;
+            case "TicTacToeLeaderboard":
+                fxmlFile = "TicTacToeLeaderboard.fxml";
+                break;
+            case "Connect4Leaderboard":
+                fxmlFile = "Connect4Leaderboard.fxml";
+                break;
+            default:
+                fxmlFile = "Homepage.fxml"; // Load a default board if title doesn't match
+                break;
+        }
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlFile));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         Stage newStg = new Stage();
         newStg.sizeToScene();
@@ -130,4 +150,5 @@ public class Leaderboard_Controller {
         String file = "Homepage.fxml";
         loadFileFunc(file, "Homepage");
     }
+
 }
