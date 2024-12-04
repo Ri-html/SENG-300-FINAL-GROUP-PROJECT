@@ -25,7 +25,7 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         UserDatabase userDb = UserDatabase.getInstance(); // Ensure UserDatabase is a singleton
-        User dummyUser = new User("Dummy Regald", "dummySlame", "dummy@gmail.com");
+        User dummyUser = new User("Dumb Regald", "dummySlame", "dummy@gmail.com");
         dummyUser.setPassword("securepass");
         userDb.addUser(dummyUser);
         dummyUser.loginUser();

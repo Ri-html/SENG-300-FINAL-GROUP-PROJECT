@@ -1,4 +1,4 @@
-package ticTacToeLeaderboard;
+package leaderboard.tictactoeLeaderboard;
 
 public class PlayerStats implements Comparable<PlayerStats> {
     // Unique identifier for the player
