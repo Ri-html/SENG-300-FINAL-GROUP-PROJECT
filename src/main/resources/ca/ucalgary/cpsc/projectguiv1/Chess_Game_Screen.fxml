@@ -197,6 +197,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
+            <Button fx:id="reset" layoutX="73.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#resetGame" text="Reset" />
          </children>
       </Pane>
    </content>

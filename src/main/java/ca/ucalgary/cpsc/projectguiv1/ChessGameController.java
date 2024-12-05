@@ -6,11 +6,13 @@ import gameLogic.Chess;
 import gameLogic.TicTacToe;
 import gameLogic.boardGames.AbstractBoardGame;
 import gameLogic.boardGames.BoardGameObserver;
+import gameLogic.boardGames.Game;
 import gameLogic.piece.chessPiece.ChessPieceDisplay;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -133,7 +135,6 @@ public class ChessGameController implements BoardGameObserver{
         afterlife1.setStyle("-fx-text-fill:brown;");
         afterlife2.setStyle("-fx-text-fill :black;");
         setUpBoard();
-
     }
 
     @FXML
@@ -176,6 +177,7 @@ public class ChessGameController implements BoardGameObserver{
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {
                     Pane currPane = new Pane();
+                    currPane.setAccessibleHelp("toRemove");
                     int xCoord = x;
                     int yCoord = y;
                     if (yCoord == 0) {
@@ -564,6 +566,13 @@ public class ChessGameController implements BoardGameObserver{
             Pane tempPane=oldPane;
             oldPane=newPane;
             newPane=tempPane;
+        }
+        public void resetGame(){
+            gamePane.getChildren().removeIf(children -> children instanceof Pane);
+            afterlife1.setText("");
+            afterlife2.setText("");
+            this.setup=false;
+            initialize();
         }
         @Override
         public void update(String obj){
