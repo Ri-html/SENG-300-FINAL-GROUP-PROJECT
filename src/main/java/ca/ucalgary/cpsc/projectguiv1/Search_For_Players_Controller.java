@@ -111,7 +111,13 @@ public class Search_For_Players_Controller {
         newStg.show();
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();
         stgWindw.close();
+
+        loadInfoFromUser(user);
         // How do I pass the information from the user object to the other screen?
+    }
+
+    public void loadInfoFromUser(User user){
+
     }
 
     public void backBtnFunc() throws IOException {
