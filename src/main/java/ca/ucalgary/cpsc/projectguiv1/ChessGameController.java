@@ -11,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -32,6 +29,7 @@ public class ChessGameController {
     private User usrTwo;
     private ChessLeaderboard cl;
     private Chess gameChess;
+    private boolean oneAlert = false;
 
     Color p1Color = Color.RED;
     Color p2Color = Color.BLUE;
@@ -356,6 +354,56 @@ public class ChessGameController {
         BackgroundFill backgroundFill = new BackgroundFill(Color.BLUE, null, null);
         Background background = new Background(backgroundFill);
         currPane.setBackground(background);
+    }
+
+
+    public void checkEndCon() {
+        if(this.oneAlert == false) { // This is to make sure that only one pop-up, pops up
+            if (this.gameChess.validateGameEnds() == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Winner!");
+                alert.setHeaderText(usrOne.getUsername() + "Wins!");
+                alert.show();
+                alert.setOnHidden(dialogEvent -> {
+                    saveEndData('W', 1);
+                    try {
+                        exitBtnFunc(); // Once the game is declared over, quit the screen
+                    } catch (IOException ioe) {
+                        System.out.println("IOExecption tictactoe exit btn func");
+                    }
+                });
+
+                this.oneAlert = true;
+            } else if (this.gameChess.validateGameEnds() == 2) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Winner!");
+                alert.setHeaderText(usrTwo.getUsername() + "Win!");
+                alert.show();
+                alert.setOnHidden(dialogEvent -> {
+                    saveEndData('W', 2);
+                    try {
+                        exitBtnFunc(); // Once the game is declared over, quit the screen
+                    } catch (IOException ioe) {
+                        System.out.println("IOExecption tictactoe exit btn func");
+                    }
+                });
+                this.oneAlert = true;
+            } else if (this.gameChess.validateGameEnds() == 3) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Draw!");
+                alert.setHeaderText("This Game Has Reached A Stalemate");
+                alert.show();
+
+                alert.setOnHidden(dialogEvent -> {
+                    try {
+                        exitBtnFunc(); // Once the game is declared over, quit the screen
+                    } catch (IOException ioe) {
+                        System.out.println("IOExecption tictactoe exit btn func");
+                    }
+                });
+                this.oneAlert = true;
+            }
+        }
     }
 
 
