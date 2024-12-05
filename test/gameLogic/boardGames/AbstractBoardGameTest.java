@@ -78,6 +78,7 @@ public class AbstractBoardGameTest implements BoardGameObserver{
         boardGame.updateMove("1 , 2");
         String two= boardGame.toString();
         assertNotEquals(one,two);
+        //assertNotEquals is junit5, not junit4.
     }
 
     @Test
