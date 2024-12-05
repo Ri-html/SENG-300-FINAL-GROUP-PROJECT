@@ -23,13 +23,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
+import network.Network;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author Ethan Copeland
@@ -55,6 +53,8 @@ public class TicTacToeGameController {
     private boolean oneAlert = false;
 
     private TicTacToeLeaderboard tttl;
+
+    public static String otherPlayersName = null;
 
     @FXML
     Pane identity;
@@ -113,10 +113,22 @@ public class TicTacToeGameController {
     @Deprecated
     public TicTacToeGameController() {
         this.usrOne = HelloApplication.usrDb.getCurrentUser();
-        this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
-        if(this.usrTwo == null){
-            // Random second user, will never be the current user
-            this.usrTwo = new User("SndUsr", "snd@user", "pass");
+
+        // Network functionality
+        List<User> allPlayers = HelloApplication.usrDb.getAllUsers();
+        Network network = new Network(allPlayers);
+        List<User> tttPlayers = network.findTictactoeRank(this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+
+
+        Collections.shuffle(tttPlayers);
+
+        this.usrTwo = tttPlayers.getFirst();
+        if (this.usrTwo.getUsername().equals(this.usrOne.getUsername())) {
+            this.usrTwo = tttPlayers.get(1);
+        }
+
+        if(otherPlayersName != null){ // match with a specific user
+            this.usrTwo = HelloApplication.usrDb.searchByUsername(otherPlayersName);
         }
 
         HelloApplication.usrDb.addUser(this.usrTwo);
@@ -207,7 +219,7 @@ public class TicTacToeGameController {
             }else{
                 this.rankLabelP1.setText("Rank: 0");
             }
-            if(this.tttl.getPlayerRank(this.usrOne.getUsername()) != -1) {
+            if(this.tttl.getPlayerRank(this.usrTwo.getUsername()) != -1) {
                 this.rankLabelP2.setText("Rank: " + this.tttl.getPlayerRank(this.usrTwo.getUsername()));
             }else{
                 this.rankLabelP2.setText("Rank: 0");
@@ -407,6 +419,7 @@ public class TicTacToeGameController {
             this.tttl.recordLoss(this.usrOne.getUsername());
 
         }
+        otherPlayersName = null;
 
     }
 }

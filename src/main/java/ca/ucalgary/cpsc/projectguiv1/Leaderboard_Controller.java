@@ -74,6 +74,9 @@ public class Leaderboard_Controller {
         javafx.application.Platform.runLater(() -> {
             Stage stage = (Stage) identity.getScene().getWindow();
             String windowTitle = stage.getTitle().replaceAll(" ", ""); // Remove spaces
+            stage.setWidth(600);
+            stage.setHeight(800);
+            stage.setResizable(false);
 
             // Dynamically determine which leaderboard to load
             switch (windowTitle) {
@@ -211,4 +214,27 @@ public class Leaderboard_Controller {
         loadFileFunc(file, "Homepage");
     }
 
+
+    /**
+     * Return to the user's profile by loading the corresponding FXML file.
+     *
+     * @param actionEvent The action event triggered by the button click
+     * @throws IOException If the file cannot be loaded
+     */
+    public void viewOtherUserProfile(javafx.event.ActionEvent actionEvent) throws IOException {
+        // Get the button object from the event source
+        Button button = (Button) actionEvent.getSource();
+
+        // Retrieve the text displayed on the button
+        String buttonText = button.getText(); // For example: "Alice - Wins: 5"
+
+        // Extract the part before the " - " separator as the player's name
+        String playerName = buttonText.split(" - ")[0]; // Result: playerName = "Alice"
+
+        // Define the target FXML file to load
+        String file = "View_Other_User_Profile.fxml";
+
+        // Load the target FXML file and pass the player's name to the title
+        loadFileFunc(file, playerName + "'s Profile");
+    }
 }
