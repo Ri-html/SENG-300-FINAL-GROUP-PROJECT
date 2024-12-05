@@ -3,3 +3,6 @@ test,test@,test
 SndUsr,snd@user,pass
 mithrask,mithra@gmail.com,123456
 trial,trial@gmail.com,1234
+Lei_Fang,fl1754@outlook.com,123456
+Jack,jack1314@outlook.com,123456
+John,123@123.com,123456
