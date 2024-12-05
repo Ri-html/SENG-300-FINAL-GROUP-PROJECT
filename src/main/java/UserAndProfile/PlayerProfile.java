@@ -89,9 +89,35 @@ public class PlayerProfile {
     // Game history display method
     public String displayGameHistory() {
         String retStr = "";
-        retStr += "Game History for Chess: " + chessProfile.getLastOpponent() + ", " + chessProfile.getLastGameResult() + ", " + chessProfile.getLastGameScore();
-        retStr += "\nGame History for TicTacToe: " + ticTacToeProfile.getLastOpponent() + ", " + ticTacToeProfile.getLastGameResult() + ", " + ticTacToeProfile.getLastGameScore();
-        retStr += "\nGame History for ConnectFour: " + connectFourProfile.getLastOpponent() + ", " + connectFourProfile.getLastGameResult() + ", " + connectFourProfile.getLastGameScore();
+        retStr += "\n Format: [Opponent], [Last Game Result (Win/Loss)], [Win/Loss Score]\n\n";
+        retStr += " Game History for Chess: " + chessProfile.getLastOpponent() + ", " + chessProfile.getLastGameResult() + ", " + chessProfile.getLastGameScore();
+        retStr += "\n Game History for TicTacToe: " + ticTacToeProfile.getLastOpponent() + ", " + ticTacToeProfile.getLastGameResult() + ", " + ticTacToeProfile.getLastGameScore();
+        retStr += "\n Game History for ConnectFour: " + connectFourProfile.getLastOpponent() + ", " + connectFourProfile.getLastGameResult() + ", " + connectFourProfile.getLastGameScore();
+        return retStr;
+    }
+
+    public String displayChessGameHistory() {
+
+        String retStr = "";
+        retStr += "Opponent: " + chessProfile.getLastOpponent() + "\n";
+        retStr += "Result: " + chessProfile.getLastGameResult() + "\n";
+        retStr += "Score: " + chessProfile.getLastGameScore();
+        return retStr;
+    }
+
+    public String displayTicTacToeGameHistory() {
+        String retStr = "";
+        retStr += "Opponent: " + ticTacToeProfile.getLastOpponent() + "\n";
+        retStr += "Result: " + ticTacToeProfile.getLastGameResult() + "\n";
+        retStr += "Score: " + ticTacToeProfile.getLastGameScore();
+        return retStr;
+    }
+
+    public String displayConnect4GameHistory() {
+        String retStr = "";
+        retStr += "Opponent: " + connectFourProfile.getLastOpponent() + "\n";
+        retStr += "Result: " + connectFourProfile.getLastGameResult() + "\n";
+        retStr += "Score: " + connectFourProfile.getLastGameScore();
         return retStr;
     }
 

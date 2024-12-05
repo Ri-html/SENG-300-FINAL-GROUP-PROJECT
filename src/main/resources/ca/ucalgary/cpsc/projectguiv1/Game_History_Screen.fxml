@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Game_History_Screen_Controller">
+<AnchorPane fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.Game_History_Screen_Controller">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="450.0" layoutX="84.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" width="650.0" />
       <AnchorPane layoutX="301.0" layoutY="350.0" prefHeight="10.0" prefWidth="200.0" />
@@ -18,8 +18,8 @@
             <Font name="Helvetica Bold" size="18.0" />
          </font>
       </Text>
-      <ScrollPane layoutX="129.0" layoutY="108.0" prefHeight="341.0" prefWidth="543.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="341.0" layoutX="128.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="543.0" />
+      <ScrollPane layoutX="129.0" layoutY="123.0" prefHeight="326.0" prefWidth="543.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="326.0" layoutX="128.0" layoutY="122.0" stroke="BLACK" strokeType="INSIDE" width="543.0" />
       <Text fx:id="gameHistoryTxt" layoutX="128.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="543.0">
          <font>
             <Font size="18.0" />
