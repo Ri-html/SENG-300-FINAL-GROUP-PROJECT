@@ -72,7 +72,13 @@ public class Search_For_Players_Controller {
                     setGraphic(null);
                 } else {
                     button.setText(user.getUsername()); // Set button text
-                    button.setOnAction(e -> navigateToProfilePage(user)); // Handle button click
+                    button.setOnAction(e -> {
+                        try {
+                            navigateToProfilePage(user);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }); // Handle button click
                     setGraphic(button); // Add button to the ListCell
                     setText(null); // Clear default text
                 }
@@ -93,8 +99,33 @@ public class Search_For_Players_Controller {
 
     }
 
-    public void navigateToProfilePage(User user){
+    public void navigateToProfilePage(User user) throws IOException {
+        String file = "View_Other_User_Profile.fxml";
 
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Viewing " +user.getUsername() +"'s Profile");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
+        // How do I pass the information from the user object to the other screen?
+    }
+
+    public void backBtnFunc() throws IOException {
+        String file = "Search_for_Players.fxml";
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Search for Players");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
     }
 
 
