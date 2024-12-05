@@ -15,7 +15,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="97.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Status" />
+      <Text fx:id="currentStatusLabel" layoutX="97.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Status" />
       <Text layoutX="186.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game History">
          <font>
             <Font size="18.0" />
