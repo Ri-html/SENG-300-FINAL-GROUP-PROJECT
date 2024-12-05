@@ -118,6 +118,10 @@ public class ChessGameController implements BoardGameObserver{
         game = new Chess();
         game.addPlayer(usrOne.getUsername());
         game.addPlayer(usrTwo.getUsername());
+        game.attachGameEndObserver(this);
+        game.attachTurnEndObserver(this);
+        //game.attachInvalidMoveObserver(this);
+
         player1Name.setText(usrOne.getUsername());
         player2Name.setText(usrTwo.getUsername());
         rankLabelP1.setText(String.valueOf(usrOne.getPlayerProfile().getChessProfile().getScoreRank()));
@@ -352,6 +356,7 @@ public class ChessGameController implements BoardGameObserver{
                 if (!Arrays.equals(origin,destination)) {
                     String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
                     game.updateMove(moves);
+                    System.out.println(currentPlayer);
                     togglePlayer();
                 }
                 origin =null;
@@ -404,6 +409,7 @@ public class ChessGameController implements BoardGameObserver{
                     if (!Arrays.equals(origin,destination)) {
                         String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
                         game.updateMove(moves);
+                        System.out.println(currentPlayer);
                         togglePlayer();
                     }
                     origin = null;
@@ -508,11 +514,16 @@ public class ChessGameController implements BoardGameObserver{
         }
         @Override
         public void update(String obj){
-            String[] objs=obj.split(",");
+            String[] objs=obj.split("\n");
             switch (objs[0]){
                 case "TurnEnd":
                     break;
                 case "GameEnd":
+                    checkEndCon();
+                    break;
+                case "InvalidMove":
+                    System.out.println(currentPlayer+"1");
+                    togglePlayer();
                     break;
             }
         }
