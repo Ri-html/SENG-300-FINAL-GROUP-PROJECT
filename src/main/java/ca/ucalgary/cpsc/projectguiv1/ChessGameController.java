@@ -2,10 +2,13 @@ package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.User;
 import gameLogic.Chess;
+import gameLogic.boardGames.AbstractBoardGame;
 import gameLogic.boardGames.BoardGameObserver;
+import gameLogic.piece.chessPiece.ChessPieceDisplay;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,12 +19,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ChessGameController extends AbstractGameController {
+public class ChessGameController {
 
+    Color p1Color=Color.RED;
+    Color p2Color=Color.BLUE;
     //Chat related properties
     @FXML
     ScrollPane chatScrlPane;
@@ -68,11 +75,25 @@ public class ChessGameController extends AbstractGameController {
     @FXML
     AnchorPane afterlife2;
 
+    AbstractBoardGame game;
+
+    protected String currentPlayer;
+
+    protected User user1= new User("1", "firsstUsr", "email@google.com");
+
+    protected User user2= new User("2", "scndUsr", "otheremail@google.com");
+
+
+
     private boolean setup = false;
 
     private ArrayList<Pane> arrOfPanes = new ArrayList<>();
 
     private ArrayList<String> arrOfPaneCoords = new ArrayList<>();
+
+    public ChessGameController() {
+        currentPlayer = user1.getUsername();
+    }
 
     @FXML
     public void initialize() {
@@ -81,9 +102,9 @@ public class ChessGameController extends AbstractGameController {
         game.addPlayer(user2.getUsername());
         player1Name.setText(user1.getUsername());
         player2Name.setText(user2.getUsername());
-        this.currentPlayer=user1.getUsername();
         rankLabelP1.setText(String.valueOf(user1.getPlayerProfile().getChessProfile().getScoreRank()));
         rankLabelP2.setText(String.valueOf(user2.getPlayerProfile().getChessProfile().getScoreRank()));
+        setUpBoard();
 
     }
 
@@ -121,19 +142,173 @@ public class ChessGameController extends AbstractGameController {
         this.chatScrlPane.setContent(this.chatBox);
     }
 
-    @Override
-    public void setUpBoard(String board) {
+    public void setUpBoard() {
+        int size=50;
         if(this.setup == false){
             for(int x = 0; x < 8; x++){
                 for(int y = 0; y < 8; y++){
                     Pane currPane = new Pane();
                     int xCoord = x;
                     int yCoord = y;
+                    if (yCoord==0){
+                        if (xCoord==0){
+                            //set pieces in the first row
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p1Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.rook.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==1) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p1Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.knight.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==2) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p1Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.bishop.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==3) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p1Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.queen.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==4) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p1Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.king.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==5) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p1Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.bishop.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        }else if (xCoord==6) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p1Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.knight.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==7) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p1Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.rook.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+                        }
+
+                    } else if (yCoord==1) {
+                        //set pieces in the second row
+                        Label xLbl = new Label();
+                        xLbl.setTextFill(p1Color);
+                        xLbl.setFont(new Font("Comic Sans", size));
+                        xLbl.setText(String.valueOf(ChessPieceDisplay.pawn.getSymbol()));
+                        xLbl.setAlignment(Pos.CENTER);
+                        currPane.getChildren().add(xLbl);
+
+                    } else if (yCoord==6) {
+                        //set pieces in the seventh row
+                        Label xLbl = new Label();
+                        xLbl.setTextFill(p2Color);
+                        xLbl.setFont(new Font("Comic Sans", size));
+                        xLbl.setText(String.valueOf(ChessPieceDisplay.pawn.getSymbol()));
+                        xLbl.setAlignment(Pos.CENTER);
+                        currPane.getChildren().add(xLbl);
+
+                    } else if (yCoord==7) {
+                        //set pieces in the eighth row
+                        if (xCoord==0){
+                            //set pieces in the first row
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p2Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.rook.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==1) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p2Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.knight.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==2) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p2Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.bishop.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==3) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p2Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.queen.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==4) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p2Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.king.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==5) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p2Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.bishop.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        }else if (xCoord==6) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p2Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.knight.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+
+                        } else if (xCoord==7) {
+                            Label xLbl = new Label();
+                            xLbl.setTextFill(p2Color);
+                            xLbl.setFont(new Font("Comic Sans", size));
+                            xLbl.setText(String.valueOf(ChessPieceDisplay.rook.getSymbol()));
+                            xLbl.setAlignment(Pos.CENTER);
+                            currPane.getChildren().add(xLbl);
+                        }
+                    }
+
                     this.gamePane.add(currPane, xCoord, yCoord);
                     arrOfPanes.add(currPane);
                     arrOfPaneCoords.add(y + " " + x);
                     currPane.setOnMouseClicked(mouseEvent -> {
-                        int[] coordsArr = {xCoord, yCoord};
+                        int[] coordsArr = {xCoord, xCoord};
                         try {
                             makeMove(coordsArr, currPane);
                         } catch (IOException ioe) {
