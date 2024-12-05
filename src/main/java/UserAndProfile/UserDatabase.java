@@ -6,6 +6,8 @@ import javafx.scene.control.Alert.AlertType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserDatabase {
     private List<User> users;
@@ -71,7 +73,7 @@ public class UserDatabase {
     // Search by username
     public User searchByUsername(String username) {
         return users.stream()
-                .filter(user -> user.getUsername().equalsIgnoreCase(username))
+                .filter(user -> user.getUsername().toLowerCase().contains(username.toLowerCase()))
                 .findFirst()
                 .orElse(null);
     }
@@ -79,9 +81,21 @@ public class UserDatabase {
     // Search by email
     public User searchByEmail(String email) {
         return users.stream()
-                .filter(user -> user.getEmail().equalsIgnoreCase(email))
+                .filter(user -> user.getEmail().toLowerCase().contains(email.toLowerCase()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public List<User> searchUsername(String username) {
+        return users.stream()
+                .filter(user -> user.getUsername().toLowerCase().contains(username.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public List<User> searchEmail(String email) {
+        return users.stream()
+                .filter(user -> user.getEmail().toLowerCase().contains(email.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     // Get all users
@@ -101,13 +115,15 @@ public class UserDatabase {
 
     // Helper method to display popups
     private void showErrorPopup(String message) {
-        Platform.runLater(() -> {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Validation Error");
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.showAndWait();
-        });
+//        Platform.runLater(() -> {
+//            Alert alert = new Alert(AlertType.ERROR);
+//            alert.setTitle("Validation Error");
+//            alert.setHeaderText(null);
+//            alert.setContentText(message);
+//            alert.showAndWait();
+//        });
+
+        // Why are back end functions doing GUI? Throw an exception or sumn
     }
 
     // New method to avoid calling addUser() during user loading

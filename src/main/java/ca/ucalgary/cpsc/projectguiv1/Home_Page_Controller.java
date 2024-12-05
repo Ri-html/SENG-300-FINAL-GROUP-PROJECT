@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.annotation.Repeatable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class Home_Page_Controller implements Initializable {
+public class Home_Page_Controller{
     @FXML
     GridPane identity;
 
@@ -49,7 +50,7 @@ public class Home_Page_Controller implements Initializable {
     Label rankingConnect4Lbl;
 
     @FXML
-    TextField searchBar;
+    Button searchPlayersBtn;
 
     @FXML
     ListView<String> listView;
@@ -59,33 +60,33 @@ public class Home_Page_Controller implements Initializable {
         user1 = new User("1", "john", "john@email.com");
     }
 
-    ArrayList<String> words = new ArrayList<>(
-            Arrays.asList("John", "Macy", "Sarah")
-    );
-
-    @FXML
-    void search(ActionEvent event){
-        listView.getItems().clear();
-        listView.getItems().addAll(searchList(searchBar.getText(), words));
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        listView.getItems().addAll(words);
-
-        // Labels under games
-        rankingTicTacToeLbl.setText("Ranking: " + user1.getPlayerProfile().getTicTacToeProfile().getScoreRank());
-        rankingConnect4Lbl.setText("Ranking: " + user1.getPlayerProfile().getConnectFourProfile().getScoreRank());
-        rankingChessLbl.setText("Ranking: "+ user1.getPlayerProfile().getChessProfile().getScoreRank());
-    }
-
-    private List<String> searchList(String searchWords, List<String> listOfStrings){
-        List<String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
-        return listOfStrings.stream().filter(input -> {
-            return searchWordsArray.stream().allMatch(word ->
-                    input.toLowerCase().contains(word.toLowerCase()));
-        }).collect(Collectors.toList());
-    }
+//    ArrayList<String> words = new ArrayList<>(
+//            Arrays.asList("John", "Macy", "Sarah")
+//    );
+//
+//    @FXML
+//    void search(ActionEvent event){
+//        listView.getItems().clear();
+//        listView.getItems().addAll(searchList(searchBar.getText(), words));
+//    }
+//
+//    @Override
+//    public void initialize(URL url, ResourceBundle resourceBundle){
+//        listView.getItems().addAll(words);
+//
+//        // Labels under games
+//        rankingTicTacToeLbl.setText("Ranking: " + user1.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+//        rankingConnect4Lbl.setText("Ranking: " + user1.getPlayerProfile().getConnectFourProfile().getScoreRank());
+//        rankingChessLbl.setText("Ranking: "+ user1.getPlayerProfile().getChessProfile().getScoreRank());
+//    }
+//
+//    private List<String> searchList(String searchWords, List<String> listOfStrings){
+//        List<String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
+//        return listOfStrings.stream().filter(input -> {
+//            return searchWordsArray.stream().allMatch(word ->
+//                    input.toLowerCase().contains(word.toLowerCase()));
+//        }).collect(Collectors.toList());
+//    }
 
 
     public void selectionFxn(String file, String title) throws IOException { // Switch to sign up page
@@ -119,6 +120,11 @@ public class Home_Page_Controller implements Initializable {
     public void gameHistorySelectionFxn() throws IOException {
         String file = "Game_History_Screen.fxml";
         selectionFxn(file, "Game History");
+    }
+
+    public void searchPlayersFunc() throws IOException {
+        String file = "Search_for_Players.fxml";
+        selectionFxn(file, "Search for Players");
     }
 
 }
