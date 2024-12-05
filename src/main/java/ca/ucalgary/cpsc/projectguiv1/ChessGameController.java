@@ -15,10 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -323,6 +320,23 @@ public class ChessGameController {
     }
 
     public void makeMove(int[] coordsArr, Pane currPane) throws IOException{
-
+        if (currPane.getChildren()==null){
+            //this skips the else ifs
+        }else if (currentPlayer.equals(player1Name.getText())){
+            Label xLbl = (Label) currPane.getChildren().get(0);
+            if (p1Color== xLbl.getTextFill()){
+                highlightPane(currPane);
+            }
+        } else if (currentPlayer.equals(player2Name.getText())) {
+            Label xLbl = (Label) currPane.getChildren().get(0);
+            if (p2Color== xLbl.getTextFill()){
+                highlightPane(currPane);
+            }
+        }
+    }
+    public void highlightPane(Pane currPane){
+        BackgroundFill backgroundFill = new BackgroundFill(Color.BLUE, null, null);
+        Background background = new Background(backgroundFill);
+        currPane.setBackground(background);
     }
 }
