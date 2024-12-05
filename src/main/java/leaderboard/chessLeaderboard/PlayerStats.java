@@ -3,10 +3,12 @@ package leaderboard.chessLeaderboard;
 public class PlayerStats implements Comparable<PlayerStats> {
     private String playerId;
     private int totalWins;
+    private int totalLosses;
 
     public PlayerStats(String playerId) {
         this.playerId = playerId;
         this.totalWins = 0;
+        this.totalLosses = 0;
     }
 
     public String getPlayerId() {
@@ -17,8 +19,17 @@ public class PlayerStats implements Comparable<PlayerStats> {
         return totalWins;
     }
 
+    public int getTotalLosses() {
+        return totalLosses;
+    }
+
+
     public void incrementWins() {
         totalWins++;
+    }
+
+    public void incrementLosses() {
+        totalLosses++;
     }
 
     @Override

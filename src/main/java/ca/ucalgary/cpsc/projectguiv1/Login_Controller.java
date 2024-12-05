@@ -38,9 +38,15 @@ public class Login_Controller {
 
             // Navigate to the Home Page
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Homepage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
-            Stage currentStage = (Stage) identity.getScene().getWindow();
-            currentStage.setScene(scene);
+            Scene scene = new Scene(fxmlLoader.load(),800,500);
+            Stage newStg = new Stage();
+            newStg.sizeToScene();
+            newStg.setTitle("Homepage");
+            newStg.setScene(scene);
+            newStg.show();
+            Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+            stgWindw.close();
+
         } else {
             // Show error pop-up instead of printing to the console
             showErrorPopup("Error: Invalid username or password.");

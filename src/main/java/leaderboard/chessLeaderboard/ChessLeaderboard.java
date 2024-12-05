@@ -26,6 +26,16 @@ public class ChessLeaderboard {
         stats.incrementWins();
     }
 
+    public synchronized void recordLoss(String playerId) {
+        PlayerStats stats = playerStatsMap.get(playerId);
+        // If player doesn't exist, create a new entry
+        if (stats == null) {
+            stats = new PlayerStats(playerId);
+            playerStatsMap.put(playerId, stats);
+        }
+        stats.incrementLosses();
+    }
+
     public synchronized List<PlayerStats> getTopPlayers(int n) {
         List<PlayerStats> allStats = new ArrayList<>(playerStatsMap.values());
         Collections.sort(allStats);
