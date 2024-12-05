@@ -362,14 +362,14 @@ public class ChessGameController {
             if (this.gameChess.validateGameEnds() == 1) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
-                alert.setHeaderText(usrOne.getUsername() + "Wins!");
+                alert.setHeaderText(usrOne.getUsername() + " Wins!");
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 1);
                     try {
                         exitBtnFunc(); // Once the game is declared over, quit the screen
                     } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
+                        System.out.println("IOExecption chess exit btn func");
                     }
                 });
 
@@ -377,14 +377,14 @@ public class ChessGameController {
             } else if (this.gameChess.validateGameEnds() == 2) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
-                alert.setHeaderText(usrTwo.getUsername() + "Win!");
+                alert.setHeaderText(usrTwo.getUsername() + " Wins!");
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 2);
                     try {
                         exitBtnFunc(); // Once the game is declared over, quit the screen
                     } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
+                        System.out.println("IOExecption chess exit btn func");
                     }
                 });
                 this.oneAlert = true;
@@ -398,7 +398,7 @@ public class ChessGameController {
                     try {
                         exitBtnFunc(); // Once the game is declared over, quit the screen
                     } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
+                        System.out.println("IOExecption chess exit btn func");
                     }
                 });
                 this.oneAlert = true;
@@ -411,22 +411,22 @@ public class ChessGameController {
         this.usrTwo = HelloApplication.usrDb.searchByUsername(this.usrTwo.getUsername());
 
         if ((result == 'W') && (player == 1)) {
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrOne.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "W", 1);
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrOne.getUsername(), "L", -1);
+            this.usrOne.getPlayerProfile().getChessProfile().setTotalWins(this.usrOne.getPlayerProfile().getChessProfile().getTotalWins() + 1);
+            this.usrTwo.getPlayerProfile().getChessProfile().setTotalLosses(this.usrTwo.getPlayerProfile().getChessProfile().getTotalLosses() + 1);
+            this.usrOne.getPlayerProfile().getChessProfile().updateRanking(this.usrOne.getPlayerProfile().getChessProfile().getScoreRank(), this.usrOne.getPlayerProfile().getChessProfile().getWinRateRank());
+            this.usrOne.getPlayerProfile().getChessProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "W", 1);
+            this.usrTwo.getPlayerProfile().getChessProfile().updateGameHistoryReal(this.usrOne.getUsername(), "L", -1);
             this.cl.recordWin(this.usrOne.getUsername());
             this.cl.recordLoss(this.usrTwo.getUsername());
             System.out.println("test1");
 
         } else if ((result == 'W') && (player == 2)) {
             System.out.println("test2");
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrTwo.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrOne.getUsername(), "W", 1);
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "L", -1);
+            this.usrTwo.getPlayerProfile().getChessProfile().setTotalWins(this.usrTwo.getPlayerProfile().getChessProfile().getTotalWins() + 1);
+            this.usrOne.getPlayerProfile().getChessProfile().setTotalLosses(this.usrOne.getPlayerProfile().getChessProfile().getTotalLosses() + 1);
+            this.usrTwo.getPlayerProfile().getChessProfile().updateRanking(this.usrTwo.getPlayerProfile().getChessProfile().getScoreRank(), this.usrTwo.getPlayerProfile().getChessProfile().getWinRateRank());
+            this.usrTwo.getPlayerProfile().getChessProfile().updateGameHistoryReal(this.usrOne.getUsername(), "W", 1);
+            this.usrOne.getPlayerProfile().getChessProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "L", -1);
             this.cl.recordWin(this.usrTwo.getUsername());
             this.cl.recordLoss(this.usrOne.getUsername());
 
