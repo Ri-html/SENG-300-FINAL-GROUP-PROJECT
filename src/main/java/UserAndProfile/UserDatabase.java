@@ -115,13 +115,15 @@ public class UserDatabase {
 
     // Helper method to display popups
     private void showErrorPopup(String message) {
-        Platform.runLater(() -> {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Validation Error");
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.showAndWait();
-        });
+//        Platform.runLater(() -> {
+//            Alert alert = new Alert(AlertType.ERROR);
+//            alert.setTitle("Validation Error");
+//            alert.setHeaderText(null);
+//            alert.setContentText(message);
+//            alert.showAndWait();
+//        });
+
+        // Why are back end functions doing GUI? Throw an exception or sumn
     }
 
     // New method to avoid calling addUser() during user loading

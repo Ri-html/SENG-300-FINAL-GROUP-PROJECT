@@ -1,3 +1,5 @@
 Stimpy,something@gmail.com,IGotThis
+test,test@,test
+SndUsr,snd@user,pass
 mithrask,mithra@gmail.com,123456
 trial,trial@gmail.com,1234
