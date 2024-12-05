@@ -54,13 +54,6 @@ public class Home_Page_Controller implements Initializable{
     @FXML
     Button searchPlayersBtn;
 
-//    @FXML
-//    ListView<String> listView;
-//    private User user1;
-//
-//    public Home_Page_Controller(){
-//        user1 = new User("1", "john", "john@email.com");
-//    }
 
 
     public void selectionFxn(String file, String title) throws IOException { // Switch to sign up page
@@ -104,9 +97,6 @@ public class Home_Page_Controller implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UserDatabase db = UserDatabase.getInstance();
-        TicTacToeLeaderboard tttl = TicTacToeLeaderboard.getInstance();
-
-
         User currUser = db.getCurrentUser();
         this.rankingTicTacToeLbl.setText("Ranking: " + currUser.getPlayerProfile().getTicTacToeProfile().getTotalScore());
         this.rankingChessLbl.setText("Ranking: " + currUser.getPlayerProfile().getChessProfile().getTotalScore());
