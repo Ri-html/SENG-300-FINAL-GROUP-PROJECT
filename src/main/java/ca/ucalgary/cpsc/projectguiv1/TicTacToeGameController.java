@@ -98,12 +98,14 @@ public class TicTacToeGameController {
     @FXML
     Label oTxtLbl;
 
+    @FXML
+    Button startBtn;
+
 
 
     @Deprecated
     public TicTacToeGameController() {
         this.usrOne = HelloApplication.usrDb.getCurrentUser();
-        //this.usrTwo = new User("SndUsr", "otheremail@google.com", "passwd");
         this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
         if(this.usrTwo == null){
             this.usrTwo = new User("SndUsr", "snd@user", "pass");
