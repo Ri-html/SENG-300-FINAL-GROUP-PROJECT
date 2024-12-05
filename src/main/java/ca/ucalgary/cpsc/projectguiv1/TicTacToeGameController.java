@@ -23,13 +23,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
+import network.Network;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author Ethan Copeland
@@ -113,7 +111,53 @@ public class TicTacToeGameController {
     @Deprecated
     public TicTacToeGameController() {
         this.usrOne = HelloApplication.usrDb.getCurrentUser();
-        this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
+
+        // Network functionality
+        List<User> allPlayers = HelloApplication.usrDb.getAllUsers();
+        Network network = new Network(allPlayers);
+        List<User> tttPlayers = network.findTictactoeRank(this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+
+
+        Collections.shuffle(tttPlayers);
+
+        this.usrTwo = tttPlayers.getFirst();
+        if (this.usrTwo.getUsername().equals(this.usrOne.getUsername())) {
+            this.usrTwo = tttPlayers.get(1);
+        }
+
+
+        HelloApplication.usrDb.addUser(this.usrTwo);
+        this.tttl = TicTacToeLeaderboard.getInstance();
+
+
+        this.gameTicTacToe = new TicTacToe(2);
+        this.gameTicTacToe.addPlayer(this.usrOne.getUsername());
+        this.gameTicTacToe.addPlayer(this.usrTwo.getUsername());
+    }
+
+    /**
+     * @param username the username of the other player
+     * This class is used for challenging other players
+     */
+    @Deprecated
+    public TicTacToeGameController(String username) {
+        this.usrOne = HelloApplication.usrDb.getCurrentUser();
+
+
+        List<User> allPlayers = HelloApplication.usrDb.getAllUsers();
+        Network network = new Network(allPlayers);
+        List<User> tttPlayers = network.findTictactoeRank(this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+
+
+        Collections.shuffle(tttPlayers);
+
+        this.usrTwo = tttPlayers.getFirst();
+        if (this.usrTwo.getUsername().equals(this.usrOne.getUsername())) {
+            this.usrTwo = tttPlayers.get(1);
+        }
+
+
+        this.usrTwo = HelloApplication.usrDb.searchByUsername(username);
         if(this.usrTwo == null){
             // Random second user, will never be the current user
             this.usrTwo = new User("SndUsr", "snd@user", "pass");
@@ -207,7 +251,7 @@ public class TicTacToeGameController {
             }else{
                 this.rankLabelP1.setText("Rank: 0");
             }
-            if(this.tttl.getPlayerRank(this.usrOne.getUsername()) != -1) {
+            if(this.tttl.getPlayerRank(this.usrTwo.getUsername()) != -1) {
                 this.rankLabelP2.setText("Rank: " + this.tttl.getPlayerRank(this.usrTwo.getUsername()));
             }else{
                 this.rankLabelP2.setText("Rank: 0");
