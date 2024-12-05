@@ -22,6 +22,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 
 
 import java.io.IOException;
@@ -47,6 +48,8 @@ public class TicTacToeGameController {
     private boolean allFilled = false;
 
     private boolean oneAlert = false;
+
+    private TicTacToeLeaderboard tttl;
 
     @FXML
     Pane identity;
@@ -95,12 +98,20 @@ public class TicTacToeGameController {
     @FXML
     Label oTxtLbl;
 
+
+
     @Deprecated
     public TicTacToeGameController() {
         this.usrOne = HelloApplication.usrDb.getCurrentUser();
         //this.usrTwo = new User("SndUsr", "otheremail@google.com", "passwd");
         this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
+        if(this.usrTwo == null){
+            this.usrTwo = new User("SndUsr", "snd@user", "pass");
+        }
+
         HelloApplication.usrDb.addUser(this.usrTwo);
+        this.tttl = TicTacToeLeaderboard.getInstance();
+
 
         this.gameTicTacToe = new TicTacToe(2);
         this.gameTicTacToe.addPlayer(this.usrOne.getUsername());
@@ -165,8 +176,19 @@ public class TicTacToeGameController {
             this.player2Name.setText(this.usrTwo.getUsername());
             this.winLabelP1.setText("Wins: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins());
             this.winLabelP2.setText("Wins: " + this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins());
-            this.rankLabelP1.setText("Rank: " + this.usrOne.getPlayerProfile().getTicTacToeProfile().getWinRate());
-            this.rankLabelP2.setText("Rank: " + this.usrTwo.getPlayerProfile().getTicTacToeProfile().getWinRate());
+
+            if(this.tttl.getPlayerRank(this.usrOne.getUsername()) != -1) {
+                this.rankLabelP1.setText("Rank: " + this.tttl.getPlayerRank(this.usrOne.getUsername()));
+            }else{
+                this.rankLabelP1.setText("Rank: 0");
+            }
+            if(this.tttl.getPlayerRank(this.usrOne.getUsername()) != -1) {
+                this.rankLabelP2.setText("Rank: " + this.tttl.getPlayerRank(this.usrTwo.getUsername()));
+            }else{
+                this.rankLabelP2.setText("Rank: 0");
+            }
+
+
             this.setup = true;
         }
 
@@ -316,13 +338,19 @@ public class TicTacToeGameController {
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
             this.usrOne.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrOne.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
             this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistory(this.usrTwo.getUsername(), "W", 1);
+            this.tttl.recordWin(this.usrOne.getUsername());
+            this.tttl.recordLoss(this.usrTwo.getUsername());
 
         }else if ((result == 'W') && (player == 2)){
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
             this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrTwo.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateGameHistory(this.usrOne.getUsername(), "W", 1);
+            this.tttl.recordWin(this.usrTwo.getUsername());
+            this.tttl.recordLoss(this.usrOne.getUsername());
+
         }
+
     }
 }
 
