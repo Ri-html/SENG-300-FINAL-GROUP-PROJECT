@@ -1,9 +1,11 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.User;
+import UserAndProfile.UserDatabase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -43,13 +45,40 @@ public class View_Other_User_Profile_Controller {
     @FXML
     private AnchorPane identity;
 
+    @FXML
+    private Text yourWinRateChess;
+
+    @FXML
+    private Text yourWinRateTicTacToe;
+
+    @FXML
+    private Text currentStatusLabel;
+
     public void setUser(User user){
         this.user = user;
         loadInfoFromUser(this.user);
     }
     public void loadInfoFromUser(User user){
+        UserDatabase db = UserDatabase.getInstance(); // current database
+        User currUser = db.getCurrentUser();
+        //Usernames
+        this.usernameLabel.setText(user.getUsername());
+        this.yourUsernameLabel.setText(currUser.getUsername());
+        // Tic Tac Toe rankings
+        this.rankingTicTacToeLabel.setText("Ranking: " + user.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+        this.yourRankingTicTacToeLabel.setText("Ranking: " + currUser.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+
+        // Chess rankings
         int result = user.getPlayerProfile().getChessProfile().getScoreRank();
-        this.rankingChessLabel.setText("TEST");
+        this.rankingChessLabel.setText("Ranking: " +  result);
+        this.yourRankingChessLabel.setText("Ranking: " + db.getCurrentUser().getPlayerProfile().getChessProfile().getScoreRank());
+
+        // Your Win Rate
+        this.yourWinRateChess.setText("Wins: " + currUser.getPlayerProfile().getChessProfile().getWinRate());
+        this.yourWinRateTicTacToe.setText("Wins: " + currUser.getPlayerProfile().getTicTacToeProfile().getWinRate());
+
+        // Other user's current status
+        this.currentStatusLabel.setText("Online");
     }
 
     public void backBtnFunc() throws IOException {
