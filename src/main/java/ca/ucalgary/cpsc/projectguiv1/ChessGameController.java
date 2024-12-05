@@ -1,3 +1,4 @@
+
 package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.User;
@@ -33,7 +34,10 @@ public class ChessGameController implements BoardGameObserver{
     private boolean oneAlert = false;
     int[] origin=null;
     int[] destination=null;
-    Pane tempPane;
+    Pane oldPane;
+    Pane newPane;
+    Label someLabel;
+    boolean exception=false;
 
     Color p1Color = Color.RED;
     Color p2Color = Color.BLUE;
@@ -118,6 +122,10 @@ public class ChessGameController implements BoardGameObserver{
         game = new Chess();
         game.addPlayer(usrOne.getUsername());
         game.addPlayer(usrTwo.getUsername());
+        game.attachGameEndObserver(this);
+        game.attachTurnEndObserver(this);
+        //game.attachInvalidMoveObserver(this);
+
         player1Name.setText(usrOne.getUsername());
         player2Name.setText(usrTwo.getUsername());
         rankLabelP1.setText(String.valueOf(usrOne.getPlayerProfile().getChessProfile().getScoreRank()));
@@ -341,10 +349,9 @@ public class ChessGameController implements BoardGameObserver{
     }
 
     public void makeMove(int[] coordsArr, Pane currPane) throws IOException {
-        if (currPane.getChildren().isEmpty()) {
-            //this skips the else ifs
-            if (origin!=null){
-                dehighlightPane();
+        //if the cell is empty and is the second click
+        if (currPane.getChildren().isEmpty()&& origin!=null) {
+                dehighlightPane(currPane);
                 int location1 = gamePane.getRowIndex(currPane); // x position
                 int location2 = gamePane.getColumnIndex(currPane); // y position
                 destination = new int[]{location1, location2};
@@ -352,63 +359,95 @@ public class ChessGameController implements BoardGameObserver{
                 if (!Arrays.equals(origin,destination)) {
                     String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
                     game.updateMove(moves);
-                    togglePlayer();
+                    System.out.println(currentPlayer);
+                    if (exception==false){
+                        togglePlayer();
+                        moveLabel();
+                    }
                 }
                 origin =null;
                 destination = null;
 
-            }
-
-        } else if (currentPlayer.equals(player1Name.getText())) {
+          //if player one moves and is the first click
+        } else if (currentPlayer.equals(player1Name.getText()) && origin==null) {
             Label xLbl = (Label) currPane.getChildren().get(0);
-            if (p1Color== xLbl.getTextFill()) {
 
-                if (origin==null) {
-                    highlightPane(currPane);
-                    int location1 = gamePane.getRowIndex(currPane); // x position
-                    int location2 = gamePane.getColumnIndex(currPane); // y position
-                    origin = new int[]{location1, location2};
-                    tempPane=currPane;
-                    System.out.println(origin[0] + " " + origin[1]);
-                } else {
-                    dehighlightPane();
-                    int location1 = gamePane.getRowIndex(currPane); // x position
-                    int location2 = gamePane.getColumnIndex(currPane); // y position
-                    destination = new int[]{location1, location2};
-                    System.out.println(destination[0] + " " + destination[1]);
-                    if (!Arrays.equals(origin,destination)) {
-                        String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
-                        game.updateMove(moves);
-                        togglePlayer();
-                    }
-                    origin = null;
-                    destination = null;
-                }
+            //check if the colour is correct
+            if (p1Color== xLbl.getTextFill()) {
+                highlightPane(currPane);
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                origin = new int[]{location1, location2};
+                oldPane=currPane;
+                System.out.println(origin[0] + " " + origin[1]);
             }
-        } else if (currentPlayer.equals(player2Name.getText())) {
+
+            //if the cell contains player two piece and is the first click
+        } else if (currentPlayer.equals(player2Name.getText()) && origin==null) {
             Label xLbl = (Label) currPane.getChildren().get(0);
             if (p2Color == xLbl.getTextFill()) {
-                if (origin==null) {
-                    highlightPane(currPane);
-                    int location1 = gamePane.getRowIndex(currPane); // x position
-                    int location2 = gamePane.getColumnIndex(currPane); // y position
-                    origin = new int[]{location1, location2};
-                    tempPane=currPane;
-                    System.out.println(origin[0] + " " + origin[1]);
-                } else {
-                    dehighlightPane();
-                    int location1 = gamePane.getRowIndex(currPane); // x position
-                    int location2 = gamePane.getColumnIndex(currPane); // y position
-                    destination = new int[]{location1, location2};
-                    System.out.println(destination[0] + " " + destination[1]);
-                    if (!Arrays.equals(origin,destination)) {
-                        String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
-                        game.updateMove(moves);
+                highlightPane(currPane);
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                origin = new int[]{location1, location2};
+                oldPane=currPane;
+                System.out.println(origin[0] + " " + origin[1]);
+            }
+
+            //if current player is Player1 and is the second click would only trigger effect when it clicks another player
+        } else if (currentPlayer.equals(player1Name.getText()) && origin!=null) {
+            Label xLbl = (Label) currPane.getChildren().get(0);
+            if (p2Color == xLbl.getTextFill()) {
+                dehighlightPane(currPane);
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                destination = new int[]{location1, location2};
+                System.out.println(destination[0] + " " + destination[1]);
+
+                //check to see if it is clicking on the same cell
+                if (!Arrays.equals(origin,destination)) {
+                    String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
+                    game.updateMove(moves);
+                    if (exception==false){
+                        currPane.getChildren().clear();
                         togglePlayer();
+                        moveLabel();
                     }
-                    origin = null;
-                    destination = null;
                 }
+                origin = null;
+                destination = null;
+            }else{
+                dehighlightPane(currPane);
+                origin = null;
+                destination = null;
+            }
+            //if current player is player two and is the second click
+        } else if (currentPlayer.equals(player2Name.getText()) && origin!=null) {
+            Label xLbl = (Label) currPane.getChildren().get(0);
+            if (p1Color == xLbl.getTextFill()) {
+                //dehighlight the pane the set the current pane as destination
+                dehighlightPane(currPane);
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                destination = new int[]{location1, location2};
+                System.out.println(destination[0] + " " + destination[1]);
+
+                //check to see if it is clicking on the same cell and perform the move if not
+                if (!Arrays.equals(origin,destination)) {
+                    String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
+                    game.updateMove(moves);
+                    if (exception==false){
+                        currPane.getChildren().clear();
+                        togglePlayer();
+                        moveLabel();
+                    }
+                }
+                origin = null;
+                destination = null;
+            }else{
+                dehighlightPane(currPane);
+                origin = null;
+                destination = null;
             }
         }
     }
@@ -420,6 +459,7 @@ public class ChessGameController implements BoardGameObserver{
             currentPlayer=player1Name.getText();
         }
     }
+
     public void highlightPane(Pane currPane) {
         BackgroundFill backgroundFill = new BackgroundFill(Color.YELLOW, null, null);
         Background background = new Background(backgroundFill);
@@ -502,17 +542,30 @@ public class ChessGameController implements BoardGameObserver{
 
         }
     }
-        public void dehighlightPane(){
-            tempPane.setBackground(null);
-            tempPane=null;
+        public void dehighlightPane(Pane currPane){
+            oldPane.setBackground(null);
+            newPane=currPane;
+        }
+
+        public void moveLabel(){
+            Label label=(Label) oldPane.getChildren().get(0);
+            oldPane.getChildren().remove(label);
+            newPane.getChildren().add(label);
+            Pane tempPane=oldPane;
+            oldPane=newPane;
+            newPane=tempPane;
         }
         @Override
         public void update(String obj){
-            String[] objs=obj.split(",");
+            String[] objs=obj.split("\n");
             switch (objs[0]){
                 case "TurnEnd":
                     break;
                 case "GameEnd":
+                    checkEndCon();
+                    break;
+                case "InvalidMove":
+                    exception=true;
                     break;
             }
         }
