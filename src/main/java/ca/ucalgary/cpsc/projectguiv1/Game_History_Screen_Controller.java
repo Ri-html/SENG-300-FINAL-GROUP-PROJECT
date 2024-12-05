@@ -103,6 +103,9 @@ public class Game_History_Screen_Controller {
     @FXML
     private AnchorPane identity;
 
+    @FXML
+    private Text gameHistoryTxt;
+
 
     private User currUsr = HelloApplication.usrDb.getCurrentUser();
 
@@ -121,18 +124,25 @@ public class Game_History_Screen_Controller {
 
 
     public Game_History_Screen_Controller(){
-        setMatchHistory();
     }
 
     public void setMatchHistory(){
         if(this.currUsr != null) {
-            this.mostRecentData.setText(this.currUsr.getPlayerProfile().displayGameHistory());
+            this.gameHistoryTxt.setText(this.currUsr.getPlayerProfile().displayGameHistory());
         }
 
     }
-    public String matchToString(User theUsr){
+    public void gotoPlayerProfFunc() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Manage_Profile.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Manage Profile");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
 
-        return "";
     }
 
     public void exitBtnFunc() throws IOException {
