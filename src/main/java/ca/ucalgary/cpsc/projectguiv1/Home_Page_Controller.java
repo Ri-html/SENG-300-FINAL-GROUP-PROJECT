@@ -1,6 +1,7 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.User;
+import UserAndProfile.UserDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class Home_Page_Controller{
+public class Home_Page_Controller implements Initializable{
     @FXML
     GridPane identity;
 
@@ -52,40 +53,12 @@ public class Home_Page_Controller{
     @FXML
     Button searchPlayersBtn;
 
-    @FXML
-    ListView<String> listView;
-    private User user1;
-
-    public Home_Page_Controller(){
-        user1 = new User("1", "john", "john@email.com");
-    }
-
-//    ArrayList<String> words = new ArrayList<>(
-//            Arrays.asList("John", "Macy", "Sarah")
-//    );
-//
 //    @FXML
-//    void search(ActionEvent event){
-//        listView.getItems().clear();
-//        listView.getItems().addAll(searchList(searchBar.getText(), words));
-//    }
+//    ListView<String> listView;
+//    private User user1;
 //
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle){
-//        listView.getItems().addAll(words);
-//
-//        // Labels under games
-//        rankingTicTacToeLbl.setText("Ranking: " + user1.getPlayerProfile().getTicTacToeProfile().getScoreRank());
-//        rankingConnect4Lbl.setText("Ranking: " + user1.getPlayerProfile().getConnectFourProfile().getScoreRank());
-//        rankingChessLbl.setText("Ranking: "+ user1.getPlayerProfile().getChessProfile().getScoreRank());
-//    }
-//
-//    private List<String> searchList(String searchWords, List<String> listOfStrings){
-//        List<String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
-//        return listOfStrings.stream().filter(input -> {
-//            return searchWordsArray.stream().allMatch(word ->
-//                    input.toLowerCase().contains(word.toLowerCase()));
-//        }).collect(Collectors.toList());
+//    public Home_Page_Controller(){
+//        user1 = new User("1", "john", "john@email.com");
 //    }
 
 
@@ -127,4 +100,12 @@ public class Home_Page_Controller{
         selectionFxn(file, "Search for Players");
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        UserDatabase db = UserDatabase.getInstance();
+        User currUser = db.getCurrentUser();
+        this.rankingTicTacToeLbl.setText("Ranking: " + currUser.getPlayerProfile().getTicTacToeProfile().getScoreRank());
+        this.rankingChessLbl.setText("Ranking: " + currUser.getPlayerProfile().getChessProfile().getScoreRank());
+        this.rankingConnect4Lbl.setText("Ranking: " + currUser.getPlayerProfile().getConnectFourProfile().getScoreRank());
+    }
 }
