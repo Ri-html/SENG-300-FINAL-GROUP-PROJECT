@@ -1,1 +1,3 @@
 Stimpy,something@gmail.com,IGotThis
+mithrask,mithra@gmail.com,123456
+trial,trial@gmail.com,1234
