@@ -22,14 +22,18 @@ import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class ChessGameController {
+public class ChessGameController implements BoardGameObserver{
 
     private User usrOne;
     private User usrTwo;
     private ChessLeaderboard cl;
     private Chess gameChess;
     private boolean oneAlert = false;
+    int[] origin=null;
+    int[] destination=null;
+    Pane tempPane;
 
     Color p1Color = Color.RED;
     Color p2Color = Color.BLUE;
@@ -92,7 +96,9 @@ public class ChessGameController {
 
     @Deprecated
     public ChessGameController() {
-        this.usrOne = HelloApplication.usrDb.getCurrentUser();
+        //this.usrOne = HelloApplication.usrDb.getCurrentUser();
+        this.usrOne = new User("SndUs", "snd@user", "pass");
+        this.currentPlayer = this.usrOne.getUsername();
         this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
         if (this.usrTwo == null) {
             this.usrTwo = new User("SndUsr", "snd@user", "pass");
@@ -335,23 +341,87 @@ public class ChessGameController {
     }
 
     public void makeMove(int[] coordsArr, Pane currPane) throws IOException {
-        if (currPane.getChildren() == null) {
+        if (currPane.getChildren().isEmpty()) {
             //this skips the else ifs
+            if (origin!=null){
+                dehighlightPane();
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                destination = new int[]{location1, location2};
+                System.out.println(destination[0] + " " + destination[1]);
+                if (!Arrays.equals(origin,destination)) {
+                    String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
+                    game.updateMove(moves);
+                    togglePlayer();
+                }
+                origin =null;
+                destination = null;
+
+            }
+
         } else if (currentPlayer.equals(player1Name.getText())) {
             Label xLbl = (Label) currPane.getChildren().get(0);
-            if (p1Color == xLbl.getTextFill()) {
-                highlightPane(currPane);
+            if (p1Color== xLbl.getTextFill()) {
+
+                if (origin==null) {
+                    highlightPane(currPane);
+                    int location1 = gamePane.getRowIndex(currPane); // x position
+                    int location2 = gamePane.getColumnIndex(currPane); // y position
+                    origin = new int[]{location1, location2};
+                    tempPane=currPane;
+                    System.out.println(origin[0] + " " + origin[1]);
+                } else {
+                    dehighlightPane();
+                    int location1 = gamePane.getRowIndex(currPane); // x position
+                    int location2 = gamePane.getColumnIndex(currPane); // y position
+                    destination = new int[]{location1, location2};
+                    System.out.println(destination[0] + " " + destination[1]);
+                    if (!Arrays.equals(origin,destination)) {
+                        String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
+                        game.updateMove(moves);
+                        togglePlayer();
+                    }
+                    origin = null;
+                    destination = null;
+                }
             }
         } else if (currentPlayer.equals(player2Name.getText())) {
             Label xLbl = (Label) currPane.getChildren().get(0);
             if (p2Color == xLbl.getTextFill()) {
-                highlightPane(currPane);
+                if (origin==null) {
+                    highlightPane(currPane);
+                    int location1 = gamePane.getRowIndex(currPane); // x position
+                    int location2 = gamePane.getColumnIndex(currPane); // y position
+                    origin = new int[]{location1, location2};
+                    tempPane=currPane;
+                    System.out.println(origin[0] + " " + origin[1]);
+                } else {
+                    dehighlightPane();
+                    int location1 = gamePane.getRowIndex(currPane); // x position
+                    int location2 = gamePane.getColumnIndex(currPane); // y position
+                    destination = new int[]{location1, location2};
+                    System.out.println(destination[0] + " " + destination[1]);
+                    if (!Arrays.equals(origin,destination)) {
+                        String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
+                        game.updateMove(moves);
+                        togglePlayer();
+                    }
+                    origin = null;
+                    destination = null;
+                }
             }
         }
     }
 
+    private void togglePlayer() {
+        if (currentPlayer.equals(player1Name.getText())) {
+            currentPlayer=player2Name.getText();
+        }else {
+            currentPlayer=player1Name.getText();
+        }
+    }
     public void highlightPane(Pane currPane) {
-        BackgroundFill backgroundFill = new BackgroundFill(Color.BLUE, null, null);
+        BackgroundFill backgroundFill = new BackgroundFill(Color.YELLOW, null, null);
         Background background = new Background(backgroundFill);
         currPane.setBackground(background);
     }
@@ -432,4 +502,18 @@ public class ChessGameController {
 
         }
     }
+        public void dehighlightPane(){
+            tempPane.setBackground(null);
+            tempPane=null;
+        }
+        @Override
+        public void update(String obj){
+            String[] objs=obj.split(",");
+            switch (objs[0]){
+                case "TurnEnd":
+                    break;
+                case "GameEnd":
+                    break;
+            }
+        }
 }
