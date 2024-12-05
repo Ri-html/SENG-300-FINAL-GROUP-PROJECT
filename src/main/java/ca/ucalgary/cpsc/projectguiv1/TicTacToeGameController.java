@@ -54,6 +54,8 @@ public class TicTacToeGameController {
 
     private TicTacToeLeaderboard tttl;
 
+    public static String otherPlayersName;
+
     @FXML
     Pane identity;
     @FXML
@@ -125,42 +127,8 @@ public class TicTacToeGameController {
             this.usrTwo = tttPlayers.get(1);
         }
 
-
-        HelloApplication.usrDb.addUser(this.usrTwo);
-        this.tttl = TicTacToeLeaderboard.getInstance();
-
-
-        this.gameTicTacToe = new TicTacToe(2);
-        this.gameTicTacToe.addPlayer(this.usrOne.getUsername());
-        this.gameTicTacToe.addPlayer(this.usrTwo.getUsername());
-    }
-
-    /**
-     * @param username the username of the other player
-     * This class is used for challenging other players
-     */
-    @Deprecated
-    public TicTacToeGameController(String username) {
-        this.usrOne = HelloApplication.usrDb.getCurrentUser();
-
-
-        List<User> allPlayers = HelloApplication.usrDb.getAllUsers();
-        Network network = new Network(allPlayers);
-        List<User> tttPlayers = network.findTictactoeRank(this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank());
-
-
-        Collections.shuffle(tttPlayers);
-
-        this.usrTwo = tttPlayers.getFirst();
-        if (this.usrTwo.getUsername().equals(this.usrOne.getUsername())) {
-            this.usrTwo = tttPlayers.get(1);
-        }
-
-
-        this.usrTwo = HelloApplication.usrDb.searchByUsername(username);
-        if(this.usrTwo == null){
-            // Random second user, will never be the current user
-            this.usrTwo = new User("SndUsr", "snd@user", "pass");
+        if(otherPlayersName != null){ // match with a specific user
+            this.usrTwo = HelloApplication.usrDb.searchByUsername(otherPlayersName);
         }
 
         HelloApplication.usrDb.addUser(this.usrTwo);
@@ -451,6 +419,7 @@ public class TicTacToeGameController {
             this.tttl.recordLoss(this.usrOne.getUsername());
 
         }
+        otherPlayersName = null;
 
     }
 }
