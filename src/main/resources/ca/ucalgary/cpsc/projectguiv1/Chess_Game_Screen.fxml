@@ -17,8 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.ChessGameController">
+<ScrollPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.ChessGameController">
    <content>
       <Pane id="chess" fx:id="identity" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="831.0" prefWidth="900.0">
          <children>
@@ -168,7 +167,7 @@
                   </ScrollPane>
                </children>
             </VBox>
-            <Button id="Connect_4_Main_Menu_View.fxml" fx:id="exitBtn" accessibleText="Main Menu Tic-Tac-Toe" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="92.0" text="Exit Game" />
+            <Button id="Connect_4_Main_Menu_View.fxml" fx:id="exitBtn" accessibleText="Main Menu Tic-Tac-Toe" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#exitBtnFunc" prefHeight="39.0" prefWidth="92.0" text="Exit Game" />
             <Accordion layoutX="298.0" layoutY="576.0" />
           <TitledPane animated="false" layoutX="322.0" layoutY="569.0" prefHeight="207.0" prefWidth="277.0" text="Chat">
             <content>
