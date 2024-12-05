@@ -1,7 +1,9 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.User;
+import UserAndProfile.UserDatabase;
 import gameLogic.ConnectFour;
+import network.Network;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +16,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class Connect4GameController {
@@ -61,13 +65,19 @@ public class Connect4GameController {
     @FXML
     public void initialize() {
         // Initializing players
-        playerOne = HelloApplication.usrDb.searchByUsername("aaronsheikh");
-        playerTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
-        if (playerTwo == null) {
-            playerTwo = new User("SndUsr", "sndUsr@gmail.com", "12346578");
-            HelloApplication.usrDb.addUser(playerTwo);
-        }
 
+        playerOne = HelloApplication.usrDb.getCurrentUser();
+        List<User> allPlayers = HelloApplication.usrDb.getAllUsers();
+        Network network = new Network(allPlayers);
+        List<User> connect4Players = network.findConnectFourRank(playerOne.getPlayerProfile().getConnectFourProfile().getScoreRank());
+
+
+        Collections.shuffle(connect4Players);
+
+        playerTwo = connect4Players.getFirst();
+        if (playerTwo.getUsername().equals(playerOne.getUsername())) {
+            playerTwo = connect4Players.get(1);
+        }
 
         connectFourGame = new ConnectFour(2);
         connectFourGame.addPlayer(playerOne.getUsername());
@@ -286,19 +296,18 @@ public class Connect4GameController {
     }
 
     public void saveEndData(char result, int player) { // Might have to change
-        playerTwo = HelloApplication.usrDb.searchByUsername(playerTwo.getUsername());
 
         if ((result == 'W') && (player == 1)) {
             playerOne.getPlayerProfile().getConnectFourProfile().setTotalWins(playerOne.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
-            playerOne.getPlayerProfile().getConnectFourProfile().setTotalLosses(playerTwo.getPlayerProfile().getConnectFourProfile().getTotalLosses() + 1);
+            playerTwo.getPlayerProfile().getConnectFourProfile().setTotalLosses(playerTwo.getPlayerProfile().getConnectFourProfile().getTotalLosses() + 1);
             playerOne.getPlayerProfile().getConnectFourProfile().updateRanking(playerOne.getPlayerProfile().getConnectFourProfile().getScoreRank(), playerOne.getPlayerProfile().getConnectFourProfile().getWinRateRank());
-            playerOne.getPlayerProfile().getConnectFourProfile().updateGameHistory(playerOne.getUsername(), "W", 1);
+            playerTwo.getPlayerProfile().getConnectFourProfile().updateGameHistory(playerTwo.getUsername(), "W", 1);
 
         } else if ((result == 'W') && (player == 2)) {
             playerTwo.getPlayerProfile().getConnectFourProfile().setTotalWins(playerTwo.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
-            playerTwo.getPlayerProfile().getConnectFourProfile().setTotalLosses(playerOne.getPlayerProfile().getConnectFourProfile().getTotalLosses() + 1);
+            playerOne.getPlayerProfile().getConnectFourProfile().setTotalLosses(playerOne.getPlayerProfile().getConnectFourProfile().getTotalLosses() + 1);
             playerTwo.getPlayerProfile().getConnectFourProfile().updateRanking(playerTwo.getPlayerProfile().getConnectFourProfile().getScoreRank(), playerTwo.getPlayerProfile().getConnectFourProfile().getWinRateRank());
-            playerTwo.getPlayerProfile().getConnectFourProfile().updateGameHistory(playerTwo.getUsername(), "W", 1);
+            playerOne.getPlayerProfile().getConnectFourProfile().updateGameHistory(playerOne.getUsername(), "W", 1);
         }
     }
 }
