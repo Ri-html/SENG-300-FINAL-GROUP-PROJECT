@@ -8,15 +8,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Search_For_Players_Controller {
@@ -54,22 +53,50 @@ public class Search_For_Players_Controller {
         }
         searchBar.clear();
 
-        List<User> matchedUsers = db.searchUsername(searchTerm);
+        List<User> matchedUsers = new ArrayList<>();
+        matchedUsers.addAll(db.searchUsername(searchTerm));
+        matchedUsers.addAll(db.searchEmail(searchTerm));
+
+        HashSet<User> allUsers = new HashSet<>(matchedUsers);
+
+        // Set a custom cell factory to create buttons for each result
+        resultView.setCellFactory(lv -> new ListCell<User>() {
+            private final Button button = new Button();
+
+            @Override
+            protected void updateItem(User user, boolean empty) {
+                super.updateItem(user, empty);
+
+                if (empty || user == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    button.setText(user.getUsername()); // Set button text
+                    button.setOnAction(e -> navigateToProfilePage(user)); // Handle button click
+                    setGraphic(button); // Add button to the ListCell
+                    setText(null); // Clear default text
+                }
+            }
+        });
+
         if(!matchedUsers.isEmpty()){
-            for(int i = 0; i < matchedUsers.size(); i++){
-                resultView.getItems().add(matchedUsers.get(i).getUsername());
+            for(User u : allUsers){
+                resultView.getItems().add(u);
+                resultLabel.setText("");
             }
         }
 
-        matchedUsers = db.searchEmail(searchTerm);
-        if(!matchedUsers.isEmpty()){
-            for(int i = 0; i < matchedUsers.size(); i++){
-                resultView.getItems().add(matchedUsers.get(i).getUsername());
-            }
+        if(resultView.getItems().isEmpty()){
+            // no results
+            resultView.getItems().add("No profile found for the given search term.");
         }
-        // change code for email stuff
 
     }
+
+    public void navigateToProfilePage(User user){
+
+    }
+
 
     public void exitBtnFunc() throws IOException {
         String file = "Homepage.fxml";
