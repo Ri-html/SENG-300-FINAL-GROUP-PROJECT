@@ -5,6 +5,7 @@ import UserAndProfile.UserDatabase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -25,10 +26,16 @@ public class View_Other_User_Profile_Controller {
     private TextArea chessTxtArea;
 
     @FXML
+    private TextArea connect4TxtArea;
+
+    @FXML
     private Text rankingChessLabel;
 
     @FXML
     private Text rankingTicTacToeLabel;
+
+    @FXML
+    private Text rankingConnect4Label;
 
     @FXML
     private Text yourUsernameLabel;
@@ -38,6 +45,9 @@ public class View_Other_User_Profile_Controller {
 
     @FXML
     private Text yourRankingTicTacToeLabel;
+
+    @FXML
+    private Text yourRankingConnect4Label;
 
     @FXML
     private Text usernameLabel;
@@ -52,7 +62,19 @@ public class View_Other_User_Profile_Controller {
     private Text yourWinRateTicTacToe;
 
     @FXML
+    private Text yourWinRateConnect4;
+
+    @FXML
     private Text currentStatusLabel;
+
+    @FXML
+    private Button challengeChessBtn;
+
+    @FXML
+    private Button challengeTicTacToeBtn;
+
+    @FXML
+    private Button challengeConnect4Btn;
 
     public void setUser(User user){
         this.user = user;
@@ -73,13 +95,19 @@ public class View_Other_User_Profile_Controller {
         this.rankingChessLabel.setText("Ranking: " +  result);
         this.yourRankingChessLabel.setText("Ranking: " + db.getCurrentUser().getPlayerProfile().getChessProfile().getScoreRank());
 
+        // Connect 4 Rankings
+        this.rankingConnect4Label.setText("Ranking: " + user.getPlayerProfile().getConnectFourProfile().getScoreRank());
+        this.yourRankingConnect4Label.setText("Ranking: " + currUser.getPlayerProfile().getConnectFourProfile().getScoreRank());
+
         // Your Win Rate
-        this.yourWinRateChess.setText("Wins: " + currUser.getPlayerProfile().getChessProfile().getWinRate());
-        this.yourWinRateTicTacToe.setText("Wins: " + currUser.getPlayerProfile().getTicTacToeProfile().getWinRate());
+        this.yourWinRateChess.setText("Wins: " + currUser.getPlayerProfile().getChessProfile().getTotalWins());
+        this.yourWinRateTicTacToe.setText("Wins: " + currUser.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+        this.yourWinRateConnect4.setText("Wins: " + currUser.getPlayerProfile().getConnectFourProfile().getTotalWins());
 
         // Other user's current status
         this.currentStatusLabel.setText("Online");
     }
+    // What will the challenge button do? Should it just start a new game with that user?
 
     public void backBtnFunc() throws IOException {
         String file = "Search_for_Players.fxml";
