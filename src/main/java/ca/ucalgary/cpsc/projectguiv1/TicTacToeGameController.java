@@ -54,7 +54,7 @@ public class TicTacToeGameController {
 
     private TicTacToeLeaderboard tttl;
 
-    public static String otherPlayersName = null;
+    public static String otherPlayersName;
 
     @FXML
     Pane identity;
