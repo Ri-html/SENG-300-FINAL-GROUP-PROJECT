@@ -35,6 +35,7 @@ public class Connect4GameController {
     private User playerTwo;
     private boolean oneAlert = false;
     private Connect4Leaderboard connect4Lead;
+    public static String otherPlayersName;
 
     // FXML Components
     @FXML
@@ -80,6 +81,10 @@ public class Connect4GameController {
         playerTwo = connect4Players.getFirst();
         if (playerTwo.getUsername().equals(playerOne.getUsername())) {
             playerTwo = connect4Players.get(1);
+        }
+
+        if(otherPlayersName != null){ // match with a specific user
+            playerTwo = HelloApplication.usrDb.searchByUsername(otherPlayersName);
         }
 
         connect4Lead = Connect4Leaderboard.getInstance();
