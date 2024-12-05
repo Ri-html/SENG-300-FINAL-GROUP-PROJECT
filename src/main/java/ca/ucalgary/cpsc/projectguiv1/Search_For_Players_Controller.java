@@ -7,6 +7,7 @@ import UserAndProfile.UserDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -103,7 +104,12 @@ public class Search_For_Players_Controller {
         String file = "View_Other_User_Profile.fxml";
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Parent root = fxmlLoader.load();
+        View_Other_User_Profile_Controller controller = fxmlLoader.getController();
+        // Set the user object in the controller
+        controller.setUser(user);
+
+        Scene scene = new Scene(root, 800, 500);
         Stage newStg = new Stage();
         newStg.sizeToScene();
         newStg.setTitle("Viewing " +user.getUsername() +"'s Profile");
@@ -111,27 +117,7 @@ public class Search_For_Players_Controller {
         newStg.show();
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();
         stgWindw.close();
-
-        loadInfoFromUser(user);
         // How do I pass the information from the user object to the other screen?
-    }
-
-    public void loadInfoFromUser(User user){
-
-    }
-
-    public void backBtnFunc() throws IOException {
-        String file = "Search_for_Players.fxml";
-
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
-        Stage newStg = new Stage();
-        newStg.sizeToScene();
-        newStg.setTitle("Search for Players");
-        newStg.setScene(scene);
-        newStg.show();
-        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
-        stgWindw.close();
     }
 
 
