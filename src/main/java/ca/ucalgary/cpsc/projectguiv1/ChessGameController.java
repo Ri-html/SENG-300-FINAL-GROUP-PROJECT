@@ -82,10 +82,10 @@ public class ChessGameController implements BoardGameObserver{
     Label rankLabelP2;
 
     @FXML
-    AnchorPane afterlife1;
+    TextArea afterlife1;
 
     @FXML
-    AnchorPane afterlife2;
+    TextArea afterlife2;
 
     AbstractBoardGame game;
 
@@ -130,6 +130,8 @@ public class ChessGameController implements BoardGameObserver{
         player2Name.setText(usrTwo.getUsername());
         rankLabelP1.setText(String.valueOf(usrOne.getPlayerProfile().getChessProfile().getScoreRank()));
         rankLabelP2.setText(String.valueOf(usrTwo.getPlayerProfile().getChessProfile().getScoreRank()));
+        afterlife1.setStyle("-fx-text-fill:brown;");
+        afterlife2.setStyle("-fx-text-fill :black;");
         setUpBoard();
 
     }
@@ -408,7 +410,11 @@ public class ChessGameController implements BoardGameObserver{
                 if (!Arrays.equals(origin,destination)) {
                     String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
                     game.updateMove(moves);
-                    if (exception==false){
+                    if (!exception){
+                        String text=afterlife2.getText();
+                        Label label=(Label)currPane.getChildren().getFirst();
+                        text+=label.getText()+"\n";
+                        afterlife2.setText(text);
                         currPane.getChildren().clear();
                         togglePlayer();
                         moveLabel();
@@ -421,7 +427,7 @@ public class ChessGameController implements BoardGameObserver{
                 origin = null;
                 destination = null;
             }
-            //if current player is player two and is the second click
+            //if current player is player two and is the second click on a player one piece
         } else if (currentPlayer.equals(player2Name.getText()) && origin!=null) {
             Label xLbl = (Label) currPane.getChildren().get(0);
             if (p1Color == xLbl.getTextFill()) {
@@ -436,7 +442,11 @@ public class ChessGameController implements BoardGameObserver{
                 if (!Arrays.equals(origin,destination)) {
                     String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
                     game.updateMove(moves);
-                    if (exception==false){
+                    if (!exception){
+                        String text=afterlife1.getText();
+                        Label label=(Label)currPane.getChildren().getFirst();
+                        text+=label.getText()+"\n";
+                        afterlife1.setText(text);
                         currPane.getChildren().clear();
                         togglePlayer();
                         moveLabel();
