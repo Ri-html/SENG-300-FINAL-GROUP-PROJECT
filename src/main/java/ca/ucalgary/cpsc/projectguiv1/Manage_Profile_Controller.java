@@ -4,16 +4,18 @@ import UserAndProfile.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static ca.ucalgary.cpsc.projectguiv1.HelloApplication.usrDb;
+
 public class Manage_Profile_Controller {
+
+    @FXML
+    Button displayGameHistory;
 
     @FXML
     TextArea gameHistory1;
@@ -53,8 +55,7 @@ public class Manage_Profile_Controller {
     private TicTacToeProfile ticTacToeProfile = new TicTacToeProfile();
     private ConnectFourProfile connectFourProfile = new ConnectFourProfile();
 
-    UserDatabase userDb = UserDatabase.getInstance();
-    User currUser = userDb.getCurrentUser();
+    private User currUser = HelloApplication.usrDb.getCurrentUser();
 
 
     @FXML
@@ -71,22 +72,18 @@ public class Manage_Profile_Controller {
     }
 
 
+    @FXML
     private void displayGameHistory() {
-        game1.setText("Chess");
-        gameHistory1.setText("Opponent: " + chessProfile.getLastOpponent() + "\n" +
-                "Result: " + chessProfile.getLastGameResult() + "\n" +
-                "Score: " + chessProfile.getLastGameScore());
+        if(this.currUser != null) {
+            game1.setText("Chess");
+            this.gameHistory1.setText(this.currUser.getPlayerProfile().displayChessGameHistory());
 
-        game2.setText("Tic-Tac-Toe");
-        gameHistory2.setText("Opponent: " + ticTacToeProfile.getLastOpponent() + "\n" +
-                "Result: " + ticTacToeProfile.getLastGameResult() + "\n" +
-                "Score: " + ticTacToeProfile.getLastGameScore());
+            game2.setText("Tic-Tac-Toe");
+            this.gameHistory2.setText(this.currUser.getPlayerProfile().displayTicTacToeGameHistory());
 
-        game3.setText("Connect-4");
-        gameHistory3.setText("Opponent: " + connectFourProfile.getLastOpponent() + "\n" +
-                "Result: " + connectFourProfile.getLastGameResult() + "\n" +
-                "Score: " + connectFourProfile.getLastGameScore());
-
+            game3.setText("Connect-4");
+            this.gameHistory3.setText(this.currUser.getPlayerProfile().displayConnect4GameHistory());
+        }
     }
 
 
@@ -96,14 +93,14 @@ public class Manage_Profile_Controller {
 
         if (!newUsername.equals(currUser.getUsername())) {
             currUser.setUsername(newUsername);
-            userDb.addUser(currUser);
+            usrDb.addUser(currUser);
             initialize();
 
         }
 
         if (!newEmail.equals(currUser.getEmail())) {
             currUser.setEmail(newEmail);
-            userDb.addUser(currUser);
+            usrDb.addUser(currUser);
             initialize();
 
         }

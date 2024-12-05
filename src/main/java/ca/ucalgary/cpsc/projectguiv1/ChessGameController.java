@@ -1,3 +1,4 @@
+
 package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.User;
@@ -22,14 +23,21 @@ import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class ChessGameController {
+public class ChessGameController implements BoardGameObserver{
 
     private User usrOne;
     private User usrTwo;
     private ChessLeaderboard cl;
     private Chess gameChess;
     private boolean oneAlert = false;
+    int[] origin=null;
+    int[] destination=null;
+    Pane oldPane;
+    Pane newPane;
+    Label someLabel;
+    boolean exception=false;
 
     Color p1Color = Color.RED;
     Color p2Color = Color.BLUE;
@@ -92,7 +100,9 @@ public class ChessGameController {
 
     @Deprecated
     public ChessGameController() {
-        this.usrOne = HelloApplication.usrDb.getCurrentUser();
+        //this.usrOne = HelloApplication.usrDb.getCurrentUser();
+        this.usrOne = new User("SndUs", "snd@user", "pass");
+        this.currentPlayer = this.usrOne.getUsername();
         this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
         if (this.usrTwo == null) {
             this.usrTwo = new User("SndUsr", "snd@user", "pass");
@@ -112,6 +122,10 @@ public class ChessGameController {
         game = new Chess();
         game.addPlayer(usrOne.getUsername());
         game.addPlayer(usrTwo.getUsername());
+        game.attachGameEndObserver(this);
+        game.attachTurnEndObserver(this);
+        //game.attachInvalidMoveObserver(this);
+
         player1Name.setText(usrOne.getUsername());
         player2Name.setText(usrTwo.getUsername());
         rankLabelP1.setText(String.valueOf(usrOne.getPlayerProfile().getChessProfile().getScoreRank()));
@@ -335,23 +349,119 @@ public class ChessGameController {
     }
 
     public void makeMove(int[] coordsArr, Pane currPane) throws IOException {
-        if (currPane.getChildren() == null) {
-            //this skips the else ifs
-        } else if (currentPlayer.equals(player1Name.getText())) {
+        //if the cell is empty and is the second click
+        if (currPane.getChildren().isEmpty()&& origin!=null) {
+                dehighlightPane(currPane);
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                destination = new int[]{location1, location2};
+                System.out.println(destination[0] + " " + destination[1]);
+                if (!Arrays.equals(origin,destination)) {
+                    String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
+                    game.updateMove(moves);
+                    System.out.println(currentPlayer);
+                    if (exception==false){
+                        togglePlayer();
+                        moveLabel();
+                    }
+                }
+                origin =null;
+                destination = null;
+
+          //if player one moves and is the first click
+        } else if (currentPlayer.equals(player1Name.getText()) && origin==null) {
             Label xLbl = (Label) currPane.getChildren().get(0);
-            if (p1Color == xLbl.getTextFill()) {
+
+            //check if the colour is correct
+            if (p1Color== xLbl.getTextFill()) {
                 highlightPane(currPane);
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                origin = new int[]{location1, location2};
+                oldPane=currPane;
+                System.out.println(origin[0] + " " + origin[1]);
             }
-        } else if (currentPlayer.equals(player2Name.getText())) {
+
+            //if the cell contains player two piece and is the first click
+        } else if (currentPlayer.equals(player2Name.getText()) && origin==null) {
             Label xLbl = (Label) currPane.getChildren().get(0);
             if (p2Color == xLbl.getTextFill()) {
                 highlightPane(currPane);
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                origin = new int[]{location1, location2};
+                oldPane=currPane;
+                System.out.println(origin[0] + " " + origin[1]);
+            }
+
+            //if current player is Player1 and is the second click would only trigger effect when it clicks another player
+        } else if (currentPlayer.equals(player1Name.getText()) && origin!=null) {
+            Label xLbl = (Label) currPane.getChildren().get(0);
+            if (p2Color == xLbl.getTextFill()) {
+                dehighlightPane(currPane);
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                destination = new int[]{location1, location2};
+                System.out.println(destination[0] + " " + destination[1]);
+
+                //check to see if it is clicking on the same cell
+                if (!Arrays.equals(origin,destination)) {
+                    String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
+                    game.updateMove(moves);
+                    if (exception==false){
+                        currPane.getChildren().clear();
+                        togglePlayer();
+                        moveLabel();
+                    }
+                }
+                origin = null;
+                destination = null;
+            }else{
+                dehighlightPane(currPane);
+                origin = null;
+                destination = null;
+            }
+            //if current player is player two and is the second click
+        } else if (currentPlayer.equals(player2Name.getText()) && origin!=null) {
+            Label xLbl = (Label) currPane.getChildren().get(0);
+            if (p1Color == xLbl.getTextFill()) {
+                //dehighlight the pane the set the current pane as destination
+                dehighlightPane(currPane);
+                int location1 = gamePane.getRowIndex(currPane); // x position
+                int location2 = gamePane.getColumnIndex(currPane); // y position
+                destination = new int[]{location1, location2};
+                System.out.println(destination[0] + " " + destination[1]);
+
+                //check to see if it is clicking on the same cell and perform the move if not
+                if (!Arrays.equals(origin,destination)) {
+                    String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
+                    game.updateMove(moves);
+                    if (exception==false){
+                        currPane.getChildren().clear();
+                        togglePlayer();
+                        moveLabel();
+                    }
+                }
+                origin = null;
+                destination = null;
+            }else{
+                dehighlightPane(currPane);
+                origin = null;
+                destination = null;
             }
         }
     }
 
+    private void togglePlayer() {
+        if (currentPlayer.equals(player1Name.getText())) {
+            currentPlayer=player2Name.getText();
+        }else {
+            currentPlayer=player1Name.getText();
+        }
+    }
+
     public void highlightPane(Pane currPane) {
-        BackgroundFill backgroundFill = new BackgroundFill(Color.BLUE, null, null);
+        BackgroundFill backgroundFill = new BackgroundFill(Color.YELLOW, null, null);
         Background background = new Background(backgroundFill);
         currPane.setBackground(background);
     }
@@ -362,14 +472,14 @@ public class ChessGameController {
             if (this.gameChess.validateGameEnds() == 1) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
-                alert.setHeaderText(usrOne.getUsername() + "Wins!");
+                alert.setHeaderText(usrOne.getUsername() + " Wins!");
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 1);
                     try {
                         exitBtnFunc(); // Once the game is declared over, quit the screen
                     } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
+                        System.out.println("IOExecption chess exit btn func");
                     }
                 });
 
@@ -377,14 +487,14 @@ public class ChessGameController {
             } else if (this.gameChess.validateGameEnds() == 2) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
-                alert.setHeaderText(usrTwo.getUsername() + "Win!");
+                alert.setHeaderText(usrTwo.getUsername() + " Wins!");
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 2);
                     try {
                         exitBtnFunc(); // Once the game is declared over, quit the screen
                     } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
+                        System.out.println("IOExecption chess exit btn func");
                     }
                 });
                 this.oneAlert = true;
@@ -398,7 +508,7 @@ public class ChessGameController {
                     try {
                         exitBtnFunc(); // Once the game is declared over, quit the screen
                     } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
+                        System.out.println("IOExecption chess exit btn func");
                     }
                 });
                 this.oneAlert = true;
@@ -411,25 +521,52 @@ public class ChessGameController {
         this.usrTwo = HelloApplication.usrDb.searchByUsername(this.usrTwo.getUsername());
 
         if ((result == 'W') && (player == 1)) {
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrOne.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "W", 1);
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrOne.getUsername(), "L", -1);
+            this.usrOne.getPlayerProfile().getChessProfile().setTotalWins(this.usrOne.getPlayerProfile().getChessProfile().getTotalWins() + 1);
+            this.usrTwo.getPlayerProfile().getChessProfile().setTotalLosses(this.usrTwo.getPlayerProfile().getChessProfile().getTotalLosses() + 1);
+            this.usrOne.getPlayerProfile().getChessProfile().updateRanking(this.usrOne.getPlayerProfile().getChessProfile().getScoreRank(), this.usrOne.getPlayerProfile().getChessProfile().getWinRateRank());
+            this.usrOne.getPlayerProfile().getChessProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "W", 1);
+            this.usrTwo.getPlayerProfile().getChessProfile().updateGameHistoryReal(this.usrOne.getUsername(), "L", -1);
             this.cl.recordWin(this.usrOne.getUsername());
             this.cl.recordLoss(this.usrTwo.getUsername());
             System.out.println("test1");
 
         } else if ((result == 'W') && (player == 2)) {
             System.out.println("test2");
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrTwo.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrOne.getUsername(), "W", 1);
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "L", -1);
+            this.usrTwo.getPlayerProfile().getChessProfile().setTotalWins(this.usrTwo.getPlayerProfile().getChessProfile().getTotalWins() + 1);
+            this.usrOne.getPlayerProfile().getChessProfile().setTotalLosses(this.usrOne.getPlayerProfile().getChessProfile().getTotalLosses() + 1);
+            this.usrTwo.getPlayerProfile().getChessProfile().updateRanking(this.usrTwo.getPlayerProfile().getChessProfile().getScoreRank(), this.usrTwo.getPlayerProfile().getChessProfile().getWinRateRank());
+            this.usrTwo.getPlayerProfile().getChessProfile().updateGameHistoryReal(this.usrOne.getUsername(), "W", 1);
+            this.usrOne.getPlayerProfile().getChessProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "L", -1);
             this.cl.recordWin(this.usrTwo.getUsername());
             this.cl.recordLoss(this.usrOne.getUsername());
 
         }
     }
+        public void dehighlightPane(Pane currPane){
+            oldPane.setBackground(null);
+            newPane=currPane;
+        }
+
+        public void moveLabel(){
+            Label label=(Label) oldPane.getChildren().get(0);
+            oldPane.getChildren().remove(label);
+            newPane.getChildren().add(label);
+            Pane tempPane=oldPane;
+            oldPane=newPane;
+            newPane=tempPane;
+        }
+        @Override
+        public void update(String obj){
+            String[] objs=obj.split("\n");
+            switch (objs[0]){
+                case "TurnEnd":
+                    break;
+                case "GameEnd":
+                    checkEndCon();
+                    break;
+                case "InvalidMove":
+                    exception=true;
+                    break;
+            }
+        }
 }

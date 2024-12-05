@@ -26,6 +26,17 @@ public class ChessProfile extends AbstractGameProfile {
     }
 
 
+    public void updateGameHistoryReal(String opponent, String result, int score) {
+        setLastOpponent(opponent);
+        setLastGameResult(result);
+        setLastGameScore(getTotalScore() + score);
+
+        // Update total games and scores
+        setTotalGamesPlayed(getTotalGamesPlayed() + 1);
+        setTotalScore(getTotalScore() + score);
+    }
+
+
     // Updates player status, including total games, score, and win rate
     @Override
     public void updatePlayerStatus(int totalGames, int score, double winRate) {

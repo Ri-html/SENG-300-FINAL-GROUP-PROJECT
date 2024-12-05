@@ -28,6 +28,9 @@ public class Home_Page_Controller implements Initializable{
     GridPane identity;
 
     @FXML
+    Button displayGameHistory;
+
+    @FXML
     Button gameHistory;
     @FXML
     Label mainTitle;
@@ -98,6 +101,11 @@ public class Home_Page_Controller implements Initializable{
     public void searchPlayersFunc() throws IOException {
         String file = "Search_for_Players.fxml";
         selectionFxn(file, "Search for Players");
+    }
+
+    public void playerProfFunc() throws IOException {
+        String file = "Manage_Profile.fxml";
+        selectionFxn(file, "Manage Profile");
     }
 
     @Override
