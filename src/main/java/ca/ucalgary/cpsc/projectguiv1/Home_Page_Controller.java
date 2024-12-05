@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 
 import java.io.IOException;
 import java.lang.annotation.Repeatable;
@@ -103,9 +104,12 @@ public class Home_Page_Controller implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UserDatabase db = UserDatabase.getInstance();
+        TicTacToeLeaderboard tttl = TicTacToeLeaderboard.getInstance();
+
+
         User currUser = db.getCurrentUser();
-        this.rankingTicTacToeLbl.setText("Ranking: " + currUser.getPlayerProfile().getTicTacToeProfile().getScoreRank());
-        this.rankingChessLbl.setText("Ranking: " + currUser.getPlayerProfile().getChessProfile().getScoreRank());
-        this.rankingConnect4Lbl.setText("Ranking: " + currUser.getPlayerProfile().getConnectFourProfile().getScoreRank());
+        this.rankingTicTacToeLbl.setText("Ranking: " + currUser.getPlayerProfile().getTicTacToeProfile().getTotalScore());
+        this.rankingChessLbl.setText("Ranking: " + currUser.getPlayerProfile().getChessProfile().getTotalScore());
+        this.rankingConnect4Lbl.setText("Ranking: " + currUser.getPlayerProfile().getConnectFourProfile().getTotalScore());
     }
 }
