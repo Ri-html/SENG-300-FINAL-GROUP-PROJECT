@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Search_For_Players_Controller {
 
@@ -43,7 +44,6 @@ public class Search_For_Players_Controller {
 
 
     UserDatabase db = UserDatabase.getInstance();
-    //private ProfileSearch profileSearch = new ProfileSearch(db);
 
     public void onSearch() {
         resultView.getItems().clear(); // clears out previous search
@@ -54,22 +54,20 @@ public class Search_For_Players_Controller {
         }
         searchBar.clear();
 
-        User user = db.searchByUsername(searchTerm);
-        if(user != null){
-            resultView.getItems().add(user.getUsername());
-            resultLabel.setText("");
+        List<User> matchedUsers = db.searchUsername(searchTerm);
+        if(!matchedUsers.isEmpty()){
+            for(int i = 0; i < matchedUsers.size(); i++){
+                resultView.getItems().add(matchedUsers.get(i).getUsername());
+            }
         }
 
-        user = db.searchByEmail(searchTerm);
-        if(user != null){
-            resultView.getItems().add(user.getUsername());
-            resultLabel.setText("");
+        matchedUsers = db.searchEmail(searchTerm);
+        if(!matchedUsers.isEmpty()){
+            for(int i = 0; i < matchedUsers.size(); i++){
+                resultView.getItems().add(matchedUsers.get(i).getUsername());
+            }
         }
-
-        if(resultView.getItems().isEmpty() && !searchTerm.isEmpty()){
-            resultView.getItems().add("No profile found for the search term.");
-            resultLabel.setText("");
-        }
+        // change code for email stuff
 
     }
 
