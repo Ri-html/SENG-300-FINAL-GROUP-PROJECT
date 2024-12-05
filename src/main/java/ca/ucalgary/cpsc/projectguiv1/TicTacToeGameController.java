@@ -332,22 +332,26 @@ public class TicTacToeGameController {
             }
         }
     }
-    public void saveEndData(char result, int player){ // Might have to change
+    public void saveEndData(char result, int player){
         this.usrTwo = HelloApplication.usrDb.searchByUsername(this.usrTwo.getUsername());
 
         if((result == 'W') && (player == 1)) {
             this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
             this.usrOne.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrOne.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrOne.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
-            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistory(this.usrTwo.getUsername(), "W", 1);
+            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "W",  1);
+            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrOne.getUsername(), "L",  -1);
             this.tttl.recordWin(this.usrOne.getUsername());
             this.tttl.recordLoss(this.usrTwo.getUsername());
+            System.out.println("test1");
 
         }else if ((result == 'W') && (player == 2)){
+            System.out.println("test2");
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
             this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateRanking(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getScoreRank(), this.usrTwo.getPlayerProfile().getTicTacToeProfile().getWinRateRank());
-            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateGameHistory(this.usrOne.getUsername(), "W", 1);
+            this.usrTwo.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrOne.getUsername(), "W", 1);
+            this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "L", -1);
             this.tttl.recordWin(this.usrTwo.getUsername());
             this.tttl.recordLoss(this.usrOne.getUsername());
 
