@@ -1,3 +1,4 @@
+
 package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.User;
@@ -33,7 +34,9 @@ public class ChessGameController implements BoardGameObserver{
     private boolean oneAlert = false;
     int[] origin=null;
     int[] destination=null;
-    Pane tempPane;
+    Pane oldPane;
+    Pane newPane;
+    Label someLabel;
 
     Color p1Color = Color.RED;
     Color p2Color = Color.BLUE;
@@ -348,7 +351,7 @@ public class ChessGameController implements BoardGameObserver{
         if (currPane.getChildren().isEmpty()) {
             //this skips the else ifs
             if (origin!=null){
-                dehighlightPane();
+                dehighlightPane(currPane);
                 int location1 = gamePane.getRowIndex(currPane); // x position
                 int location2 = gamePane.getColumnIndex(currPane); // y position
                 destination = new int[]{location1, location2};
@@ -358,6 +361,7 @@ public class ChessGameController implements BoardGameObserver{
                     game.updateMove(moves);
                     System.out.println(currentPlayer);
                     togglePlayer();
+                    moveLabel();
                 }
                 origin =null;
                 destination = null;
@@ -373,10 +377,10 @@ public class ChessGameController implements BoardGameObserver{
                     int location1 = gamePane.getRowIndex(currPane); // x position
                     int location2 = gamePane.getColumnIndex(currPane); // y position
                     origin = new int[]{location1, location2};
-                    tempPane=currPane;
+                    oldPane=currPane;
                     System.out.println(origin[0] + " " + origin[1]);
                 } else {
-                    dehighlightPane();
+                    dehighlightPane(currPane);
                     int location1 = gamePane.getRowIndex(currPane); // x position
                     int location2 = gamePane.getColumnIndex(currPane); // y position
                     destination = new int[]{location1, location2};
@@ -385,6 +389,7 @@ public class ChessGameController implements BoardGameObserver{
                         String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
                         game.updateMove(moves);
                         togglePlayer();
+                        moveLabel();
                     }
                     origin = null;
                     destination = null;
@@ -398,10 +403,10 @@ public class ChessGameController implements BoardGameObserver{
                     int location1 = gamePane.getRowIndex(currPane); // x position
                     int location2 = gamePane.getColumnIndex(currPane); // y position
                     origin = new int[]{location1, location2};
-                    tempPane=currPane;
+                    oldPane=currPane;
                     System.out.println(origin[0] + " " + origin[1]);
                 } else {
-                    dehighlightPane();
+                    dehighlightPane(currPane);
                     int location1 = gamePane.getRowIndex(currPane); // x position
                     int location2 = gamePane.getColumnIndex(currPane); // y position
                     destination = new int[]{location1, location2};
@@ -411,6 +416,7 @@ public class ChessGameController implements BoardGameObserver{
                         game.updateMove(moves);
                         System.out.println(currentPlayer);
                         togglePlayer();
+                        moveLabel();
                     }
                     origin = null;
                     destination = null;
@@ -426,6 +432,7 @@ public class ChessGameController implements BoardGameObserver{
             currentPlayer=player1Name.getText();
         }
     }
+
     public void highlightPane(Pane currPane) {
         BackgroundFill backgroundFill = new BackgroundFill(Color.YELLOW, null, null);
         Background background = new Background(backgroundFill);
@@ -508,9 +515,18 @@ public class ChessGameController implements BoardGameObserver{
 
         }
     }
-        public void dehighlightPane(){
-            tempPane.setBackground(null);
-            tempPane=null;
+        public void dehighlightPane(Pane currPane){
+            oldPane.setBackground(null);
+            newPane=currPane;
+        }
+
+        public void moveLabel(){
+            Label label=(Label) oldPane.getChildren().get(0);
+            oldPane.getChildren().remove(label);
+            newPane.getChildren().add(label);
+            Pane tempPane=oldPane;
+            oldPane=newPane;
+            newPane=tempPane;
         }
         @Override
         public void update(String obj){
@@ -524,6 +540,7 @@ public class ChessGameController implements BoardGameObserver{
                 case "InvalidMove":
                     System.out.println(currentPlayer+"1");
                     togglePlayer();
+                    moveLabel();
                     break;
             }
         }
