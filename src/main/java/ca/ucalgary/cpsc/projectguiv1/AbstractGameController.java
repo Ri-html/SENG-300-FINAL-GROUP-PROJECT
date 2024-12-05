@@ -7,5 +7,7 @@ import gameLogic.boardGames.Game;
 
 public abstract class AbstractGameController implements BoardGameObserver {
 
+}
+
 
 
