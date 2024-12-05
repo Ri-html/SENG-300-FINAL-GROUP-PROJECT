@@ -13,7 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,7 +29,7 @@ public class Connect4GameController {
     private ConnectFour connectFourGame;
     private User playerOne;
     private User playerTwo;
-    private boolean isPlayerOneTurn = true;
+    private boolean oneAlert = false;
 
     // FXML Components
     @FXML
@@ -58,8 +57,14 @@ public class Connect4GameController {
     @FXML
     public void initialize() {
         // Initializing players
-        playerOne = new User("1", "firsstUsr", "email@google.com");
-        playerTwo = new User("2", "scndUsr", "otheremail@google.com");
+        playerOne = HelloApplication.usrDb.searchByUsername("aaronsheikh");
+        playerTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
+        if (playerTwo == null) {
+            playerTwo = new User("SndUsr", "sndUsr@gmail.com", "12346578");
+            HelloApplication.usrDb.addUser(playerTwo);
+        }
+
+
         connectFourGame = new ConnectFour(2);
         connectFourGame.addPlayer(playerOne.getUsername());
         connectFourGame.addPlayer(playerTwo.getUsername());
@@ -67,18 +72,17 @@ public class Connect4GameController {
         Random random = new Random();
         connectFourGame.setCurrentPlayer(random.nextInt(2));
 
-        if (connectFourGame.getCurrentPlayer().equals(playerOne.getUsername())) {
-            infoLabel.setText("Click to start!");
-        } else {
-            infoLabel.setText("Click to start!");
-        }
+        infoLabel.setText("Click to start!");
+
 
         // Initializing the board
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLUMNS; col++) {
+                int x = col;
+                int y = row;
                 Circle cell = new Circle(35, Color.WHITE);
                 cell.setStroke(Color.BLACK);
-                cell.setOnMouseClicked(event -> handleCellClick(cell));
+                cell.setOnMouseClicked(event -> handleCellClick(x));
                 gamePane.add(cell, col, row);
                 board[row][col] = cell;
             }
@@ -96,86 +100,118 @@ public class Connect4GameController {
 
 
     // Handle cell click event (when a player places a token)
-    private void handleCellClick(Circle cell) {
-        int col = GridPane.getColumnIndex(cell);
-        int row = getAvailableRow(col);
+    private void handleCellClick(int col) {
 
-        if (row == -1) {
+        int row = getAvailableRow(col);
+        int[] moves = {col, row};
+        boolean isValid = connectFourGame.validateMove(moves);
+        if (!isValid) {
             infoLabel.setText("Column is full. Try a different column.");
             return;
         }
 
+        infoLabel.setText("");
+
+
         // Place the token for the current player
         // Determine the color to set based on whose turn it is
         Color playerColor;
-        if (isPlayerOneTurn) {
+        if (connectFourGame.getCurrentPlayer().equals(playerOne.getUsername())) {
             playerColor = Color.YELLOW; // Player 1's color (Yellow)
+            connectFourGame.makeMove(moves);
+            connectFourGame.switchCurrentPlayer();
+            board[row][col].setFill(playerColor);
+
+            checkEndCon();
+            makeRandMove();
+            checkEndCon();
+
         } else {
-            playerColor = Color.RED; // Player 2's color (Red)
+            makeRandMove();
+            checkEndCon();
         }
 
-        // Set the color of the token at the given position (row, col)
-        board[row][col].setFill(playerColor);
 
-        // Check for a winner
-        if (checkWinner(row, col)) {
-            showWinnerAlert();
-        } else {
-            switchTurn();
-        }
     }
 
-    // Switch turns between players
-    private void switchTurn() {
-        isPlayerOneTurn = !isPlayerOneTurn;
-        // Declare a message string to hold the information about whose turn it is
-        String turnMessage;
-
-        // Check if it's Player 1's turn
-        if (isPlayerOneTurn) {
-            // It's Player 1's turn
-            turnMessage = "Player 1's Turn (Yellow)";
-        } else {
-            // It's Player 2's turn
-            turnMessage = "Player 2's Turn (Red)";
-        }
-
-        // Update the infoLabel with the turn message
-        infoLabel.setText(turnMessage);
-
-
-        // Automatically make a move for player 2 if it's their turn
-        if (!isPlayerOneTurn) {
-            makeRandomMove();
-        }
-    }
-
-    // Make a random move for Player 2 (AI)
-    private void makeRandomMove() {
+    private void makeRandMove() {
         Random rand = new Random();
-        int col;
-        int row;
+        int col = rand.nextInt(COLUMNS);
+        int row = getAvailableRow(col);
+        int[] moves = {col, row};
+        boolean isValid = connectFourGame.validateMove(moves);
 
-        do {
-            col = rand.nextInt(COLUMNS);
-            row = getAvailableRow(col);
-        } while (row == -1);
-
-        // Check if it's Player 1's turn
-        if (isPlayerOneTurn) {
-            // It's Player 1's turn, so fill the cell with yellow
-            board[row][col].setFill(Color.YELLOW);
-        } else {
-            // It's Player 2's turn, so fill the cell with red
-            board[row][col].setFill(Color.RED);
+        if (!isValid) {
+            infoLabel.setText("Column is full. Try a different column.");
+            return;
         }
 
-        if (checkWinner(row, col)) {
-            showWinnerAlert();
+        Color playerColor;
+        if (connectFourGame.getCurrentPlayer().equals(playerOne.getUsername())) {
+            playerColor = Color.YELLOW; // Player 1's color (Yellow)
+
+            connectFourGame.makeMove(moves);
+            connectFourGame.switchCurrentPlayer();
+            board[row][col].setFill(playerColor);
+
+            checkEndCon();
+
         } else {
-            switchTurn();
+            playerColor = Color.RED; // Player 1's color (Yellow)
+
+            connectFourGame.makeMove(moves);
+            connectFourGame.switchCurrentPlayer();
+            board[row][col].setFill(playerColor);
+
+            checkEndCon();
+        }
+
+    }
+
+    public void checkEndCon() {
+        if(!this.oneAlert) {
+            if (connectFourGame.validateGameEnds() == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Winner!");
+                alert.setHeaderText("Red Wins!");
+                alert.show();
+                alert.setOnHidden(dialogEvent -> {
+                    saveEndData('W', 1);
+                    try {
+                        exitBtnFunc();
+                    } catch (IOException ioe) {
+                        System.out.println("IOExecption tictactoe exit btn func");
+                    }
+                });
+
+                this.oneAlert = true;
+            } else if (connectFourGame.validateGameEnds() == 2) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Winner!");
+                alert.setHeaderText("Yellow Wins!");
+                alert.show();
+                alert.setOnHidden(dialogEvent -> {
+                    saveEndData('W', 2);
+                    try {
+                        exitBtnFunc();
+                    } catch (IOException ioe) {
+                        System.out.println("IOExecption tictactoe exit btn func");
+                    }
+                });
+                this.oneAlert = true;
+            }
         }
     }
+
+
+//    private void checkEndCon() {
+//        if (gameEnded) return; // Prevent further checks once the game has ended
+//
+//        if (connectFourGame.checkWin() == 1 || connectFourGame.checkWin() == 2) {
+//            gameEnded = true; // Mark the game as ended
+//            showWinnerAlert();
+//        }
+//    }
 
     // Get the available row for a specific column
     private int getAvailableRow(int col) {
@@ -187,50 +223,22 @@ public class Connect4GameController {
         return -1; // Column is full
     }
 
-    // Check if the current player has won after placing a token
-    private boolean checkWinner(int row, int col) {
-        Color playerColor = (Color) board[row][col].getFill();
-        return checkDirection(row, col, playerColor, 1, 0) // Horizontal
-                || checkDirection(row, col, playerColor, 0, 1) // Vertical
-                || checkDirection(row, col, playerColor, 1, 1) // Diagonal \
-                || checkDirection(row, col, playerColor, 1, -1); // Diagonal /
-    }
-
-    // Check for consecutive tokens in a specific direction
-    private boolean checkDirection(int row, int col, Color color, int rowDir, int colDir) {
-        int count = 1;
-        count += countConsecutive(row, col, color, rowDir, colDir);
-        count += countConsecutive(row, col, color, -rowDir, -colDir);
-        return count >= 4;
-    }
-
-    // Count the consecutive tokens in one direction
-    private int countConsecutive(int row, int col, Color color, int rowDir, int colDir) {
-        int count = 0;
-        int r = row + rowDir, c = col + colDir;
-        while (r >= 0 && r < ROWS && c >= 0 && c < COLUMNS && board[r][c].getFill().equals(color)) {
-            count++;
-            r += rowDir;
-            c += colDir;
-        }
-        return count;
-    }
 
     // Show an alert when a player wins
-    private void showWinnerAlert() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Winner!");
-        alert.setHeaderText((isPlayerOneTurn ? "Player 1" : "Player 2") + " won!");
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                try {
-                    exitBtnFunc();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    private void showWinnerAlert() {
+//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//        alert.setTitle("Winner!");
+//        alert.setHeaderText((connectFourGame.getCurrentPlayer().equals(playerOne.getUsername()) ? "Player 1" : "Player 2") + " won!");
+//        alert.showAndWait().ifPresent(response -> {
+//            if (response == ButtonType.OK) {
+//                try {
+//                    exitBtnFunc();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
     // Exit the game and return to the main menu
     @FXML
@@ -250,5 +258,22 @@ public class Connect4GameController {
     @FXML
     private void sendBtnFunc() {
         infoLabel.setText("Chat feature not implemented yet.");
+    }
+
+    public void saveEndData(char result, int player) { // Might have to change
+        playerTwo = HelloApplication.usrDb.searchByUsername(playerTwo.getUsername());
+
+        if ((result == 'W') && (player == 1)) {
+            playerOne.getPlayerProfile().getConnectFourProfile().setTotalWins(playerOne.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
+            playerOne.getPlayerProfile().getConnectFourProfile().setTotalLosses(playerTwo.getPlayerProfile().getConnectFourProfile().getTotalLosses() + 1);
+            playerOne.getPlayerProfile().getConnectFourProfile().updateRanking(playerOne.getPlayerProfile().getConnectFourProfile().getScoreRank(), playerOne.getPlayerProfile().getConnectFourProfile().getWinRateRank());
+            playerOne.getPlayerProfile().getConnectFourProfile().updateGameHistory(playerOne.getUsername(), "W", 1);
+
+        } else if ((result == 'W') && (player == 2)) {
+            playerTwo.getPlayerProfile().getConnectFourProfile().setTotalWins(playerTwo.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
+            playerTwo.getPlayerProfile().getConnectFourProfile().setTotalLosses(playerOne.getPlayerProfile().getConnectFourProfile().getTotalLosses() + 1);
+            playerTwo.getPlayerProfile().getConnectFourProfile().updateRanking(playerTwo.getPlayerProfile().getConnectFourProfile().getScoreRank(), playerTwo.getPlayerProfile().getConnectFourProfile().getWinRateRank());
+            playerTwo.getPlayerProfile().getConnectFourProfile().updateGameHistory(playerTwo.getUsername(), "W", 1);
+        }
     }
 }
