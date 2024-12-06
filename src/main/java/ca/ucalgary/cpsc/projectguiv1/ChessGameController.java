@@ -103,8 +103,7 @@ public class ChessGameController implements BoardGameObserver{
 
     @FXML
     public void initialize() {
-        //this.usrOne = HelloApplication.usrDb.getCurrentUser();
-        this.usrOne = new User("SndUs", "snd@user", "pass");
+        this.usrOne = HelloApplication.usrDb.getCurrentUser();
         this.currentPlayer = this.usrOne.getUsername();
         this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
         if (this.usrTwo == null) {
@@ -114,10 +113,11 @@ public class ChessGameController implements BoardGameObserver{
         HelloApplication.usrDb.addUser(this.usrTwo);
         this.cl = ChessLeaderboard.getInstance();
 
-
+        /*
         this.gameChess = new Chess();
         this.gameChess.addPlayer(this.usrOne.getUsername());
         this.gameChess.addPlayer(this.usrTwo.getUsername());
+        */
 
         game = new Chess();
         game.addPlayer(usrOne.getUsername());
