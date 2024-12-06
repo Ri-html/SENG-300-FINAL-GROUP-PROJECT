@@ -28,15 +28,15 @@ public class Connect4LeaderboardObserverTest {
 
         observer.update(message);
 
-        Connect4Leaderboard lb = Connect4Leaderboard.getInstance();
+        Connect4Leaderboard lb = Connect4Leaderboard.getInstance();             // Ws/Ls start accumulating from 0
         PlayerStats stats = lb.getPlayerStats("playerX");
         assertNotNull(stats);
         assertEquals(1, stats.getTotalWins());
 
         // Check that loser stats are not incremented
         PlayerStats loserStats = lb.getPlayerStats("playerY");
-        assertNull(loserStats); // never recorded a win for playerY
-    }
+        assertEquals(1, loserStats.getTotalLosses()); // never recorded a win for playerY
+    }                                                           // Instead losses would be updated to 1 from 0
 
     @Test
     public void testUpdateNoWinnerLine() {
