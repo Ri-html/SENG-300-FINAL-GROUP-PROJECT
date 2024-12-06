@@ -124,7 +124,7 @@ public class ChessGameController implements BoardGameObserver{
         game.addPlayer(usrTwo.getUsername());
         game.attachGameEndObserver(this);
         game.attachTurnEndObserver(this);
-        //game.attachInvalidMoveObserver(this);
+        game.attachInvalidMoveObserver(this);
 
         player1Name.setText(usrOne.getUsername());
         player2Name.setText(usrTwo.getUsername());
@@ -482,7 +482,7 @@ public class ChessGameController implements BoardGameObserver{
 
     public void checkEndCon() {
         if(this.oneAlert == false) { // This is to make sure that only one pop-up, pops up
-            if (this.gameChess.validateGameEnds() == 1) {
+            if (this.game.validateGameEnds() == 1) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
                 alert.setHeaderText(usrOne.getUsername() + " Wins!");
@@ -511,7 +511,7 @@ public class ChessGameController implements BoardGameObserver{
                 });
 
                 this.oneAlert = true;
-            } else if (this.gameChess.validateGameEnds() == 2) {
+            } else if (this.game.validateGameEnds() == 2) {
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
@@ -539,7 +539,7 @@ public class ChessGameController implements BoardGameObserver{
                 });
                 this.oneAlert = true;
 
-            } else if (this.gameChess.validateGameEnds() == 0) {
+            } else if (this.game.validateGameEnds() == 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Draw!");
                 alert.setHeaderText("This Game Has Reached A Stalemate");
