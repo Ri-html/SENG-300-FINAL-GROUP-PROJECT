@@ -446,8 +446,11 @@ public class TicTacToeGameController {
             this.tttl.recordWin(this.usrOne.getUsername());
             this.tttl.recordLoss(this.usrTwo.getUsername());
 
-            GameRecord gameRecord = new GameRecord("Tic-Tac-Toe", this.usrTwo.getUsername(), "W", this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+            GameRecord gameRecord = new GameRecord("Tic-Tac-Toe", this.usrTwo.getUsername(), "W", this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalScore());
             this.usrOne.getPlayerProfile().getTicTacToeProfile().addGameRecord(gameRecord);
+
+            GameRecord gameRecord2 = new GameRecord("Tic-Tac-Toe", this.usrOne.getUsername(), "L", this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalScore());
+            this.usrTwo.getPlayerProfile().getTicTacToeProfile().addGameRecord(gameRecord2);
 
         }else if ((result == 'W') && (player == 2)){ // Update all the backend upon current user winning
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
@@ -458,8 +461,11 @@ public class TicTacToeGameController {
             this.tttl.recordWin(this.usrTwo.getUsername());
             this.tttl.recordLoss(this.usrOne.getUsername());
 
-            GameRecord gameRecord = new GameRecord("Tic-Tac-Toe", this.usrOne.getUsername(), "W", this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+            GameRecord gameRecord = new GameRecord("Tic-Tac-Toe", this.usrOne.getUsername(), "W", this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalScore());
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().addGameRecord(gameRecord);
+
+            GameRecord gameRecord2 = new GameRecord("Tic-Tac-Toe", this.usrTwo.getUsername(), "L", this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalScore());
+            this.usrOne.getPlayerProfile().getTicTacToeProfile().addGameRecord(gameRecord2);
 
         }
         otherPlayersName = null;
