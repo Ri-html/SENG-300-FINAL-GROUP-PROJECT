@@ -57,4 +57,22 @@ public class KingTest {
         assertNotNull(chess.getBoard()[1][4]);
     }
 
+    @Test
+    public void kingCapTest1(){
+        Chess chess = new Chess();
+
+        ((AbstractChessPiece)chess.getBoard()[1][4]).makeMove(chess.getBoard(), 3, 4);
+        ((AbstractChessPiece)chess.getBoard()[0][4]).makeMove(chess.getBoard(), 1,4);
+        System.out.println(Arrays.deepToString(chess.getBoard()));
+
+        AbstractChessPiece p = (AbstractChessPiece)chess.getBoard()[6][5];
+        p.makeMove(chess.getBoard(), 4, 5);
+        p.makeMove(chess.getBoard(), 3, 5);
+        p.makeMove(chess.getBoard(), 2, 5);
+        AbstractChessPiece k = (AbstractChessPiece)chess.getBoard()[1][4];
+        k.makeMove(chess.getBoard(), 2, 5);
+        assertTrue(chess.getBoard()[2][5].getSide() == ChessSide.WHITE);
+        System.out.println(Arrays.deepToString(chess.getBoard()));
+    }
+
 }
