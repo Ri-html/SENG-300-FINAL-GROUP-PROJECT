@@ -1,6 +1,7 @@
 
 package ca.ucalgary.cpsc.projectguiv1;
 
+import UserAndProfile.GameRecord;
 import UserAndProfile.User;
 import gameLogic.Chess;
 import gameLogic.TicTacToe;
@@ -589,7 +590,9 @@ public class ChessGameController implements BoardGameObserver{
             this.usrTwo.getPlayerProfile().getChessProfile().updateGameHistoryReal(this.usrOne.getUsername(), "L", -1);
             this.cl.recordWin(this.usrOne.getUsername());
             this.cl.recordLoss(this.usrTwo.getUsername());
-            System.out.println("test1");
+
+            GameRecord gameRecord = new GameRecord("Chess", this.usrTwo.getUsername(), "W", this.usrOne.getPlayerProfile().getChessProfile().getTotalWins());
+            this.usrOne.getPlayerProfile().getChessProfile().addGameRecord(gameRecord);
 
         } else if ((result == 'W') && (player == 2)) {
             System.out.println("test2");
@@ -601,8 +604,13 @@ public class ChessGameController implements BoardGameObserver{
             this.cl.recordWin(this.usrTwo.getUsername());
             this.cl.recordLoss(this.usrOne.getUsername());
 
+            GameRecord gameRecord = new GameRecord("Chess", this.usrOne.getUsername(), "W", this.usrTwo.getPlayerProfile().getChessProfile().getTotalWins());
+            this.usrTwo.getPlayerProfile().getChessProfile().addGameRecord(gameRecord);
+
         }
     }
+
+
         public void dehighlightPane(Pane currPane){
             oldPane.setBackground(null);
             newPane=currPane;
