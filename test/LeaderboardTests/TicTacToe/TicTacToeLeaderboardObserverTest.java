@@ -35,8 +35,8 @@ public class TicTacToeLeaderboardObserverTest {
 
         // Check that loser stats are not incremented
         PlayerStats loserStats = lb.getPlayerStats("playerY");
-        assertNull(loserStats); // never recorded a win for playerY
-    }
+        assertEquals(1, loserStats.getTotalLosses()); // never recorded a win for playerY
+    }                                                           // Will be incremented to 1 for losses from 0
 
     @Test
     public void testUpdateNoWinnerLine() {
