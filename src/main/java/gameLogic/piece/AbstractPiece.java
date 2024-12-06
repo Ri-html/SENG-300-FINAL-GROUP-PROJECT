@@ -11,6 +11,10 @@ public abstract class AbstractPiece implements Piece {
         this.side = side;
     }
 
+    /**
+     * gets which player's side the piece belongs to
+     * @return the side field
+     */
     public Side getSide() {
         return side;
     }
@@ -21,9 +25,14 @@ public abstract class AbstractPiece implements Piece {
      */
     @Override
     public String toString() {
-        return side.toString()+" "+display;
+        return String.valueOf(side+" "+display);
     }
 
+    /**
+     * To compare whether two piece belongs to the same player
+     * @param o another abstractPiece object
+     * @return whether they are on the same side
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -32,6 +41,10 @@ public abstract class AbstractPiece implements Piece {
         return display == that.display && Objects.equals(side, that.side);
     }
 
+    /**
+     * creates a hashcode of the object
+     * @return an integer hashcode
+     */
     @Override
     public int hashCode() {
         return Objects.hash(side, display);

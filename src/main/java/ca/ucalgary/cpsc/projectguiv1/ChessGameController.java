@@ -103,7 +103,9 @@ public class ChessGameController implements BoardGameObserver{
 
     public static String otherPlayersName;
 
-
+    /**
+     * Sets up board and gui
+     */
     @FXML
     public void initialize() {
         this.usrOne = HelloApplication.usrDb.getCurrentUser();
@@ -142,6 +144,10 @@ public class ChessGameController implements BoardGameObserver{
         setUpBoard();
     }
 
+    /**
+     * return to chess game menu
+     * @throws IOException incase the return fails
+     */
     @FXML
     public void exitBtnFunc() throws IOException { // Switch to chess main menu
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Chess_Main_Menu_View.fxml"));
@@ -155,15 +161,9 @@ public class ChessGameController implements BoardGameObserver{
         stgWindw.close();
     }
 
-
-    @FXML
-    public void handleClicks(MouseEvent event) {
-        double x = event.getX();
-        double y = event.getY();
-        //int row = (int) (y / CELL_SIZE); // Calculate row index
-        //int col = (int) (x / CELL_SIZE); // Calculate column index
-    }
-
+    /**
+     * send messages to other player
+     */
     public void sendBtnFunc() {
         String chatTxt = "";
         if (game.getCurrentPlayer().equals(usrOne.getUsername())) {
@@ -176,6 +176,9 @@ public class ChessGameController implements BoardGameObserver{
         this.chatScrlPane.setContent(this.chatBox);
     }
 
+    /**
+     * sets up the chess pieces on the board
+     */
     public void setUpBoard() {
         int size = 50;
         if (this.setup == false) {
@@ -357,6 +360,12 @@ public class ChessGameController implements BoardGameObserver{
         }
     }
 
+    /**
+     * makes the move
+     * @param coordsArr array containing the coordinate of the pieces
+     * @param currPane the pane that implements this onclick function
+     * @throws IOException  throws an exception
+     */
     public void makeMove(int[] coordsArr, Pane currPane) throws IOException {
             //used to skip the rest if current pane is empty
         if (currPane.getChildren().isEmpty()&& origin==null) {
@@ -372,7 +381,7 @@ public class ChessGameController implements BoardGameObserver{
                     String moves = String.format("%s,%s,%s,%s",origin[0],origin[1],destination[0],destination[1]);
                     game.updateMove(moves);
                     System.out.println(currentPlayer);
-                    if (exception==false){
+                    if (!exception){
                         togglePlayer();
                         moveLabel();
                     }else{
@@ -384,7 +393,7 @@ public class ChessGameController implements BoardGameObserver{
 
           //if player one moves and is the first click
         } else if (currentPlayer.equals(player1Name.getText()) && origin==null) {
-            Label xLbl = (Label) currPane.getChildren().get(0);
+            Label xLbl = (Label) currPane.getChildren().getFirst();
 
             //check if the colour is correct
             if (p1Color== xLbl.getTextFill()) {
@@ -398,7 +407,7 @@ public class ChessGameController implements BoardGameObserver{
 
             //if the cell contains player two piece and is the first click
         } else if (currentPlayer.equals(player2Name.getText()) && origin==null) {
-            Label xLbl = (Label) currPane.getChildren().get(0);
+            Label xLbl = (Label) currPane.getChildren().getFirst();
             if (p2Color == xLbl.getTextFill()) {
                 highlightPane(currPane);
                 int location1 = gamePane.getRowIndex(currPane); // x position
@@ -474,6 +483,9 @@ public class ChessGameController implements BoardGameObserver{
         }
     }
 
+    /**
+     * switches the current player
+     */
     private void togglePlayer() {
         if (currentPlayer.equals(player1Name.getText())) {
             currentPlayer=player2Name.getText();
@@ -482,13 +494,19 @@ public class ChessGameController implements BoardGameObserver{
         }
     }
 
+    /**
+     * highlights the current pane
+     * @param currPane the pane clicked
+     */
     public void highlightPane(Pane currPane) {
         BackgroundFill backgroundFill = new BackgroundFill(Color.YELLOW, null, null);
         Background background = new Background(backgroundFill);
         currPane.setBackground(background);
     }
 
-
+    /**
+     * check if end condition is met and perform different operations for win and tie
+     */
     public void checkEndCon() {
         if(this.oneAlert == false) { // This is to make sure that only one pop-up, pops up
             if (this.game.validateGameEnds() == 1) {
@@ -578,7 +596,11 @@ public class ChessGameController implements BoardGameObserver{
         }
     }
 
-
+    /**
+     * Saves the data into a file
+     * @param result   the result of the player
+     * @param player    the player
+     */
     public void saveEndData(char result, int player) {
         this.usrTwo = HelloApplication.usrDb.searchByUsername(this.usrTwo.getUsername());
 
@@ -610,13 +632,19 @@ public class ChessGameController implements BoardGameObserver{
         }
     }
 
-
+    /**
+     * unhighlight the previous pane clicked
+     * @param currPane the current pane, and the second pane clicked
+     */
         public void dehighlightPane(Pane currPane){
             oldPane.setBackground(null);
             newPane=currPane;
         }
 
-        public void moveLabel(){
+    /**
+     * move the label representing the chess piece
+     */
+    public void moveLabel(){
             Label label=(Label) oldPane.getChildren().get(0);
             oldPane.getChildren().remove(label);
             newPane.getChildren().add(label);
@@ -624,7 +652,11 @@ public class ChessGameController implements BoardGameObserver{
             oldPane=newPane;
             newPane=tempPane;
         }
-        public void resetGame(){
+
+    /**
+     * resets the game to initial state if both players agree to a rematch
+     */
+    public void resetGame(){
             gamePane.getChildren().removeIf(children -> children instanceof Pane);
             afterlife1.setText("");
             afterlife2.setText("");
@@ -635,7 +667,12 @@ public class ChessGameController implements BoardGameObserver{
             this.oneAlert=false;
             initialize();
         }
-        @Override
+
+    /**
+     * This method updates this observer about the turn end condition, game end condition, and invalid moves
+     * @param obj   a string object passed by the notify methods in abstractBoardGame
+     */
+    @Override
         public void update(String obj){
             String[] objs=obj.split("\n");
             switch (objs[0]){

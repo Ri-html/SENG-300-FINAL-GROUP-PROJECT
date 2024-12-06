@@ -165,14 +165,26 @@ public abstract class AbstractBoardGame implements BoardGame {
         }
     }
 
+    /**
+     * sets the current player
+     * @param aCurrentPlayer the current player
+     */
     public void setCurrentPlayer(int aCurrentPlayer){
         currentPlayer=aCurrentPlayer;
     }
 
+    /**
+     * gets the current player
+     * @return the current player as a string
+     */
     public String getCurrentPlayer() {
         return players[currentPlayer];
     }
 
+    /**
+     * gets the current game state
+     * @return the game state
+     */
     public GameState getGameState() {
         return gameState;
     }
