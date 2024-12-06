@@ -109,6 +109,60 @@ public class View_Other_User_Profile_Controller {
     }
     // What will the challenge button do? Should it just start a new game with that user?
 
+    public void playTicTacToe() throws IOException {
+        // challengeTicTacToeBtn
+        TicTacToeGameController.otherPlayersName = this.user.getUsername(); // User being challenged
+
+        // Load tic tac toe game
+        String file = "TicTacToe_Game_Screen.fxml";
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Playing Tic Tac Toe");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
+    }
+
+    public void playConnect4() throws IOException{
+        //challengeConnect4Btn
+        Connect4GameController.otherPlayersName = this.user.getUsername();
+
+        // Load Connect 4 game
+        String file = "Connect4_Game_Screen.fxml";
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Playing Connect 4");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
+    }
+
+    public void playChess() throws IOException{
+        //
+        ChessGameController.otherPlayersName = this.user.getUsername();
+
+        // Load Chess game
+        String file = "Chess_Game_Screen.fxml";
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Playing Chess");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
+    }
+
     public void backBtnFunc() throws IOException {
         String file = "Search_for_Players.fxml";
 

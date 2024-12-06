@@ -100,6 +100,8 @@ public class ChessGameController implements BoardGameObserver{
 
     private ArrayList<String> arrOfPaneCoords = new ArrayList<>();
 
+    public static String otherPlayersName;
+
 
     @FXML
     public void initialize() {
@@ -108,6 +110,10 @@ public class ChessGameController implements BoardGameObserver{
         this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
         if (this.usrTwo == null) {
             this.usrTwo = new User("SndUsr", "snd@user", "pass");
+        }
+
+        if(otherPlayersName != null){ // match with a specific user
+            this.usrTwo = HelloApplication.usrDb.searchByUsername(otherPlayersName);
         }
 
         HelloApplication.usrDb.addUser(this.usrTwo);
