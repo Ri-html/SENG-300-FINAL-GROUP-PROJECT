@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 import static ca.ucalgary.cpsc.projectguiv1.HelloApplication.usrDb;
 
@@ -25,6 +26,12 @@ public class Manage_Profile_Controller {
 
     @FXML
     TextArea gameHistory3;
+
+    @FXML
+    TextArea recentMatch1;
+
+    @FXML
+    TextArea recentMatch2;
 
     @FXML
     TextField usernameField;
@@ -69,6 +76,7 @@ public class Manage_Profile_Controller {
         emailField.setText(currUser.getEmail());
 
         displayGameHistory();
+        displayRecentMatches();
     }
 
 
@@ -107,6 +115,27 @@ public class Manage_Profile_Controller {
 
     }
 
+    public void displayRecentMatches() {
+        List<GameRecord> recentMatches = currUser.getPlayerProfile().getAllGameRecords();
+        if (recentMatches != null) {
+            if (recentMatches.size() > 1) {
+                GameRecord match1 = recentMatches.getLast();
+                recentMatch1.setText(match1.toString());
+
+                GameRecord match2 = recentMatches.get(recentMatches.size() - 2);
+                recentMatch2.setText(match2.toString());
+            }
+            else if (recentMatches.size() == 1) {
+                GameRecord match1 = recentMatches.getFirst();
+                recentMatch1.setText(match1.toString());
+                recentMatch2.setText("N/A");
+            }
+        } else {
+            recentMatch1.setText("N/A");
+            recentMatch2.setText("N/A");
+        }
+    }
+
 
     public void exitBtnFunc() throws IOException { // Go to Homepage
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
@@ -119,6 +148,8 @@ public class Manage_Profile_Controller {
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();
         stgWindw.close();
     }
+
+
 
 
 }

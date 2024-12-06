@@ -1,5 +1,6 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
+import UserAndProfile.GameRecord;
 import UserAndProfile.User;
 import UserAndProfile.UserDatabase;
 import gameLogic.ConnectFour;
@@ -342,7 +343,9 @@ public class Connect4GameController {
             playerTwo.getPlayerProfile().getConnectFourProfile().updateGameHistoryReal(playerOne.getUsername(), "L",  -1);
             connect4Lead.recordWin(playerOne.getUsername());
             connect4Lead.recordLoss(playerTwo.getUsername());
-            playerOne.getPlayerProfile().getConnectFourProfile().addGameRecord("Connect-4", playerTwo.getUsername(), "W", playerOne.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
+
+            GameRecord gameRecord = new GameRecord("Connect-4", playerTwo.getUsername(), "W", playerOne.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
+            playerOne.getPlayerProfile().getConnectFourProfile().addGameRecord(gameRecord);
 
         }else if ((result == 'W') && (player == 2)){ // Update all the backend upon current user winning
             playerTwo.getPlayerProfile().getConnectFourProfile().setTotalWins(playerTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
@@ -352,7 +355,9 @@ public class Connect4GameController {
             playerOne.getPlayerProfile().getConnectFourProfile().updateGameHistoryReal(playerTwo.getUsername(), "L", -1);
             connect4Lead.recordWin(playerTwo.getUsername());
             connect4Lead.recordLoss(playerOne.getUsername());
-            playerTwo.getPlayerProfile().getConnectFourProfile().addGameRecord("Connect-4", playerOne.getUsername(), "W", playerTwo.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
+
+            GameRecord gameRecord = new GameRecord("Connect-4", playerOne.getUsername(), "W", playerTwo.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
+            playerTwo.getPlayerProfile().getConnectFourProfile().addGameRecord(gameRecord);
         }
     }
 }

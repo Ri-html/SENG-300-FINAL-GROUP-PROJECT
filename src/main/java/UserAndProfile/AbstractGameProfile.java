@@ -24,11 +24,11 @@ public abstract class AbstractGameProfile {
     private int winRateRank;
 
     // List to store all game records
-    private List<GameRecord> gameRecords;
+    private List<GameRecord> gameRecords = new ArrayList<>();
 
     // Add a game record
-    public void addGameRecord(String opponent, String result, int score) {
-        GameRecord newRecord = new GameRecord(opponent, result, score);
+    public void addGameRecord(String game, String opponent, String result, int score) {
+        GameRecord newRecord = new GameRecord(game, opponent, result, score);
         this.gameRecords.add(newRecord);
 
         // Update the last game details
@@ -45,6 +45,7 @@ public abstract class AbstractGameProfile {
     // Constructor
     public AbstractGameProfile() {
         // Initialize with default values if needed
+        this.gameRecords = new ArrayList<>();
     }
 
     // Abstract methods to be implemented by subclasses (specific to each game)
