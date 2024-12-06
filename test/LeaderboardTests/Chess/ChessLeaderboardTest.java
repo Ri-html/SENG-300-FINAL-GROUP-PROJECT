@@ -1,9 +1,11 @@
 package LeaderboardTests.Chess;
 import leaderboard.chessLeaderboard.ChessLeaderboard;
 import leaderboard.chessLeaderboard.PlayerStats;
+import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -17,6 +19,19 @@ public class ChessLeaderboardTest {
             ChessLeaderboard.class.getDeclaredMethod("clearAll").invoke(lb);
         } catch (Exception e) {
 
+        }
+    }
+
+    @Before
+    public void resetLeaderboard() {
+        try {
+            // Access the private static `instance` field
+            Field instanceField = ChessLeaderboard.class.getDeclaredField("instance");
+            instanceField.setAccessible(true);              // Allow access to the private field
+            instanceField.set(null, null);                  // Reset the singleton instance to null
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to reset ChessLeaderboard singleton", e);
         }
     }
 

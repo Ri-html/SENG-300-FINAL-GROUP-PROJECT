@@ -34,8 +34,8 @@ public class ChessLeaderboardObserverTest {
 
         // Check that loser stats are not incremented
         PlayerStats loserStats = lb.getPlayerStats("playerY");
-        assertNull(loserStats); // never recorded a win for playerY
-    }
+        assertEquals(null, loserStats); // never recorded a win for playerY
+    }                                                           // Increments loss to 1 from 0
 
     @Test
     public void testUpdateNoWinnerLine() {

@@ -6,13 +6,54 @@ import leaderboard.matchmaking_LB.Match;
 import leaderboard.matchmaking_LB.MatchmakingSystem;
 import leaderboard.matchmaking_LB.Player;
 import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class rankAndPlayerTest {
+
+    @Before
+    public void resetTicTacToeLeaderboard() {
+        try {
+            // Access the private static `instance` field
+            Field instanceField = TicTacToeLeaderboard.class.getDeclaredField("instance");
+            instanceField.setAccessible(true);              // Allow access to the private field
+            instanceField.set(null, null);                  // Reset the singleton instance to null
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to reset TicTacToeLeaderboard singleton", e);
+        }
+    }
+    @Before
+    public void resetConnect4Leaderboard() {
+        try {
+            // Access the private static `instance` field
+            Field instanceField = Connect4Leaderboard.class.getDeclaredField("instance");
+            instanceField.setAccessible(true);              // Allow access to the private field
+            instanceField.set(null, null);                  // Reset the singleton instance to null
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to reset Connect4Leaderboard singleton", e);
+        }
+    }
+
+    @Before
+    public void resetChessLeaderboard() {
+        try {
+            // Access the private static `instance` field
+            Field instanceField = ChessLeaderboard.class.getDeclaredField("instance");
+            instanceField.setAccessible(true);              // Allow access to the private field
+            instanceField.set(null, null);                  // Reset the singleton instance to null
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to reset ChessLeaderboard singleton", e);
+        }
+    }
 
     @Test
     public void playerSkillTest(){

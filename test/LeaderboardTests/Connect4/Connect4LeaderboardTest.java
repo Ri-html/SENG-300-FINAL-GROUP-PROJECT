@@ -32,7 +32,7 @@ public class Connect4LeaderboardTest {
             instanceField.set(null, null);                  // Reset the singleton instance to null
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to reset TicTacToeLeaderboard singleton", e);
+            throw new RuntimeException("Failed to reset Connect4Leaderboard singleton", e);
         }
     }
 
