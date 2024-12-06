@@ -3,6 +3,7 @@ package ca.ucalgary.cpsc.projectguiv1;
 import UserAndProfile.User;
 import UserAndProfile.UserDatabase;
 import gameLogic.ConnectFour;
+import javafx.scene.Node;
 import leaderboard.connect4Leaderboard.Connect4Leaderboard;
 import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 import network.Network;
@@ -233,11 +234,22 @@ public class Connect4GameController {
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 2);
-                    try {
-                        exitBtnFunc();
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
-                    }
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
                 });
 
                 this.oneAlert = true;
@@ -248,11 +260,47 @@ public class Connect4GameController {
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 1);
-                    try {
-                        exitBtnFunc();
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
-                    }
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
+                });
+                this.oneAlert = true;
+            }else if (this.connectFourGame.validateGameEnds() == 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Draw!");
+                alert.setHeaderText("This Game Has Reached A Stalemate");
+                alert.show();
+
+                alert.setOnHidden(dialogEvent -> {
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
                 });
                 this.oneAlert = true;
             }
@@ -309,6 +357,11 @@ public class Connect4GameController {
 
         // Clear the input field
         chatTxtField.clear();
+    }
+
+    public void resetGame(){
+        this.oneAlert=false;
+        initialize();
     }
 
     public void saveEndData(char result, int player) { // Might have to change
