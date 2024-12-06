@@ -6,20 +6,24 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="22" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" scope="TEST" name="junit" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="net.christophermerrill.TestFxUtils" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="testfx.core" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="testfx.junit" level="project" />
+    <orderEntry type="library" name="FX" level="project" />
+    <orderEntry type="library" scope="TEST" name="junit" level="project" />
+    <orderEntry type="library" scope="TEST" name="net.christophermerrill.TestFxUtils" level="project" />
+    <orderEntry type="library" scope="TEST" name="testfx.core" level="project" />
+    <orderEntry type="library" scope="TEST" name="testfx.junit" level="project" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="file://C:/Program Files/JavaFX/javafx-sdk-23.0.1/lib" />
+          <root url="file://$MODULE_DIR$/lib" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://C:/Program Files/JavaFX/javafx-sdk-23.0.1/lib" recursive="false" />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/lib" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
   </component>

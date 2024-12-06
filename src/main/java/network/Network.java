@@ -1,6 +1,6 @@
 package network;
 
-import UserAndProfile.*;
+import UserAndProfile.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,10 @@ public class Network {
     // List of users queueing for a tictactoe game
     private List<User> tictactoeQueue;
 
-    // Constructor
+    /**
+     * Constructor
+     * @param players
+     */
     public Network(List<User> players) {
         this.players = players;
         this.chessGame = new ArrayList<>();
@@ -38,42 +41,66 @@ public class Network {
         this.tictactoeQueue = new ArrayList<>();
     }
 
-    // Getter for all players on network
+    /**
+     * Returns list of players on network
+     * @return (List<User>)
+     */
     public List<User> getPlayers() {
         return players;
     }
 
-    // Getter for players in a chess game
+    /**
+     * Returns list of players in a chess game
+     * @return (List<User>)
+     */
     public List<User> getChessGame() {
         return chessGame;
     }
 
-    // Getter for players in a chess queue
+    /**
+     * Returns list of players in a chess queue
+     * @return (List<User>)
+     */
     public List<User> getChessQueue() {
         return chessQueue;
     }
 
-    // Getter for players in a connect four game
+    /**
+     * Returns list of players in a connect four game
+     * @return (List<User>)
+     */
     public List<User> getConnectFourGame(){
         return connectFourGame;
     }
 
-    // Getter for players in a connect four queue
+    /**
+     * Returns list of players in a connect four queue
+     * @return (List<User>)
+     */
     public List<User> getConnectFourQueue() {
         return connectFourQueue;
     }
 
-    // Getter for players in a tictactoe game
+    /**
+     * Returns list of players in a tictactoe game
+     * @return (List<User>)
+     */
     public List<User> getTictactoeGame() {
         return tictactoeGame;
     }
 
-    // Getter for players in a tictactoe queue
+    /**
+     * Returns list of players in a tictactoe queue
+     * @return (List<User>)
+     */
     public List<User> getTictactoeQueue() {
         return tictactoeQueue;
     }
 
-    // Find chess players of same rank that are online
+    /**
+     * Returns list of players in of same chess rank (all players)
+     * @return (List<User>)
+     */
     public List<User> findChessRank(int rank) {
         List<User> matchedUsers = new ArrayList<>();
         for (User user : players) {
@@ -84,7 +111,10 @@ public class Network {
         return matchedUsers;
     }
 
-    // Find chess players of same rank that are queued for a game
+    /**
+     * Returns list of players in of same chess rank (in queue)
+     * @return (List<User>)
+     */
     public List<User> findChessRankQueue(int rank) {
         List<User> matchedUsers = new ArrayList<>();
         for (User user : chessQueue) {
@@ -95,7 +125,10 @@ public class Network {
         return matchedUsers;
     }
 
-    // Find Connect Four players of same rank that are online
+    /**
+     * Returns list of players in of same connect four rank (all players)
+     * @return (List<User>)
+     */
     public List<User> findConnectFourRank(int rank) {
         List<User> matchedUsers = new ArrayList<>();
         for (User user : players) {
@@ -106,7 +139,10 @@ public class Network {
         return matchedUsers;
     }
 
-    // Find Connect Four players of same rank that are queued for a game
+    /**
+     * Returns list of players in of same connect four rank (in queue)
+     * @return (List<User>)
+     */
     public List<User> findConnectFourRankQueue(int rank) {
         List<User> matchedUsers = new ArrayList<>();
         for (User user : connectFourQueue) {
@@ -117,7 +153,10 @@ public class Network {
         return matchedUsers;
     }
 
-    // Find Tictactoe players of same rank that are online
+    /**
+     * Returns list of players in of same tictactoe rank (all players)
+     * @return (List<User>)
+     */
     public List<User> findTictactoeRank(int rank) {
         List<User> matchedUsers = new ArrayList<>();
         for (User user : players) {
@@ -128,7 +167,10 @@ public class Network {
         return matchedUsers;
     }
 
-    // Find Tictactoe players of same rank that are queued for a game
+    /**
+     * Returns list of players in of same tictactoe rank (in queue)
+     * @return (List<User>)
+     */
     public List<User> findTictactoeRankQueue(int rank) {
         List<User> matchedUsers = new ArrayList<>();
         for (User user : tictactoeQueue) {
@@ -139,52 +181,94 @@ public class Network {
         return matchedUsers;
     }
 
-    // Add user to chess queue
+    /**
+     * Add user to chess queue
+     * @param user (User)
+     */
     public void addChessQueue(User user) {
         chessQueue.add(user);
     }
 
-    // Add user to chess game
+    /**
+     * Add user to chess game
+     * @param user (User)
+     */
     public void addChessGame(User user) { chessGame.add(user); }
 
-    // Add user to Connect Four queue
+    /**
+     * Add user to connect four queue
+     * @param user (User)
+     */
     public void addConnectFourQueue(User user) {
         connectFourQueue.add(user);
     }
 
-    // Add user to Connect Four game
+    /**
+     * Add user to connect four game
+     * @param user (User)
+     */
     public void addConnectFourGame(User user) {
         connectFourGame.add(user);
     }
 
-    // Add user to Tictactoe queue
+    /**
+     * Add user to tictactoe queue
+     * @param user (User)
+     */
     public void addTictactoeQueue(User user) {
         tictactoeQueue.add(user);
     }
 
-    // Add user to Tictactoe game
+    /**
+     * Add user to tictactoe game
+     * @param user (User)
+     */
     public void addTictactoeGame(User user) {
         tictactoeGame.add(user);
     }
 
-    // Add user to players online
+    /**
+     * Add user to online network
+     * @param user (User)
+     */
     public void addUser(User user) {
         players.add(user);
     }
 
-    // Remove user from chess queue
+    /**
+     * Remove user from chess queue
+     * @param user (User)
+     */
     public void removeChessQueue(User user) { chessQueue.remove(user); }
-    // Remove user from chess game
+    /**
+     * Remove user from chess game
+     * @param user (User)
+     */
     public void removeChessGame(User user) { chessGame.remove(user); }
-    // Remove user from connect four queue
+    /**
+     * Remove user from connect four queue
+     * @param user (User)
+     */
     public void removeConnectFourQueue(User user) { connectFourQueue.remove(user); }
-    // Remove user from connect four game
+    /**
+     * Remove user from connect four queue
+     * @param user (User)
+     */
     public void removeConnectFourGame (User user) { connectFourGame.remove(user); }
-    // Remove user from tictactoe queue
+    /**
+     * Remove user from tictactoe queue
+     * @param user (User)
+     */
     public void removeTictactoeQueue(User user) { tictactoeQueue.remove(user); }
-    // Remove user from tictactoe game
+    /**
+     * Remove user from tictactoe game
+     * @param user (User)
+     */
     public void removeTictactoeGame (User user) { tictactoeGame.remove(user); }
-    // Remove user from network
+    /**
+     * Remove user from network
+     * @param user (User)
+     */
     public void removeUser (User user) { players.remove(user);}
 
 }

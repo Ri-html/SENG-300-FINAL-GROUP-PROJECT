@@ -1,6 +1,6 @@
-package networkTest;
+package NetworkTests;
 
-import UserAndProfile.User;
+import UserAndProfile.*;
 import network.Network;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,16 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+/**
+ * tests for Network.java
+ */
 public class NetworkTests {
 private Network network;
 
-@Before
+    /**
+     * Setup function to run before every test
+     */
+    @Before
     public void setup() {
 
-    User user1 = new User("1","Rob", "rob@email.com");
-    User user2 = new User("2","Joe", "Joe@email.com");
-    User user3 = new User("3", "Stacy", "Stacy@email.com");
+    User user1 = new User("Rob", "rob@email.com","aaa");
+    User user2 = new User("Joe", "Joe@email.com","aaa");
+    User user3 = new User("Stacy", "Stacy@email.com","aaa");
     user1.getPlayerProfile().getChessProfile().setScoreRank(1000);
     user2.getPlayerProfile().getChessProfile().setScoreRank(1000);
     user3.getPlayerProfile().getChessProfile().setScoreRank(2000);
@@ -51,14 +56,20 @@ private Network network;
     network.addTictactoeQueue(user2);
 }
 
-@Test
+    /**
+     * test for getPlayers
+     */
+    @Test
     public void getPlayersTest() {
     int expected = 3;
     int actual = network.getPlayers().size();
     assertEquals(expected, actual);
 }
 
-@Test
+    /**
+     * test for getChessGame
+     */
+    @Test
     public void getChessGameTest() {
     int expected = 2;
     String expected1 = "Rob";
@@ -73,7 +84,9 @@ private Network network;
     assertEquals(expected1, actual1);
     assertEquals(expected2, actual2);
 }
-
+    /**
+     * test for getConnectFourGame
+     */
     @Test
     public void getConnectFourGameTest() {
         int expected = 2;
@@ -90,6 +103,9 @@ private Network network;
         assertEquals(expected2, actual2);
     }
 
+    /**
+     * test for getTictactoeGame
+     */
     @Test
     public void getTictactoeGameTest() {
         int expected = 2;
@@ -106,6 +122,9 @@ private Network network;
         assertEquals(expected2, actual2);
     }
 
+    /**
+     * test for getChessQueue
+     */
     @Test
     public void getChessQueueTest() {
         int expected = 1;
@@ -118,7 +137,9 @@ private Network network;
         assertEquals(expected, actual);
         assertEquals(expected1, actual1);
     }
-
+    /**
+     * test for getConnectFOurQueue
+     */
     @Test
     public void getConnectFourQueueTest() {
         int expected = 1;
@@ -132,6 +153,9 @@ private Network network;
         assertEquals(expected1, actual1);
     }
 
+    /**
+     * test for getTictactoeQueue
+     */
     @Test
     public void getTictactoeQueueTest() {
         int expected = 1;
@@ -144,7 +168,9 @@ private Network network;
         assertEquals(expected, actual);
         assertEquals(expected1, actual1);
     }
-
+    /**
+     * test for findChessRank
+     */
     @Test
     public void findChessRankTest() {
         int expected = 2;
@@ -160,7 +186,9 @@ private Network network;
         assertEquals(expected1, actual1);
         assertEquals(expected2, actual2);
     }
-
+    /**
+     * test for findConnectFourRank
+     */
     @Test
     public void findConnectFourRankTest() {
         int expected = 2;
@@ -176,9 +204,11 @@ private Network network;
         assertEquals(expected1, actual1);
         assertEquals(expected2, actual2);
     }
-
+    /**
+     * test for findTictactoeRank
+     */
     @Test
-    public void findTictactoeTest() {
+    public void findTictactoeRankTest() {
         int expected = 2;
         String expected1 = "Rob";
         String expected2 = "Stacy";
@@ -193,6 +223,9 @@ private Network network;
         assertEquals(expected2, actual2);
     }
 
+    /**
+     * test for findChessQueueRank
+     */
     @Test
     public void findChessQueueRankTest() {
         int expected = 1;
@@ -205,7 +238,9 @@ private Network network;
         assertEquals(expected, actual);
         assertEquals(expected1, actual1);
     }
-
+    /**
+     * test for findConnectFourQueueRank
+     */
     @Test
     public void findConnectFourQueueRankTest() {
         int expected = 1;
@@ -219,6 +254,9 @@ private Network network;
         assertEquals(expected1, actual1);
     }
 
+    /**
+     * test for findTictactoeQueueRank
+     */
     @Test
     public void findTictactoeQueueRankTest() {
         int expected = 1;
@@ -232,6 +270,9 @@ private Network network;
         assertEquals(expected1, actual1);
     }
 
+    /**
+     * test for addChessGame
+     */
     @Test
 
     public void addChessGameTest() {
@@ -239,7 +280,7 @@ private Network network;
         String expected1 = "Rob";
         String expected2 = "Joe";
         String expected3 = "Josh";
-        User user1 = new User("4", "Josh","Josh@email.com");
+        User user1 = new User("Josh","Josh@email.com","aaa");
         network.addChessGame(user1);
 
         List<User> chessUsers = network.getChessGame();
@@ -257,6 +298,9 @@ private Network network;
 
     }
 
+    /**
+     * test for addConnectFourGame
+     */
     @Test
 
     public void addConnectFourGameTest() {
@@ -264,7 +308,7 @@ private Network network;
         String expected1 = "Joe";
         String expected2 = "Stacy";
         String expected3 = "Jeff";
-        User user1 = new User("5", "Jeff","Jeff@email.com");
+        User user1 = new User( "Jeff","Jeff@email.com","aaa");
         network.addConnectFourGame(user1);
 
         List<User> connectFourUsers = network.getConnectFourGame();
@@ -280,7 +324,9 @@ private Network network;
 
         network.removeConnectFourGame(user1);
     }
-
+    /**
+     * test for addTictactoeGame
+     */
     @Test
 
     public void addTictactoeGameTest() {
@@ -288,7 +334,7 @@ private Network network;
         String expected1 = "Rob";
         String expected2 = "Stacy";
         String expected3 = "Adam";
-        User user1 = new User("6", "Adam","Adam@email.com");
+        User user1 = new User("Adam","Adam@email.com","aaa");
         network.addTictactoeGame(user1);
 
         List<User> tictactoeUsers = network.getTictactoeGame();
@@ -306,13 +352,16 @@ private Network network;
 
     }
 
+    /**
+     * test for addChessQueue
+     */
     @Test
 
     public void addChessQueueTest() {
         int expected = 2;
         String expected1 = "Stacy";
         String expected2 = "Kory";
-        User user1 = new User("7", "Kory","Kory@email.com");
+        User user1 = new User("Kory","Kory@email.com","aaa");
         network.addChessQueue(user1);
 
         List<User> chessQueueUsers = network.getChessQueue();
@@ -327,14 +376,16 @@ private Network network;
 
         network.removeChessQueue(user1);
     }
-
+    /**
+     * test for addConnectFourQueue
+     */
     @Test
 
     public void addConnectFourQueueTest() {
         int expected = 2;
         String expected1 = "Rob";
         String expected2 = "Steve";
-        User user1 = new User("8", "Steve","Steve@email.com");
+        User user1 = new User("Steve","Steve@email.com","aaa");
         network.addConnectFourQueue(user1);
 
         List<User> connectFourQueueUsers = network.getConnectFourQueue();
@@ -349,14 +400,16 @@ private Network network;
 
         network.removeConnectFourQueue(user1);
     }
-
+    /**
+     * test for addTictactoeQueue
+     */
     @Test
 
     public void addTictactoeQueueTest() {
         int expected = 2;
         String expected1 = "Joe";
         String expected2 = "Kyle";
-        User user1 = new User("9", "Kyle","Kyle@email.com");
+        User user1 = new User("Kyle","Kyle@email.com","aaa");
         network.addTictactoeQueue(user1);
 
         List<User> tictactoeQueueUsers = network.getTictactoeQueue();
@@ -373,13 +426,16 @@ private Network network;
 
     }
 
+    /**
+     * test for removeChessGame
+     */
     @Test
     public void removeChessGameTest() {
         int expected = 2;
         String expected1 = "Rob";
         String expected2 = "Joe";
 
-        User user1 = new User("10","Martin", "Martin@email.com");
+        User user1 = new User("Martin", "Martin@email.com","aaa");
 
         network.addChessGame(user1);
         network.removeChessGame(user1);
@@ -394,13 +450,16 @@ private Network network;
         assertEquals(expected1, actual1);
         assertEquals(expected2, actual2);
     }
+    /**
+     * test for removeConnectFourGame
+     */
     @Test
     public void removeConnectFourGameTest() {
 
         int expected = 2;
         String expected1 = "Joe";
         String expected2 = "Stacy";
-        User user1 = new User("11", "Richard","Richard@email.com");
+        User user1 = new User("Richard","Richard@email.com","aaa");
         network.addConnectFourGame(user1);
         network.removeConnectFourGame(user1);
 
@@ -413,13 +472,15 @@ private Network network;
         assertEquals(expected1, actual1);
         assertEquals(expected2, actual2);
     }
-
+    /**
+     * test for removeTictactoeGame
+     */
     @Test
     public void removeTictactoeGameTest() {
         int expected = 2;
         String expected1 = "Rob";
         String expected2 = "Stacy";
-        User user1 = new User("12", "Sarah","Sarah@email.com");
+        User user1 = new User("Sarah","Sarah@email.com","aaa");
         network.addTictactoeGame(user1);
         network.removeTictactoeGame(user1);
 
@@ -433,13 +494,15 @@ private Network network;
         assertEquals(expected2, actual2);
 
     }
-
+    /**
+     * test for removeChessQueue
+     */
     @Test
     public void removeChessQueueTest() {
 
         int expected = 1;
         String expected1 = "Stacy";
-        User user1 = new User("13", "Daniel","Daniel@email.com");
+        User user1 = new User("Daniel","Daniel@email.com","aaa");
         network.addChessQueue(user1);
         network.removeChessQueue(user1);
 
@@ -452,12 +515,14 @@ private Network network;
         assertEquals(expected1, actual1);
 
     }
-
+    /**
+     * test for removeConnectFourQueue
+     */
     @Test
     public void removeConnectFourQueueTest() {
         int expected = 1;
         String expected1 = "Rob";
-        User user1 = new User("14", "James","James@email.com");
+        User user1 = new User("James","James@email.com","aaa");
         network.addConnectFourQueue(user1);
         network.removeConnectFourQueue(user1);
 
@@ -471,11 +536,14 @@ private Network network;
 
     }
 
+    /**
+     * test for removeTictactoeQueue
+     */
     @Test
     public void removeTictactoeQueueTest() {
         int expected = 1;
         String expected1 = "Joe";
-        User user1 = new User("15", "Ashley","Ashley@email.com");
+        User user1 = new User("Ashley","Ashley@email.com","aaa");
         network.addTictactoeQueue(user1);
         network.removeTictactoeQueue(user1);
 
@@ -489,6 +557,9 @@ private Network network;
 
     }
 
+    /**
+     * test for addUser
+     */
     @Test
     public void addUserTest() {
         int expected = 4;
@@ -496,7 +567,7 @@ private Network network;
         String expected2 = "Joe";
         String expected3 = "Stacy";
         String expected4 = "Lisa";
-        User user1 = new User("16", "Lisa","Lisa@email.com");
+        User user1 = new User("Lisa","Lisa@email.com","aaa");
         network.addUser(user1);
         List<User> allUsers = network.getPlayers();
         int actual = allUsers.size();
@@ -515,13 +586,16 @@ private Network network;
         network.removeUser(user1);
     }
 
+    /**
+     * test for removeUser
+     */
     @Test
     public void removeUsertest() {
         int expected = 3;
         String expected1 = "Rob";
         String expected2 = "Joe";
         String expected3 = "Stacy";
-        User user1 = new User("17", "Nathan","Nathan@email.com");
+        User user1 = new User("Nathan","Nathan@email.com","aaa");
         network.addUser(user1);
         network.removeUser(user1);
         List<User> allUsers = network.getPlayers();
