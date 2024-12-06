@@ -33,7 +33,7 @@ public class Bishop extends AbstractChessPiece{
             // keep checking in current direction until blocked or out of bounds
             while (isInBounds(newX, newY)) {
                 if (isValidSquare(board, newX, newY)) {
-                    validMoves.add(new int[] {newX, newY});
+                        validMoves.add(new int[]{newX, newY});
                     // stop if the square contains an opponent's piece
                     if (board[newX][newY] != null) break;
                 } else {

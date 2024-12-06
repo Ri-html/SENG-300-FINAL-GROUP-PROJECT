@@ -1,12 +1,17 @@
 package gameLogic.piece.chessPiece;
 
+import gameLogic.Chess;
 import gameLogic.piece.chessPiece.AbstractChessPiece;
 import gameLogic.piece.Piece;
 import gameLogic.side.ChessSide;
+import org.junit.Test;
+import java.util.Arrays;
+
 
 public class KingTest {
-    Piece[][] board = new Piece[8][8];
-    King king1 = new King(ChessSide.WHITE);
+    @Test
+    public void kingMoveTest(){
 
-    //board[2][2] = king1;
+    }
+
 }

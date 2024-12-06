@@ -13,7 +13,7 @@ public class Queen extends AbstractChessPiece {
     }
 
     @Override
-    int[][] getValidMoves(Piece[][] board) {
+    public int[][] getValidMoves(Piece[][] board) {
 
         List<int[]> validMoves = new ArrayList<>();
 
@@ -31,7 +31,7 @@ public class Queen extends AbstractChessPiece {
             // keep checking in current direction until blocked or out of bounds
             while (isInBounds(newX, newY)) {
                 if (isValidSquare(board, newX, newY)) {
-                    validMoves.add(new int[] {newX, newY});
+                        validMoves.add(new int[]{newX, newY});
                     // stop if the square contains an opponent's piece
                     if (board[newX][newY] != null) break;
                 } else {
