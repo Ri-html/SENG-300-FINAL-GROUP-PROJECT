@@ -13,7 +13,7 @@ public class TicTacToe extends AbstractBoardGame {
     private static final int WIDTH = 3;
 
     @Override
-    protected Piece[][] setUpBoard() {
+    public Piece[][] setUpBoard() {
 
         return new Piece[WIDTH][WIDTH];
 

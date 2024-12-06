@@ -16,7 +16,6 @@ public abstract class AbstractBoardGame implements BoardGame {
     public ArrayList<BoardGameObserver> boardSetupObservers=new ArrayList<>();
     public ArrayList<BoardGameObserver> turnEndObservers=new ArrayList<>();
     public ArrayList<BoardGameObserver> gameEndObservers=new ArrayList<>();
-    public ArrayList<BoardGameObserver> invalidMoveObservers=new ArrayList<>();
     protected String winner = null;
     protected String gameID;
     protected int currentPlayer = 0;
@@ -93,14 +92,14 @@ public abstract class AbstractBoardGame implements BoardGame {
         for (int i=0;i<aMove.length;i++){
             moves[i]=Integer.parseInt(aMove[i]);
         }
-        System.out.println(aMove[0]+aMove[1]+aMove[2]+aMove[3]);
+
         //uses the integer moves
         if (validateMove(moves)){
             makeMove(moves);
             checkForEndGame(move);
         }else{
-            notifyInvalidMove(move);
-            System.out.println(aMove[0]+aMove[1]+aMove[2]+aMove[3]);
+            gameState=GameState.OVER;
+            notifyGameEnd();
         }
     }
 
@@ -190,9 +189,6 @@ public abstract class AbstractBoardGame implements BoardGame {
     public void detachTurnEndObserver(BoardGameObserver observer){turnEndObservers.remove(observer);}
     public void attachGameEndObserver(BoardGameObserver observer){gameEndObservers.add(observer);}
     public void detachGameEndObserver(BoardGameObserver observer){gameEndObservers.remove(observer);}
-    public void attachInvalidMoveObserver(BoardGameObserver observer){invalidMoveObservers.add(observer);}
-    public void dettachInvalidMoveObserver(BoardGameObserver observer){invalidMoveObservers.remove(observer);}
-
     public void notifyBoardSetup(){
             for(BoardGameObserver observer : boardSetupObservers){
                 StringBuilder stringToSend=new StringBuilder();
@@ -202,7 +198,6 @@ public abstract class AbstractBoardGame implements BoardGame {
                 observer.update(stringToSend.toString());
             }
     }
-
     public void notifyTurnEnd(String moves){
         for(BoardGameObserver observer : turnEndObservers){
             StringBuilder stringToSend=new StringBuilder();
@@ -225,22 +220,13 @@ public abstract class AbstractBoardGame implements BoardGame {
                     }
                 }
             }else{
-                stringToSend.append("winner,none,loser,none");
+                stringToSend.append("winner:none - loser: none");
             }
             stringToSend.append("\n");
             observer.update(stringToSend.toString());
         }
     }
 
-    public void notifyInvalidMove(String moves){
-        for(BoardGameObserver observer : invalidMoveObservers){
-            StringBuilder stringToSend=new StringBuilder();
-            stringToSend.append("InvalidMove"+"\n");
-            stringToSend.append(gameID).append("\n");
-            stringToSend.append(moves).append("\n");
-            observer.update(stringToSend.toString());
-        }
-    }
     /**
      * print the string representation of the game board
      * @return string representation of the game board
@@ -274,5 +260,13 @@ public abstract class AbstractBoardGame implements BoardGame {
     }
     public enum GameState {
         WAITING, INPROGRESS, OVER
+    }
+
+    public Piece[][] getGameBoard() {
+        return gameBoard;
+    }
+
+    public void setGameBoard(Piece[][] gameBoard) {
+        this.gameBoard = gameBoard;
     }
 }

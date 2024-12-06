@@ -5,6 +5,7 @@ import gameLogic.side.ChessSide;
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class AbstractBoardGameTest implements BoardGameObserver{
