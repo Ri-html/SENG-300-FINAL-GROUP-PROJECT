@@ -79,13 +79,15 @@ public class Connect4GameController {
 
         Collections.shuffle(connect4Players);
 
-        playerTwo = connect4Players.getFirst();
-        if (playerTwo.getUsername().equals(playerOne.getUsername())) {
-            playerTwo = connect4Players.get(1);
-        }
 
         if(otherPlayersName != null){ // match with a specific user
             playerTwo = HelloApplication.usrDb.searchByUsername(otherPlayersName);
+        }else{
+            playerTwo = connect4Players.getFirst();
+            if (playerTwo.getUsername().equals(playerOne.getUsername())) {
+                playerTwo = connect4Players.get(1);
+            }
+            otherPlayersName = playerTwo.getUsername();
         }
 
         connect4Lead = Connect4Leaderboard.getInstance();
