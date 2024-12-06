@@ -459,7 +459,7 @@ public class TicTacToeGameController {
             this.tttl.recordLoss(this.usrOne.getUsername());
 
             GameRecord gameRecord = new GameRecord("Tic-Tac-Toe", this.usrOne.getUsername(), "W", this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins());
-            this.usrTwo.getPlayerProfile().getTicTacToeProfileFixed().addGameRecord(gameRecord);
+            this.usrTwo.getPlayerProfile().getTicTacToeProfile().addGameRecord(gameRecord);
 
         }
         otherPlayersName = null;
