@@ -3,13 +3,18 @@ package UserAndProfile;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Abstract class representing a game profile, storing player information such as game history,
+ * player status, win/loss records, and rankings. This class includes abstract methods for
+ * subclasses to implement game-specific updates.
+ */
 public abstract class AbstractGameProfile {
 
+    // Various private variables being used by the functions
     // Game history fields
     private String lastOpponent;
     private String lastGameResult;
     private int lastGameScore;
-
     // Player status fields
     private int totalGamesPlayed;
     private int totalScore;
@@ -29,6 +34,15 @@ public abstract class AbstractGameProfile {
     // Add a game record
     public void addGameRecord(String game, String opponent, String result, int score) {
         GameRecord newRecord = new GameRecord(game, opponent, result, score);
+    /**
+     * Adds a new game record to the player's history and updates the last game details.
+     *
+     * @param opponent The opponent.
+     * @param result The result of the game (e.g., win, loss, draw, etc).
+     * @param score The score of the game.
+     */
+    public void addGameRecord(String opponent, String result, int score) {
+        GameRecord newRecord = new GameRecord(opponent, result, score);
         this.gameRecords.add(newRecord);
 
         // Update the last game details
@@ -37,21 +51,56 @@ public abstract class AbstractGameProfile {
         setLastGameScore(score);
     }
 
-    // Get all game records
+    /**
+     * Fetches a copy of all game records stored in the profile.
+     *
+     * @return A list containing all game records.
+     */
     public List<GameRecord> getAllGameRecords() {
         return new ArrayList<>(this.gameRecords); // Return a copy of the list to preserve encapsulation
     }
 
-    // Constructor
+    /**
+     * Constructs an empty game profile with default values.
+     */
     public AbstractGameProfile() {
         // Initialize with default values if needed
         this.gameRecords = new ArrayList<>();
     }
 
     // Abstract methods to be implemented by subclasses (specific to each game)
+    /**
+     * Updates the game history with a new game.
+     *
+     * @param opponent The opponent's name.
+     * @param result The result of the game (win, loss, draw, etc).
+     * @param score The score achieved in the game.
+     */
     public abstract void updateGameHistory(String opponent, String result, int score);
+
+    /**
+     * Updates the player's status.
+     *
+     * @param totalGames The total number of games played.
+     * @param score The total score.
+     * @param winRate The win rate of the player.
+     */
     public abstract void updatePlayerStatus(int totalGames, int score, double winRate);
+
+    /**
+     * Updates the win/loss record of the player.
+     *
+     * @param wins The total number of wins.
+     * @param losses The total number of losses.
+     */
     public abstract void updateWinLoseRecord(int wins, int losses);
+
+    /**
+     * Updates the player's ranking based on score and win rate.
+     *
+     * @param scoreRank The rank based on score.
+     * @param winRateRank The rank based on win rate.
+     */
     public abstract void updateRanking(int scoreRank, int winRateRank);
 
     // Getters and setters for each field
