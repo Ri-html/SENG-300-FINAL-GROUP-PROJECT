@@ -2,11 +2,8 @@ package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.GameRecord;
 import UserAndProfile.User;
-import UserAndProfile.UserDatabase;
 import gameLogic.ConnectFour;
-import javafx.scene.Node;
 import leaderboard.connect4Leaderboard.Connect4Leaderboard;
-import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 import network.Network;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +27,7 @@ public class Connect4GameController {
     private static final int ROWS = 6;
     private static final int COLUMNS = 7;
 
-    // Instance variables
+    // Initializing variables
     private final Circle[][] board = new Circle[ROWS][COLUMNS];
     private ConnectFour connectFourGame;
     private User playerOne;
@@ -39,7 +36,6 @@ public class Connect4GameController {
     private Connect4Leaderboard connect4Lead;
     public static String otherPlayersName;
 
-    // FXML Components
     @FXML
     private GridPane gamePane;
     @FXML
@@ -67,11 +63,14 @@ public class Connect4GameController {
     @FXML
     ScrollPane chatScrlPane;
 
-    // Initialization method
+
+    /**
+     * Initializing the game screen, players, and the board
+     */
     @FXML
     public void initialize() {
-        // Initializing players
 
+        // Initializing players
         playerOne = HelloApplication.usrDb.getCurrentUser();
         List<User> allPlayers = HelloApplication.usrDb.getAllUsers();
         Network network = new Network(allPlayers);
@@ -136,7 +135,10 @@ public class Connect4GameController {
     }
 
 
-    // Handle cell click event (when a player places a token)
+    /**
+     * Places a piece on the board based on what column user has clicked, placing a yellow piece
+     * @param col column that the user clicked on
+     */
     private void handleCellClick(int col) {
 
         int row = getAvailableRow(col);
@@ -150,20 +152,21 @@ public class Connect4GameController {
         infoLabel.setText("");
 
 
-        // Place the token for the current player
-        // Determine the color to set based on whose turn it is
+        // Placing the yellow piece for the user playing
         Color playerColor;
         if (connectFourGame.getCurrentPlayer().equals(playerOne.getUsername())) {
-            playerColor = Color.YELLOW; // Player 1's color (Yellow)
+            playerColor = Color.YELLOW;
             connectFourGame.makeMove(moves);
             connectFourGame.switchCurrentPlayer();
             board[row][col].setFill(playerColor);
 
+            // Checks for a win, move made by opponent, checks for win again
             checkEndCon();
             makeRandMove();
             checkEndCon();
 
         } else {
+            // Move made by opponent, checks for win
             makeRandMove();
             checkEndCon();
         }
@@ -171,6 +174,9 @@ public class Connect4GameController {
 
     }
 
+    /**
+     * Makes a random move throughout the board, placing a red piece
+     */
     private void makeRandMove() {
         Random rand = new Random();
         int col = rand.nextInt(COLUMNS);
@@ -183,6 +189,7 @@ public class Connect4GameController {
             makeRandMove();
         }
 
+        // Places a red piece for the opponent player
         Color playerColor;
         playerColor = Color.RED;
 
@@ -194,9 +201,14 @@ public class Connect4GameController {
 
     }
 
+    /**
+     * Checking for win on the board
+     */
     public void checkEndCon() {
         if(!this.oneAlert) {
             if (connectFourGame.validateGameEnds() == 1) {
+                // Opponent wins
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
                 alert.setHeaderText("Red Wins!");
@@ -204,6 +216,7 @@ public class Connect4GameController {
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 2);
                     Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    // Sending an alert for rematch
                     alert2.setTitle("Rematch Request");
                     alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
 
@@ -223,6 +236,8 @@ public class Connect4GameController {
 
                 this.oneAlert = true;
             } else if (connectFourGame.validateGameEnds() == 2) {
+                // User wins
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
                 alert.setHeaderText("Yellow Wins!");
@@ -230,6 +245,7 @@ public class Connect4GameController {
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 1);
                     Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    // Sending an alert for rematch
                     alert2.setTitle("Rematch Request");
                     alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
 
@@ -248,6 +264,8 @@ public class Connect4GameController {
                 });
                 this.oneAlert = true;
             }else if (this.connectFourGame.validateGameEnds() == 0) {
+                // Board is now full
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Draw!");
                 alert.setHeaderText("This Game Has Reached A Stalemate");
@@ -255,6 +273,7 @@ public class Connect4GameController {
 
                 alert.setOnHidden(dialogEvent -> {
                     Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    // Sending an alert for rematch
                     alert2.setTitle("Rematch Request");
                     alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
 
@@ -276,19 +295,26 @@ public class Connect4GameController {
         }
     }
 
-    
-    // Get the available row for a specific column
+
+    /**
+     * Helper method to get available row to place a piece at
+     * @param col column which the user clicked on, or the random column generated by the opponent player
+     * @return the available row, -1 if column is full
+     */
     private int getAvailableRow(int col) {
         for (int row = ROWS - 1; row >= 0; row--) {
             if (board[row][col].getFill().equals(Color.WHITE)) {
                 return row;
             }
         }
-        return -1; // Column is full
+        return -1;
     }
-    
 
-    // Exit the game and return to the main menu
+
+    /**
+     * Functionality to exit the screen and going to main menu after clicking on the exit button
+     * @throws IOException
+     */
     @FXML
     private void exitBtnFunc() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Connect_4_Main_Menu_View.fxml"));
@@ -302,6 +328,10 @@ public class Connect4GameController {
         currentStage.close();
     }
 
+
+    /**
+     * Functionality to send messages in the chat box
+     */
     @FXML
     public void sendBtnFunc() {
         // Get the text from the input field
@@ -328,12 +358,20 @@ public class Connect4GameController {
         chatTxtField.clear();
     }
 
+    /**
+     * Functionality to reset the game
+     */
     public void resetGame(){
         this.oneAlert=false;
         initialize();
     }
 
-    public void saveEndData(char result, int player) { // Might have to change
+    /**
+     * Saving the data for the players after the game has ended
+     * @param result W or L
+     * @param player 1 if user wins, 2 if opponent wins
+     */
+    public void saveEndData(char result, int player) {
 
         if((result == 'W') && (player == 1)) { // Update all the backend upon current user winning
             playerOne.getPlayerProfile().getConnectFourProfile().setTotalWins(playerOne.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
