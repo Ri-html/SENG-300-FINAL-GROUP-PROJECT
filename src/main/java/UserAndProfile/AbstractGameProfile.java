@@ -31,9 +31,6 @@ public abstract class AbstractGameProfile {
     // List to store all game records
     private List<GameRecord> gameRecords = new ArrayList<>();
 
-    // Add a game record
-    public void addGameRecord(String game, String opponent, String result, int score) {
-        GameRecord newRecord = new GameRecord(game, opponent, result, score);
     /**
      * Adds a new game record to the player's history and updates the last game details.
      *
@@ -41,8 +38,8 @@ public abstract class AbstractGameProfile {
      * @param result The result of the game (e.g., win, loss, draw, etc).
      * @param score The score of the game.
      */
-    public void addGameRecord(String opponent, String result, int score) {
-        GameRecord newRecord = new GameRecord(opponent, result, score);
+    public void addGameRecord(String game, String opponent, String result, int score) {
+        GameRecord newRecord = new GameRecord(game, opponent, result, score);
         this.gameRecords.add(newRecord);
 
         // Update the last game details
