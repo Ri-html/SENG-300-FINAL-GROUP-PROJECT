@@ -344,7 +344,7 @@ public class Connect4GameController {
             connect4Lead.recordWin(playerOne.getUsername());
             connect4Lead.recordLoss(playerTwo.getUsername());
 
-            GameRecord gameRecord = new GameRecord("Connect-4", playerTwo.getUsername(), "W", playerOne.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
+            GameRecord gameRecord = new GameRecord("Connect-4", playerTwo.getUsername(), "W", playerOne.getPlayerProfile().getConnectFourProfile().getTotalWins());
             playerOne.getPlayerProfile().getConnectFourProfile().addGameRecord(gameRecord);
 
         }else if ((result == 'W') && (player == 2)){ // Update all the backend upon current user winning
@@ -356,7 +356,7 @@ public class Connect4GameController {
             connect4Lead.recordWin(playerTwo.getUsername());
             connect4Lead.recordLoss(playerOne.getUsername());
 
-            GameRecord gameRecord = new GameRecord("Connect-4", playerOne.getUsername(), "W", playerTwo.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
+            GameRecord gameRecord = new GameRecord("Connect-4", playerOne.getUsername(), "W", playerTwo.getPlayerProfile().getConnectFourProfile().getTotalWins());
             playerTwo.getPlayerProfile().getConnectFourProfile().addGameRecord(gameRecord);
         }
     }
