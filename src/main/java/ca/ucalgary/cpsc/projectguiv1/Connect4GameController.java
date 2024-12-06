@@ -170,40 +170,6 @@ public class Connect4GameController {
 
     }
 
-//    private void makeRandMove() {
-//        Random rand = new Random();
-//        int col = rand.nextInt(COLUMNS);
-//        int row = getAvailableRow(col);
-//        int[] moves = {col, row};
-//        boolean isValid = connectFourGame.validateMove(moves);
-//
-//        if (!isValid) {
-//            infoLabel.setText("Column is full. Try a different column.");
-//            return;
-//        }
-//
-//        Color playerColor;
-//        if (connectFourGame.getCurrentPlayer().equals(playerOne.getUsername())) {
-//            playerColor = Color.YELLOW; // Player 1's color (Yellow)
-//
-//            connectFourGame.makeMove(moves);
-//            connectFourGame.switchCurrentPlayer();
-//            board[row][col].setFill(playerColor);
-//
-//            checkEndCon();
-//
-//        } else {
-//            playerColor = Color.RED; // Player 1's color (Yellow)
-//
-//            connectFourGame.makeMove(moves);
-//            connectFourGame.switchCurrentPlayer();
-//            board[row][col].setFill(playerColor);
-//
-//            checkEndCon();
-//        }
-//
-//    }
-
     private void makeRandMove() {
         Random rand = new Random();
         int col = rand.nextInt(COLUMNS);
@@ -213,7 +179,7 @@ public class Connect4GameController {
 
         if (!isValid) {
             infoLabel.setText("Column is full. Try a different column.");
-            return;
+            makeRandMove();
         }
 
         Color playerColor;
@@ -376,6 +342,7 @@ public class Connect4GameController {
             playerTwo.getPlayerProfile().getConnectFourProfile().updateGameHistoryReal(playerOne.getUsername(), "L",  -1);
             connect4Lead.recordWin(playerOne.getUsername());
             connect4Lead.recordLoss(playerTwo.getUsername());
+            playerOne.getPlayerProfile().getConnectFourProfile().addGameRecord("Connect-4", playerTwo.getUsername(), "W", playerOne.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
 
         }else if ((result == 'W') && (player == 2)){ // Update all the backend upon current user winning
             playerTwo.getPlayerProfile().getConnectFourProfile().setTotalWins(playerTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
@@ -385,7 +352,7 @@ public class Connect4GameController {
             playerOne.getPlayerProfile().getConnectFourProfile().updateGameHistoryReal(playerTwo.getUsername(), "L", -1);
             connect4Lead.recordWin(playerTwo.getUsername());
             connect4Lead.recordLoss(playerOne.getUsername());
-
+            playerTwo.getPlayerProfile().getConnectFourProfile().addGameRecord("Connect-4", playerOne.getUsername(), "W", playerTwo.getPlayerProfile().getConnectFourProfile().getTotalWins() + 1);
         }
     }
 }
