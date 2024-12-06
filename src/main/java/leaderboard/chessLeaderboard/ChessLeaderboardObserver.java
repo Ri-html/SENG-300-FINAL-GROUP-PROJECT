@@ -2,10 +2,10 @@ package leaderboard.chessLeaderboard;
 
 import gameLogic.boardGames.BoardGameObserver;
 
-public class LeaderboardObserver implements BoardGameObserver {
+public class ChessLeaderboardObserver implements BoardGameObserver {
     private ChessLeaderboard leaderboard;
 
-    public LeaderboardObserver() {
+    public ChessLeaderboardObserver() {
         this.leaderboard = ChessLeaderboard.getInstance();
     }
 

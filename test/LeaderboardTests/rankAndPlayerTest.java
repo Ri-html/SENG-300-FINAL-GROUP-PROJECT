@@ -1,14 +1,19 @@
 package LeaderboardTests;
-import leaderboard.*;
+import leaderboard.chessLeaderboard.ChessLeaderboard;
+import leaderboard.connect4Leaderboard.Connect4Leaderboard;
+import leaderboard.connect4Leaderboard.PlayerStats;
+import leaderboard.matchmaking_LB.Match;
+import leaderboard.matchmaking_LB.MatchmakingSystem;
+import leaderboard.matchmaking_LB.Player;
+import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
-import UserAndProfile.*;
 
 
-public class ConnectFourTests {
-    /*
+public class rankAndPlayerTest {
+
     @Test
     public void playerSkillTest(){
         Player test = new Player("test", 10);
@@ -114,10 +119,10 @@ public class ConnectFourTests {
     }
 
     @Test
-    public void leaderboardRanksTest(){
+    public void Connect4LeaderboardRanksTest(){
         Player test = new Player("test", 10);
         Player test2 = new Player("test2", 10);
-        ConnectFourLeaderboard cfl = ConnectFourLeaderboard.getInstance();
+        Connect4Leaderboard cfl = Connect4Leaderboard.getInstance();
 
         String ID1 = test.getPlayerID();
         String ID2 = test2.getPlayerID();
@@ -132,7 +137,7 @@ public class ConnectFourTests {
     }
 
     @Test
-    public void leaderboardRanksTest(){
+    public void TicTacToeLeaderboardRanksTest(){
         Player test = new Player("test", 10);
         Player test2 = new Player("test2", 10);
         TicTacToeLeaderboard tttl = TicTacToeLeaderboard.getInstance();
@@ -148,5 +153,21 @@ public class ConnectFourTests {
         assertEquals(2, tttl.getPlayerRank(ID2));
         assertEquals(-1, tttl.getPlayerRank("test"));
     }
-*/
+    @Test
+    public void ChessLeaderboardRanksTest(){
+        Player test = new Player("test", 10);
+        Player test2 = new Player("test2", 10);
+        ChessLeaderboard cl = ChessLeaderboard.getInstance();
+
+        String ID1 = test.getPlayerID();
+        String ID2 = test2.getPlayerID();
+
+        cl.recordWin(ID1);
+        assertEquals(1, cl.getPlayerRank(ID1));
+        cl.recordWin(ID1);
+        cl.recordWin(ID2);
+        assertEquals(1, cl.getPlayerRank(ID1));
+        assertEquals(2, cl.getPlayerRank(ID2));
+        assertEquals(-1, cl.getPlayerRank("test"));
+    }
 }

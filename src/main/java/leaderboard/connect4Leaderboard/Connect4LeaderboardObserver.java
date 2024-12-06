@@ -2,12 +2,12 @@ package leaderboard.connect4Leaderboard;
 
 import gameLogic.boardGames.BoardGameObserver;
 
-public class ConnectFour4boardObserver implements BoardGameObserver {
+public class Connect4LeaderboardObserver implements BoardGameObserver {
     // Reference to the singleton instance of the Connect Four leaderboard
     private Connect4Leaderboard leaderboard;
 
     // Constructor to initialize the observer with the leaderboard instance
-    public ConnectFour4boardObserver() {
+    public Connect4LeaderboardObserver() {
         this.leaderboard = Connect4Leaderboard.getInstance();
     }
 

@@ -1,30 +1,33 @@
-package LeaderboardTests;
+package LeaderboardTests.Chess;
 
+import leaderboard.chessLeaderboard.ChessLeaderboard;
+import leaderboard.chessLeaderboard.ChessLeaderboardObserver;
+import leaderboard.chessLeaderboard.PlayerStats;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import UserAndProfile.*;
 
-public class LeaderboardObserverTest {
-/*
+
+public class ChessLeaderboardObserverTest {
+
     @Before
     public void setup() {
-        Leaderboard lb = Leaderboard.getInstance();
+        ChessLeaderboard lb = ChessLeaderboard.getInstance();
         try {
-            Leaderboard.class.getDeclaredMethod("clearAll").invoke(lb);
+            ChessLeaderboard.class.getDeclaredMethod("clearAll").invoke(lb);
         } catch (Exception e) {
         }
     }
 
     @Test
     public void testUpdate() {
-        LeaderboardObserver observer = new LeaderboardObserver();
+        ChessLeaderboardObserver observer = new ChessLeaderboardObserver();
         String gameId = "someGameId";
         String message = "GameEnd\n" + gameId + "\n" + "winner,playerX,loser,playerY\n";
 
         observer.update(message);
 
-        Leaderboard lb = Leaderboard.getInstance();
+        ChessLeaderboard lb = ChessLeaderboard.getInstance();
         PlayerStats stats = lb.getPlayerStats("playerX");
         assertNotNull(stats);
         assertEquals(1, stats.getTotalWins());
@@ -36,16 +39,14 @@ public class LeaderboardObserverTest {
 
     @Test
     public void testUpdateNoWinnerLine() {
-        LeaderboardObserver observer = new LeaderboardObserver();
+        ChessLeaderboardObserver observer = new ChessLeaderboardObserver();
 
         // If message doesn't contain winner line properly
         String message = "GameEnd\nsomeGameId\nnoProperWinnerLine\n";
         observer.update(message);
 
-        Leaderboard lb = Leaderboard.getInstance();
+        ChessLeaderboard lb = ChessLeaderboard.getInstance();
         // No winner recorded
         assertEquals(-1, lb.getPlayerRank("playerX"));
     }
-
- */
 }

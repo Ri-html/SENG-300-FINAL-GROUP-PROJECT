@@ -1,17 +1,20 @@
-package LeaderboardTests;
-import UserAndProfile.*;
+package LeaderboardTests.Chess;
+import leaderboard.chessLeaderboard.ChessLeaderboard;
+import leaderboard.chessLeaderboard.PlayerStats;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
 import java.util.List;
 
-public class LeaderboardTest {
-/*
+import static org.junit.Assert.*;
+
+public class ChessLeaderboardTest {
+
     @Before
     public void setUp() {
-        Leaderboard lb = Leaderboard.getInstance();
+        ChessLeaderboard lb = ChessLeaderboard.getInstance();
         try {
-            Leaderboard.class.getDeclaredMethod("clearAll").invoke(lb);
+            ChessLeaderboard.class.getDeclaredMethod("clearAll").invoke(lb);
         } catch (Exception e) {
 
         }
@@ -19,7 +22,7 @@ public class LeaderboardTest {
 
     @Test
     public void testRecordWinAndGetPlayerStats() {
-        Leaderboard lb = Leaderboard.getInstance();
+        ChessLeaderboard lb = ChessLeaderboard.getInstance();
 
         lb.recordWin("playerA");
         assertEquals(1, lb.getPlayerStats("playerA").getTotalWins());
@@ -33,7 +36,7 @@ public class LeaderboardTest {
 
     @Test
     public void testGetTopPlayers() {
-        Leaderboard lb = Leaderboard.getInstance();
+        ChessLeaderboard lb = ChessLeaderboard.getInstance();
         lb.recordWin("playerA");
         lb.recordWin("playerA");
         lb.recordWin("playerB");
@@ -53,7 +56,7 @@ public class LeaderboardTest {
 
     @Test
     public void testGetPlayerRank() {
-        Leaderboard lb = Leaderboard.getInstance();
+        ChessLeaderboard lb = ChessLeaderboard.getInstance();
         lb.recordWin("p1");
         lb.recordWin("p1");
         lb.recordWin("p2");
@@ -67,6 +70,4 @@ public class LeaderboardTest {
         assertEquals(3, lb.getPlayerRank("p2"));
         assertEquals(-1, lb.getPlayerRank("unknown")); 
     }
-
- */
 }
