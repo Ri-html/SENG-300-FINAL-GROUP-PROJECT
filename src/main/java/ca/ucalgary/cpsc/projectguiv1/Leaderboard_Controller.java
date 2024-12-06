@@ -1,7 +1,10 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
+import UserAndProfile.User;
+import UserAndProfile.UserDatabase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -216,10 +219,12 @@ public class Leaderboard_Controller {
 
 
     /**
-     * Return to the user's profile by loading the corresponding FXML file.
+     * Handles the event triggered when the user clicks to view another user's profile.
+     * This method retrieves the username from the button's text, fetches the corresponding
+     * User object from the database, and navigates to the user's profile page.
      *
      * @param actionEvent The action event triggered by the button click
-     * @throws IOException If the file cannot be loaded
+     * @throws IOException If the FXML file cannot be loaded
      */
     public void viewOtherUserProfile(javafx.event.ActionEvent actionEvent) throws IOException {
         // Get the button object from the event source
@@ -228,15 +233,49 @@ public class Leaderboard_Controller {
         // Retrieve the text displayed on the button
         String buttonText = button.getText(); // For example: "Alice - Wins: 5"
 
-
         // Extract the part before the " - " separator as the player's name
         String playerName = buttonText.split(" - ")[0]; // Result: playerName = "Alice"
+
+        // Set the viewed username in UserSession
         UserSession.getInstance().setViewedUsername(playerName);
 
-        // Define the target FXML file to load
-        String file = "View_Other_User_Profile.fxml";
+        // Retrieve the User object from UserDatabase
+        UserDatabase db = UserDatabase.getInstance();
+        User viewedUser = db.searchByUsername(playerName);
 
-        // Load the target FXML file and pass the player's name to the title
-        loadFileFunc(file, playerName + "'s Profile");
+        if (viewedUser == null) {
+            System.out.println("User not found in database: " + playerName);
+            return;
+        }
+
+        // Navigate to the user's profile page
+        navigateToProfilePage(viewedUser);
+
+        // Close the current Leaderboard window
+        Stage currentStage = (Stage) this.identity.getScene().getWindow();
+        currentStage.close();
+    }
+
+    /**
+     * Navigates to the profile page of a specific user.
+     *
+     * @param user The User object representing the profile to display
+     * @throws IOException If the FXML file for the profile page cannot be loaded
+     */
+    public void navigateToProfilePage(User user) throws IOException {
+        // Load the FXML file for the profile page
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("View_Other_User_Profile.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller and pass the user object
+        View_Other_User_Profile_Controller controller = loader.getController();
+        controller.setUser(user);
+
+        // Set up the new scene and stage
+        Scene scene = new Scene(root, 800, 500);
+        Stage newStage = new Stage();
+        newStage.setScene(scene);
+        newStage.setTitle("Viewing " + user.getUsername() + "'s Profile");
+        newStage.show();
     }
 }

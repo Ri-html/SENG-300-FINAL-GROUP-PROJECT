@@ -19,6 +19,7 @@ public class Chess extends AbstractBoardGame {
     //chess can only take 2 players, board is 8x8
     public Chess() {
         super(2, 8, 8);
+        setUpBoard();
         currentPlayer = 0;
     }
     
