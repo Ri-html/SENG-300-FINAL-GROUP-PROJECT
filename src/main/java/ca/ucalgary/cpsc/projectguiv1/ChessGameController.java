@@ -6,11 +6,13 @@ import gameLogic.Chess;
 import gameLogic.TicTacToe;
 import gameLogic.boardGames.AbstractBoardGame;
 import gameLogic.boardGames.BoardGameObserver;
+import gameLogic.boardGames.Game;
 import gameLogic.piece.chessPiece.ChessPieceDisplay;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -98,10 +100,10 @@ public class ChessGameController implements BoardGameObserver{
 
     private ArrayList<String> arrOfPaneCoords = new ArrayList<>();
 
-    @Deprecated
-    public ChessGameController() {
-        //this.usrOne = HelloApplication.usrDb.getCurrentUser();
-        this.usrOne = new User("SndUs", "snd@user", "pass");
+
+    @FXML
+    public void initialize() {
+        this.usrOne = HelloApplication.usrDb.getCurrentUser();
         this.currentPlayer = this.usrOne.getUsername();
         this.usrTwo = HelloApplication.usrDb.searchByUsername("SndUsr");
         if (this.usrTwo == null) {
@@ -111,14 +113,12 @@ public class ChessGameController implements BoardGameObserver{
         HelloApplication.usrDb.addUser(this.usrTwo);
         this.cl = ChessLeaderboard.getInstance();
 
-
+        /*
         this.gameChess = new Chess();
         this.gameChess.addPlayer(this.usrOne.getUsername());
         this.gameChess.addPlayer(this.usrTwo.getUsername());
-    }
+        */
 
-    @FXML
-    public void initialize() {
         game = new Chess();
         game.addPlayer(usrOne.getUsername());
         game.addPlayer(usrTwo.getUsername());
@@ -133,7 +133,6 @@ public class ChessGameController implements BoardGameObserver{
         afterlife1.setStyle("-fx-text-fill:brown;");
         afterlife2.setStyle("-fx-text-fill :black;");
         setUpBoard();
-
     }
 
     @FXML
@@ -176,6 +175,7 @@ public class ChessGameController implements BoardGameObserver{
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {
                     Pane currPane = new Pane();
+                    currPane.setAccessibleHelp("toRemove");
                     int xCoord = x;
                     int yCoord = y;
                     if (yCoord == 0) {
@@ -351,8 +351,11 @@ public class ChessGameController implements BoardGameObserver{
     }
 
     public void makeMove(int[] coordsArr, Pane currPane) throws IOException {
-        //if the cell is empty and is the second click
-        if (currPane.getChildren().isEmpty()&& origin!=null) {
+            //used to skip the rest if current pane is empty
+        if (currPane.getChildren().isEmpty()&& origin==null) {
+
+            //if the cell is empty and is the second click
+        }else if (currPane.getChildren().isEmpty()&& origin!=null) {
                 dehighlightPane(currPane);
                 int location1 = gamePane.getRowIndex(currPane); // x position
                 int location2 = gamePane.getColumnIndex(currPane); // y position
@@ -486,40 +489,80 @@ public class ChessGameController implements BoardGameObserver{
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 1);
-                    try {
-                        exitBtnFunc(); // Once the game is declared over, quit the screen
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption chess exit btn func");
-                    }
+
+                    // Create a confirmation dialog
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
+
                 });
 
                 this.oneAlert = true;
             } else if (this.gameChess.validateGameEnds() == 2) {
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Winner!");
                 alert.setHeaderText(usrTwo.getUsername() + " Wins!");
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 2);
-                    try {
-                        exitBtnFunc(); // Once the game is declared over, quit the screen
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption chess exit btn func");
-                    }
+                    // Create a confirmation dialog
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
                 });
                 this.oneAlert = true;
-            } else if (this.gameChess.validateGameEnds() == 3) {
+
+            } else if (this.gameChess.validateGameEnds() == 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Draw!");
                 alert.setHeaderText("This Game Has Reached A Stalemate");
                 alert.show();
 
                 alert.setOnHidden(dialogEvent -> {
-                    try {
-                        exitBtnFunc(); // Once the game is declared over, quit the screen
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption chess exit btn func");
-                    }
+                    // Create a confirmation dialog
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
                 });
                 this.oneAlert = true;
             }
@@ -564,6 +607,17 @@ public class ChessGameController implements BoardGameObserver{
             Pane tempPane=oldPane;
             oldPane=newPane;
             newPane=tempPane;
+        }
+        public void resetGame(){
+            gamePane.getChildren().removeIf(children -> children instanceof Pane);
+            afterlife1.setText("");
+            afterlife2.setText("");
+            currentPlayer=usrOne.getUsername();
+            oldPane=null;
+            newPane=null;
+            this.setup=false;
+            this.oneAlert=false;
+            initialize();
         }
         @Override
         public void update(String obj){
