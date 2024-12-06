@@ -613,8 +613,11 @@ public class ChessGameController implements BoardGameObserver{
             this.cl.recordWin(this.usrOne.getUsername());
             this.cl.recordLoss(this.usrTwo.getUsername());
 
-            GameRecord gameRecord = new GameRecord("Chess", this.usrTwo.getUsername(), "W", this.usrOne.getPlayerProfile().getChessProfile().getTotalWins());
+            GameRecord gameRecord = new GameRecord("Chess", this.usrTwo.getUsername(), "W", this.usrOne.getPlayerProfile().getChessProfile().getTotalScore());
             this.usrOne.getPlayerProfile().getChessProfile().addGameRecord(gameRecord);
+
+            GameRecord gameRecord2 = new GameRecord("Chess", this.usrOne.getUsername(), "L", this.usrTwo.getPlayerProfile().getChessProfile().getTotalScore());
+            this.usrTwo.getPlayerProfile().getChessProfile().addGameRecord(gameRecord2);
 
         } else if ((result == 'W') && (player == 2)) {
             System.out.println("test2");
@@ -626,8 +629,11 @@ public class ChessGameController implements BoardGameObserver{
             this.cl.recordWin(this.usrTwo.getUsername());
             this.cl.recordLoss(this.usrOne.getUsername());
 
-            GameRecord gameRecord = new GameRecord("Chess", this.usrOne.getUsername(), "W", this.usrTwo.getPlayerProfile().getChessProfile().getTotalWins());
+            GameRecord gameRecord = new GameRecord("Chess", this.usrOne.getUsername(), "W", this.usrTwo.getPlayerProfile().getChessProfile().getTotalScore());
             this.usrTwo.getPlayerProfile().getChessProfile().addGameRecord(gameRecord);
+
+            GameRecord gameRecord2 = new GameRecord("Chess", this.usrTwo.getUsername(), "L", this.usrOne.getPlayerProfile().getChessProfile().getTotalScore());
+            this.usrOne.getPlayerProfile().getChessProfile().addGameRecord(gameRecord2);
 
         }
     }
