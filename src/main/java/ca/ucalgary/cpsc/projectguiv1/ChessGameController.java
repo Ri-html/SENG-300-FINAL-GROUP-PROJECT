@@ -368,6 +368,8 @@ public class ChessGameController implements BoardGameObserver{
                     if (exception==false){
                         togglePlayer();
                         moveLabel();
+                    }else{
+                        exception=false;
                     }
                 }
                 origin =null;
