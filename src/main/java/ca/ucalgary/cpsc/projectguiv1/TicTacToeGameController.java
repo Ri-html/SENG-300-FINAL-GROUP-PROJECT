@@ -446,10 +446,10 @@ public class TicTacToeGameController {
         otherPlayersName = name;
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TicTacToe_Game_Screen.fxml"));
         // This scene is big enough to fit all the javafx GUI
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 700);
         Stage newStg = new Stage();
         newStg.sizeToScene();
-        newStg.setTitle("Main Menu Tic-Tac-Toe");
+        newStg.setTitle("Playing TicTacToe");
         newStg.setScene(scene);
         newStg.show();
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();
