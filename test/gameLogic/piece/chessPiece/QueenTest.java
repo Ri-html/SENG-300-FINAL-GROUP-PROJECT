@@ -78,7 +78,7 @@ public class QueenTest {
         b.makeMove(chess.getBoard(), 3, 0);
         // Capture pawn
         b.makeMove(chess.getBoard(), 6, 0);
-        assertTrue(chess.getBoard()[6][0].getSide() == ChessSide.WHITE);
+        assertSame(chess.getBoard()[6][0].getSide(), ChessSide.WHITE);
         System.out.println(Arrays.deepToString(chess.getBoard()));
     }
 
@@ -93,7 +93,7 @@ public class QueenTest {
         b.makeMove(chess.getBoard(), 3, 6);
         // Capture bishop
         b.makeMove(chess.getBoard(), 7, 2);
-        assertTrue(chess.getBoard()[7][2].getSide() == ChessSide.WHITE);
+        assertSame(chess.getBoard()[7][2].getSide(), ChessSide.WHITE);
         System.out.println(Arrays.deepToString(chess.getBoard()));
     }
 }
