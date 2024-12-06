@@ -228,8 +228,10 @@ public class Leaderboard_Controller {
         // Retrieve the text displayed on the button
         String buttonText = button.getText(); // For example: "Alice - Wins: 5"
 
+
         // Extract the part before the " - " separator as the player's name
         String playerName = buttonText.split(" - ")[0]; // Result: playerName = "Alice"
+        UserSession.getInstance().setViewedUsername(playerName);
 
         // Define the target FXML file to load
         String file = "View_Other_User_Profile.fxml";
