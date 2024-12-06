@@ -58,13 +58,18 @@ public class Manage_Profile_Controller {
     ScrollPane identity;
 
 
+    // Initializing profiles for each game
     private ChessProfile chessProfile = new ChessProfile();
     private TicTacToeProfile ticTacToeProfile = new TicTacToeProfile();
     private ConnectFourProfile connectFourProfile = new ConnectFourProfile();
 
+    // Getting the current user
     private User currUser = HelloApplication.usrDb.getCurrentUser();
 
 
+    /**
+     * Initialing all the data to be shown in the manage profile screen, such as username, email, and game history
+     */
     @FXML
     private void initialize() {
 
@@ -79,7 +84,9 @@ public class Manage_Profile_Controller {
         displayRecentMatches();
     }
 
-
+    /**
+     * Displaying the game history for each individual game
+     */
     @FXML
     private void displayGameHistory() {
         if(this.currUser != null) {
@@ -94,7 +101,9 @@ public class Manage_Profile_Controller {
         }
     }
 
-
+    /**
+     * If changes are made to user details, it will apply them and show on screen
+     */
     public void updateUserDetails() {
         String newUsername = usernameField.getText();
         String newEmail = emailField.getText();
@@ -115,6 +124,9 @@ public class Manage_Profile_Controller {
 
     }
 
+    /**
+     * Displaying the recent matches played
+     */
     public void displayRecentMatches() {
         List<GameRecord> recentMatches = currUser.getPlayerProfile().getAllGameRecords();
         if (recentMatches != null) {
@@ -137,6 +149,10 @@ public class Manage_Profile_Controller {
     }
 
 
+    /**
+     * Functionality to go back to the homepage after clicking the exit button
+     * @throws IOException
+     */
     public void exitBtnFunc() throws IOException { // Go to Homepage
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
