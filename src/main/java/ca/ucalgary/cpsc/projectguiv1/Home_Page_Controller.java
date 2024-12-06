@@ -72,36 +72,65 @@ public class Home_Page_Controller implements Initializable{
 
     }
 
+    /**
+     * Passes file name and title of chess main menu to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void chessSelectionFxn() throws IOException {
         String file = "Chess_Main_Menu_View.fxml";
         selectionFxn(file, "Chess Main Menu");
     }
 
+    /**
+     * Passes file name and title of tic-tac-toe main menu to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void ticTacToeSelectionFxn() throws IOException {
         String file = "Tic_Tac_Toe_Main_Menu_View.fxml";
         selectionFxn(file, "Tic-Tac-Toe Main Menu");
     }
 
+    /**
+     * Passes file name and title of connect 4 main menu to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void connect4SelectionFxn() throws IOException {
         String file = "Connect_4_Main_Menu_View.fxml";
         selectionFxn(file, "Connect 4 Main Menu");
     }
 
+    /**
+     * Passes file name and title of user's game history to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void gameHistorySelectionFxn() throws IOException {
         String file = "Game_History_Screen.fxml";
         selectionFxn(file, "Game History");
     }
 
+    /**
+     * Passes file name and title of search for players screen to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void searchPlayersFunc() throws IOException {
         String file = "Search_for_Players.fxml";
         selectionFxn(file, "Search for Players");
     }
 
+    /**
+     * Passes file name and title of manage user profile to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void playerProfFunc() throws IOException {
         String file = "Manage_Profile.fxml";
         selectionFxn(file, "Manage Profile");
     }
 
+    /**
+     * Initializes the current ranking of the user in all games when the homepage screen is loaded.
+     * @param url resolves relative paths for the root object
+     * @param resourceBundle resources used to localize the root object
+      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UserDatabase db = UserDatabase.getInstance();

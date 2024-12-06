@@ -76,10 +76,19 @@ public class View_Other_User_Profile_Controller {
     @FXML
     private Button challengeConnect4Btn;
 
+    /**
+     * Method to set User object from another controller.
+     * @param user user object being passed
+     */
     public void setUser(User user){
         this.user = user;
         loadInfoFromUser(this.user);
     }
+
+    /**
+     * Loads information from current user and user whose profile is being viewed.
+     * @param user user object being used.
+     */
     public void loadInfoFromUser(User user){
         UserDatabase db = UserDatabase.getInstance(); // current database
         User currUser = db.getCurrentUser();
@@ -109,6 +118,11 @@ public class View_Other_User_Profile_Controller {
     }
     // What will the challenge button do? Should it just start a new game with that user?
 
+    /**
+     * When challenge button next to tic-tac-toe game is clicked, loads tic-tac-toe game
+     * with other player as opponent.
+     * @throws IOException if the file does not load properly
+     */
     public void playTicTacToe() throws IOException {
         // challengeTicTacToeBtn
         TicTacToeGameController.otherPlayersName = this.user.getUsername(); // User being challenged
@@ -127,6 +141,11 @@ public class View_Other_User_Profile_Controller {
         stgWindw.close();
     }
 
+    /**
+     * When challenge button next to connect 4 game is clicked, loads connect 4 game
+     * with other player as opponent.
+     * @throws IOException if the file does not load properly
+     */
     public void playConnect4() throws IOException{
         //challengeConnect4Btn
         Connect4GameController.otherPlayersName = this.user.getUsername();
@@ -145,6 +164,11 @@ public class View_Other_User_Profile_Controller {
         stgWindw.close();
     }
 
+    /**
+     * When challenge button next to chess game is clicked, loads chess game
+     * with other player as opponent.
+     * @throws IOException if the file does not load properly
+     */
     public void playChess() throws IOException{
         //
         ChessGameController.otherPlayersName = this.user.getUsername();
@@ -163,6 +187,10 @@ public class View_Other_User_Profile_Controller {
         stgWindw.close();
     }
 
+    /**
+     * Goes back to Search for Players screen and closes View Other User Profile screen.
+     * @throws IOException if the file does not load properly
+     */
     public void backBtnFunc() throws IOException {
         String file = "Search_for_Players.fxml";
 

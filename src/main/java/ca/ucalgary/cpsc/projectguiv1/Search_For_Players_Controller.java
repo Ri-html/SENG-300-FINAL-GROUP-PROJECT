@@ -45,6 +45,11 @@ public class Search_For_Players_Controller {
 
     UserDatabase db = UserDatabase.getInstance();
 
+    /**
+     * Searches through list of all users by username and email and returns users
+     * matching with the search term as buttons. When pressed, the buttons navigate to the
+     * other user's profile page.
+     */
     public void onSearch() {
         resultView.getItems().clear(); // clears out previous search
 
@@ -100,6 +105,12 @@ public class Search_For_Players_Controller {
 
     }
 
+    /**
+     * Passes the user as an object to the View Other User Profile Controller.
+     * Loads the View Other User Profile screen.
+     * @param user user whose profile page will be loaded
+     * @throws IOException if the file does not load properly
+     */
     public void navigateToProfilePage(User user) throws IOException {
         String file = "View_Other_User_Profile.fxml";
 
@@ -121,6 +132,10 @@ public class Search_For_Players_Controller {
     }
 
 
+    /**
+     * Opens homepage and exits our of the Search for Players screen.
+     * @throws IOException if the file does not load properly
+     */
     public void exitBtnFunc() throws IOException {
         String file = "Homepage.fxml";
 

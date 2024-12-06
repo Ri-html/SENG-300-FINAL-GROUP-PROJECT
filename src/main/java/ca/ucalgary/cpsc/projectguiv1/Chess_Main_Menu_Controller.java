@@ -39,6 +39,12 @@ public class Chess_Main_Menu_Controller {
     @FXML
     AnchorPane identity;
 
+    /**
+     * Opens new screens, like leaderboard, exit and manage your profile from the main menu.
+     * @param file the fxl file that is being loaded onto the screen
+     * @param title the title of the screen
+     * @throws IOException if the file does not load properly
+     */
     public void loadFileFunc(String file, String title) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
@@ -51,7 +57,10 @@ public class Chess_Main_Menu_Controller {
         stgWindw.close();
     }
 
-    // play online
+    /**
+     * Opens the chess game screen
+     * @throws IOException if the file does not load properly
+     */
     public void playOnlineFunc() throws IOException {
         String file = "Chess_Game_Screen.fxml";
 
@@ -67,16 +76,29 @@ public class Chess_Main_Menu_Controller {
     }
 
     //Navigate to the Leaderboard Page
+
+    /**
+     * Passes file name and title to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void leaderboardButtonFxn() throws IOException{
         String file = "Leaderboard.fxml";
         loadFileFunc(file, "Chess Leaderboard");
     }
 
+    /**
+     * Passes file name and title to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void exitBtnFunc() throws IOException {
         String file = "Homepage.fxml";
         loadFileFunc(file, "Homepage");
     }
 
+    /**
+     * Passes file name and title to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void profileFunc() throws IOException {
         String file = "Manage_Profile.fxml";
         loadFileFunc(file, "Manage Profile");
