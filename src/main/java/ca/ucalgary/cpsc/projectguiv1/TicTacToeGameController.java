@@ -355,7 +355,11 @@ public class TicTacToeGameController {
                     // Show the dialog and wait for user response
                     alert2.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
-                            resetGame();
+                            try {
+                                resetGameWithOtherPlayer(this.usrTwo.getUsername());
+                            }catch (IOException ioe){
+                                System.out.println("Couldnt rematch");
+                            }
                         } else {
                             try {
                                 exitBtnFunc(); // Once the game is declared over, quit the screen
@@ -382,7 +386,11 @@ public class TicTacToeGameController {
                     // Show the dialog and wait for user response
                     alert2.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
-                            resetGame();
+                            try {
+                                resetGameWithOtherPlayer(this.usrTwo.getUsername());
+                            }catch (IOException ioe){
+                                System.out.println("Couldnt rematch");
+                            }
                         } else {
                             try {
                                 exitBtnFunc(); // Once the game is declared over, quit the screen
@@ -407,7 +415,11 @@ public class TicTacToeGameController {
                     // Show the dialog and wait for user response
                     alert2.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
-                            resetGame();
+                            try {
+                                resetGameWithOtherPlayer(this.usrTwo.getUsername());
+                            }catch (IOException ioe){
+                                System.out.println("Couldnt rematch");
+                            }
                         } else {
                             try {
                                 exitBtnFunc(); // Once the game is declared over, quit the screen
@@ -428,6 +440,20 @@ public class TicTacToeGameController {
         this.setup=false;
         initialize();
         setupGrid();
+    }
+
+    private void resetGameWithOtherPlayer(String name) throws IOException{
+        otherPlayersName = name;
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TicTacToe_Game_Screen.fxml"));
+        // This scene is big enough to fit all the javafx GUI
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Main Menu Tic-Tac-Toe");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
     }
 
     /**
