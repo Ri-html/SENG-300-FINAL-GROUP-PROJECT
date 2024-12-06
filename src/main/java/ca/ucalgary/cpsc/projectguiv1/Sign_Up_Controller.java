@@ -13,20 +13,46 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class for handling user sign-up in the application.
+ * <p>
+ * This class manages the user registration process, including validating input fields,
+ * checking if the username or email already exists, and navigating to the Home page
+ * upon successful registration. It also handles navigation back to the Login page.
+ * </p>
+ */
 public class Sign_Up_Controller {
 
+    /**
+     * The GridPane layout containing the sign-up form elements.
+     */
     @FXML
     private GridPane identity;
 
+    /**
+     * The TextField for entering the user's email address.
+     */
     @FXML
     private TextField emailField;
 
+    /**
+     * The TextField for entering the user's username.
+     */
     @FXML
     private TextField usernameField;
 
+    /**
+     * The PasswordField for entering the user's password.
+     */
     @FXML
     private PasswordField passwordField;
 
+    /**
+     * Navigates back to the Login page when the login link is clicked.
+     *
+     * @param event the ActionEvent triggered by the login link click
+     * @throws IOException if an I/O error occurs while loading the Login page
+     */
     @FXML
     public void loginLinkFxn(ActionEvent event) throws IOException {
         // Navigate back to the Login Page
@@ -36,6 +62,17 @@ public class Sign_Up_Controller {
         currentStage.setScene(scene);
     }
 
+    /**
+     * Handles the sign-up action when the sign-up button is clicked.
+     * <p>
+     * This method validates the user input fields (email, username, and password), checks if
+     * the username and email already exist in the database, and adds the new user to the database
+     * upon successful validation. It also navigates to the Home Page after a successful registration.
+     * </p>
+     *
+     * @param event the ActionEvent triggered by the sign-up button click
+     * @throws IOException if an I/O error occurs while loading the Home page
+     */
     @FXML
     public void signupButtonFxn(ActionEvent event) throws IOException {
         String email = emailField.getText().trim();
@@ -79,7 +116,15 @@ public class Sign_Up_Controller {
         currentStage.setScene(scene);
     }
 
-    // Method to show error popup
+    /**
+     * Displays an error popup with a given message.
+     * <p>
+     * This method is called when there is a validation error or an issue during the sign-up process,
+     * and it shows an alert with the error message.
+     * </p>
+     *
+     * @param message the message to be displayed in the error popup
+     */
     private void showErrorPopup(String message) {
         // Create an error alert dialog
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);

@@ -13,17 +13,44 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class for handling user login and navigation in the application.
+ * <p>
+ * This class provides functionality for user login, displaying an error popup in case of invalid login,
+ * and navigating to the Home Page or Sign Up page. It interacts with the UserDatabase to authenticate the user.
+ * </p>
+ */
 public class Login_Controller {
 
+    /**
+     * The GridPane layout containing the login elements.
+     */
     @FXML
     private GridPane identity;
 
+    /**
+     * The TextField for the username input.
+     */
     @FXML
     private TextField usernameTxtField;
 
+    /**
+     * The PasswordField for the password input.
+     */
     @FXML
     private PasswordField passwordField;
 
+    /**
+     * Handles the login action when the login button is clicked.
+     * <p>
+     * This method validates the user's credentials by searching for the username in the UserDatabase.
+     * If the username and password match, the user is logged in and redirected to the Home Page.
+     * Otherwise, an error popup is shown.
+     * </p>
+     *
+     * @param event the ActionEvent triggered by the login button click
+     * @throws IOException if an I/O error occurs while loading the Home Page
+     */
     @FXML
     public void loginButtonFxn(ActionEvent event) throws IOException {
         String username = usernameTxtField.getText().trim();
@@ -54,6 +81,12 @@ public class Login_Controller {
         }
     }
 
+    /**
+     * Navigates the user to the Sign Up page when the Sign Up link is clicked.
+     *
+     * @param event the ActionEvent triggered by the Sign Up link click
+     * @throws IOException if an I/O error occurs while loading the Sign Up page
+     */
     @FXML
     public void signupLinkFxn(ActionEvent event) throws IOException {
         // Navigate to the Sign Up Page
@@ -63,7 +96,14 @@ public class Login_Controller {
         currentStage.setScene(scene);
     }
 
-    // Method to show error popups
+    /**
+     * Displays an error popup with a given message.
+     * <p>
+     * This method is called when there is an invalid login attempt, and it shows an alert with the error message.
+     * </p>
+     *
+     * @param message the message to be displayed in the error popup
+     */
     private void showErrorPopup(String message) {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
         alert.setTitle("Login Error");
