@@ -76,7 +76,7 @@ public class AbstractBoardGameTest implements BoardGameObserver{
         boardGame.addPlayer("rrr");
         String one= boardGame.toString();
         boardGame.setIsMoveCorrect(true);
-        boardGame.updateMove("1 , 2");
+        boardGame.updateMove("1,2");
         String two= boardGame.toString();
         assertNotEquals(one,two);
     }
