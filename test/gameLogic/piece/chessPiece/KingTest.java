@@ -5,6 +5,10 @@ import gameLogic.piece.chessPiece.AbstractChessPiece;
 import gameLogic.piece.Piece;
 import gameLogic.side.ChessSide;
 import org.junit.Test;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 
 
