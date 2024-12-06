@@ -36,4 +36,25 @@ public class KingTest {
         assertArrayEquals(valids, expecteds);
     }
 
+    @Test
+    public void kingMoveTest1(){
+        //This shouldn't move the king
+        Chess chess = new Chess();
+        System.out.println(Arrays.deepToString(chess.getBoard()));
+        AbstractChessPiece k = (AbstractChessPiece)chess.getBoard()[0][4];
+        k.makeMove(chess.getBoard(), 1, 4);
+        assertNotNull(chess.getBoard()[0][4]);
+    }
+
+    @Test
+    public void kingMoveTest2(){
+        //This should move the king
+        Chess chess = new Chess();
+        System.out.println(Arrays.deepToString(chess.getBoard()));
+        ((AbstractChessPiece)chess.getBoard()[1][4]).makeMove(chess.getBoard(), 3, 4);
+        ((AbstractChessPiece)chess.getBoard()[0][4]).makeMove(chess.getBoard(), 1, 4);
+        assertNull(chess.getBoard()[0][4]);
+        assertNotNull(chess.getBoard()[1][4]);
+    }
+
 }
