@@ -131,10 +131,10 @@ public class Manage_Profile_Controller {
         List<GameRecord> recentMatches = currUser.getPlayerProfile().getAllGameRecords();
         if (recentMatches != null) {
             if (recentMatches.size() > 1) {
-                GameRecord match1 = recentMatches.get(recentMatches.size() - 1);
+                GameRecord match1 = recentMatches.getFirst();
                 recentMatch1.setText(match1.toString());
 
-                GameRecord match2 = recentMatches.get(recentMatches.size() - 2);
+                GameRecord match2 = recentMatches.get(1);
                 recentMatch2.setText(match2.toString());
             }
             else if (recentMatches.size() == 1) {
