@@ -5,6 +5,7 @@ import UserAndProfile.UserDatabase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -25,10 +26,16 @@ public class View_Other_User_Profile_Controller {
     private TextArea chessTxtArea;
 
     @FXML
+    private TextArea connect4TxtArea;
+
+    @FXML
     private Text rankingChessLabel;
 
     @FXML
     private Text rankingTicTacToeLabel;
+
+    @FXML
+    private Text rankingConnect4Label;
 
     @FXML
     private Text yourUsernameLabel;
@@ -38,6 +45,9 @@ public class View_Other_User_Profile_Controller {
 
     @FXML
     private Text yourRankingTicTacToeLabel;
+
+    @FXML
+    private Text yourRankingConnect4Label;
 
     @FXML
     private Text usernameLabel;
@@ -52,7 +62,19 @@ public class View_Other_User_Profile_Controller {
     private Text yourWinRateTicTacToe;
 
     @FXML
+    private Text yourWinRateConnect4;
+
+    @FXML
     private Text currentStatusLabel;
+
+    @FXML
+    private Button challengeChessBtn;
+
+    @FXML
+    private Button challengeTicTacToeBtn;
+
+    @FXML
+    private Button challengeConnect4Btn;
 
     public void setUser(User user){
         this.user = user;
@@ -73,12 +95,72 @@ public class View_Other_User_Profile_Controller {
         this.rankingChessLabel.setText("Ranking: " +  result);
         this.yourRankingChessLabel.setText("Ranking: " + db.getCurrentUser().getPlayerProfile().getChessProfile().getScoreRank());
 
+        // Connect 4 Rankings
+        this.rankingConnect4Label.setText("Ranking: " + user.getPlayerProfile().getConnectFourProfile().getScoreRank());
+        this.yourRankingConnect4Label.setText("Ranking: " + currUser.getPlayerProfile().getConnectFourProfile().getScoreRank());
+
         // Your Win Rate
-        this.yourWinRateChess.setText("Wins: " + currUser.getPlayerProfile().getChessProfile().getWinRate());
-        this.yourWinRateTicTacToe.setText("Wins: " + currUser.getPlayerProfile().getTicTacToeProfile().getWinRate());
+        this.yourWinRateChess.setText("Wins: " + currUser.getPlayerProfile().getChessProfile().getTotalWins());
+        this.yourWinRateTicTacToe.setText("Wins: " + currUser.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+        this.yourWinRateConnect4.setText("Wins: " + currUser.getPlayerProfile().getConnectFourProfile().getTotalWins());
 
         // Other user's current status
         this.currentStatusLabel.setText("Online");
+    }
+    // What will the challenge button do? Should it just start a new game with that user?
+
+    public void playTicTacToe() throws IOException {
+        // challengeTicTacToeBtn
+        TicTacToeGameController.otherPlayersName = this.user.getUsername(); // User being challenged
+
+        // Load tic tac toe game
+        String file = "TicTacToe_Game_Screen.fxml";
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Playing Tic Tac Toe");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
+    }
+
+    public void playConnect4() throws IOException{
+        //challengeConnect4Btn
+        Connect4GameController.otherPlayersName = this.user.getUsername();
+
+        // Load Connect 4 game
+        String file = "Connect4_Game_Screen.fxml";
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Playing Connect 4");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
+    }
+
+    public void playChess() throws IOException{
+        //
+        ChessGameController.otherPlayersName = this.user.getUsername();
+
+        // Load Chess game
+        String file = "Chess_Game_Screen.fxml";
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Stage newStg = new Stage();
+        newStg.sizeToScene();
+        newStg.setTitle("Playing Chess");
+        newStg.setScene(scene);
+        newStg.show();
+        Stage stgWindw = (Stage) this.identity.getScene().getWindow();
+        stgWindw.close();
     }
 
     public void backBtnFunc() throws IOException {

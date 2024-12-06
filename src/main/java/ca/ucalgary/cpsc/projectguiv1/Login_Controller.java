@@ -35,6 +35,7 @@ public class Login_Controller {
         if (user != null && user.getPassword().equals(password)) {
             userDatabase.setCurrentUser(user); // Set the logged-in user
             System.out.println("Login successful for user: " + username);
+            UserSession.getInstance().setCurrentUsername(username);
 
             // Navigate to the Home Page
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Homepage.fxml"));

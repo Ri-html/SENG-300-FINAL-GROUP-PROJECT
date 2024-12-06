@@ -1,11 +1,11 @@
 package gameLogic.boardGames;
 
 import gameLogic.side.ConnectFourSide;
-import org.junit.jupiter.api.Test;
 import gameLogic.ConnectFour;
 import gameLogic.piece.ConnectFourPiece;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 // TESTS FOR CONNECT FOUR IMPLEMENTATION OF BOARD GAME
 public class ConnectFourTest {
@@ -14,7 +14,7 @@ public class ConnectFourTest {
     TESTS FOR BASIC SETUP
      */
     @Test
-    void boardEmpty() {
+    public void boardEmpty() {
         ConnectFour connectFour = new ConnectFour(2);
         ConnectFourPiece[][] testBoard = new ConnectFourPiece[6][7];
         for (int i = 0; i < connectFour.getBoard().length; i++) {
@@ -30,7 +30,7 @@ public class ConnectFourTest {
     TEST PLACING PIECES
      */
     @Test
-    void placesPiece() {
+    public void placesPiece() {
         ConnectFour connectFour = new ConnectFour(2);
         connectFour.makeMove(new int[]{1,0});
         assertNotNull(connectFour.getBoard()[connectFour.getBoard().length - 1][1]);
@@ -41,7 +41,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    void pieceFalls() {
+    public void pieceFalls() {
         ConnectFour connectFour = new ConnectFour(2);
         connectFour.makeMove(new int[]{0,0});
         assertEquals(
@@ -51,7 +51,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    void pieceFallsOnTopOfPiece() {
+    public void pieceFallsOnTopOfPiece() {
         ConnectFour connectFour = new ConnectFour(2);
         connectFour.makeMove(new int[]{0,0});
         connectFour.makeMove(new int[]{0,0});
@@ -65,20 +65,20 @@ public class ConnectFourTest {
      */
 
     @Test
-    void canPlaceOnEmptyBoard() {
+    public void canPlaceOnEmptyBoard() {
         ConnectFour connectFour = new ConnectFour(2);
         assertTrue(connectFour.validateMove(new int[]{0,0}));
     }
 
     @Test
-    void cannotPlaceInvalidXIndex() {
+    public void cannotPlaceInvalidXIndex() {
         ConnectFour connectFour = new ConnectFour(2);
         assertFalse(connectFour.validateMove(new int[]{-1,0}));
         assertFalse(connectFour.validateMove(new int[]{connectFour.getBoard()[0].length, 0}));
     }
 
     @Test
-    void cannotPlaceOnFullColumn() {
+    public void cannotPlaceOnFullColumn() {
         ConnectFour connectFour = new ConnectFour(2);
         connectFour.makeMove(new int[]{0,0});
         connectFour.makeMove(new int[]{0,0});
@@ -90,7 +90,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    void canPlaceOnHalfFullColumn() {
+    public void canPlaceOnHalfFullColumn() {
         ConnectFour connectFour = new ConnectFour(2);
         connectFour.makeMove(new int[]{0,0});
         assertTrue(connectFour.validateMove(new int[]{0,0}));
@@ -101,7 +101,7 @@ public class ConnectFourTest {
      */
 
     @Test
-    void RecognizesOngoingBoard() {
+    public void RecognizesOngoingBoard() {
         ConnectFour connectFour = new ConnectFour(2);
         //assertEquals("Ongoing", connectFour.validateGameEnds().name());
         assertEquals(-1, connectFour.validateGameEnds());
@@ -111,7 +111,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    void RecognizesHorizontalWin() {
+    public void RecognizesHorizontalWin() {
         ConnectFour connectFour = new ConnectFour(2);
         //assertEquals("Ongoing", connectFour.validateGameEnds().name());
         assertEquals(-1, connectFour.validateGameEnds());
@@ -130,7 +130,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    void RecognizesVerticalWin() {
+    public void RecognizesVerticalWin() {
         ConnectFour connectFour = new ConnectFour(2);
         //assertEquals("Ongoing", connectFour.validateGameEnds().name());
         assertEquals(-1, connectFour.validateGameEnds());
@@ -149,7 +149,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    void RecognizesDiagonalUpRightWin() {
+    public void RecognizesDiagonalUpRightWin() {
         ConnectFour connectFour = new ConnectFour(2);
         //assertEquals("Ongoing", connectFour.validateGameEnds().name());
         assertEquals(-1, connectFour.validateGameEnds());
@@ -185,7 +185,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    void RecognizesDiagonalUpLeftWin() {
+    public void RecognizesDiagonalUpLeftWin() {
         ConnectFour connectFour = new ConnectFour(2);
         assertEquals(-1, connectFour.validateGameEnds());
         //assertEquals("Ongoing", connectFour.validateGameEnds().name());
@@ -223,7 +223,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    void drawOnBoardFullNoWins() {
+    public void drawOnBoardFullNoWins() {
         ConnectFour connectFour = new ConnectFour(2);
         for (int i = 0; i <= connectFour.getBoard().length; i++) {
             for (int j = 0; j < connectFour.getBoard()[0].length; j++) {
@@ -236,7 +236,7 @@ public class ConnectFourTest {
     }
 
     @Test
-    void randomMoveWorks() {
+    public void randomMoveWorks() {
         ConnectFour connectFour = new ConnectFour(2);
         connectFour.makeRandomMove();
         boolean moveMade = false;

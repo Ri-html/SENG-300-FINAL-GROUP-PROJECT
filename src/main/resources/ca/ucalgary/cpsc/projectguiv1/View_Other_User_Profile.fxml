@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="identity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.View_Other_User_Profile_Controller">
+<AnchorPane fx:id="identity" prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.cpsc.projectguiv1.View_Other_User_Profile_Controller">
    <children>
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backBtnFunc" text="Back" />
       <Text fx:id="usernameLabel" layoutX="95.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
@@ -23,15 +23,23 @@
       </Text>
       <TextArea fx:id="chessTxtArea" layoutX="66.0" layoutY="171.0" prefHeight="62.0" prefWidth="153.0" text="Chess" />
       <TextArea fx:id="tictactoeTxtArea" layoutX="66.0" layoutY="249.0" prefHeight="62.0" prefWidth="153.0" text="Tic-Tac-Toe" />
-      <Button layoutX="341.0" layoutY="189.0" mnemonicParsing="false" text="Challenge" />
-      <Button layoutX="341.0" layoutY="253.0" mnemonicParsing="false" text="Challenge" />
+      <Button fx:id="challengeChessBtn" layoutX="341.0" layoutY="186.0" mnemonicParsing="false" onMouseClicked="#playChess" text="Challenge" />
+      <Button fx:id="challengeTicTacToeBtn" layoutX="341.0" layoutY="266.0" mnemonicParsing="false" onMouseClicked="#playTicTacToe" text="Challenge" />
       <Text fx:id="rankingChessLabel" layoutX="231.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking: x/x" />
       <Text fx:id="rankingTicTacToeLabel" layoutX="231.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking: x/x" />
       <Line endX="16.399993896484375" endY="351.0" layoutX="442.0" layoutY="49.0" startX="16.399993896484375" startY="-50.50710678100586" />
-      <Text fx:id="yourUsernameLabel" layoutX="496.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Username" />
+      <Text fx:id="yourUsernameLabel" layoutX="476.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Username">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
       <Text fx:id="yourRankingChessLabel" layoutX="504.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking: x/x" />
-      <Text fx:id="yourWinRateChess" layoutX="506.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wins: 3/4" />
+      <Text fx:id="yourWinRateChess" layoutX="504.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wins: 3/4" />
       <Text fx:id="yourRankingTicTacToeLabel" layoutX="504.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking: x/x" />
-      <Text fx:id="yourWinRateTicTacToe" layoutX="511.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wins: 3/4" />
+      <Text fx:id="yourWinRateTicTacToe" layoutX="504.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wins: 3/4" />
+      <TextArea fx:id="connect4TxtArea" layoutX="66.0" layoutY="324.0" prefHeight="62.0" prefWidth="153.0" text="Connect 4" />
+      <Text fx:id="rankingConnect4Label" layoutX="231.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking: x/x" />
+      <Button fx:id="challengeConnect4Btn" layoutX="341.0" layoutY="342.0" mnemonicParsing="false" onMouseClicked="#playConnect4" text="Challenge" />
+      <Text fx:id="yourRankingConnect4Label" layoutX="504.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking: x/x" />
+      <Text fx:id="yourWinRateConnect4" layoutX="505.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wins: 3/4" />
    </children>
 </AnchorPane>

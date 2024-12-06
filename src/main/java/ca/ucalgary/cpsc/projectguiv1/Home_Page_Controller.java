@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 
 import java.io.IOException;
 import java.lang.annotation.Repeatable;
@@ -56,13 +57,6 @@ public class Home_Page_Controller implements Initializable{
     @FXML
     Button searchPlayersBtn;
 
-//    @FXML
-//    ListView<String> listView;
-//    private User user1;
-//
-//    public Home_Page_Controller(){
-//        user1 = new User("1", "john", "john@email.com");
-//    }
 
 
     public void selectionFxn(String file, String title) throws IOException { // Switch to sign up page
@@ -112,8 +106,8 @@ public class Home_Page_Controller implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UserDatabase db = UserDatabase.getInstance();
         User currUser = db.getCurrentUser();
-        this.rankingTicTacToeLbl.setText("Ranking: " + currUser.getPlayerProfile().getTicTacToeProfile().getScoreRank());
-        this.rankingChessLbl.setText("Ranking: " + currUser.getPlayerProfile().getChessProfile().getScoreRank());
-        this.rankingConnect4Lbl.setText("Ranking: " + currUser.getPlayerProfile().getConnectFourProfile().getScoreRank());
+        this.rankingTicTacToeLbl.setText("Ranking: " + currUser.getPlayerProfile().getTicTacToeProfile().getTotalScore());
+        this.rankingChessLbl.setText("Ranking: " + currUser.getPlayerProfile().getChessProfile().getTotalScore());
+        this.rankingConnect4Lbl.setText("Ranking: " + currUser.getPlayerProfile().getConnectFourProfile().getTotalScore());
     }
 }

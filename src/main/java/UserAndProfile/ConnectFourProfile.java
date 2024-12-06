@@ -1,11 +1,12 @@
 package UserAndProfile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConnectFourProfile extends AbstractGameProfile {
 
     // List to store all game records
-    private List<GameRecord> gameRecords;
+    private List<GameRecord> gameRecords = new ArrayList<>();
 
 
     // Constructor

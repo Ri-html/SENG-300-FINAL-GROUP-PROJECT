@@ -29,7 +29,7 @@ public class Knight extends AbstractChessPiece{
             int newY = y + move[1];
 
             if (isInBounds(newX, newY) && isValidSquare(board, newX, newY)) {
-                validMoves.add(new int[] {newX, newY});
+                    validMoves.add(new int[]{newX, newY});
             }
         }
 

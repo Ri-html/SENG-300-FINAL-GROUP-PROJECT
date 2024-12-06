@@ -1,8 +1,10 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
+import UserAndProfile.GameRecord;
 import UserAndProfile.User;
 import UserAndProfile.UserDatabase;
 import gameLogic.ConnectFour;
+import javafx.scene.Node;
 import leaderboard.connect4Leaderboard.Connect4Leaderboard;
 import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 import network.Network;
@@ -78,13 +80,15 @@ public class Connect4GameController {
 
         Collections.shuffle(connect4Players);
 
-        playerTwo = connect4Players.getFirst();
-        if (playerTwo.getUsername().equals(playerOne.getUsername())) {
-            playerTwo = connect4Players.get(1);
-        }
 
         if(otherPlayersName != null){ // match with a specific user
             playerTwo = HelloApplication.usrDb.searchByUsername(otherPlayersName);
+        }else{
+            playerTwo = connect4Players.getFirst();
+            if (playerTwo.getUsername().equals(playerOne.getUsername())) {
+                playerTwo = connect4Players.get(1);
+            }
+            otherPlayersName = playerTwo.getUsername();
         }
 
         connect4Lead = Connect4Leaderboard.getInstance();
@@ -167,40 +171,6 @@ public class Connect4GameController {
 
     }
 
-//    private void makeRandMove() {
-//        Random rand = new Random();
-//        int col = rand.nextInt(COLUMNS);
-//        int row = getAvailableRow(col);
-//        int[] moves = {col, row};
-//        boolean isValid = connectFourGame.validateMove(moves);
-//
-//        if (!isValid) {
-//            infoLabel.setText("Column is full. Try a different column.");
-//            return;
-//        }
-//
-//        Color playerColor;
-//        if (connectFourGame.getCurrentPlayer().equals(playerOne.getUsername())) {
-//            playerColor = Color.YELLOW; // Player 1's color (Yellow)
-//
-//            connectFourGame.makeMove(moves);
-//            connectFourGame.switchCurrentPlayer();
-//            board[row][col].setFill(playerColor);
-//
-//            checkEndCon();
-//
-//        } else {
-//            playerColor = Color.RED; // Player 1's color (Yellow)
-//
-//            connectFourGame.makeMove(moves);
-//            connectFourGame.switchCurrentPlayer();
-//            board[row][col].setFill(playerColor);
-//
-//            checkEndCon();
-//        }
-//
-//    }
-
     private void makeRandMove() {
         Random rand = new Random();
         int col = rand.nextInt(COLUMNS);
@@ -210,7 +180,7 @@ public class Connect4GameController {
 
         if (!isValid) {
             infoLabel.setText("Column is full. Try a different column.");
-            return;
+            makeRandMove();
         }
 
         Color playerColor;
@@ -233,11 +203,22 @@ public class Connect4GameController {
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 2);
-                    try {
-                        exitBtnFunc();
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
-                    }
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
                 });
 
                 this.oneAlert = true;
@@ -248,11 +229,47 @@ public class Connect4GameController {
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 1);
-                    try {
-                        exitBtnFunc();
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
-                    }
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
+                });
+                this.oneAlert = true;
+            }else if (this.connectFourGame.validateGameEnds() == 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Draw!");
+                alert.setHeaderText("This Game Has Reached A Stalemate");
+                alert.show();
+
+                alert.setOnHidden(dialogEvent -> {
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
                 });
                 this.oneAlert = true;
             }
@@ -311,6 +328,11 @@ public class Connect4GameController {
         chatTxtField.clear();
     }
 
+    public void resetGame(){
+        this.oneAlert=false;
+        initialize();
+    }
+
     public void saveEndData(char result, int player) { // Might have to change
 
         if((result == 'W') && (player == 1)) { // Update all the backend upon current user winning
@@ -322,6 +344,9 @@ public class Connect4GameController {
             connect4Lead.recordWin(playerOne.getUsername());
             connect4Lead.recordLoss(playerTwo.getUsername());
 
+            GameRecord gameRecord = new GameRecord("Connect-4", playerTwo.getUsername(), "W", playerOne.getPlayerProfile().getConnectFourProfile().getTotalWins());
+            playerOne.getPlayerProfile().getConnectFourProfile().addGameRecord(gameRecord);
+
         }else if ((result == 'W') && (player == 2)){ // Update all the backend upon current user winning
             playerTwo.getPlayerProfile().getConnectFourProfile().setTotalWins(playerTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
             playerOne.getPlayerProfile().getConnectFourProfile().setTotalLosses(playerOne.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
@@ -331,6 +356,8 @@ public class Connect4GameController {
             connect4Lead.recordWin(playerTwo.getUsername());
             connect4Lead.recordLoss(playerOne.getUsername());
 
+            GameRecord gameRecord = new GameRecord("Connect-4", playerOne.getUsername(), "W", playerTwo.getPlayerProfile().getConnectFourProfile().getTotalWins());
+            playerTwo.getPlayerProfile().getConnectFourProfile().addGameRecord(gameRecord);
         }
     }
 }

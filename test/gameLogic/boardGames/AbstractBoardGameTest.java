@@ -5,6 +5,7 @@ import gameLogic.side.ChessSide;
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class AbstractBoardGameTest implements BoardGameObserver{
@@ -75,10 +76,9 @@ public class AbstractBoardGameTest implements BoardGameObserver{
         boardGame.addPlayer("rrr");
         String one= boardGame.toString();
         boardGame.setIsMoveCorrect(true);
-        boardGame.updateMove("1 , 2");
+        boardGame.updateMove("1,2");
         String two= boardGame.toString();
         assertNotEquals(one,two);
-        //assertNotEquals is junit5, not junit4.
     }
 
     @Test

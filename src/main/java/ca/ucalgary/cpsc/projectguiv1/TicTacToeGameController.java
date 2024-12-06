@@ -1,26 +1,21 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
 
-import UserAndProfile.TicTacToeProfile;
+import UserAndProfile.GameRecord;
 import UserAndProfile.User;
 
 import gameLogic.TicTacToe;
-import gameLogic.boardGames.AbstractBoardGame;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import leaderboard.tictactoeLeaderboard.TicTacToeLeaderboard;
 import network.Network;
@@ -110,8 +105,8 @@ public class TicTacToeGameController {
     /**
      * Sets up the user which are to play, and gets the leaderboard that has their stats.
      */
-    @Deprecated
-    public TicTacToeGameController() {
+    @FXML
+    public void initialize() {
         this.usrOne = HelloApplication.usrDb.getCurrentUser();
 
         // Network functionality
@@ -353,11 +348,23 @@ public class TicTacToeGameController {
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 1);
-                    try {
-                        exitBtnFunc(); // Once the game is declared over, quit the screen
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
-                    }
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
+
                 });
 
                 this.oneAlert = true;
@@ -368,11 +375,22 @@ public class TicTacToeGameController {
                 alert.show();
                 alert.setOnHidden(dialogEvent -> {
                     saveEndData('W', 2);
-                    try {
-                        exitBtnFunc(); // Once the game is declared over, quit the screen
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
-                    }
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
                 });
                 this.oneAlert = true;
             } else if (this.gameTicTacToe.validateGameEnds() == 3) {
@@ -382,15 +400,34 @@ public class TicTacToeGameController {
                 alert.show();
 
                 alert.setOnHidden(dialogEvent -> {
-                    try {
-                        exitBtnFunc(); // Once the game is declared over, quit the screen
-                    } catch (IOException ioe) {
-                        System.out.println("IOExecption tictactoe exit btn func");
-                    }
+                    Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert2.setTitle("Rematch Request");
+                    alert2.setHeaderText("Hi, the other player requested a rematch. Do you want to play?");
+
+                    // Show the dialog and wait for user response
+                    alert2.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            resetGame();
+                        } else {
+                            try {
+                                exitBtnFunc(); // Once the game is declared over, quit the screen
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
                 });
                 this.oneAlert = true;
             }
         }
+    }
+
+    private void resetGame() {
+        gamePane.getChildren().removeIf(children -> children instanceof Pane);
+        this.oneAlert = false;
+        this.setup=false;
+        initialize();
+        setupGrid();
     }
 
     /**
@@ -409,6 +446,9 @@ public class TicTacToeGameController {
             this.tttl.recordWin(this.usrOne.getUsername());
             this.tttl.recordLoss(this.usrTwo.getUsername());
 
+            GameRecord gameRecord = new GameRecord("Tic-Tac-Toe", this.usrTwo.getUsername(), "W", this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+            this.usrOne.getPlayerProfile().getTicTacToeProfile().addGameRecord(gameRecord);
+
         }else if ((result == 'W') && (player == 2)){ // Update all the backend upon current user winning
             this.usrTwo.getPlayerProfile().getTicTacToeProfile().setTotalWins(this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins() + 1);
             this.usrOne.getPlayerProfile().getTicTacToeProfile().setTotalLosses(this.usrOne.getPlayerProfile().getTicTacToeProfile().getTotalLosses() + 1);
@@ -417,6 +457,9 @@ public class TicTacToeGameController {
             this.usrOne.getPlayerProfile().getTicTacToeProfile().updateGameHistoryReal(this.usrTwo.getUsername(), "L", -1);
             this.tttl.recordWin(this.usrTwo.getUsername());
             this.tttl.recordLoss(this.usrOne.getUsername());
+
+            GameRecord gameRecord = new GameRecord("Tic-Tac-Toe", this.usrOne.getUsername(), "W", this.usrTwo.getPlayerProfile().getTicTacToeProfile().getTotalWins());
+            this.usrTwo.getPlayerProfile().getTicTacToeProfile().addGameRecord(gameRecord);
 
         }
         otherPlayersName = null;

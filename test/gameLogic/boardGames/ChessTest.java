@@ -5,7 +5,10 @@ import org.junit.Test;
 import gameLogic.Chess;
 import gameLogic.piece.chessPiece.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ChessTest {
 
@@ -61,9 +64,125 @@ public class ChessTest {
                 }
             }
         }
+        AbstractChessPiece p1 = ((AbstractChessPiece)chess.getBoard()[1][1]);
+        assertArrayEquals(p1.getLocation(), new int[]{1, 1});
+    }
+
+
+    @Test
+    public void TestisInCheck1() {
+        Chess chess = new Chess();
+        chess.addPlayer("a - white");
+        chess.addPlayer("b - black");
+        AbstractChessPiece knight = (AbstractChessPiece) chess.getBoard()[7][1];
+        AbstractChessPiece king = (AbstractChessPiece) chess.getBoard()[0][4];
+
+        knight.makeMove(chess.getBoard(), 5, 2);
+        knight.makeMove(chess.getBoard(), 3, 1);
+        knight.makeMove(chess.getBoard(), 2, 3);
+
+        String boardString = Arrays.deepToString(chess.getBoard());
+        boardString = boardString.replace("], ", "],\n");
+        System.out.println(boardString);
+
+        // inCheck is working,
+        boolean inCheck = king.isInCheck(chess.getBoard());
+        System.out.println("is in check? " + inCheck);
+
+        //black to move should end game here.
+        chess.setCurrentPlayer(1);
+        System.out.println("curr player: " + chess.getCurrentPlayer());
+
+        int gameState = chess.validateGameEnds();
+        System.out.println(gameState);
+        //black wins because white king in check & black to move
+        assertEquals(gameState, 2);
+    }
+
+    @Test
+    public void TestisInCheck2() {
+        Chess chess = new Chess();
+        chess.addPlayer("a - white");
+        chess.addPlayer("b - black");
+
+        AbstractChessPiece knight = (AbstractChessPiece) chess.getBoard()[7][1];
+        AbstractChessPiece king = (AbstractChessPiece) chess.getBoard()[0][4];
+
+        knight.makeMove(chess.getBoard(), 5, 2);
+        knight.makeMove(chess.getBoard(), 3, 1);
+        knight.makeMove(chess.getBoard(), 2, 3);
+
+        String boardString = Arrays.deepToString(chess.getBoard());
+        boardString = boardString.replace("], ", "],\n");
+        System.out.println(boardString);
+
+        // inCheck is working,
+        boolean inCheck = king.isInCheck(chess.getBoard());
+        System.out.println(Arrays.deepToString(chess.getBoard()));
+        System.out.println("is in check? " + inCheck);
+
+        //white to move should not end the game.
+        chess.setCurrentPlayer(0);
+        System.out.println("curr player: " + chess.getCurrentPlayer());
+        //this loop printed all valid moves for each piece on the board for manual checking
+//        for (int i = 0; i < 7; i++) {
+//            for (int j = 0; j < 7; j++) {
+//                if(chess.getBoard()[i][j] != null) {
+//                    int[][] valids = ((AbstractChessPiece) chess.getBoard()[i][j]).getValidMoves(chess.getBoard());
+//                    System.out.println("piece " + chess.getBoard()[i][j].getClass() + " is side " + chess.getBoard()[i][j].getSide() + " at pos (" + i + ","+ j + ")");
+//                    System.out.println(Arrays.deepToString(valids));
+//                }
+//            }
+//        }
+        int gameState = chess.validateGameEnds();
+        System.out.println(gameState);
+        //white has valid move to capture knight, so game should continue
+        assertEquals(-1, gameState);
     }
 
 
 
+    //game doesn't end on startup
+    @Test
+    public void validateGameEndsTest1(){
+        Chess chess = new Chess();
+        assertEquals(chess.validateGameEnds(), -1);
+    }
+
+    //check game doesn't end for some pawn check
+    @Test
+    public void validateGameEndsTest2(){
+        Chess chess = new Chess();
+        chess.addPlayer("a - white");
+        chess.addPlayer("b - black");
+
+        AbstractChessPiece p = (AbstractChessPiece) chess.getBoard()[6][2];
+        AbstractChessPiece k = (AbstractChessPiece) chess.getBoard()[0][4];
+        p.makeMove(chess.getBoard(), 4, 2);
+        p.makeMove(chess.getBoard(), 3, 2);
+        p.makeMove(chess.getBoard(), 2, 2);
+        p.makeMove(chess.getBoard(), 1, 3);
+        chess.setCurrentPlayer(0);
+        //validate game end should return -1 because pawn can be captured
+        assertEquals(-1,chess.validateGameEnds());
+    }
+
+    @Test
+    public void validateGameEndsTest3(){
+        Chess chess = new Chess();
+        chess.addPlayer("a - white");
+        chess.addPlayer("b - black");
+
+        AbstractChessPiece p = (AbstractChessPiece) chess.getBoard()[6][2];
+        AbstractChessPiece k = (AbstractChessPiece) chess.getBoard()[0][4];
+        p.makeMove(chess.getBoard(), 4, 2);
+        p.makeMove(chess.getBoard(), 3, 2);
+        p.makeMove(chess.getBoard(), 2, 2);
+        p.makeMove(chess.getBoard(), 1, 3);
+        //black to move
+        chess.setCurrentPlayer(1);
+        //validate game end should return 2 because B checkmate W king
+        assertEquals(2,chess.validateGameEnds());
+    }
 
 }

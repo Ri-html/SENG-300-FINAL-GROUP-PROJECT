@@ -245,15 +245,28 @@ public class ConnectFour extends AbstractBoardGame {
      * Checks if gameBoard is full (no possible moves left)
      * @return true if gameBoard is full
      */
+//    private boolean isFull() {
+//        boolean full = true;
+//        for ( int i = 0; i < gameBoard[0].length; i++) {
+//            if (gameBoard[gameBoard.length - 1][i] == null) {
+//                full = false;
+//                break;
+//            }
+//        }
+//        return full;
+//    }
+
     private boolean isFull() {
         boolean full = true;
-        for ( int i = 0; i < gameBoard[0].length; i++) {
-            if (gameBoard[gameBoard.length - 1][i] == null) {
-                full = false;
-                break;
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[i].length; j++) {
+                if (gameBoard[i][j] == null) {
+                    full = false; // Found an empty cell, board is not full
+                    break;
+                }
             }
         }
-        return full;
+        return full; // No empty cells found, board is full
     }
 
     /**
