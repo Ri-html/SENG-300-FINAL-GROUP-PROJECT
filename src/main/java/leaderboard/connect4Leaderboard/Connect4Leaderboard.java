@@ -118,9 +118,9 @@ public class Connect4Leaderboard {
         leaderboard.recordWin("player1");
         leaderboard.recordLoss("player2");
         leaderboard.recordWin("player3");
-    }
-}
-;
+
+
+
 
         // Add sample data
         leaderboard.recordWin("Alice");
