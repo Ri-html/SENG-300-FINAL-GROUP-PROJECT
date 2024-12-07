@@ -189,4 +189,5 @@ public class Manage_Profile_Controller {
             friendsListArea.setText("Unable to load friends list.");
         }
     }
+
 }
