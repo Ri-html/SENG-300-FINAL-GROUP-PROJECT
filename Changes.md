@@ -1,8 +1,3 @@
-## Gamelogic Team
-
-## Leaderboard Team
-
-## Network Team
 
 ## GUI Team
 Rematch Function
@@ -17,11 +12,12 @@ Lobby Chat (Global)
 
 We decided to forgo implementing a global chat system and instead opted for a chat limited to players within a current game due to the lack of actual networking in our application. A global chat would require real-time communication and complex networking infrastructure, which was beyond the scope of our project. By restricting the chat to active game sessions, we simplified the implementation, as messages could be managed locally within the game instance without needing a server. 
 
-
-## Authentication Team
-
 ## Integration Team
 Integration team documented changes requested, creating ease for other teams to look through information. Also documented 
 the effect on the system, including the amount of work that had to be done and what had to be changed. Team decided to focus 
 on rematch system, as both teams recommend it. Chat functionality was deemed unimportant and would likely overstress the system, 
 resulting in failure of primary functionality.
+
+A friend request system was suggested and it had become apparent to us that we had no such feature in our system.
+Being more complex, this was able to be implemented in our system by searching a player up and then sending them a friend request.
+
