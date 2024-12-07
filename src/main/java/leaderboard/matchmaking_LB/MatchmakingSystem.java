@@ -62,16 +62,27 @@ public class MatchmakingSystem {
         match.printMatchSummary();
     }
 
+    /**
+     * Selects a game type for the match.
+     * @return The game type as a string (TicTacToe).
+     */
     private String selectGameType() {
         // Logic to select a game type (e.g., TicTacToe, Chess, Connect4)
         return "TicTacToe"; // Placeholder value
     }
 
+    /**
+     * Simulates the result of a match.
+     * @return The result of the match ("Won" or "Draw").
+     */
     private String simulateMatchResult() {
         // Simulate match result (e.g., "Won" or "Draw")
         return "Won"; // Placeholder value
     }
 
+    /**
+     * Prints the current status of the matchmaking queue, including players and their skill levels.
+     */
     public void printQueueStatus() {
         System.out.println("Matchmaking Queue Status:");
         if (availablePlayers.isEmpty()) {
@@ -83,6 +94,10 @@ public class MatchmakingSystem {
         }
     }
 
+    /**
+     * Returns the list of players currently in the matchmaking queue.
+     * @return A list of players in the queue.
+     */
     public List<Player> getAvailablePlayers() {
         return availablePlayers;
     }
