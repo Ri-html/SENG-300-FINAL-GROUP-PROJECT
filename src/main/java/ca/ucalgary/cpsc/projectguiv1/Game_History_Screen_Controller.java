@@ -16,89 +16,6 @@ import java.io.IOException;
 
 public class Game_History_Screen_Controller {
 
-    @FXML
-    private Button back;
-
-    @FXML
-    private BorderPane eighthMostRecent;
-
-    @FXML
-    Text eighthMostRecentData;
-
-    @FXML
-    private Text eighthMostRecentWL;
-
-    @FXML
-    private BorderPane fifthMostRecent;
-
-    @FXML
-    private Text fifthMostRecentData;
-
-    @FXML
-    private Text fifthMostRecentWL;
-
-    @FXML
-    private BorderPane fourthMostRecent;
-
-    @FXML
-    private Text fourthMostRecentData;
-
-    @FXML
-    private BorderPane mostRecent;
-
-    @FXML
-    private Text mostRecentData;
-
-    @FXML
-    private Text mostRecentWL;
-
-    @FXML
-    private BorderPane ninthMostRecent;
-
-    @FXML
-    private Text ninthMostRecentData;
-
-    @FXML
-    private Text ninthMostRecentWL;
-
-    @FXML
-    private Button profile;
-
-    @FXML
-    private BorderPane secondMostRecent;
-
-    @FXML
-    private Text secondMostRecentData;
-
-    @FXML
-    private Text secondMostRecentWL;
-
-    @FXML
-    private BorderPane seventhMostRecent;
-
-    @FXML
-    private Text seventhMostRecentData;
-
-    @FXML
-    private Text seventhMostRecentWL;
-
-    @FXML
-    private BorderPane sixthMostRecent;
-
-    @FXML
-    private Text sixthMostRecentData;
-
-    @FXML
-    private Text sixthMostRecentWL;
-
-    @FXML
-    private BorderPane thirdMostRecent;
-
-    @FXML
-    private Text thirdMostRecentData;
-
-    @FXML
-    private Text thirdMostRecentWL;
 
     @FXML
     private AnchorPane identity;
@@ -110,6 +27,12 @@ public class Game_History_Screen_Controller {
     private User currUsr = HelloApplication.usrDb.getCurrentUser();
 
 
+    /**
+     * Opens new screens, like leaderboard, exit and manage your profile from the main menu.
+     * @param file the fxl file that is being loaded onto the screen
+     * @param title the title of the screen
+     * @throws IOException if the file does not load properly
+     */
     public void loadFileFunc(String file, String title) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(file));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
@@ -126,12 +49,19 @@ public class Game_History_Screen_Controller {
     public Game_History_Screen_Controller(){
     }
 
+    /**
+     * Updates the string data for the game history upon clicking "Display Game History"
+     */
     public void setMatchHistory(){
         if(this.currUsr != null) {
             this.gameHistoryTxt.setText(this.currUsr.getPlayerProfile().displayGameHistory());
         }
 
     }
+    /**
+     * Loads the player's profile screen and switches scenes to the profile
+     * @throws IOException if the file/screen does not load properly
+     */
     public void gotoPlayerProfFunc() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Manage_Profile.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
@@ -145,6 +75,10 @@ public class Game_History_Screen_Controller {
 
     }
 
+    /**
+     * Passes in the Homepage file and title of the homepage window to loadFileFunc
+     * @throws IOException if the file does not load properly
+     */
     public void exitBtnFunc() throws IOException {
         String file = "Homepage.fxml";
         loadFileFunc(file, "Homepage");
