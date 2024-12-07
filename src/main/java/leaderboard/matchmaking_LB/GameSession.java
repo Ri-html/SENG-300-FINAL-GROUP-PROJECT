@@ -5,6 +5,10 @@ public class GameSession {
     private String sessionID;
     private String status; // In-Progress, Completed
 
+     /**
+     * Constructor to create a new game session for the given match.
+     * @param match The match associated with this session.
+     */
     public GameSession(Match match) {
         this.match = match;
         this.sessionID = generateSessionID();
@@ -12,11 +16,20 @@ public class GameSession {
         System.out.println("Match " + sessionID + " between " + match.getPlayer1().getUsername() + " and " + match.getPlayer2().    getUsername() + " has started.");
     }
 
+    /**
+     * Generates a unique session ID for the game session.
+     * @return A unique session ID.
+     */
     private String generateSessionID() {
         // Generate unique session ID logic
         return "some_unique_id";
     }
 
+     /**
+     * Ends the game session, updates the match status, and displays the result.
+     * @param result The result of the game (e.g., "Won" or "Draw").
+     * @param winner The winning player, if applicable.
+     */
      public void endMatch(String result, Player winner) {
         if (status.equals("In-Progress")) {
             status = "Completed";
@@ -32,10 +45,15 @@ public class GameSession {
         }
     }
 
+    /**
+     * Returns players to the matchmaking queue after the game session ends.
+     */
     private void returnPlayersToQueue() {
         System.out.println("Returning players to the main menu.");
     }
-
+    /**
+     * Prints a summary of the game session.
+     */
     public void printMatchSummary() {
         System.out.println("Match Summary:");
         System.out.println("Match ID: " + sessionID);
