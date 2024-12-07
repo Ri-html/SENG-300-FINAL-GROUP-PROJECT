@@ -2,16 +2,26 @@ package leaderboard.tictactoeLeaderboard;
 
 import gameLogic.boardGames.BoardGameObserver;
 
+/**
+ * An observer class that listens for game end events in Tic Tac Toe and updates the leaderboard.
+ */
 public class TicTacToeLeaderboardObserver implements BoardGameObserver {
     // Reference to the singleton instance of the Tic Tac Toe leaderboard
     private TicTacToeLeaderboard leaderboard;
 
-    // Constructor to initialize the observer with the leaderboard instance
+    /**
+     * Constructor to initialize the observer with the Tic Tac Toe leaderboard instance.
+     */
     public TicTacToeLeaderboardObserver() {
         this.leaderboard = TicTacToeLeaderboard.getInstance();
     }
 
-    // Updates the leaderboard based on the game message
+    /**
+     * Updates the leaderboard based on the message received from the observed game.
+     * The message is expected to contain game end details, including the winner and loser.
+     * 
+     * @param message The message containing game end details.
+     */
     @Override
     public void update(String message) {
         // Split the incoming message into lines
