@@ -7,6 +7,12 @@ public class Match {
     private String matchID;
     private String status; // Pending, In-Progress, Completed
 
+    /**
+     * Constructor to create a match between two players for a specified game type.
+     * @param player1 The first player.
+     * @param player2 The second player.
+     * @param gameType The type of game to be played (e.g., TicTacToe, Chess, Connect4).
+     */
     public Match(Player player1, Player player2, String gameType) {
         this.player1 = player1;
         this.player2 = player2;
@@ -15,10 +21,18 @@ public class Match {
         this.status = "Pending";
     }
 
+    /**
+     * Generates a unique match ID for the match.
+     * @return A unique match ID.
+     */
     private String generateMatchID() {
         return java.util.UUID.randomUUID().toString();
     }
 
+    /**
+     * Gets the first player of the match.
+     * @return The first player.
+     */
     public Player getPlayer1() {
         return player1;
     }
