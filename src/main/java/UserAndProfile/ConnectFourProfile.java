@@ -3,18 +3,32 @@ package UserAndProfile;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class representing a Connect Four player profile. This class extends AbstractGameProfile
+ * and provides functionality specific to managing game records, player status, and rankings 
+ * in Connect Four.
+ */
 public class ConnectFourProfile extends AbstractGameProfile {
 
-    // List to store all game records
+    /**
+     * A list to store all game records for the player.
+     */
     private List<GameRecord> gameRecords = new ArrayList<>();
 
-
-    // Constructor
+    /**
+     * Constructs a new ConnectFourProfile with default values.
+     */
     public ConnectFourProfile() {
         super();
     }
 
-    // Updates the game history with details about the last game
+    /**
+     * Updates the game history with details about the last game, including the opponent, result, and score.
+     * 
+     * @param opponent The name of the opponent.
+     * @param result The result of the game (e.g., win, lose, draw).
+     * @param score The score achieved in the game.
+     */
     @Override
     public void updateGameHistory(String opponent, String result, int score) {
         setLastOpponent(opponent);
@@ -26,6 +40,14 @@ public class ConnectFourProfile extends AbstractGameProfile {
         setTotalScore(getTotalScore() + score);
     }
 
+    /**
+     * Updates the game history, including the opponent, result, and cumulative score. 
+     * This method includes an additional calculation for score accumulation.
+     * 
+     * @param opponent The name of the opponent.
+     * @param result The result of the game (e.g., win, lose, draw).
+     * @param score The score achieved in the game.
+     */
     public void updateGameHistoryReal(String opponent, String result, int score) {
         setLastOpponent(opponent);
         setLastGameResult(result);
@@ -36,7 +58,13 @@ public class ConnectFourProfile extends AbstractGameProfile {
         setTotalScore(getTotalScore() + score);
     }
 
-    // Updates player status, including total games, score, and win rate
+    /**
+     * Updates the player's status, including the total number of games played, total score, and win rate.
+     * 
+     * @param totalGames The total number of games played.
+     * @param score The total score accumulated by the player.
+     * @param winRate The player's win rate as a percentage.
+     */
     @Override
     public void updatePlayerStatus(int totalGames, int score, double winRate) {
         setTotalGamesPlayed(totalGames);
@@ -44,7 +72,12 @@ public class ConnectFourProfile extends AbstractGameProfile {
         setWinRate(winRate);
     }
 
-    // Updates the win/loss record with total wins and losses
+    /**
+     * Updates the player's win/loss record and recalculates the win rate.
+     * 
+     * @param wins The total number of wins.
+     * @param losses The total number of losses.
+     */
     @Override
     public void updateWinLoseRecord(int wins, int losses) {
         setTotalWins(wins);
@@ -58,22 +91,32 @@ public class ConnectFourProfile extends AbstractGameProfile {
         }
     }
 
-    // Updates the ranking based on score and win rate ranks
+    /**
+     * Updates the player's rankings based on their score and win rate.
+     * 
+     * @param scoreRank The rank based on score.
+     * @param winRateRank The rank based on win rate.
+     */
     @Override
     public void updateRanking(int scoreRank, int winRateRank) {
         setScoreRank(scoreRank);
         setWinRateRank(winRateRank);
     }
 
-
-    // Adds a game record manually (optional method)
-
+    /**
+     * Retrieves all game records stored for the player.
+     * 
+     * @return A list of all game records.
+     */
     public List<GameRecord> getAllGameRecords() {
         return gameRecords;
     }
 
-    // Adds a game record manually (optional method)
-
+    /**
+     * Adds a new game record manually to the player's game history.
+     * 
+     * @param record The GameRecord object representing the game's details.
+     */
     public void addGameRecord(GameRecord record) {
         gameRecords.add(record);
         setLastOpponent(record.getOpponent());
@@ -81,7 +124,9 @@ public class ConnectFourProfile extends AbstractGameProfile {
         setLastGameScore(record.getScore());
     }
 
-    // Prints all game records (optional, for debugging)
+    /**
+     * Prints all game records to the console. This method is primarily for debugging purposes.
+     */
     public void printGameRecords() {
         for (GameRecord record : gameRecords) {
             System.out.println(record);
