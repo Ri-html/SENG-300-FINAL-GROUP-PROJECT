@@ -1,6 +1,17 @@
 package UserAndProfile;
 
+/**
+ * The Main class demonstrates the usage of the UserDatabase class.
+ * It initializes the user database, displays all users, adds a new user,
+ * and then displays the updated list of users.
+ */
 public class Main {
+
+    /**
+     * The main method serves as the entry point of the application.
+     * 
+     * @param args Command-line arguments (not used in this application).
+     */
     public static void main(String[] args) {
         // Initialize the user database
         UserDatabase userDb = UserDatabase.getInstance();
