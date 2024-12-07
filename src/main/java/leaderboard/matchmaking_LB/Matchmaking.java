@@ -3,13 +3,24 @@ package leaderboard.matchmaking_LB;
 import java.util.List;
 import java.util.ArrayList;
 
+    /**
+     * Constructor to initialize the matchmaking system.
+     */
 public class Matchmaking{
     private List<Player> availablePlayers;
 
+    /**
+     * Adds a player to the matchmaking queue.
+     * @param player The player to be added to the queue.
+     */
     public void addPlayerToQueue(Player player) {
-        // Add player to matchmaking queue
+        
     }
 
+    /**
+     * Removes a player from the matchmaking queue.
+     * @param player The player to be removed from the queue.
+     */
     public void removePlayerFromQueue(Player player) {
         // Remove player from matchmaking queue
     }
@@ -25,6 +36,9 @@ public class Matchmaking{
         return skillDifference <= 2; // Example threshold for skill match
     }
 
+    /**
+     * Prints the current status of the matchmaking queue, including players and their skill levels.
+     */
     public void printQueueStatus() {
         System.out.println("Matchmaking Queue Status:");
         if (availablePlayers.isEmpty()) {
