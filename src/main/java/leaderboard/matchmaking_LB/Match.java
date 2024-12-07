@@ -37,26 +37,51 @@ public class Match {
         return player1;
     }
 
+
+    /**
+     * Gets the second player of the match.
+     * @return The second player.
+     */
     public Player getPlayer2() {
         return player2;
     }
 
+    /**
+     * Gets the game type of the match.
+     * @return The game type.
+     */
     public String getGameType() {
         return gameType;
     }
 
+    /**
+     * Gets the match ID.
+     * @return The match ID.
+     */
     public String getMatchID() {
         return matchID;
     }
 
+    /**
+     * Gets the current status of the match.
+     * @return The current status (e.g., Pending, In-Progress, Completed).
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * Sets the status of the match.
+     * @param status The new status of the match.
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     * Starts the match by changing its status to "In-Progress".
+     * Prints a message indicating that the match has started.
+     */
     public void startMatch() {
         if (status.equals("Pending")) {
             status = "In-Progress";
@@ -66,6 +91,12 @@ public class Match {
         }
     }
 
+    /**
+     * Ends the match by changing its status to "Completed".
+     * Prints the result of the match.
+     * @param result The result of the match (e.g., "Won" or "Draw").
+     * @param winner The winning player, if applicable.
+     */
     public void endMatch(String result, Player winner) {
         if (status.equals("In-Progress")) {
             status = "Completed";
@@ -82,6 +113,9 @@ public class Match {
     }
 
 
+    /**
+     * Prints a summary of the match, including match ID, game type, players, and status.
+     */
     public void printMatchSummary() {
         System.out.println("Match Summary:");
         System.out.println("Match ID: " + matchID);
