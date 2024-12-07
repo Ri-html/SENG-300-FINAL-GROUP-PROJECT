@@ -1,4 +1,4 @@
-package ca.ucalgary.cpsc.projectguiv1;
+    package ca.ucalgary.cpsc.projectguiv1;
 
 import UserAndProfile.UserDatabase;
 import javafx.application.Application;
