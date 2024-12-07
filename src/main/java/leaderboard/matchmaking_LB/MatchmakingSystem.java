@@ -6,10 +6,17 @@ import java.util.List;
 public class MatchmakingSystem {
     private List<Player> availablePlayers;
 
+    /**
+     * Constructor to initialize the matchmaking system.
+     */
     public MatchmakingSystem() {
         this.availablePlayers = new ArrayList<>();
     }
 
+    /**
+     * Adds a player to the matchmaking queue.
+     * @param player The player to be added to the queue.
+     */
     public void addPlayerToQueue(Player player) {
         if (!availablePlayers.contains(player)) {
             availablePlayers.add(player);
@@ -17,6 +24,10 @@ public class MatchmakingSystem {
         }
     }
 
+    /**
+     * Removes a player from the matchmaking queue.
+     * @param player The player to be removed from the queue.
+     */
     public void removePlayerFromQueue(Player player) {
         if (availablePlayers.remove(player)) {
             System.out.println("Player " + player.getUsername() + " removed from matchmaking queue.");
@@ -25,6 +36,10 @@ public class MatchmakingSystem {
         }
     }
 
+    /**
+     * Attempts to match two players from the queue and start a game session.
+     * If there are fewer than two players in the queue, matchmaking will not proceed.
+     */
     public void attemptMatchmaking() {
         if (availablePlayers.size() < 2) {
             System.out.println("Not enough players in the queue for matchmaking.");
