@@ -61,6 +61,9 @@ public class Manage_Profile_Controller {
     Button showFriendsBtn; // The button to display the friend list
 
     @FXML
+    Button showFriendsPageBtn;
+
+    @FXML
     TextArea friendsListArea; // TextArea to display the friend list
 
 
@@ -88,6 +91,8 @@ public class Manage_Profile_Controller {
 
         displayGameHistory();
         displayRecentMatches();
+
+        showFriendsBtn.setOnAction(event -> showFriendsList());
     }
 
     /**
@@ -171,8 +176,6 @@ public class Manage_Profile_Controller {
         stgWindw.close();
     }
 
-
-    @FXML
     private void showFriendsList() {
         if (currUser != null && currUser.getFriends() != null) {
             List<User> friends = currUser.getFriends();

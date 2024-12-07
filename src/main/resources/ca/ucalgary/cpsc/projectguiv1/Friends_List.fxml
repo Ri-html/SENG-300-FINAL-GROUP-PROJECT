@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ca.ucalgary.cpsc.projectguiv1.FriendsList"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ca.ucalgary.cpsc.projectguiv1.Friends_List_Controller"
+      spacing="10"
+      alignment="CENTER"
+      prefWidth="400"
+      prefHeight="300">
 
-</AnchorPane>
+    <Label text="Friends List" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+
+    <!-- ListView to display friends -->
+    <ListView fx:id="friendsList" prefWidth="350" prefHeight="200" />
+
+    <!-- Back button -->
+    <Button fx:id="backBtn" text="Back" onAction="#backBtnFunc" />
+
+</VBox>
