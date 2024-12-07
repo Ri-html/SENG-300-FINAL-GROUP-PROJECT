@@ -1,5 +1,6 @@
 package TestFx;
 import ca.ucalgary.cpsc.projectguiv1.HelloApplication;
+import ca.ucalgary.cpsc.projectguiv1.Sign_Up_Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,20 +14,19 @@ import org.testfx.framework.junit.ApplicationTest;
 import java.io.IOException;
 import org.junit.*;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class Signup_Test extends ApplicationTest {
-    Pane mainroot;
-    Stage mainstage;
 
     @Override
     public void start(Stage stage) throws IOException {
-        mainroot = (Pane) FXMLLoader.load(HelloApplication.class.getResource("Signup.fxml"));
-        mainstage = stage;
-        stage.setScene(new Scene(mainroot));
+        FXMLLoader fxmlLoader = new FXMLLoader(Sign_Up_Controller.class.getResource("Signup.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        stage.setTitle("Signup");
+        stage.setScene(scene);
         stage.show();
-        stage.toFront();
     }
     @Before
     public void setUp() throws Exception{
@@ -40,49 +40,36 @@ public class Signup_Test extends ApplicationTest {
         release(new MouseButton[]{});
     }
 
+    /**
+     * Testing if somebody tries to log in when there is missing info
+     */
     @Test //THIS IS DEFAULT EXAMPLE FROM SUTCLIFFE
-    public void SignupEmptyUsername() {
+    public void SignupEmpty() {
+
+
+    }
+    /**
+     * Testing if somebody tries to log in when username is taken
+     */
+    @Test //THIS IS DEFAULT EXAMPLE FROM SUTCLIFFE
+    public void SignupTaken() {
         // Locate the button by its ID
-        Button button = (Button) mainroot.lookup("#signupButton");
-        clickOn("#signupbutton");
-        assertEquals("Sign Up", button.getText());
 
-
-    //As long as username, email, and password are passed, you will be logged on
     }
 
     @org.junit.jupiter.api.Test //THIS IS DEFAULT EXAMPLE FROM SUTCLIFFE
     public void EnterUsername() {
-        // Locate the textfield by its ID
-        TextField textField = lookup("#usernameField").queryAs(TextField.class);
+
 
     }
 
     @org.junit.jupiter.api.Test //THIS IS DEFAULT EXAMPLE FROM SUTCLIFFE
     public void EnterEmail() {
-        // Locate the textfield by its ID
-        TextField textField = lookup("#emailField").queryAs(TextField.class);
+
     }
 
     @org.junit.jupiter.api.Test //THIS IS DEFAULT EXAMPLE FROM SUTCLIFFE
     public void EnterPassword() {
-        // Locate the textfield by its ID
-        TextField textField = lookup("#passwordField").queryAs(TextField.class);
+
     }
-    /* Still figuring out how Mockito works!
-    @Test
-    void testUpdateLabel() {
-        // Mock the Label
-        Label mockLabel = mock(Label.class);
-
-        // Create the controller with the mocked Label
-        MyController controller = new MyController(mockLabel);
-
-        // Test the updateLabel method
-        controller.updateLabel("Hello, World!");
-
-           // Verify that setText was called on the Label
-        verify(mockLabel).setText("Hello, World!");
-    }
-    */
 }

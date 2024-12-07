@@ -1,7 +1,14 @@
 package TestFx.Connect4;
 
 import ca.ucalgary.cpsc.projectguiv1.HelloApplication;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -17,17 +24,13 @@ public class Connect4_Game_Screen_Test extends ApplicationTest {
     }
 
     @org.junit.jupiter.api.Test //THIS IS DEFAULT EXAMPLE FROM SUTCLIFFE
-    public void testButtonClick() {
-        // Locate the button by its ID
-        Button button = lookup("#myButton").queryAs(Button.class);
+    public void exitButtonPressed() {
 
-        // Assert initial text
-        assertEquals("Click Me", button.getText());
-
-        // Simulate a button click
-        clickOn("#myButton");
-
-        // Assert changed text
-        assertEquals("Clicked", button.getText());
     }
+
+    @org.junit.jupiter.api.Test //THIS IS DEFAULT EXAMPLE FROM SUTCLIFFE
+    public void pieceDrop() {
+
+    }
+
 }

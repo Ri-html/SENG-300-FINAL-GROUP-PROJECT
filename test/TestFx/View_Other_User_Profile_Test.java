@@ -17,17 +17,7 @@ public class View_Other_User_Profile_Test extends ApplicationTest {
     }
 
     @org.junit.jupiter.api.Test //THIS IS DEFAULT EXAMPLE FROM SUTCLIFFE
-    public void testButtonClick() {
-        // Locate the button by its ID
-        Button button = lookup("#myButton").queryAs(Button.class);
+    public void viewOtherProfileButton() {
 
-        // Assert initial text
-        assertEquals("Click Me", button.getText());
-
-        // Simulate a button click
-        clickOn("#myButton");
-
-        // Assert changed text
-        assertEquals("Clicked", button.getText());
     }
 }

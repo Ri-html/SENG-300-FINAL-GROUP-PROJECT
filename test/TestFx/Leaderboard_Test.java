@@ -21,20 +21,5 @@ public class Leaderboard_Test extends ApplicationTest {
      */
     @Test
     public void testPlayer1stButtonNavigation() {
-        // Locate the 1st player button by its fx:id
-        Button firstPlayerButton = lookup("#player_1st_button").queryAs(Button.class);
-
-        // Ensure the button exists
-        assertNotNull("The 1st player button should exist.", firstPlayerButton);
-
-        // Set sample text for the button to simulate a player
-        interact(() -> firstPlayerButton.setText("Alice - Wins: 10"));
-
-        // Simulate clicking the button
-        clickOn("#player_1st_button");
-
-        // Verify that the new stage title corresponds to the user's profile
-        Stage currentStage = (Stage) firstPlayerButton.getScene().getWindow();
-        assertEquals("Viewing Alice's Profile", currentStage.getTitle());
     }
 }

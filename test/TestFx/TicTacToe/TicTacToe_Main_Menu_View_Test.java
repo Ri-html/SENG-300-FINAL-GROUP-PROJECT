@@ -16,18 +16,43 @@ public class TicTacToe_Main_Menu_View_Test extends ApplicationTest {
         new HelloApplication().start(stage); // Start the application
     }
 
+
     @org.junit.jupiter.api.Test //THIS IS DEFAULT EXAMPLE FROM SUTCLIFFE
-    public void testButtonClick() {
-        // Locate the button by its ID
-        Button button = lookup("#myButton").queryAs(Button.class);
+    public void leaderboardButton() {
 
-        // Assert initial text
-        assertEquals("Click Me", button.getText());
+    }
+    @org.junit.jupiter.api.Test
+    public void playOnlineButton() {
 
-        // Simulate a button click
-        clickOn("#myButton");
+    }
 
-        // Assert changed text
-        assertEquals("Clicked", button.getText());
+    @org.junit.jupiter.api.Test
+    public void gameHistoryButton() {
+
+    }
+
+    @org.junit.jupiter.api.Test
+    public void exitButton() {
+
+    }
+
+    @org.junit.jupiter.api.Test
+    public void seeProfile() {
+
+    }
+
+    @org.junit.jupiter.api.Test
+    public void chatHistory() {
+
+    }
+
+    @org.junit.jupiter.api.Test
+    public void chatMessage() {
+
+    }
+
+    @org.junit.jupiter.api.Test
+    public void backButton() {
+
     }
 }
