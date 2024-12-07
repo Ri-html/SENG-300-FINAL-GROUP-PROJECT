@@ -1,11 +1,11 @@
 package ca.ucalgary.cpsc.projectguiv1;
 
-import UserAndProfile.User;
 import UserAndProfile.UserDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import network.Network;
 
 import java.io.IOException;
 
@@ -31,6 +31,10 @@ public class HelloApplication extends Application {
             System.out.println("No users found in database. Starting with an empty database.");
         }
 
+        // Create the Network object with all users from the UserDatabase
+        Network network = new Network(userDb.getAllUsers());
+
+        // Launch the JavaFX application
         launch();
     }
 
