@@ -57,6 +57,12 @@ public class Manage_Profile_Controller {
     @FXML
     ScrollPane identity;
 
+    @FXML
+    Button showFriendsBtn; // The button to display the friend list
+
+    @FXML
+    TextArea friendsListArea; // TextArea to display the friend list
+
 
     // Initializing profiles for each game
     private ChessProfile chessProfile = new ChessProfile();
@@ -166,6 +172,21 @@ public class Manage_Profile_Controller {
     }
 
 
-
-
+    @FXML
+    private void showFriendsList() {
+        if (currUser != null && currUser.getFriends() != null) {
+            List<User> friends = currUser.getFriends();
+            if (friends.isEmpty()) {
+                friendsListArea.setText("You have no friends added.");
+            } else {
+                StringBuilder friendListText = new StringBuilder();
+                for (User friend : friends) {
+                    friendListText.append(friend.getUsername()).append("\n");
+                }
+                friendsListArea.setText(friendListText.toString());
+            }
+        } else {
+            friendsListArea.setText("Unable to load friends list.");
+        }
+    }
 }

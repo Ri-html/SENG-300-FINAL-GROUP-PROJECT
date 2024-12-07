@@ -41,5 +41,10 @@
       <Button fx:id="challengeConnect4Btn" layoutX="341.0" layoutY="342.0" mnemonicParsing="false" onMouseClicked="#playConnect4" text="Challenge" />
       <Text fx:id="yourRankingConnect4Label" layoutX="504.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking: x/x" />
       <Text fx:id="yourWinRateConnect4" layoutX="505.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wins: 3/4" />
+      <Button fx:id="AddFriend" layoutX="199.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#AddFriend" prefHeight="20.0" prefWidth="65.0" text="Add Friend">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -66,6 +68,9 @@ public class View_Other_User_Profile_Controller {
 
     @FXML
     private Text currentStatusLabel;
+
+    @FXML
+    private Button AddFriend;
 
     @FXML
     private Button challengeChessBtn;
@@ -204,4 +209,32 @@ public class View_Other_User_Profile_Controller {
         Stage stgWindw = (Stage) this.identity.getScene().getWindow();
         stgWindw.close();
     }
+
+
+    public void AddFriend() {
+        UserDatabase db = UserDatabase.getInstance(); // Access the database
+        User currentUser = db.getCurrentUser(); // Get the logged-in user
+
+        // Add the viewed user (this.user) to the current user's friends
+            if (!currentUser.getFriends().contains(this.user)) {
+                currentUser.addFriend(this.user); // Use the User class's method
+
+                // Show a confirmation alert
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Friend Added");
+                alert.setHeaderText(null); // No header text
+                alert.setContentText(this.user.getUsername() + " has been added as a friend.");
+                alert.showAndWait(); // Show the alert and wait for user action
+            } else {
+                // Show a message if the user is already a friend
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Already Friends");
+                alert.setHeaderText(null); // No header text
+                alert.setContentText(this.user.getUsername() + " is already your friend.");
+                alert.showAndWait();
+
+        }
+
+    }
+
 }
