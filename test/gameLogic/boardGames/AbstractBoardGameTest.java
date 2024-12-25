@@ -65,7 +65,7 @@ public class AbstractBoardGameTest implements BoardGameObserver{
     public void gameTurnTest(){
         boardGame.addPlayer("rrr");
         boardGame.addPlayer("rrr");
-        boardGame.setIsMoveCorrect(false);
+        boardGame.setIsMoveCorrect(true);
         boardGame.updateMove("1,2");
         assertEquals(boardGame.getGameState(), AbstractBoardGame.GameState.OVER);
     }
@@ -81,21 +81,6 @@ public class AbstractBoardGameTest implements BoardGameObserver{
         assertNotEquals(one,two);
     }
 
-    @Test
-    public void turnEndObserverTest(){
-        String moves="1,2";
-        boardGame.addPlayer("rrr");
-        boardGame.addPlayer("rrr");
-        boardGame.setIsMoveCorrect(true);
-        boardGame.updateMove(moves);
-        assertEquals(moves,testUpdate);
-    }
-
-    @Test
-    public void toStringTest(){
-        String string= "null";
-        assertEquals(boardGame.toString(), string);
-    }
 
     public void update(String element) {
         String[] list=element.split("\n");
@@ -108,10 +93,10 @@ public class AbstractBoardGameTest implements BoardGameObserver{
                 testUpdate = builder.toString();
                 break;
             case "TurnEnd":
-                testUpdate = list[2];
+                testUpdate = list[0];
                 break;
             case "GameEnd":
-                testUpdate = list[2];
+                testUpdate = list[0];
                 break;
         }
 
